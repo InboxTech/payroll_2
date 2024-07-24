@@ -1,0 +1,11 @@
+{
+    "name": "LeaveApply",
+    "alias": "leaveapply",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\LeaveApply\\Providers\\LeaveApplyServiceProvider"
+    ],
+    "files": []
+}

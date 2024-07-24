@@ -1,0 +1,11 @@
+{
+    "name": "AppliedLeave",
+    "alias": "appliedleave",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\AppliedLeave\\Providers\\AppliedLeaveServiceProvider"
+    ],
+    "files": []
+}

@@ -1,0 +1,1 @@
+{{ date('h:i A', $row->punch_in) }} &nbsp;<a href="javascript:void(0);"><i class="fa-solid fa-location-dot"></i></a>

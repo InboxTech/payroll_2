@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/punchinout",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\PunchInOut\\": "app/",
+            "Modules\\PunchInOut\\Database\\Factories\\": "database/factories/",
+            "Modules\\PunchInOut\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\PunchInOut\\Tests\\": "tests/"
+        }
+    }
+}

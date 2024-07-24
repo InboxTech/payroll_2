@@ -1,0 +1,11 @@
+{
+    "name": "AttendenceReport",
+    "alias": "attendencereport",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\AttendenceReport\\Providers\\AttendenceReportServiceProvider"
+    ],
+    "files": []
+}

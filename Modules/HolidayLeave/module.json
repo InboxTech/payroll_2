@@ -1,0 +1,11 @@
+{
+    "name": "HolidayLeave",
+    "alias": "holidayleave",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\HolidayLeave\\Providers\\HolidayLeaveServiceProvider"
+    ],
+    "files": []
+}

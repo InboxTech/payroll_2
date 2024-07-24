@@ -1,0 +1,11 @@
+{
+    "name": "PunchInOut",
+    "alias": "punchinout",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\PunchInOut\\Providers\\PunchInOutServiceProvider"
+    ],
+    "files": []
+}

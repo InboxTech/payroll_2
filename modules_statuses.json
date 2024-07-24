@@ -1,0 +1,13 @@
+{
+    "Auth": true,
+    "Role": true,
+    "User": true,
+    "Salary": true,
+    "Setting": true,
+    "Leave": true,
+    "HolidayLeave": true,
+    "LeaveApply": true,
+    "AppliedLeave": true,
+    "PunchInOut": true,
+    "AttendenceReport": true
+}

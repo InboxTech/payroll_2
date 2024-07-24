@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/appliedleave",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\AppliedLeave\\": "app/",
+            "Modules\\AppliedLeave\\Database\\Factories\\": "database/factories/",
+            "Modules\\AppliedLeave\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\AppliedLeave\\Tests\\": "tests/"
+        }
+    }
+}
