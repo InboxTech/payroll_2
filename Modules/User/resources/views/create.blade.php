@@ -88,7 +88,7 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-4 mb-2">
-                                            <label class="form-label" for="joining-date">Joining Date </label>
+                                            <label class="form-label" for="joining-date">Joining Date <span class="text-danger">*</span></label>
                                             <input type="date" name="joining_date" class="form-control"/>
                                         </div>
                                         <div class="col-sm-4 mb-2">
@@ -112,19 +112,19 @@
                                 <div class="tab-pane fade" id="form-tabs-bank-details" role="tabpanel">
                                     <div class="row">
                                         <div class="col-md-4 mt-2">
-                                            <label class="form-label" for="bank-name">Bank Name <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="bank-name">Bank Name </label>
                                             <input type="text" name="bank_name" class="form-control"/>
                                         </div>
                                         <div class="col-md-4 mt-2">
-                                            <label class="form-label" for="bank-branch-name">Bank Branch Name <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="bank-branch-name">Bank Branch Name </label>
                                             <input type="text" name="bank_branch_name" class="form-control"/>
                                         </div>
                                         <div class="col-md-4 mt-2">
-                                            <label class="form-label" for="account-number">Account Number <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="account-number">Account Number </label>
                                             <input type="text" name="account_number" class="form-control"/>
                                         </div>
                                         <div class="col-md-4 mt-2">
-                                            <label class="form-label" for="ifsc-code">IFSC Code <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="ifsc-code">IFSC Code </label>
                                             <input type="text" name="ifsc_code" class="form-control"/>
                                         </div>
                                     </div>
@@ -155,10 +155,10 @@
                                                         <p><strong>Gross Salary</strong></p>
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="gross_salary_yearly" class="form-control jsInputGrossSalYearly" data-rule-required="true" data-msg-required="Please Enter Gross Salary"/>
+                                                        <input type="number" name="gross_salary_yearly" class="form-control jsInputGrossSalYearly" data-rule-required="true" data-msg-required="Please Enter Gross Salary" value="">
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="gross_salary_monthly" class="form-control jsInputGrossSalMonthly" data-rule-required="true" data-msg-required="Please Enter Gross Salary">
+                                                        <input type="number" name="gross_salary_monthly" class="form-control jsInputGrossSalMonthly" data-rule-required="true" data-msg-required="Please Enter Gross Salary" value="">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -166,10 +166,10 @@
                                                         <p>Basic</p>
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="basic_yearly" class="form-control jsCalculateGrossSalaryYearly" onchange="calculateEmployeeContriYearly()" onkeyup="calculateEmployeeContriYearly()" data-rule-required="true" data-msg-required="Please Enter Basic"/>
+                                                        <input type="number" name="basic_yearly" class="form-control jsCalculateGrossSalaryYearly" data-rule-required="true" data-msg-required="Please Enter Basic" value=""/>
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="basic_monthly" class="form-control jsCalculateGrossSalaryMonthly" onchange="calculateEmployeeContriMonthly()" onkeyup="calculateEmployeeContriMonthly()" data-rule-required="true" data-msg-required="Please Enter Basic">
+                                                        <input type="number" name="basic_monthly" class="form-control jsCalculateGrossSalaryMonthly" onchange="calculateEmployeeContriMonthly()" onkeyup="calculateEmployeeContriMonthly()" data-rule-required="true" data-msg-required="Please Enter Basic" value="">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -221,10 +221,10 @@
                                                         <p>Special Allowance</p>
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="special_allowance_yearly" class="form-control jsCalculateGrossSalaryYearly" data-rule-required="true" data-msg-required="Please Enter Special Allowance">
+                                                        <input type="number" name="special_allowance_yearly" class="form-control jsCalculateGrossSalaryYearly" data-rule-required="true" data-msg-required="Please Enter Special Allowance" value="">
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="special_allowance_monthly" class="form-control jsCalculateGrossSalaryMonthly" data-rule-required="true" data-msg-required="Please Enter Special Allowance">
+                                                        <input type="number" name="special_allowance_monthly" class="form-control jsCalculateGrossSalaryMonthly" data-rule-required="true" data-msg-required="Please Enter Special Allowance" value="">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -233,68 +233,94 @@
                                                     </td>
                                                     <td>
                                                         <span class="jsGrossSalaryYearlyA"></span>
-                                                        <input type="hidden" name="gross_salary_A_yearly" value="">
+                                                        <input type="hidden" name="gross_salary_A_yearly" class="jsInputGrossSalaryYearlyA" value="">
                                                     </td>
                                                     <td>
                                                         <span class="jsGrossSalaryMonthlyA"></span>
+                                                        <input type="hidden" name="gross_salary_A_monthly" class="jsInputGrossSalaryMonthlyA" value="">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Less : Deduction</strong></td>
                                                     <td></td>
                                                     <td></td>
-                                                </tr>                                                
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Do you want to Deduct PF</strong></td>
+                                                    <td>
+                                                        <select name="is_pf_deduct_yearly" class="form-select jsIsPFDeductYearly" data-rule-required="true" data-msg-required="Please Select An Option">
+                                                            <option value="">Select Deduct PF</option>
+                                                            <option value="Yes">Yes</option>
+                                                            <option value="No">Not Deduct</option>
+                                                            <option value="Fix">Fix Deduct</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select name="is_pf_deduct_monthly" class="form-select jsIsPFDeductMonthly" data-rule-required="true" data-msg-required="Please Select An Option">
+                                                            <option value="">Select Deduct PF</option>
+                                                            <option value="Yes">Yes</option>
+                                                            <option value="No">Not Deduct</option>
+                                                            <option value="Fix">Fix Deduct</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
                                                 <tr>
                                                     <td>Employee Contribution 12% of basic of Rs. 1800/- whichever is less</td>
                                                     <td>
-                                                        <input type="number" name="employee_contribution_yearly" class="form-control jsEmployeeContributionYearly" readonly>
+                                                        <input type="number" name="employee_contribution_yearly" class="form-control jsEmployeeContributionYearly" onchange="CalculateEmpContriBNetSalYearly()" onkeyup="CalculateEmpContriBNetSalYearly()">
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="employee_contribution_monthly" class="form-control jsEmployeeContributionMonthly" readonly>
+                                                        <input type="number" name="employee_contribution_monthly" class="form-control jsEmployeeContributionMonthly" onchange="CalculateEmpContriBNetSalMonthly()" onkeyup="CalculateEmpContriBNetSalMonthly()">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>ESI Employee Contribution (0.25%)</td>
                                                     <td>
-                                                        <input type="number" name="esi_employee_contribution_yearly" class="form-control jsESIEmployeeContributionYearly" onchange="CalculateEmpContriBNetSalYearly()" onkeyup="CalculateEmpContriBNetSalYearly()">
+                                                        <input type="number" name="esi_employee_contribution_yearly" class="form-control jsESIEmployeeContributionYearly" onchange="CalculateEmpContriBNetSalYearly()" onkeyup="CalculateEmpContriBNetSalYearly()" data-rule-required="true" data-msg-required="Please Enter ESI Employee Contribution">
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="esi_employee_contribution_monthly" class="form-control jsESIEmployeeContributionMonthly" onchange="CalculateEmpContriBNetSal()" onkeyup="CalculateEmpContriBNetSal()">
+                                                        <input type="number" name="esi_employee_contribution_monthly" class="form-control jsESIEmployeeContributionMonthly" onchange="CalculateEmpContriBNetSalMonthly()" onkeyup="CalculateEmpContriBNetSalMonthly()" data-rule-required="true" data-msg-required="Please Enter ESI Employee Contribution">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Labour Welfare Fund (Gujarat) employee Contribution</td>
                                                     <td>
-                                                        <input type="number" name="labour_welfare_employee_yearly" class="form-control jsLabourEmployeeContriYearly" onchange="CalculateEmpContriBNetSalYearly()" onkeyup="CalculateEmpContriBNetSalYearly()">
+                                                        <input type="number" name="labour_welfare_employee_yearly" class="form-control jsLabourEmployeeContriYearly" onchange="CalculateEmpContriBNetSalYearly()" onkeyup="CalculateEmpContriBNetSalYearly()" data-rule-required="true" data-msg-required="Please Enter Labour Welfare Fund">
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="labour_welfare_employee_monthly" class="form-control jsLabourEmployeeContriMonthly" onchange="CalculateEmpContriBNetSal()" onkeyup="CalculateEmpContriBNetSal()">
+                                                        <input type="number" name="labour_welfare_employee_monthly" class="form-control jsLabourEmployeeContriMonthly" onchange="CalculateEmpContriBNetSalMonthly()" onkeyup="CalculateEmpContriBNetSalMonthly()" data-rule-required="true" data-msg-required="Please Enter Labour Welfare Fund">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Professional Tax</td>
                                                     <td>
-                                                        <input type="number" name="professional_yearly" class="form-control jsProfessionalTaxYearly" onchange="CalculateEmpContriBNetSalYearly()" onkeyup="CalculateEmpContriBNetSalYearly()">
+                                                        <input type="number" name="professional_tax_yearly" class="form-control jsProfessionalTaxYearly" onchange="CalculateEmpContriBNetSalYearly()" onkeyup="CalculateEmpContriBNetSalYearly()" data-rule-required="true" data-msg-required="Please Enter Professional Tax">
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="professional_monthly" class="form-control jsProfessionalTaxMonthly" onchange="CalculateEmpContriBNetSal()" onkeyup="CalculateEmpContriBNetSal()">
+                                                        <input type="number" name="professional_tax_monthly" class="form-control jsProfessionalTaxMonthly" onchange="CalculateEmpContriBNetSalMonthly()" onkeyup="CalculateEmpContriBNetSalMonthly()" data-rule-required="true" data-msg-required="Please Enter Professional Tax">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Employee Contribution (B)</strong></td>
                                                     <td>
                                                         <span class="jsEmployeeContributionBYearly"></span>
-                                                        <input type="hidden" name="employee_contribution_B_yearly" value="">
+                                                        <input type="hidden" name="employee_contribution_B_yearly" class="jsInputEmployeeContributionBYearly" value="">
                                                     </td>
-                                                    <td></td>
+                                                    <td>
+                                                        <span class="jsEmployeeContributionBMonthly"></span>
+                                                        <input type="hidden" name="employee_contribution_B_monthly" class="jsInputEmployeeContributionBMonthly" value="">
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Net Salary (C)</strong></td>
                                                     <td>
-                                                        <span class="jsNetSalary"></span>
-                                                        <input type="hidden" name="net_salary_yearly" value="">
+                                                        <span class="jsNetSalaryCYearly"></span>
+                                                        <input type="hidden" name="net_salary_C_yearly" class="jsInputNetSalaryCYearly" value="">
                                                     </td>
-                                                    <td></td>
+                                                    <td>
+                                                        <span class="jsNetSalaryCMonthly"></span>
+                                                        <input type="hidden" name="net_salary_C_monthly" class="jsInputNetSalaryCMonthly" value="">
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>P.F. (Employers Controbution 12% of Basic or Rs. 1800/- which ever is less)</td>
@@ -311,7 +337,7 @@
                                                         <input type="number" name="esi_employer_contribution_yearly" class="form-control jsESIEmployerContributionYearly" onchange="CalculateEmployerContriDYearly()" onkeyup="CalculateEmployerContriDYearly()">
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="esi_employer_contribution_monthly" class="form-control jsESIEmployerContributionMonthly" onchange="CalculateEmployerContriDYearly()" onkeyup="CalculateEmployerContriDYearly()">
+                                                        <input type="number" name="esi_employer_contribution_monthly" class="form-control jsESIEmployerContributionMonthly" onchange="CalculateEmployerContriDMonthly()" onkeyup="CalculateEmployerContriDMonthly()">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -320,29 +346,29 @@
                                                         <input type="number" name="labour_welfare_employer_yearly" class="form-control jsLabourEmployerContriYearly" onchange="CalculateEmployerContriDYearly()" onkeyup="CalculateEmployerContriDYearly()">
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="labour_welfare_employer_monthly" class="form-control jsLabourEmployerContriMonthly" onchange="CalculateEmployerContriDYearly()" onkeyup="CalculateEmployerContriDYearly()">
+                                                        <input type="number" name="labour_welfare_employer_monthly" class="form-control jsLabourEmployerContriMonthly" onchange="CalculateEmployerContriDMonthly()" onkeyup="CalculateEmployerContriDMonthly()">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Employer Contribution (D)</td>
                                                     <td>
                                                         <span class="jsEmployerContributionDYearly"></span>
-                                                        <input type="hidden" name="employer_contri_yearly" class="jsInputEmployerContriDYearly">
+                                                        <input type="hidden" name="employer_contri_D_yearly" class="jsInputEmployerContriDYearly">
                                                     </td>
                                                     <td>
                                                         <span class="jsEmployerContributionDMonthly"></span>
-                                                        <input type="hidden" name="employer_contri_monthly" class="jsInputEmployerContriDMonthly">
+                                                        <input type="hidden" name="employer_contri_D_monthly" class="jsInputEmployerContriDMonthly">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>CTC (B+C+D)</td>
                                                     <td>
                                                         <span class="jsCTCBCDYearly"></span>
-                                                        <input type="hidden" name="ctc_bcd_yearly" class="jsCTCBCDYearly">
+                                                        <input type="hidden" name="ctc_bcd_yearly" class="jsInputCTCBCDYearly">
                                                     </td>
                                                     <td>
                                                         <span class="jsCTCBCDMonthly"></span>
-                                                        <input type="hidden" name="ctc_bcd_monthly" class="jsCTCBCDMonthly">
+                                                        <input type="hidden" name="ctc_bcd_monthly" class="jsInputCTCBCDMonthly">
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -363,37 +389,162 @@
 
     @push('script')
         <script type="text/javascript">
-            function calculateEmployeeContriYearly()
-            {
-                var basicValue = $('.jsCalculateGrossSalaryYearly').val();
+            $('body').on('change', '.jsIsPFDeductYearly', function() {
+                var pfdeduct = $(this).val();
+                
+                switch(pfdeduct) {
+                    case 'Yes':
+                        calculateEmployeeContriYearly();
+                        $('.jsEmployeeContributionYearly').prop("readonly", true);
+                        break;
+                    case 'No':
+                        $('.jsEmployeeContributionYearly').val('');
+                        $('.jsEmployeeContributionYearly').prop("readonly", true);
+                        CalculateEmpContriBNetSalYearly();
+                        break;
+                    case 'Fix':
+                        $('.jsEmployeeContributionYearly').removeAttr('readonly');
+                        break;
+                    default:
+                        console.log('default');
+                }
+            });
+
+            // Yearly Deduction
+            function calculateEmployeeContriYearly() {
+                var basicValue = parseFloat($('.jsCalculateGrossSalaryYearly').val()) || 0;
                 var employeeContriYearly = basicValue * 12 / 100;
-                $('.jsEmployeeContributionYearly').val(employeeContriYearly);
+                $('.jsEmployeeContributionYearly').val(employeeContriYearly.toFixed(2));
 
                 CalculateEmpContriBNetSalYearly();
             }
 
-            function CalculateEmpContriBNetSalYearly() 
-            {
+            function CalculateEmpContriBNetSalYearly() {
                 var empContriYearly = parseFloat($('.jsEmployeeContributionYearly').val()) || 0;
                 var esiempContriYearly = parseFloat($('.jsESIEmployeeContributionYearly').val()) || 0;
                 var labourempContriYearly = parseFloat($('.jsLabourEmployeeContriYearly').val()) || 0;
                 var professionalTax = parseFloat($('.jsProfessionalTaxYearly').val()) || 0;
-                var InputGrossSalYearly = $('.jsInputGrossSalYearly').val();
-                console.log(InputGrossSalYearly);
-                var employeeContriB = empContriYearly + esiempContriYearly + labourempContriYearly + professionalTax;
-                
-                $('.jsEmployeeContributionBYearly').text(employeeContriB.toFixed(2));
-                $('input[name=employee_contribution_B_yearly]').val(employeeContriB.toFixed(2));
+                var InputGrossSalYearly = parseFloat($('.jsInputGrossSalYearly').val()) || 0;
+
+                if($('body .jsIsPFDeductYearly').val() == 'No'){
+                    var employeeContriB = esiempContriYearly + labourempContriYearly + professionalTax;
+                } else {
+                    var employeeContriB = empContriYearly + esiempContriYearly + labourempContriYearly + professionalTax;
+                }
+
+                $('.jsEmployeeContributionBYearly').text('{{ config("constant.currency_symbol") }}' + ' ' + employeeContriB.toFixed(2));
+                $('.jsInputEmployeeContributionBYearly').val(employeeContriB.toFixed(2));
 
                 var netSalC = InputGrossSalYearly - employeeContriB;
 
-                $('.jsNetSalary').text(netSalC.toFixed(2));
-                $('input[name=net_salary_yearly]').val(netSalC.toFixed(2));
+                $('.jsNetSalaryCYearly').text('{{ config("constant.currency_symbol") }}' + ' ' + netSalC.toFixed(2));
+                $('.jsInputNetSalaryCYearly').val(netSalC.toFixed(2));
+
+                calculateCTCYearly();
             }
 
-            function CalculateEmployerContriDYearly()
-            {
+            function CalculateEmployerContriDYearly() {
+                var EmployerContriYearly = parseFloat($('.jsEmployerContriYearly').val()) || 0;
+                var ESIEmployerContributionYearly = parseFloat($('.jsESIEmployerContributionYearly').val()) || 0;
+                var LabourEmployerContriYearly = parseFloat($('.jsLabourEmployerContriYearly').val()) || 0;
+                
+                var EmployerContriDYearly = EmployerContriYearly + ESIEmployerContributionYearly + LabourEmployerContriYearly;
 
+                $('.jsEmployerContributionDYearly').text('{{ config("constant.currency_symbol") }}' + ' ' + EmployerContriDYearly.toFixed(2));
+                $('.jsInputEmployerContriDYearly').val(EmployerContriDYearly.toFixed(2));
+
+                calculateCTCYearly();
+            }
+
+            function calculateCTCYearly() {
+                var EmployeeContributionBYearly = parseFloat($('.jsInputEmployeeContributionBYearly').val()) || 0;
+                var netSalaryCYearly = parseFloat($('.jsInputNetSalaryCYearly').val()) || 0;
+                var EmployerContributionDYearly = parseFloat($('.jsInputEmployerContriDYearly').val()) || 0;
+                
+                var ctcYearly = EmployeeContributionBYearly + netSalaryCYearly + EmployerContributionDYearly;
+
+                $('.jsCTCBCDYearly').text('{{ config("constant.currency_symbol") }}' + ' ' + ctcYearly.toFixed(2));
+                $('.jsInputCTCBCDYearly').val(ctcYearly.toFixed(2));
+            }
+
+            // Monthly Deduction
+            $('body').on('change', '.jsIsPFDeductMonthly', function() {
+                var pfdeduct = $(this).val();
+                
+                switch(pfdeduct) {
+                    case 'Yes':
+                        calculateEmployeeContriMonthly();
+                        $('.jsEmployeeContributionMonthly').prop("readonly", true);
+                        break;
+                    case 'No':
+                        $('.jsEmployeeContributionMonthly').val('');
+                        $('.jsEmployeeContributionMonthly').prop("readonly", true);
+                        CalculateEmpContriBNetSalMonthly();
+                        break;
+                    case 'Fix':
+                        $('.jsEmployeeContributionMonthly').removeAttr('readonly');
+                        break;
+                    default:
+                        console.log('default');
+                }
+            });
+
+            function calculateEmployeeContriMonthly()
+            {
+                var basicValue = $('.jsCalculateGrossSalaryMonthly').val();
+                var employeeContriMonthly = basicValue * 12 / 100;
+                $('.jsEmployeeContributionMonthly').val(employeeContriMonthly);
+
+                CalculateEmpContriBNetSalMonthly();
+            }
+
+            function CalculateEmpContriBNetSalMonthly()
+            {
+                var empContriMonthly = parseFloat($('.jsEmployeeContributionMonthly').val()) || 0;
+                var esiempContriMonthly = parseFloat($('.jsESIEmployeeContributionMonthly').val()) || 0;
+                var labourempContriMonthly = parseFloat($('.jsLabourEmployeeContriMonthly').val()) || 0;
+                var professionalTax = parseFloat($('.jsProfessionalTaxMonthly').val()) || 0;
+                var InputGrossSalMonthly = $('.jsInputGrossSalMonthly').val();
+
+                if($('body .jsIsPFDeductMonthly').val() == 'No'){
+                    var employeeContriB = esiempContriMonthly + labourempContriMonthly + professionalTax;
+                } else {
+                    var employeeContriB = empContriMonthly + esiempContriMonthly + labourempContriMonthly + professionalTax;
+                }
+
+                $('.jsEmployeeContributionBMonthly').text('{{ config("constant.currency_symbol") }}'+' '+employeeContriB.toFixed(2));
+                $('.jsInputEmployeeContributionBMonthly').val(employeeContriB.toFixed(2));
+
+                var netSalC = InputGrossSalMonthly - employeeContriB;
+
+                $('.jsNetSalaryCMonthly').text('{{ config("constant.currency_symbol") }}'+' '+netSalC.toFixed(2));
+                $('.jsInputNetSalaryCMonthly').val(netSalC.toFixed(2));
+                calculateCTCMonthly();
+            }
+
+            function CalculateEmployerContriDMonthly()
+            {
+                var EmployerContriMonthly = parseFloat($('.jsEmployerContriMonthly').val()) || 0;
+                    ESIEmployerContributionMonthly = parseFloat($('.jsESIEmployerContributionMonthly').val()) || 0;
+                    LabourEmployerContriMonthly = parseFloat($('.jsLabourEmployerContriMonthly').val()) || 0;
+                
+                var EmployerContriDMonthly = EmployerContriMonthly + ESIEmployerContributionMonthly + LabourEmployerContriMonthly;
+                
+                $('.jsEmployerContributionDMonthly').text('{{ config("constant.currency_symbol") }}'+' '+EmployerContriDMonthly.toFixed(2));
+                $('.jsInputEmployerContriDMonthly').val(EmployerContriDMonthly.toFixed(2));
+                calculateCTCMonthly()
+            }
+
+            function calculateCTCMonthly()
+            {
+                var EmployeeContributionBMonthly = parseFloat($('.jsInputEmployeeContributionBMonthly').val()) || 0;
+                    netSalaryCMonthly = parseFloat($('.jsInputNetSalaryCMonthly').val()) || 0;
+                    EmployerContributionDMonthly = parseFloat($('.jsInputEmployerContriDMonthly').val()) || 0;
+                
+                ctcMonthly = EmployeeContributionBMonthly + netSalaryCMonthly + EmployerContributionDMonthly;
+
+                $('.jsCTCBCDMonthly').text('{{ config("constant.currency_symbol") }}'+' '+ctcMonthly.toFixed(2));
+                $('.jsInputCTCBCDMonthly').val(ctcMonthly);
             }
 
             $.validator.addMethod("validEmail", function(value, element) {
@@ -414,6 +565,7 @@
             var token = "{{ csrf_token() }}";
 
             $('.FormValidate').validate({
+                ignore: "",
                 rules:{
                     'first_name': {
                         required: true
@@ -457,6 +609,9 @@
                     "status": {
                         required : true,
                     },
+                    "joining_date": {
+                        required : true,
+                    },
                     'password': {
                         required : true,
                     },
@@ -493,6 +648,9 @@
                     "status": {
                         required: "Please Select Status",
                     },
+                    "joining_date": {
+                        required: "Please Select Joinig Date",
+                    },
                     'password' : {
                         required: 'Please Enter Password'
                     },
@@ -506,18 +664,18 @@
             $(document).ready(function() {
                 // calculate yearly salary
                 $('body').on('keyup change load', '.jsCalculateGrossSalaryYearly', function() {
-                    var totalSum = 0;
+                    var totalSumYearly = 0;
 
                     $('.jsCalculateGrossSalaryYearly').each(function() {
                         var inputVal = $(this).val();
 
                         if (!isNaN(inputVal) && inputVal !== '') {
-                            totalSum += parseFloat(inputVal);
+                            totalSumYearly += parseFloat(inputVal);
                         }
                     });
 
-                    $('.jsGrossSalaryYearlyA').text('{{ config("constant.currency_symbol") }} '+totalSum.toFixed(2));
-                    $('input[name=gross_salary_A_yearly]').val(totalSum);
+                    $('.jsGrossSalaryYearlyA').text('{{ config("constant.currency_symbol") }} '+totalSumYearly.toFixed(2));
+                    $('.jsInputGrossSalaryYearlyA').val(totalSumYearly);
                 });
 
                 // calculate monthly salary
@@ -533,6 +691,7 @@
                     });
 
                     $('.jsGrossSalaryMonthlyA').text('{{ config("constant.currency_symbol") }} '+totalSumMonthly);
+                    $('.jsInputGrossSalaryMonthlyA').val(totalSumMonthly);
                 });
             });
         </script>

@@ -128,9 +128,59 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        
+
+        // Yearly Deduction
+        $input['gross_salary_A_yearly'] = $input['basic_yearly'] + $input['hra_yearly'] + $input['medical_yearly'] + $input['education_yearly'] + $input['conveyance_yearly'] + $input['special_allowance_yearly'];
+
+        switch ($input['is_pf_deduct_yearly']) {
+            case 'Yes':
+                $input['employee_contribution_yearly'] = $input['basic_yearly'] * 12 / 100;
+                break;
+            case 'No':
+                $input['employee_contribution_yearly'] = '';
+                break;
+            case 'Fix':
+                $input['employee_contribution_yearly'] = $input['employee_contribution_yearly'];
+                break;
+            default:
+            $input['employee_contribution_yearly'] = 0;
+                break;
+        }
+
+        $input['employee_contribution_B_yearly'] = $input['employee_contribution_yearly'] + $input['esi_employee_contribution_yearly'] + $input['labour_welfare_employee_yearly'] + $input['professional_tax_yearly'];
+        $input['net_salary_C_yearly'] = $input['gross_salary_yearly'] - $input['employee_contribution_B_yearly'];
+
+        $input['employer_contri_D_yearly'] = $input['employer_contribution_yearly'] + $input['esi_employer_contribution_yearly'] + $input['labour_welfare_employer_yearly'];
+
+        $input['ctc_bcd_yearly'] = $input['employee_contribution_B_yearly'] + $input['net_salary_C_yearly'] + $input['employer_contri_D_yearly'];
+
+        // Monthly Deduction
+        $input['gross_salary_A_monthly'] = $input['basic_monthly'] + $input['hra_monthly'] + $input['medical_monthly'] + $input['education_monthly'] + $input['conveyance_monthly'] + $input['special_allowance_monthly'];
+
+        switch ($input['is_pf_deduct_monthly']) {
+            case 'Yes':
+                $input['employee_contribution_monthly'] = $input['basic_monthly'] * 12 / 100;
+                break;
+            case 'No':
+                $input['employee_contribution_monthly'] = '';
+                break;
+            case 'Fix':
+                $input['employee_contribution_monthly'] = $input['employee_contribution_monthly'];
+                break;
+            default:
+            $input['employee_contribution_monthly'] = 0;
+                break;
+        }
+
+        $input['employee_contribution_B_monthly'] = $input['employee_contribution_monthly'] + $input['esi_employee_contribution_monthly'] + $input['labour_welfare_employee_monthly'] + $input['professional_tax_monthly'];
+        $input['net_salary_monthly'] = $input['gross_salary_monthly'] - $input['employee_contribution_B_monthly'];
+
+        $input['employer_contri_D_monthly'] = $input['employer_contribution_monthly'] + $input['esi_employer_contribution_monthly'] + $input['labour_welfare_employer_monthly'];
+
+        $input['ctc_bcd_monthly'] = $input['employee_contribution_B_monthly'] + $input['net_salary_monthly'] + $input['employer_contri_D_monthly'];
+
         $input['password'] = Hash::make($input['password']);
-                
+
         $user = User::create($input);
         $user->assignRole($request->role);
 
@@ -141,7 +191,7 @@ class UserController extends Controller
             $userDetails = UserDetail::create($request->all());
 
             if($request->assign_leave) {
-                
+
                 foreach($request->assign_leave as $key => $value) {
 
                     $assignLeave = new AssignLeave;
@@ -174,8 +224,9 @@ class UserController extends Controller
         $roles = Role::whereNot('id', 1)->pluck('name','name')->all();
 
         $selectedRole = $user->roles->first()->name ?? null;
-                
-        return view('user::edit', compact('user','roles', 'selectedRole'));
+        $assignLeave = Leave::get();
+
+        return view('user::edit', compact('user','roles', 'selectedRole', 'assignLeave'));
     }
 
     /**
@@ -185,12 +236,60 @@ class UserController extends Controller
     {
         $input = $request->all();
 
+        // Yearly Deduction
+        $input['gross_salary_A_yearly'] = $input['basic_yearly'] + $input['hra_yearly'] + $input['medical_yearly'] + $input['education_yearly'] + $input['conveyance_yearly'] + $input['special_allowance_yearly'];
+
+        switch ($input['is_pf_deduct_yearly']) {
+            case 'Yes':
+                $input['employee_contribution_yearly'] = $input['basic_yearly'] * 12 / 100;
+                break;
+            case 'No':
+                $input['employee_contribution_yearly'] = '';
+                break;
+            case 'Fix':
+                $input['employee_contribution_yearly'] = $input['employee_contribution_yearly'];
+                break;
+            default:
+            $input['employee_contribution_yearly'] = 0;
+                break;
+        }
+
+        $input['employee_contribution_B_yearly'] = $input['employee_contribution_yearly'] + $input['esi_employee_contribution_yearly'] + $input['labour_welfare_employee_yearly'] + $input['professional_tax_yearly'];
+        $input['net_salary_C_yearly'] = $input['gross_salary_yearly'] - $input['employee_contribution_B_yearly'];
+
+        $input['employer_contri_D_yearly'] = $input['employer_contribution_yearly'] + $input['esi_employer_contribution_yearly'] + $input['labour_welfare_employer_yearly'];
+
+        $input['ctc_bcd_yearly'] = $input['employee_contribution_B_yearly'] + $input['net_salary_C_yearly'] + $input['employer_contri_D_yearly'];
+
+        // Monthly Deduction
+        $input['gross_salary_A_monthly'] = $input['basic_monthly'] + $input['hra_monthly'] + $input['medical_monthly'] + $input['education_monthly'] + $input['conveyance_monthly'] + $input['special_allowance_monthly'];
+
+        switch ($input['is_pf_deduct_monthly']) {
+            case 'Yes':
+                $input['employee_contribution_monthly'] = $input['basic_monthly'] * 12 / 100;
+                break;
+            case 'No':
+                $input['employee_contribution_monthly'] = '';
+                break;
+            case 'Fix':
+                $input['employee_contribution_monthly'] = $input['employee_contribution_monthly'];
+                break;
+            default:
+            $input['employee_contribution_monthly'] = 0;
+                break;
+        }
+
+        $input['employee_contribution_B_monthly'] = $input['employee_contribution_monthly'] + $input['esi_employee_contribution_monthly'] + $input['labour_welfare_employee_monthly'] + $input['professional_tax_monthly'];
+        $input['net_salary_monthly'] = $input['gross_salary_monthly'] - $input['employee_contribution_B_monthly'];
+
+        $input['employer_contri_D_monthly'] = $input['employer_contribution_monthly'] + $input['esi_employer_contribution_monthly'] + $input['labour_welfare_employer_monthly'];
+
+        $input['ctc_bcd_monthly'] = $input['employee_contribution_B_monthly'] + $input['net_salary_monthly'] + $input['employer_contri_D_monthly'];
+
         $userDetailColumns = \Schema::getColumnListing('user_details');
 
         $filteredInput = array_intersect_key($input, array_flip($userDetailColumns));
-
-        $input['status'] = $input['status'] == 'on'? '1' : '0';
-
+        
         if($user->update($input))
         {
             DB::table('model_has_roles')->where('model_id',$user->id)->delete();
