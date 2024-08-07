@@ -17,4 +17,8 @@ use Modules\Salary\Http\Controllers\SalaryController;
 Route::prefix('admin')->middleware(['auth'])->group(function(){
     Route::resource('salary', SalaryController::class);
     Route::get('/salary/delete', [SalaryController::class, 'destroy'])->name('salary.delete');
+    Route::get('/salary/month-list/{user}', [SalaryController::class, 'monthlist'])->name('salary.monthlist');
+    Route::post('calculateAllDaysWithSalary', [SalaryController::class, 'calculateAllDaysWithSalary'])->name('salary.calculateAllDaysWithSalary');
+    Route::get('generate-slip/{id}', [SalaryController::class, 'generateslip'])->name('salary.generateslip');
+    Route::get('employee-salary', [SalaryController::class, 'employeesalary'])->name('salary.employeesalary');
 });

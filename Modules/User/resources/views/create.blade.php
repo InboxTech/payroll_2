@@ -58,12 +58,16 @@
                                             <input type="text" name="last_name" class="form-control"/>
                                         </div>
                                         <div class="col-md-4 mb-2">
-                                            <label class="form-label" for="basic-default-fullname">Email <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="basic-default-fullname">Email (official)<span class="text-danger">*</span></label>
                                             <input type="text" name="email" class="form-control"/>
                                         </div>
                                         <div class="col-md-4 mb-2">
                                             <label class="form-label" for="basic-default-fullname">Mobile Number <span class="text-danger">*</span></label>
                                             <input type="text" name="mobile_no" class="form-control only_numbers"/>
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <label class="form-label" for="email-personal">Email (personal)</label>
+                                            <input type="text" name="personal_email" class="form-control"/>
                                         </div>
                                         <div class="col-md-4 mb-2">
                                             <label class="form-label" for="formtabs-birthdate">Date Of Birth <span class="text-danger">*</span></label>
@@ -94,6 +98,15 @@
                                         <div class="col-sm-4 mb-2">
                                             <label class="form-label" for="releaving-date">Releaving Date </label>
                                             <input type="date" name="releaving_date" class="form-control"/>
+                                        </div>
+                                        <div class="col-sm-4 mb-2">
+                                            <label for="designation-list" class="form-label">Designation <span class="text-danger">*</span></label>
+                                            <select name="designation_id" class="form-select" data-rule-required="true" data-msg-required="Please Select Designation">
+                                                <option value="">Select Designation</option>
+                                                @foreach($designation as $dkey => $dvalue)
+                                                    <option value="{{ $dkey }}">{{ $dvalue }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <hr>
@@ -586,6 +599,18 @@
                             type: "post",
                         },
                     },
+                    "personal_email": {
+                        email:true,
+                        validEmail:true,
+                        remote:
+                        {
+                            data: {
+                                '_token': token,
+                            },
+                            url: "{{ route('user_check_duplication') }}",
+                            type: "post",
+                        },
+                    },
                     "mobile_no": {
                         required : true,
                         digits: true,
@@ -631,7 +656,13 @@
                         required: "Please Enter Email Id",
                         email:"Please Enter Valid Email Address",
                         validEmail:"Please Enter Valid Email Address",
-                        remote: "This Email Id Already Exist."
+                        remote: "This Email Already Exist."
+                    },
+                    "personal_email": {
+                        required: "Please Enter Email Id",
+                        email:"Please Enter Valid Email Address",
+                        validEmail:"Please Enter Valid Email Address",
+                        remote: "This Email Already Exist."
                     },
                     "mobile_no": {
                         required: "Please Enter Mobile Number",

@@ -9,5 +9,6 @@
     "LeaveApply": true,
     "AppliedLeave": true,
     "PunchInOut": true,
-    "AttendenceReport": true
+    "AttendenceReport": true,
+    "Designation": true
 }

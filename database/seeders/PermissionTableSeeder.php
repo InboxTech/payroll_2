@@ -29,37 +29,141 @@ class PermissionTableSeeder extends Seeder
 
         $permissions = [
             [
-                'name' => 'View Role',
+                'name' => 'view-role',
                 'group_name' => 'Role'
             ],
             [
-                'name' => 'Create Role',
+                'name' => 'create-role',
                 'group_name' => 'Role'
             ],
             [
-                'name' => 'Edit Role',
+                'name' => 'edit-role',
                 'group_name' => 'Role'
             ],
             [
-                'name' => 'Delete Role',
+                'name' => 'delete-role',
                 'group_name' => 'Role'
             ],
             [
-                'name' => 'View User',
-                'group_name' => 'User'
+                'name' => 'view-employee',
+                'group_name' => 'Employee'
             ],
             [
-                'name' => 'Create User',
-                'group_name' => 'User'
+                'name' => 'create-employee',
+                'group_name' => 'Employee'
             ],
             [
-                'name' => 'Edit User',
-                'group_name' => 'User'
+                'name' => 'edit-employee',
+                'group_name' => 'Employee'
             ],
             [
-                'name' => 'Delete User',
-                'group_name' => 'User'
-            ]            
+                'name' => 'delete-employee',
+                'group_name' => 'Employee'
+            ],
+            [
+                'name' => 'view-designation',
+                'group_name' => 'Designation'
+            ],
+            [
+                'name' => 'create-designation',
+                'group_name' => 'Designation'
+            ],
+            [
+                'name' => 'edit-designation',
+                'group_name' => 'Designation'
+            ],
+            [
+                'name' => 'delete-designation',
+                'group_name' => 'Designation'
+            ],
+            [
+                'name' => 'view-leave',
+                'group_name' => 'Leave'
+            ],
+            [
+                'name' => 'create-leave',
+                'group_name' => 'Leave'
+            ],
+            [
+                'name' => 'edit-leave',
+                'group_name' => 'Leave'
+            ],
+            [
+                'name' => 'delete-leave',
+                'group_name' => 'Leave'
+            ],
+            [
+                'name' => 'view-leave-apply',
+                'group_name' => 'LeaveApply'
+            ],
+            [
+                'name' => 'create-leave-apply',
+                'group_name' => 'LeaveApply'
+            ],
+            [
+                'name' => 'edit-leave-apply',
+                'group_name' => 'LeaveApply'
+            ],
+            [
+                'name' => 'delete-leave-apply',
+                'group_name' => 'LeaveApply'
+            ],
+            [
+                'name' => 'view-applied-leave',
+                'group_name' => 'AppliedLeave'
+            ],
+            [
+                'name' => 'create-applied-leave',
+                'group_name' => 'AppliedLeave'
+            ],
+            [
+                'name' => 'edit-applied-leave',
+                'group_name' => 'AppliedLeave'
+            ],
+            [
+                'name' => 'delete-applied-leave',
+                'group_name' => 'AppliedLeave'
+            ],
+            [
+                'name' => 'view-attendance-report',
+                'group_name' => 'AttendanceReport'
+            ],
+            [
+                'name' => 'create-attendance-report',
+                'group_name' => 'AttendanceReport'
+            ],
+            [
+                'name' => 'edit-attendance-report',
+                'group_name' => 'AttendanceReport'
+            ],
+            [
+                'name' => 'delete-attendance-report',
+                'group_name' => 'AttendanceReport'
+            ],
+            [
+                'name' => 'view-salary',
+                'group_name' => 'Salary'
+            ],
+            [
+                'name' => 'create-salary',
+                'group_name' => 'Salary'
+            ],
+            [
+                'name' => 'edit-salary',
+                'group_name' => 'Salary'
+            ],
+            [
+                'name' => 'delete-salary',
+                'group_name' => 'Salary'
+            ],
+            [
+                'name' => 'view-setting',
+                'group_name' => 'Setting'
+            ],
+            [
+                'name' => 'edit-setting',
+                'group_name' => 'Setting'
+            ],
         ];
 
         foreach ($permissions as $permission) {

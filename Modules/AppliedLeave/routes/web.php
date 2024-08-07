@@ -17,4 +17,7 @@ use Modules\AppliedLeave\Http\Controllers\AppliedLeaveController;
 Route::prefix('admin')->middleware(['auth'])->group(function(){
     Route::resource('appliedleave', AppliedLeaveController::class);
     Route::post('/appliedleave/delete', [AppliedLeaveController::class, 'destroy'])->name('appliedleave.delete');
+    Route::get('appliedleave/{id}/editleave', [AppliedLeaveController:: class, 'editleave'])->name('appliedleave.editleave');
+    Route::put('appliedleave/{leaveapply}/updateleave', [AppliedLeaveController:: class, 'updateleave'])->name('appliedleave.updateleave');
+    Route::post('getNumberofLeaveInThisMonth', [AppliedLeaveController::class, 'getNumberofLeavesinThisMonth'])->name('appliedleave.getNumberofLeavesinThisMonth');
 });

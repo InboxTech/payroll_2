@@ -9,7 +9,7 @@
     <script src="{{ asset('admin/assets/vendor/js/menu.min.js') }}"></script>
 
     <script src="{{ asset('admin/assets/vendor/libs/moment/moment.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/vendor/libs/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/vendor/libs/flatpickr/flatpickr.js') }}"></script>
     
     <script src="{{ asset('admin/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('admin/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.js') }}"></script>

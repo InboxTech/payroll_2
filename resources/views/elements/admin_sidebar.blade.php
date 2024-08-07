@@ -51,7 +51,18 @@
         <li class="menu-item @if($current_controller == 'UserController') active @endif">
             <a href="{{ route('user.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-users"></i>
-                <div data-i18n="User">User</div>
+                <div data-i18n="Employee">Employee</div>
+            </a>
+        </li>
+        
+        @php
+            $controller = array('DesignationController');
+            $action = array('index');
+        @endphp
+        <li class="menu-item @if($current_controller == 'DesignationController') active @endif">
+            <a href="{{ route('designation.index') }}" class="menu-link">
+                <i class="fa-regular fa-address-card"></i>&nbsp;
+                <div data-i18n="Designation">Designation</div>
             </a>
         </li>
         
@@ -90,7 +101,7 @@
         <li class="menu-item {{ in_array($current_controller,$controller)? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-calendar-stats"></i>
-                <div data-i18n="Attendence">Attendence</div>
+                <div data-i18n="Attendance">Attendance</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item @if($current_controller == 'PunchInOutController') active @endif">
@@ -100,7 +111,7 @@
                 </li>
                 <li class="menu-item @if($current_controller == 'AttendenceReportController') active @endif">
                     <a href="{{ route('attendencereport.index') }}" class="menu-link">
-                        <div data-i18n="Attendence Report">Attendence Report</div>
+                        <div data-i18n="Attendance Report">Attendance Report</div>
                     </a>
                 </li>
             </ul>
@@ -109,9 +120,10 @@
         @php 
             $controller = array('SalaryController');
             $action = array('index');
+            $roleId= array(1, 2);
         @endphp
         <li class="menu-item @if($current_controller == 'SalaryController') active @endif">
-            <a href="{{ route('salary.index') }}" class="menu-link">
+            <a href="{{ (in_array(Auth::user()->roles()->first()->id, $roleId)) ? route('salary.index') : route('salary.employeesalary') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-file-dollar"></i>
                 <div data-i18n="Salary">Salary</div>
             </a>

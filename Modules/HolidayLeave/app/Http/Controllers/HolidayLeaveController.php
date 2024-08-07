@@ -8,9 +8,19 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\HolidayLeave;
 use Modules\HolidayLeave\Http\Requests\CreateHolidayLeaveRequest;
+use Illuminate\Support\Facades\DB;
 
 class HolidayLeaveController extends Controller
 {
+    public function getnumberofholiday(Request $request)
+    {
+        $countofHoliday = HolidayLeave::where(DB::raw("(DATE_FORMAT(holiday_date,'%Y-%m'))"), $request->monthyear)->count();
+
+        $data['countofHoliday'] = $countofHoliday;
+
+        return response()->json(['data' => $data, 'status' => true]);
+    }
+
     /**
      * Display a listing of the resource.
      */

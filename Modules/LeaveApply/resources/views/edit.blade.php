@@ -8,7 +8,7 @@
                 <h4 class="py-3 mb-4">
                     <span class="text-muted fw-light">
                         <a href="{{ route('dashboard') }}" class="text-reset">Dashboard</a> /
-                        <a href="{{ route('user.index') }}" class="text-reset">Leave Apply</a> /
+                        <a href="{{ route('leaveapply.index') }}" class="text-reset">Leave Apply</a> /
                     </span> Edit
                 </h4>
             </div>

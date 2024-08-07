@@ -17,4 +17,5 @@ use Modules\HolidayLeave\Http\Controllers\HolidayLeaveController;
 Route::prefix('admin')->middleware(['auth'])->group(function(){
     Route::resource('holidayleave', HolidayLeaveController::class);
     Route::get('holidayleave/delete/{id}', [HolidayLeaveController::class, 'destroy'])->name('holidayleave.delete');
+    Route::post('getnumberofholiday', [HolidayLeaveController::class, 'getnumberofholiday'])->name('salary.getnumberofholiday');
 });

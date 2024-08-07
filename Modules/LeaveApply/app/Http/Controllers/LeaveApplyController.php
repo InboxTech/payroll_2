@@ -21,7 +21,7 @@ class LeaveApplyController extends Controller
     {
         if($request->ajax()) {
             
-            $data = LeaveApply::where('user_id', Auth::user()->id)->get();
+            $data = LeaveApply::where(['user_id' => Auth::user()->id, 'is_leave_cancle' => 1])->latest();
 
             return Datatables::of($data)
                     ->addColumn('checkbox', function($row) {

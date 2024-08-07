@@ -11,6 +11,7 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\Designation;
 use App\Models\UserDetail;
 use App\Models\AssignLeave;
 use App\Models\Leave;
@@ -32,7 +33,7 @@ class UserController extends Controller
                 $check_dup = User::where('email', $request->email)
                                     ->where(function ($query) use ($userId) {
                                         $query->where('id', '!=', $userId)
-                                              ->orWhereNull('id'); // Handles cases where id is null (new record)
+                                              ->orWhereNull('id');
                                     })
                                     ->first();
             }
@@ -41,7 +42,16 @@ class UserController extends Controller
                 $check_dup = User::where('mobile_no', $request->mobile_no)
                                     ->where(function ($query) use ($userId) {
                                         $query->where('id', '!=', $userId)
-                                            ->orWhereNull('id'); // Handles cases where id is null (new record)
+                                            ->orWhereNull('id');
+                                    })
+                                    ->first();
+            }
+            elseif($request->personal_email)
+            {
+                $check_dup = User::where('personal_email', $request->personal_email)
+                                    ->where(function ($query) use ($userId) {
+                                        $query->where('id', '!=', $userId)
+                                            ->orWhereNull('id');
                                     })
                                     ->first();
             }
@@ -118,8 +128,10 @@ class UserController extends Controller
     {
         $roles = Role::whereNot('id', 1)->pluck('name','name')->all();
         $assignLeave = Leave::get();
+
+        $designation = Designation::where('status', 1)->pluck('name', 'id');
         
-        return view('user::create', compact('roles', 'assignLeave'));
+        return view('user::create', compact('roles', 'assignLeave', 'designation'));
     }
 
     /**
@@ -137,7 +149,7 @@ class UserController extends Controller
                 $input['employee_contribution_yearly'] = $input['basic_yearly'] * 12 / 100;
                 break;
             case 'No':
-                $input['employee_contribution_yearly'] = '';
+                $input['employee_contribution_yearly'] = 0;
                 break;
             case 'Fix':
                 $input['employee_contribution_yearly'] = $input['employee_contribution_yearly'];
@@ -162,7 +174,7 @@ class UserController extends Controller
                 $input['employee_contribution_monthly'] = $input['basic_monthly'] * 12 / 100;
                 break;
             case 'No':
-                $input['employee_contribution_monthly'] = '';
+                $input['employee_contribution_monthly'] = 0;
                 break;
             case 'Fix':
                 $input['employee_contribution_monthly'] = $input['employee_contribution_monthly'];
@@ -198,7 +210,8 @@ class UserController extends Controller
 
                     $assignLeave->user_id = $user->id;
                     $assignLeave->leave_id = $key;
-                    $assignLeave->number_of_leaves = $value;
+                    $assignLeave->assign_leave = $value;
+                    $assignLeave->leave_balance = $value;
 
                     $assignLeave->save();
                 }
@@ -226,7 +239,9 @@ class UserController extends Controller
         $selectedRole = $user->roles->first()->name ?? null;
         $assignLeave = Leave::get();
 
-        return view('user::edit', compact('user','roles', 'selectedRole', 'assignLeave'));
+        $designation = Designation::where('status', 1)->pluck('name', 'id');
+
+        return view('user::edit', compact('user','roles', 'selectedRole', 'assignLeave', 'designation'));
     }
 
     /**
@@ -235,7 +250,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $input = $request->all();
-
+        
         // Yearly Deduction
         $input['gross_salary_A_yearly'] = $input['basic_yearly'] + $input['hra_yearly'] + $input['medical_yearly'] + $input['education_yearly'] + $input['conveyance_yearly'] + $input['special_allowance_yearly'];
 
@@ -244,7 +259,7 @@ class UserController extends Controller
                 $input['employee_contribution_yearly'] = $input['basic_yearly'] * 12 / 100;
                 break;
             case 'No':
-                $input['employee_contribution_yearly'] = '';
+                $input['employee_contribution_yearly'] = 0;
                 break;
             case 'Fix':
                 $input['employee_contribution_yearly'] = $input['employee_contribution_yearly'];
@@ -269,7 +284,7 @@ class UserController extends Controller
                 $input['employee_contribution_monthly'] = $input['basic_monthly'] * 12 / 100;
                 break;
             case 'No':
-                $input['employee_contribution_monthly'] = '';
+                $input['employee_contribution_monthly'] = 0;
                 break;
             case 'Fix':
                 $input['employee_contribution_monthly'] = $input['employee_contribution_monthly'];

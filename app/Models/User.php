@@ -21,15 +21,18 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'emp_id',
+        'designation_id',
         'first_name',
         'middle_name',
         'last_name',
         'email',
         'mobile_no',
+        'personal_email',
         'password',
         'dob',
         'joining_date',
         'releaving_date',
+        'profile_image',
         'status',
     ];
 
@@ -67,5 +70,15 @@ class User extends Authenticatable
     public function assign_leave()
     {
         return $this->hasMany(AssignLeave::class);
+    }
+
+    public function leave_apply()
+    {
+        return $this->hasMany(LeaveApply::class);
+    }
+
+    public function designation()
+    {
+        return $this->belongsTo(Designation::class);
     }
 }

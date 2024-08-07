@@ -53,6 +53,12 @@
                                             <th>Reason :</th>
                                             <td>{{ $model->reason }}</td>
                                         </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="{{ route('appliedleave.editleave', $model->id) }}" class="btn btn-primary">Edit Leave</a>
+                                            </td>
+                                            <td></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -73,7 +79,7 @@
                                     <div class="col-sm-9">
                                         <select name="is_approved" class="form-select">
                                             <option value="">Select Status</option>
-                                            @foreach(config('custom.leave_status') as $lskey => $lsvalue)                                            
+                                            @foreach(config('custom.leave_status') as $lskey => $lsvalue)
                                                 <option value="{{ $lskey }}" @if($lskey == $model->is_approved) selected @endif>{{ $lsvalue }}</option>
                                             @endforeach
                                         </select>

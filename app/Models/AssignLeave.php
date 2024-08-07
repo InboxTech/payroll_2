@@ -12,7 +12,8 @@ class AssignLeave extends Model
     protected $fillable = [
         'user_id',
         'leave_id',
-        'number_of_leaves',
+        'assign_leave',
+        'leave_balance',
     ];
 
     public function leave()

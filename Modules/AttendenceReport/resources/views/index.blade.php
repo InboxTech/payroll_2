@@ -5,7 +5,7 @@
                 @include('flashmessage.flashmessage')
             </div>
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
-                <h4 class="py-3 mb-4"><span class="text-muted fw-light">Dashboard /</span> Attendence Report</h4>
+                <h4 class="py-3 mb-4"><span class="text-muted fw-light">Dashboard /</span> Attendance Report</h4>
             </div>
             <div class="row mb-3">
                 <div class="col">

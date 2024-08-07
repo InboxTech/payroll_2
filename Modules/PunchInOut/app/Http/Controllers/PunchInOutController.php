@@ -20,17 +20,20 @@ class PunchInOutController extends Controller
 
         if($request->ajax()) {
 
-            $data = PunchInOut::where('user_id', Auth::user()->id)->latest();
+            $data = PunchInOut::where('user_id', Auth::user()->id);
 
             if ($request->filled('start_date') && $request->filled('end_date')) {
-                $data->whereBetween('date', [Carbon::parse($request->start_date)->format('Y-m-d'), Carbon::parse($request->end_date)->format('Y-m-d')]);
+                $startDate = Carbon::parse($request->start_date)->format('Y-m-d');
+                $endDate = Carbon::parse($request->end_date)->format('Y-m-d');
+
+                $data->whereBetween('date', [$startDate, $endDate]);
+                
+            }elseif ($request->filled('start_date')) {
+                $startDate = Carbon::parse($request->start_date)->format('Y-m-d');
+                $data->whereDate('date', $startDate);
             }
 
-            if($request->filled('start_date')) {
-                $data->whereDate('date', [Carbon::parse($request->start_date)->format('Y-m-d')]);
-            }
-
-            $data = $data->get();
+            $data = $data->orderBy('date', 'DESC')->get();
 
             return DataTables::of($data)
                     ->addIndexColumn()
@@ -48,13 +51,19 @@ class PunchInOutController extends Controller
                     })
                     ->addColumn('total_time', function($row) {
                         if($row->punch_out != null) {
-                            $punchIn = Carbon::createFromTimestamp($row->punch_in);
-                            $punchOut = Carbon::createFromTimestamp($row->punch_out);
+                            $punchIn = new Carbon($row->punch_in);
+                            $punchOut = new Carbon($row->punch_out);
 
-                            return $timeDifference = $punchOut->diff($punchIn)->format('%H:%I'). ' Hr';
+                            return $timeDifference = $punchIn->diff($punchOut)->format('%H:%I'). ' Hr';
                         }
                         return '00:00'.' Hr';
                     })
+                    ->addColumn('action', function($row){       
+                        $btn = '<a href="'.route('punchinout.edit', $row->id).'" class="btn btn-sm btn-icon item-edit"><i class="text-primary ti ti-pencil"></i></a>';
+    
+                        return $btn;
+                    })
+                    ->rawColumns(['action'])
                     ->make(true);
         }
 
@@ -80,7 +89,7 @@ class PunchInOutController extends Controller
 
         $punchInOut->user_id = Auth::user()->id;
         $punchInOut->date = Carbon::now()->toDateString();
-        $punchInOut->punch_in = Carbon::now()->timestamp;
+        $punchInOut->punch_in = date('H:i');
         $punchInOut->punch_in_lat = $request->latitude;
         $punchInOut->punch_in_long = $request->longitude;
         $punchInOut->punch_in_out_status = 1;
@@ -100,9 +109,9 @@ class PunchInOutController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(PunchInOut $punchinout)
     {
-        return view('punchinout::edit');
+        return view('punchinout::edit', compact('punchinout'));
     }
 
     /**
@@ -112,13 +121,22 @@ class PunchInOutController extends Controller
     {
         $punchInOut = PunchInOut::findorFail($id);
 
-        $punchInOut->punch_out = Carbon::now()->timestamp;
         $punchInOut->punch_out_lat = $request->latitude;
         $punchInOut->punch_out_long = $request->longitude;
         $punchInOut->punch_in_out_status = 0;
-        $punchInOut->save();
+        
+        if($request)
+        {
+            $punchInOut->punch_out = $request->punch_out;
+            $punchInOut->save();
 
-        return redirect()->route('punchinout.index')->with('success', 'You have Successfully Punch Out');
+            return redirect()->route('punchinout.index')->with('success', 'Attendence Update Successfully');
+        } else {
+            $punchInOut->punch_out = date('H:i');
+            $punchInOut->save();
+
+            return redirect()->route('punchinout.index')->with('success', 'You have Successfully Punch Out');
+        }
     }
 
     /**

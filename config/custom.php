@@ -1,10 +1,9 @@
 <?php 
     return [
-        'payment_type' => [
-            '1' => 'Online', 
-            '2' => 'Net Banking', 
+        'payment_mode' => [
+            '1' => 'RTGS',
+            '2' => 'Cash',
             '3' => 'Cheque',
-            '4' => 'Direct Bank Account'
         ],
         'leave_cancle' => [
             '1' => 'No',

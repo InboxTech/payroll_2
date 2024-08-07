@@ -13,22 +13,23 @@
             <tr>
                 <td>{{ \Carbon\Carbon::parse($dvalue->date)->format('d-m-Y') }}</td>
                 <td>@if($dvalue) Present @else Absent @endif</td>
-                <td>{{ \Carbon\Carbon::createFromTimestamp($dvalue->punch_in)->format('d-m-Y H:i A') }} &nbsp;<a href="https://www.google.com/maps?q={{ $dvalue->punch_in_lat }},{{ $dvalue->punch_in_long }}" target="_blank"><i class="fa-solid fa-location-dot"></i></td>
+                <td>{{ date('h:i A', strtotime($dvalue->punch_in)) }} &nbsp;<a href="https://www.google.com/maps?q={{ $dvalue->punch_in_lat }},{{ $dvalue->punch_in_long }}" target="_blank"><i class="fa-solid fa-location-dot"></i></td>
                 <td>
                     @if($dvalue->punch_out !== null)
                         @php
-                            echo \Carbon\Carbon::createFromTimestamp($dvalue->punch_out)->format('d-m-Y H:i A')
+                            echo date('h:i A', strtotime($dvalue->punch_out));
                         @endphp
                         &nbsp;<a href="https://www.google.com/maps?q={{ $dvalue->punch_out_lat }},{{ $dvalue->punch_out_long }}" target="_blank"><i class="fa-solid fa-location-dot"></i>
                     @else 
-                        00-00-0000 00:00
+                        00:00
                     @endif
                 </td>
                 <td>
                     @if($dvalue->punch_out !== null)
                         @php 
-                            $punchIn = \Carbon\Carbon::createFromTimestamp($dvalue->punch_in);
-                            $punchOut = \Carbon\Carbon::createFromTimestamp($dvalue->punch_out);
+                            $punchIn = new Carbon\Carbon($dvalue->punch_in);
+                            $punchOut = new Carbon\Carbon($dvalue->punch_out);
+
                             $timeDifference = $punchOut->diff($punchIn)->format('%H:%I');
                             echo $timeDifference . ' Hr';
                         @endphp

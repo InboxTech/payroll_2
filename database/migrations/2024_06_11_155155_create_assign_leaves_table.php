@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('leave_id');
-            $table->float('number_of_leaves', 8, 2);
+            $table->decimal('assign_leave', 8, 2);
+            $table->decimal('leave_balance', 8, 2);
             $table->timestamps();
         });
     }

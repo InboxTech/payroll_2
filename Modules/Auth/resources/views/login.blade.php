@@ -16,7 +16,7 @@
                         <form class="mb-3" action="{{ route('login_submit') }}" method="post">
                             @csrf
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                <label for="email" class="form-label">Email (official) <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="email" placeholder="Enter Your Email" autofocus />
                                 <span class="error">{{ $errors->first('email') }}</span>
                             </div>

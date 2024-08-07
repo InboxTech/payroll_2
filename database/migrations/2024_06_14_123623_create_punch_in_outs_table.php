@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->Date('date');
-            $table->integer('punch_in')->nullable();
+            $table->time('punch_in')->nullable();
             $table->string('punch_in_lat')->nullable();
             $table->string('punch_in_long')->nullable();
-            $table->integer('punch_out')->nullable();
+            $table->time('punch_out')->nullable();
             $table->string('punch_out_lat')->nullable();
             $table->string('punch_out_long')->nullable();
             $table->integer('punch_in_out_status')->comment('1 for Punch In, 0 for Punch Out');
