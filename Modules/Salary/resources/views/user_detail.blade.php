@@ -8,6 +8,6 @@
         </div>
         <div class="d-flex flex-column">
             <h6 class="mb-0">{{ $row->full_name }}</h6>
-            <small class="text-truncate text-muted">{{ $row->roles->first()->name ?? '' }}</small>
+            <small class="text-truncate text-muted">{{ $row->designation->name }}</small>
         </div>
     </div>

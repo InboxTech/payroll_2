@@ -44,6 +44,8 @@ class Salary extends Model
         'final_amount',
         'payment_mode',
         'remark',
+        'is_salary_slip_generate',
+        'salary_slip_path',
     ];
 
     public function user()

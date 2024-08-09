@@ -10,15 +10,20 @@
                         <a href="{{ route('dashboard') }}" class="text-reset">Dashboard</a> / 
                     </span>
                     <span class="text-muted fw-light">
-                        <a href="{{ route('salary.index') }}" class="text-reset">Salary</a> /
+                        @if(Auth::user()->roles()->first()->id == 1 || Auth::user()->roles()->first()->id == 2)
+                            <a href="{{ route('salary.index') }}" class="text-reset">Salary</a> /
+                        @else
+                            <a href="{{ route('salary.employeesalary') }}" class="text-reset">Salary</a> /
+                        @endif
                     </span>
                     <span>{{ $user->full_name }}</span>
                 </h4>
                 <div class="d-flex align-content-center flex-wrap gap-3">
                     <div class="d-flex gap-3">
-                        <a href="{{ route('salary.create') }}" class="btn btn-outline-primary"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a>
-                        {{-- <a href="javascript:void(0);" class="btn btn-outline-danger" id="delete-selected"><i class="fas fa-trash"></i>&nbsp;&nbsp;Delete</a> --}}
-                        <a href="{{ route('salary.index') }}" class="btn btn-outline-danger"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;Back</a>
+                        @can('create-salary')
+                            <a href="{{ route('salary.create') }}" class="btn btn-outline-primary"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a>
+                            <a href="{{ route('salary.index') }}" class="btn btn-outline-danger"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;Back</a>
+                        @endcan
                     </div>
                 </div>
             </div>
@@ -36,7 +41,7 @@
                                     <div class="row g-3">
                                         <div class="col-md-3">
                                             <label class="form-label" for="collapsible-phone">Calendar</label>
-                                            <input type="time" class="form-control phone-mask jsCalendar"/>
+                                            <input type="month" max="{{ date('Y-m', strtotime('-1 Month')) }}" class="form-control phone-mask jsMonthYear"/>
                                         </div>
                                     </div>
                                 </div>
@@ -50,10 +55,11 @@
                     <table class="data-table table text-center" id="Salary">
                         <thead>
                             <tr>
-                                <th class="text-center"><input type="checkbox" class="form-check-input jsCheckAll"></th>
                                 <th class="text-center">Salary Month & Year</th>
                                 <th class="text-center">Total Salary</th>
-                                <th class="text-center">Action</th>
+                                @canany(['edit-salary', 'show-salary'])
+                                    <th class="text-center">Action</th>
+                                @endcan
                             </tr>
                         </thead>
                     </table>
@@ -76,18 +82,19 @@
                     ajax: {
                         url:"{{ route('salary.monthlist', $user->id) }}",
                         data: function (d) {
-                            d.emp_id = $('.jsEmployeeId').val()
+                            d.month_year = $('.jsMonthYear').val()
                         }
                     },
                     columns: [
-                        { data: 'checkbox', name: 'checkbox', orderable: false, searchable: false},
                         { data: 'month_year', name: 'month_year'},
                         { data: 'final_amount', name: 'final_amount'},
-                        { data: 'action', name: 'action', orderable: false, searchable: false },
+                        @canany(['edit-salary', 'show-salary'])
+                            { data: 'action', name: 'action', orderable: false, searchable: false },
+                        @endcan
                     ],
                 });
         
-                $(".form-control").keyup(function(){
+                $(".form-control").change(function(){
                     table.draw();
                 });
             });

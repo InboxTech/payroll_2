@@ -108,6 +108,15 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <div class="col-sm-4 mb-2">
+                                            <label for="department-list" class="form-label">Department <span class="text-danger">*</span></label>
+                                            <select name="department_id" class="form-select" data-rule-required="true" data-msg-required="Please Select Department">
+                                                <option value="">Select Department</option>
+                                                @foreach($department as $dkey => $dvalue)
+                                                    <option value="{{ $dkey }}">{{ $dvalue }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                     <hr>
                                     <h4>Login Details</h4>

@@ -8,8 +8,9 @@
                 <h4 class="py-3 mb-4"><span class="text-muted fw-light">Dashboard /</span>Applied Leave</h4>
                 <div class="d-flex align-content-center flex-wrap gap-3">
                     <div class="d-flex gap-3">
-                        <a href="javascript:void(0);" class="btn btn-outline-danger delete_records"><i class="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>
-                        <a href="{{ route('leaveapply.create') }}" class="btn btn-outline-primary d-none"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a>
+                        @can('delete-applied-leave')
+                            <a href="javascript:void(0);" class="btn btn-outline-danger delete_records"><i class="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>
+                        @endcan
                     </div>
                 </div>
             </div>
@@ -46,7 +47,7 @@
                                             <label class="form-label" for="collapsible-phone">Approval Status</label>
                                             <select name="is_approved" class="form-select jsApprovalStatus">
                                                 <option value="">Select Status</option>
-                                                @foreach(config('custom.leave_status') as $lskey => $lsvalue)
+                                                @foreach(config('constant.leave_status') as $lskey => $lsvalue)
                                                     <option value="{{ $lskey }}">{{ $lsvalue }}</option>
                                                 @endforeach
                                             </select>
@@ -69,7 +70,9 @@
                                 <th class="text-center">From Date - To Date</th>
                                 <th class="text-center">Total Leave Day</th>
                                 <th class="text-center">Approval Status</th>
-                                <th class="text-center">Action</th>
+                                @can('edit-applied-leave')
+                                    <th class="text-center">Action</th>
+                                @endcan
                             </tr>
                         </thead>
                     </table>
@@ -105,7 +108,9 @@
                         { data: 'from_date_to_date', name: 'from_date_to_date'},
                         { data: 'number_of_days', name: 'number_of_days' },
                         { data: 'approval_status', name: 'approval_status'},
-                        { data: 'action', name: 'action', orderable: false, searchable: false },
+                        @can('edit-applied-leave')
+                            { data: 'action', name: 'action', orderable: false, searchable: false },
+                        @endcan
                     ],
                 });
         

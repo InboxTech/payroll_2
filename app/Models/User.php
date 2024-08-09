@@ -22,6 +22,7 @@ class User extends Authenticatable
     protected $fillable = [
         'emp_id',
         'designation_id',
+        'department_id',
         'first_name',
         'middle_name',
         'last_name',
@@ -80,5 +81,10 @@ class User extends Authenticatable
     public function designation()
     {
         return $this->belongsTo(Designation::class);
+    }
+    
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
     }
 }

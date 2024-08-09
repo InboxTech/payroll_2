@@ -37,7 +37,7 @@
                                         <label class="form-label" for="basic-default-fullname">Leave Mode <span class="text-danger">*</span></label>
                                         <select name="leave_mode" class="form-select">
                                             <option value="">Select Leave Mode</option>
-                                            @foreach(config('custom.leave_mode') as $lmkey => $lmvalue)
+                                            @foreach(config('constant.leave_mode') as $lmkey => $lmvalue)
                                                 <option value="{{ $lmkey }}">{{ $lmvalue }}</option>
                                             @endforeach
                                         </select>

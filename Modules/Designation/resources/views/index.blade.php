@@ -8,7 +8,9 @@
                 <h4 class="py-3 mb-4"><span class="text-muted fw-light">Dashboard /</span> Designation</h4>
                 <div class="d-flex align-content-center flex-wrap gap-3">
                     <div class="d-flex gap-3">
-                        <a href="javascript:void(0);" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addNew"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a>
+                        @can('create-designation')
+                            <a href="javascript:void(0);" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addNew"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a>
+                        @endcan
                     </div>
                 </div>
             </div>

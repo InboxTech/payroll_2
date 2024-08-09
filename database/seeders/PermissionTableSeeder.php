@@ -77,6 +77,22 @@ class PermissionTableSeeder extends Seeder
                 'group_name' => 'Designation'
             ],
             [
+                'name' => 'view-department',
+                'group_name' => 'Department'
+            ],
+            [
+                'name' => 'create-department',
+                'group_name' => 'Department'
+            ],
+            [
+                'name' => 'edit-department',
+                'group_name' => 'Department'
+            ],
+            [
+                'name' => 'delete-department',
+                'group_name' => 'Department'
+            ],
+            [
                 'name' => 'view-leave',
                 'group_name' => 'Leave'
             ],
@@ -91,6 +107,22 @@ class PermissionTableSeeder extends Seeder
             [
                 'name' => 'delete-leave',
                 'group_name' => 'Leave'
+            ],
+            [
+                'name' => 'view-holiday-leave',
+                'group_name' => 'HolidayLeave'
+            ],
+            [
+                'name' => 'create-holiday-leave',
+                'group_name' => 'HolidayLeave'
+            ],
+            [
+                'name' => 'edit-holiday-leave',
+                'group_name' => 'HolidayLeave'
+            ],
+            [
+                'name' => 'delete-holiday-leave',
+                'group_name' => 'HolidayLeave'
             ],
             [
                 'name' => 'view-leave-apply',
@@ -113,10 +145,6 @@ class PermissionTableSeeder extends Seeder
                 'group_name' => 'AppliedLeave'
             ],
             [
-                'name' => 'create-applied-leave',
-                'group_name' => 'AppliedLeave'
-            ],
-            [
                 'name' => 'edit-applied-leave',
                 'group_name' => 'AppliedLeave'
             ],
@@ -125,19 +153,23 @@ class PermissionTableSeeder extends Seeder
                 'group_name' => 'AppliedLeave'
             ],
             [
+                'name' => 'view-punchinout',
+                'group_name' => 'PunchInOut'
+            ],
+            [
+                'name' => 'edit-punchinout',
+                'group_name' => 'PunchInOut'
+            ],
+            [
+                'name' => 'view-location',
+                'group_name' => 'PunchInOut'
+            ],
+            [
+                'name' => 'employee-list',
+                'group_name' => 'AttendanceReport'
+            ],
+            [
                 'name' => 'view-attendance-report',
-                'group_name' => 'AttendanceReport'
-            ],
-            [
-                'name' => 'create-attendance-report',
-                'group_name' => 'AttendanceReport'
-            ],
-            [
-                'name' => 'edit-attendance-report',
-                'group_name' => 'AttendanceReport'
-            ],
-            [
-                'name' => 'delete-attendance-report',
                 'group_name' => 'AttendanceReport'
             ],
             [
@@ -153,12 +185,12 @@ class PermissionTableSeeder extends Seeder
                 'group_name' => 'Salary'
             ],
             [
-                'name' => 'delete-salary',
+                'name' => 'show-salary',
                 'group_name' => 'Salary'
             ],
             [
-                'name' => 'view-setting',
-                'group_name' => 'Setting'
+                'name' => 'employee-list-salary',
+                'group_name' => 'Salary'
             ],
             [
                 'name' => 'edit-setting',

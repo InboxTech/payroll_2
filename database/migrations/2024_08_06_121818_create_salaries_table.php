@@ -47,7 +47,8 @@ return new class extends Migration
             $table->decimal('final_amount')->nullable();
             $table->integer('payment_mode')->nullable();
             $table->text('remark')->nullable();
-            $table->integer('is_salary_slip_generate')->default(0)->comment('1 for Generate, 0 for Not Generate');
+            $table->integer('is_salary_slip_generate')->default(0)->comment('1 for Yes, 0 for No');
+            $table->string('salary_slip_path')->nullable();
             $table->timestamps();
         });
     }

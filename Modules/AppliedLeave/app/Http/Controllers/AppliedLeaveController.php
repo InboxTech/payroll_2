@@ -17,6 +17,14 @@ use Illuminate\Support\Facades\DB;
 
 class AppliedLeaveController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:view-applied-leave|create-applied-leave|edit-applied-leave|delete-applied-leave', ['only' => ['index','show']]);
+        $this->middleware('permission:create-applied-leave', ['only' => ['create','store']]);
+        $this->middleware('permission:edit-applied-leave', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete-applied-leave', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -62,10 +70,7 @@ class AppliedLeaveController extends Controller
                         return view('appliedleave::approved_status', compact('row'));
                     })
                     ->addColumn('action', function($row) {
-                            
-                        $btn = '<a href="'.route('appliedleave.edit', $row->id).'" class="btn btn-sm btn-icon item-edit"><i class="text-primary ti ti-pencil" title="Edit"></i></a>';
-                        
-                        return $btn;
+                        return view('appliedleave::action', compact('row'));
                     })
                     ->addColumn('apply_date', function($row) {
                         return date('d-m-Y', strtotime($row->created_at));

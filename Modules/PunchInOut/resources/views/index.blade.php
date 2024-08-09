@@ -65,7 +65,9 @@
                                 <th class="text-center">Punch In</th>
                                 <th class="text-center">Punch Out</th>
                                 <th class="text-center">Total Time</th>
-                                <th class="text-center">Action</th>
+                                @can('edit-punchinout')
+                                    <th class="text-center">Action</th>
+                                @endcan
                             </tr>
                         </thead>
                     </table>
@@ -114,7 +116,9 @@
                         { data: 'punch_in', name: 'punch_in', orderable: false, searchable: false},
                         { data: 'punch_out', name: 'punch_out', orderable: false, searchable: false},
                         { data: 'total_time', name: 'total_time', orderable: false, searchable: false },
-                        { data: 'action', name: 'action', orderable: false, searchable: false },
+                        @can('edit-punchinout')
+                            { data: 'action', name: 'action', orderable: false, searchable: false },
+                        @endcan
                     ],
                 });
         

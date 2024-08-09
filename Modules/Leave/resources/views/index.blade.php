@@ -11,7 +11,9 @@
                     <div class="card mb-4">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h5 class="mb-0">Leave Type</h5>
-                            <h5 class="mb-0"><a href="{{ route('leave.create') }}" class="float-end"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a></h5>
+                            @can('create-leave')
+                                <h5 class="mb-0"><a href="{{ route('leave.create') }}" class="float-end"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a></h5>
+                            @endcan
                         </div>
                         <div class="table-responsive text-nowrap p-2">
                             @livewire('leave-list')
@@ -22,7 +24,9 @@
                     <div class="card mb-4">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h5 class="mb-0">Holiday Leave</h5>
-                            <h5 class="mb-0"><a href="{{ route('holidayleave.create') }}" class="float-end"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a></h5>
+                            @can('create-holiday-leave')
+                                <h5 class="mb-0"><a href="{{ route('holidayleave.create') }}" class="float-end"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a></h5>
+                            @endcan
                         </div>
                         <div class="table-responsive text-nowrap p-2">
                             @livewire('holiday-leave-list')

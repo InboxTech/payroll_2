@@ -34,7 +34,7 @@
                                             <input type="text" name="full_name" class="form-control jsName"/>
                                         </div>
                                         <div class="col-md-3">
-                                            <label class="form-label" for="collapsible-email">Email</label>
+                                            <label class="form-label" for="collapsible-email">Email (Official)</label>
                                             <input type="text" class="form-control jsEmail" name="email"/>
                                         </div>
                                         <div class="col-md-3">
@@ -56,7 +56,7 @@
                                 <th class="text-center"><input type="checkbox" class="form-check-input jsCheckAll"></th>
                                 <th class="text-center">Employee Name</th>
                                 <th class="text-center">Employee Id</th>
-                                <th class="text-center">Email</th>
+                                <th class="text-center">Email (Official)</th>
                                 <th class="text-center">Mobile</th>
                                 <th class="text-center">Action</th>
                             </tr>

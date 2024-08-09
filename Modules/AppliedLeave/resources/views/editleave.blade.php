@@ -41,7 +41,7 @@
                                         <label class="form-label" for="basic-default-fullname">Leave Mode <span class="text-danger">*</span></label>
                                         <select name="leave_mode" class="form-select">
                                             <option value="">Select Leave Mode</option>
-                                            @foreach(config('custom.leave_mode') as $lmkey => $lmvalue)
+                                            @foreach(config('constant.leave_mode') as $lmkey => $lmvalue)
                                                 <option value="{{ $lmkey }}" @if($lmkey == $result->leave_mode) selected @endif>{{ $lmvalue }}</option>
                                             @endforeach
                                         </select>
@@ -50,7 +50,7 @@
                                         <label class="form-label" for="basic-default-fullname">Leave Cancle <span class="text-danger">*</span></label>
                                         <select name="is_leave_cancle" class="form-select">
                                             <option value="">Select Leave Cancle</option>
-                                            @foreach(config('custom.leave_cancle') as $lckey => $lcvalue)
+                                            @foreach(config('constant.leave_cancle') as $lckey => $lcvalue)
                                                 <option value="{{ $lckey }}" @if($lckey == $result->is_leave_cancle) selected @endif>{{ $lcvalue }}</option>
                                             @endforeach
                                         </select>

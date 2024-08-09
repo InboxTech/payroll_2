@@ -301,7 +301,7 @@
                                             <input type="number" class="form-control jsESIEmployeeContributionMonthly" data-rule-required="true" data-msg-required="Please Enter ESI Employee Contribution" value="{{ $salary->user->user_detail->esi_employee_contribution_monthly }}" readonly>
                                         </td>
                                         <td>
-                                            <input type="number" name="esi_employee_contribution" class="form-control jsESIEmployeeContribution" data-rule-required="true" data-msg-required="Please Enter ESI Employee Contribution" value="{{ $salary->esi_employee_contribution }}" readonly>
+                                            <input type="number" name="esi_employee_contribution" class="form-control jsESIEmployeeContribution" data-rule-required="true" data-msg-required="Please Enter ESI Employee Contribution" value="{{ $salary->esi_employee_contribution }}">
                                         </td>
                                     </tr>
                                     <tr>
@@ -398,7 +398,7 @@
                                     <label for="mode-of-payment" class="form-label">Mode Of Payment <span class="text-danger">*</span></label>
                                     <select name="payment_mode" class="form-select" data-rule-required="true" data-msg-required="Please Select Mode of Payment">
                                         <option value="">Select Mode Of Payment</option>
-                                        @foreach(config('custom.payment_mode') as $pkey => $pvalue)
+                                        @foreach(config('constant.payment_mode') as $pkey => $pvalue)
                                             <option value="{{ $pkey }}" @if($salary->payment_mode == $pkey) selected @endif>{{ $pvalue }}</option>
                                         @endforeach
                                     </select>
@@ -406,6 +406,14 @@
                                 <div class="col-md-4 mb-3">
                                     <label for="remark" class="form-label">Remark</label>
                                     <textarea name="remark" class="form-control">{{ $salary->remark }}</textarea>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <label for="is-salary-slip-generate">Is Salary Slip Generate <span class="text-danger">*</span></label>
+                                    <select name="is_salary_slip_generate" class="form-select" data-rule-required="true" data-msg-required="Please Select Is Salary Slip Generate">
+                                        <option value="">Select Option</option>
+                                        <option value="1" @if($salary->is_salary_slip_generate == 1) selected @endif>Yes</option>
+                                        <option value="0" @if($salary->is_salary_slip_generate == 0) selected @endif>No</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -500,6 +508,45 @@
             });
 
             $(document).on('keyup change', '.jsNumberofPaidLeaves', calculateSalary);
+            $(document).on('keyup change', '.jsESIEmployeeContribution', calculateESI);
+
+            function calculateESI()
+            {
+                let ESIEmployeeContribution = parseFloat($(this).val()) || 0; // Ensure it is a number
+
+                let pfDeductionStatus = "{{ $salary->user->user_detail->is_pf_deduct_monthly }}";
+                let LabourWelfareFund = parseFloat("{{ $salary->user->user_detail->labour_welfare_employee_monthly }}");
+                let ProfessionalTaxCurrentMonth = parseFloat("{{ $salary->user->user_detail->professional_tax_monthly }}");
+                let InputGrossSalaryA = parseFloat($('.jsInputGrossSalaryA').val()) || 0;
+                let Basic = parseFloat($('.jsBasic').val()) || 0;
+
+                    switch (pfDeductionStatus) {
+                        case 'Yes':
+                            EmployeeContriCurrentMonth = (Basic * 12) / 100;
+                            break;
+                        case 'No':
+                            EmployeeContriCurrentMonth = 0;
+                            break;
+                        case 'Fix':
+                            EmployeeContriCurrentMonth = parseFloat("{{ $salary->user->user_detail->employee_contribution_monthly }}");
+                            break;
+                        default:
+                            EmployeeContriCurrentMonth = 0;
+                            break;
+                    }
+                    
+                    EmployeeContriBCurrentMonth = EmployeeContriCurrentMonth + LabourWelfareFund + ProfessionalTaxCurrentMonth + ESIEmployeeContribution;
+
+                    NetSalaryC = InputGrossSalaryA - (EmployeeContriCurrentMonth + LabourWelfareFund + ProfessionalTaxCurrentMonth + ESIEmployeeContribution);
+                    
+                    Ctcbcd = EmployeeContriBCurrentMonth + NetSalaryC + parseFloat("{{ $salary->user->user_detail->employer_contri_D_monthly }}");
+
+                $('.jsEmployeeContributionBCurrentMonthly').text('{{ config("constant.currency_symbol") }}'+' '+Math.round(EmployeeContriBCurrentMonth).toFixed(2));
+                $('.jsNetSalaryC').text('{{ config("constant.currency_symbol") }}'+' '+Math.round(NetSalaryC).toFixed(2));
+                $('.jsCTCBCD').text('{{ config("constant.currency_symbol") }}'+' '+Math.round(Ctcbcd).toFixed(2))
+                $('.jsInputCTCBCD').val(Math.round(Ctcbcd).toFixed(2));
+                $('.jsFinalAmount').val(Math.round(Ctcbcd).toFixed(2));
+            }
             
             let previousPaidLeaves = "{{ $salary->number_of_paid_leaves }}";
             

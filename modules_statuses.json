@@ -10,5 +10,6 @@
     "AppliedLeave": true,
     "PunchInOut": true,
     "AttendenceReport": true,
-    "Designation": true
+    "Designation": true,
+    "Department": true
 }

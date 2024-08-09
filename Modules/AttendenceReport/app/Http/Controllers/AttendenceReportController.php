@@ -14,6 +14,17 @@ use Illuminate\Support\Carbon;
 
 class AttendenceReportController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:employee-list', ['only' => ['index','show']]);
+        $this->middleware('permission:view-attendance-report', ['only' => ['report']]);
+        
+        /* $this->middleware('permission:view-attendance-report|create-attendance-report|edit-attendance-report|delete-attendance-report', ['only' => ['index','show']]);
+        $this->middleware('permission:create-attendance-report', ['only' => ['create','store']]);
+        $this->middleware('permission:edit-attendance-report', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete-attendance-report', ['only' => ['destroy']]); */
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -49,9 +60,7 @@ class AttendenceReportController extends Controller
                         return $row->full_name;
                     })
                     ->addColumn('report', function($row) {
-                        $btn = '<a href="'.route('attendencereport.report', $row->id).'" class="btn btn-sm btn-icon item-edit"><i class="fa-solid fa-calendar-days fa-lg"></i></a>';
-    
-                        return $btn;
+                        return view('attendencereport::action', compact('row'));
                     })
                     ->rawColumns(['report', 'full_name'])
                     ->make(true);

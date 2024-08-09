@@ -11,6 +11,14 @@ use DataTables;
 
 class DesignationController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:view-designation|create-designation|edit-designation|delete-designation', ['only' => ['index','show']]);
+        $this->middleware('permission:create-designation', ['only' => ['create','store']]);
+        $this->middleware('permission:edit-designation', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete-designation', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */

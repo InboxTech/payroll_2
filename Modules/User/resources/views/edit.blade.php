@@ -110,6 +110,15 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <div class="col-sm-4 mb-2">
+                                            <label for="department-list" class="form-label">Department <span class="text-danger">*</span></label>
+                                            <select name="department_id" class="form-select" data-rule-required="true" data-msg-required="Please Select Department">
+                                                <option value="">Select Department</option>
+                                                @foreach($department as $dkey => $dvalue)
+                                                    <option value="{{ $dkey }}" @if($user->department_id == $dkey) selected @endif>{{ $dvalue }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="form-tabs-bank-details" role="tabpanel">

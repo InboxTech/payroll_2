@@ -38,7 +38,7 @@
                                         <tr>
                                             <th>Leave Mode :</th>
                                             <td>
-                                                @foreach(config('custom.leave_mode') as $lmkey => $lmvalue)
+                                                @foreach(config('constant.leave_mode') as $lmkey => $lmvalue)
                                                     @if($lmkey == $model->leave_mode)
                                                         {{ $lmvalue }}
                                                     @endif
@@ -77,16 +77,18 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-3 col-form-label" for="basic-default-name">Is Approved <span class="text-danger">*</span></label>
                                     <div class="col-sm-9">
-                                        <select name="is_approved" class="form-select">
+                                        <select name="is_approved" class="form-select" disabled>
                                             <option value="">Select Status</option>
-                                            @foreach(config('custom.leave_status') as $lskey => $lsvalue)
+                                            @foreach(config('constant.leave_status') as $lskey => $lsvalue)
                                                 <option value="{{ $lskey }}" @if($lskey == $model->is_approved) selected @endif>{{ $lsvalue }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <div class="mt-3">
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    @if($model->is_approved == 0)
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    @endif
                                     <a href="{{ route('appliedleave.index') }}" class="btn btn-label-secondary waves-effect">Back</a>
                                 </div>
                             </form>

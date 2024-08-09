@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Artisan;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('salary-slip', function(){
+    return view('salary-slip');
+});

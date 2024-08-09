@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Designation;
+use App\Models\Department;
 use App\Models\UserDetail;
 use App\Models\AssignLeave;
 use App\Models\Leave;
@@ -21,6 +22,14 @@ use Modules\User\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:view-employee|create-employee|edit-employee|delete-employee', ['only' => ['index','show']]);
+        $this->middleware('permission:create-employee', ['only' => ['create','store']]);
+        $this->middleware('permission:edit-employee', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete-employee', ['only' => ['destroy']]);
+    }
+
     public function check_duplication(Request $request)
     {
         if($request->ajax())
@@ -110,10 +119,8 @@ class UserController extends Controller
                     ->addColumn('status', function($row){
                         return view('user::status', compact('row'));
                     })
-                    ->addColumn('action', function($row){       
-                        $btn = '<a href="'.route('user.edit', $row->id).'" class="btn btn-sm btn-icon item-edit"><i class="text-primary ti ti-pencil"></i></a>';
-    
-                        return $btn;
+                    ->addColumn('action', function($row){
+                        return view('user::action', compact('row'));
                     })
                     ->rawColumns(['action', 'checkbox'])
                     ->make(true);
@@ -130,8 +137,9 @@ class UserController extends Controller
         $assignLeave = Leave::get();
 
         $designation = Designation::where('status', 1)->pluck('name', 'id');
+        $department = Department::where('status', 1)->pluck('name', 'id');
         
-        return view('user::create', compact('roles', 'assignLeave', 'designation'));
+        return view('user::create', compact('roles', 'assignLeave', 'designation', 'department'));
     }
 
     /**
@@ -240,8 +248,9 @@ class UserController extends Controller
         $assignLeave = Leave::get();
 
         $designation = Designation::where('status', 1)->pluck('name', 'id');
+        $department = Department::where('status', 1)->pluck('name', 'id');
 
-        return view('user::edit', compact('user','roles', 'selectedRole', 'assignLeave', 'designation'));
+        return view('user::edit', compact('user','roles', 'selectedRole', 'assignLeave', 'designation', 'department'));
     }
 
     /**

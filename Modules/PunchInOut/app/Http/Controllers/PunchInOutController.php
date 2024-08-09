@@ -13,6 +13,13 @@ use DataTables;
 
 class PunchInOutController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:view-punchinout|edit-punchinout|view-location', ['only' => ['index','show']]);
+        $this->middleware('permission:edit-punchinout', ['only' => ['edit','update']]);
+        $this->middleware('permission:view-location', ['only' => ['']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -59,9 +66,7 @@ class PunchInOutController extends Controller
                         return '00:00'.' Hr';
                     })
                     ->addColumn('action', function($row){       
-                        $btn = '<a href="'.route('punchinout.edit', $row->id).'" class="btn btn-sm btn-icon item-edit"><i class="text-primary ti ti-pencil"></i></a>';
-    
-                        return $btn;
+                        return view('punchinout::action', compact('row'));
                     })
                     ->rawColumns(['action'])
                     ->make(true);

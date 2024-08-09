@@ -12,6 +12,14 @@ use DataTables;
 
 class RoleController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:view-role|create-role|edit-role|delete-role', ['only' => ['index','show']]);
+        $this->middleware('permission:create-role', ['only' => ['create','store']]);
+        $this->middleware('permission:edit-role', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete-role', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */

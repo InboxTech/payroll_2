@@ -14,6 +14,14 @@ use DataTables;
 
 class LeaveApplyController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:view-leave-apply|create-leave-apply|edit-leave-apply|delete-leave-apply', ['only' => ['index','show']]);
+        $this->middleware('permission:create-leave-apply', ['only' => ['create','store']]);
+        $this->middleware('permission:edit-leave-apply', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete-leave-apply', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -38,14 +46,7 @@ class LeaveApplyController extends Controller
                         return view('leaveapply::approved_status', compact('row'));
                     })
                     ->addColumn('action', function($row) {
-                            
-                        if($row->is_approved == 1 || $row->is_approved == 2) {
-                            $btn = '';
-                        } else {
-                            $btn = '<a href="'.route('leaveapply.edit', $row->id).'" class="btn btn-sm btn-icon item-edit"><i class="text-primary ti ti-pencil"></i></a>';
-                        }
-
-                        return $btn;
+                        return view('leaveapply::action', compact('row'));
                     })
                     ->addColumn('apply_date', function($row) {
                         return date('d-m-Y', strtotime($row->created_at));

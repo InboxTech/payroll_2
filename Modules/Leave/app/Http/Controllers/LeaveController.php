@@ -11,6 +11,14 @@ use Modules\Leave\Http\Requests\CreateLeaveRequest;
 
 class LeaveController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:view-leave|create-leave|edit-leave|delete-leave', ['only' => ['index','show']]);
+        $this->middleware('permission:create-leave', ['only' => ['create','store']]);
+        $this->middleware('permission:edit-leave', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete-leave', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */

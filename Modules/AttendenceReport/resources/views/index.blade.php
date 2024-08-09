@@ -49,7 +49,9 @@
                             <tr>
                                 <th class="text-center">Employee Name</th>
                                 <th class="text-center">Employee Id</th>
-                                <th class="text-center">Attendence Report</th>
+                                @can('view-attendance-report')
+                                    <th class="text-center">Attendence Report</th>
+                                @endcan
                             </tr>
                         </thead>
                     </table>
@@ -80,11 +82,10 @@
                     columns: [
                         { data: 'full_name', name: 'full_name' },
                         { data: 'emp_id', name: 'emp_id' },
-                        { data: 'report', name: 'report', orderable: false, searchable: false },
+                        @can('view-attendance-report')
+                            { data: 'report', name: 'report', orderable: false, searchable: false },
+                        @endcan
                     ],
-                    columnDefs: [
-                        { className: 'text-center', targets: [0, 1, 2] } // Center align columns 0, 1, and 2
-                    ]
                 });
         
                 $(".form-control").keyup(function(){

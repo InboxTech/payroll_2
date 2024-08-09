@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\DB;
 
 class HolidayLeaveController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:view-holiday-leave|create-holiday-leave|edit-holiday-leave|delete-holiday-leave', ['only' => ['index','show']]);
+        $this->middleware('permission:create-holiday-leave', ['only' => ['create','store']]);
+        $this->middleware('permission:edit-holiday-leave', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete-holiday-leave', ['only' => ['destroy']]);
+    }
+
     public function getnumberofholiday(Request $request)
     {
         $countofHoliday = HolidayLeave::where(DB::raw("(DATE_FORMAT(holiday_date,'%Y-%m'))"), $request->monthyear)->count();

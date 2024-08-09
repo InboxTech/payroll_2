@@ -8,8 +8,12 @@
                 <h4 class="py-3 mb-4"><span class="text-muted fw-light">Dashboard /</span> Leave Apply</h4>
                 <div class="d-flex align-content-center flex-wrap gap-3">
                     <div class="d-flex gap-3">
-                        <a href="javascript:void(0);" class="btn btn-outline-danger delete_records"><i class="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>
-                        <a href="{{ route('leaveapply.create') }}" class="btn btn-outline-primary"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a>
+                        @can('delete-leave-apply')
+                            <a href="javascript:void(0);" class="btn btn-outline-danger delete_records"><i class="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>
+                        @endcan
+                        @can('create-leave-apply')
+                            <a href="{{ route('leaveapply.create') }}" class="btn btn-outline-primary"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a>
+                        @endcan
                     </div>
                 </div>
             </div>
@@ -24,7 +28,9 @@
                                 <th class="text-center">Total Leave Day</th>
                                 <th class="text-center">Approval Status</th>
                                 <th class="text-center">Apply Date</th>
-                                <th class="text-center">Action</th>
+                                @can('edit-leave-apply')
+                                    <th class="text-center">Action</th>
+                                @endcan
                             </tr>
                         </thead>
                     </table>
@@ -55,7 +61,9 @@
                         { data: 'number_of_days', name: 'number_of_days' },
                         { data: 'approval_status', name: 'approval_status'},
                         { data: 'apply_date', name: 'apply_date'},
-                        { data: 'action', name: 'action', orderable: false, searchable: false },
+                        @can('edit-leave-apply')
+                            { data: 'action', name: 'action', orderable: false, searchable: false },
+                        @endcan
                     ],
                 });
         

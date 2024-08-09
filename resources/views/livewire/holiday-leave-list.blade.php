@@ -1,10 +1,12 @@
 <div>
-    <table class="table">
+    <table class="table text-center">
         <thead>
             <tr>
                 <th>Holiday Name & Date</th>
                 <th>Status</th>
-                <th>Actions</th>
+                @canany(['edit-holiday-leave', 'delete-holiday-leave'])
+                    <th>Actions</th>
+                @endcanany
             </tr>
         </thead>
         <tbody class="table-border-bottom-0">
@@ -18,15 +20,21 @@
                             <span class="badge bg-danger">Inactive</span>
                         @endif
                     </td>
-                    <td>
-                        <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{ route('holidayleave.edit', $value->id) }}"><i class="ti ti-pencil me-1"></i> Edit</a>
-                                <a class="dropdown-item" href="{{ route('holidayleave.delete', $value->id) }}" onclick="return confirm('Are you sure you want to delete?');"><i class="ti ti-trash me-1"></i> Delete</a>
+                    @canany(['edit-holiday-leave', 'delete-holiday-leave'])
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>
+                                <div class="dropdown-menu">
+                                    @can('edit-holiday-leave')
+                                        <a class="dropdown-item" href="{{ route('holidayleave.edit', $value->id) }}"><i class="ti ti-pencil me-1"></i> Edit</a>
+                                    @endcan
+                                    @can('delete-holiday-leave')
+                                        <a class="dropdown-item" href="{{ route('holidayleave.delete', $value->id) }}" onclick="return confirm('Are you sure you want to delete?');"><i class="ti ti-trash me-1"></i> Delete</a>
+                                    @endcan
+                                </div>
                             </div>
-                        </div>
-                    </td>
+                        </td>
+                    @endcanany
                 </tr>
             @empty
                 <tr>

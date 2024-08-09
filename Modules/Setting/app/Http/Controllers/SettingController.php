@@ -10,6 +10,11 @@ use App\Models\Setting;
 
 class SettingController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:edit-setting', ['only' => ['index','setting_submit']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -74,7 +79,7 @@ class SettingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         //
     }
@@ -98,7 +103,7 @@ class SettingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id): RedirectResponse
+    public function update(Request $request, $id)
     {
         //
     }

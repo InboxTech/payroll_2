@@ -27,72 +27,102 @@
         </li>
 
         @php
+            $controller = array('DesignationController', 'DepartmentController');
+            $action = array('index');
+        @endphp
+        @canany(['view-designation', 'view-department'])
+            <li class="menu-item {{ in_array($current_controller,$controller)? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-calendar"></i>
+                    <div data-i18n="Master">Master</div>
+                </a>
+                <ul class="menu-sub">
+                    @can('view-designation')
+                        <li class="menu-item @if($current_controller == 'DesignationController') active @endif">
+                            <a href="{{ route('designation.index') }}" class="menu-link">
+                                <div data-i18n="Designation">Designation</div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('view-department')
+                        <li class="menu-item @if($current_controller == 'DepartmentController') active @endif">
+                            <a href="{{ route('department.index') }}" class="menu-link">
+                                <div data-i18n="Department">Department</div>
+                            </a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
+        @endcan
+
+        @php
             $controller = array('RoleController');
             $action = array('index');
         @endphp
-        <li class="menu-item {{ in_array($current_controller,$controller)? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-settings"></i>
-                <div data-i18n="Roles & Permissions">Roles & Permissions</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item @if($current_controller == 'RoleController') active @endif">
-                    <a href="{{ route('role.index') }}" class="menu-link">
-                        <div data-i18n="Roles">Roles</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+        @can('view-role')
+            <li class="menu-item {{ in_array($current_controller,$controller)? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-settings"></i>
+                    <div data-i18n="Roles & Permissions">Roles & Permissions</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item @if($current_controller == 'RoleController') active @endif">
+                        <a href="{{ route('role.index') }}" class="menu-link">
+                            <div data-i18n="Roles">Roles</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endcan
 
         @php
             $controller = array('UserController');
             $action = array('index');
         @endphp
-        <li class="menu-item @if($current_controller == 'UserController') active @endif">
-            <a href="{{ route('user.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-users"></i>
-                <div data-i18n="Employee">Employee</div>
-            </a>
-        </li>
-        
-        @php
-            $controller = array('DesignationController');
-            $action = array('index');
-        @endphp
-        <li class="menu-item @if($current_controller == 'DesignationController') active @endif">
-            <a href="{{ route('designation.index') }}" class="menu-link">
-                <i class="fa-regular fa-address-card"></i>&nbsp;
-                <div data-i18n="Designation">Designation</div>
-            </a>
-        </li>
+        @can('view-employee')
+            <li class="menu-item @if($current_controller == 'UserController') active @endif">
+                <a href="{{ route('user.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-users"></i>
+                    <div data-i18n="Employee">Employee</div>
+                </a>
+            </li>
+        @endcan
         
         @php
             $controller = array('LeaveController', 'LeaveApplyController', 'AppliedLeaveController');
             $action = array('index');
         @endphp
-        <li class="menu-item {{ in_array($current_controller,$controller)? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-calendar"></i>
-                <div data-i18n="Leave">Leave</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item @if($current_controller == 'LeaveController') active @endif">
-                    <a href="{{ route('leave.index') }}" class="menu-link">
-                        <div data-i18n="Leave">Leave</div>
-                    </a>
-                </li>
-                <li class="menu-item @if($current_controller == 'LeaveApplyController') active @endif">
-                    <a href="{{ route('leaveapply.index') }}" class="menu-link">
-                        <div data-i18n="Leave Apply">Leave Apply</div>
-                    </a>
-                </li>
-                <li class="menu-item @if($current_controller == 'AppliedLeaveController') active @endif">
-                    <a href="{{ route('appliedleave.index') }}" class="menu-link">
-                        <div data-i18n="Applied Leave">Applied Leave</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+        @canany(['view-leave', 'view-leave-apply', 'view-applied-leave'])
+            <li class="menu-item {{ in_array($current_controller,$controller)? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-calendar"></i>
+                    <div data-i18n="Leave">Leave</div>
+                </a>
+                <ul class="menu-sub">
+                    @can('view-leave')
+                        <li class="menu-item @if($current_controller == 'LeaveController') active @endif">
+                            <a href="{{ route('leave.index') }}" class="menu-link">
+                                <div data-i18n="Leave">Leave</div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('view-leave-apply')
+                        <li class="menu-item @if($current_controller == 'LeaveApplyController') active @endif">
+                            <a href="{{ route('leaveapply.index') }}" class="menu-link">
+                                <div data-i18n="Leave Apply">Leave Apply</div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('view-applied-leave')
+                        <li class="menu-item @if($current_controller == 'AppliedLeaveController') active @endif">
+                            <a href="{{ route('appliedleave.index') }}" class="menu-link">
+                                <div data-i18n="Applied Leave">Applied Leave</div>
+                            </a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
+        @endcan
 
         @php
             $controller = array('PunchInOutController', 'AttendenceReportController');
@@ -109,11 +139,13 @@
                         <div data-i18n="Punch In-Out">Punch In-Out</div>
                     </a>
                 </li>
-                <li class="menu-item @if($current_controller == 'AttendenceReportController') active @endif">
-                    <a href="{{ route('attendencereport.index') }}" class="menu-link">
-                        <div data-i18n="Attendance Report">Attendance Report</div>
-                    </a>
-                </li>
+                @can('employee-list')
+                    <li class="menu-item @if($current_controller == 'AttendenceReportController') active @endif">
+                        <a href="{{ route('attendencereport.index') }}" class="menu-link">
+                            <div data-i18n="Attendance Report">Attendance Report</div>
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </li>
         
@@ -122,21 +154,25 @@
             $action = array('index');
             $roleId= array(1, 2);
         @endphp
-        <li class="menu-item @if($current_controller == 'SalaryController') active @endif">
-            <a href="{{ (in_array(Auth::user()->roles()->first()->id, $roleId)) ? route('salary.index') : route('salary.employeesalary') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-file-dollar"></i>
-                <div data-i18n="Salary">Salary</div>
-            </a>
-        </li>
+        @can('view-salary')
+            <li class="menu-item @if($current_controller == 'SalaryController') active @endif">
+                <a href="{{ (in_array(Auth::user()->roles()->first()->id, $roleId)) ? route('salary.index') : route('salary.employeesalary') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-file-dollar"></i>
+                    <div data-i18n="Salary">Salary</div>
+                </a>
+            </li>
+        @endcan
 
         @php 
             $controller = array('SettingController');
             $action = array('index');
         @endphp
-        <li class="menu-item @if($current_controller == 'SettingController') active @endif">
-            <a href="{{ route('setting.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-settings"></i>
-                <div data-i18n="Setting">Setting</div>
-            </a>
-        </li>
+        @can('edit-setting')
+            <li class="menu-item @if($current_controller == 'SettingController') active @endif">
+                <a href="{{ route('setting.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-settings"></i>
+                    <div data-i18n="Setting">Setting</div>
+                </a>
+            </li>
+        @endcan
     </ul>

@@ -5,11 +5,15 @@
                 @include('flashmessage.flashmessage')
             </div>
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
-                <h4 class="py-3 mb-4"><span class="text-muted fw-light">Dashboard /</span> User</h4>
+                <h4 class="py-3 mb-4"><span class="text-muted fw-light">Dashboard /</span> Employee</h4>
                 <div class="d-flex align-content-center flex-wrap gap-3">
                     <div class="d-flex gap-3">
-                        <a href="javascript:void(0);" class="btn btn-outline-danger delete_records"><i class="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>
-                        <a href="{{ route('user.create') }}" class="btn btn-outline-primary"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a>
+                        @can('delete-employee')
+                            <a href="javascript:void(0);" class="btn btn-outline-danger delete_records"><i class="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>
+                        @endcan
+                        @can('create-employee')
+                            <a href="{{ route('user.create') }}" class="btn btn-outline-primary"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a>
+                        @endcan
                     </div>
                 </div>
             </div>

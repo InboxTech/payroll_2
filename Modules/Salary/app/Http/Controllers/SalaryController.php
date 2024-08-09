@@ -15,8 +15,19 @@ use \App\Models\User;
 use DataTables;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
 class SalaryController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:view-salary|create-salary|edit-salary|delete-salary', ['only' => ['monthlist','show']]);
+        $this->middleware('permission:create-salary', ['only' => ['create','store']]);
+        $this->middleware('permission:edit-salary', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete-salary', ['only' => ['destroy']]);
+        $this->middleware('permission:employee-list-salary', ['only' => ['index']]);
+    }
+
     public function calculateAllDaysWithSalary(Request $request)
     {
         // Present Days Caculation
@@ -165,6 +176,10 @@ class SalaryController extends Controller
         
         // ESI Employee Contribution
         $data['ESIEmployeeContribution'] = $userData->user_detail->esi_employee_contribution_monthly;
+        if(!$request->ajax())
+        {
+            $data['ESIEmployeeContribution'] = $request->esi_employee_contribution;
+        }
 
         // Labour Welfare Fund (Gujarat) employee
         $data['LabourEmployeeContriCurrentMonth'] = $userData->user_detail->labour_welfare_employee_monthly;
@@ -177,7 +192,7 @@ class SalaryController extends Controller
         $data['EmployeeContributionB'] = number_format($EmployeeContributionB, 2, '.', '');
 
         // Net Salary (C)
-        $NetSalaryC = $data['GrossSalaryA'] - ($data['EmployeeContribution'] + $data['LabourEmployeeContriCurrentMonth'] + $data['ProfessionalTax']);
+        $NetSalaryC = $data['GrossSalaryA'] - ($data['EmployeeContribution'] + $data['LabourEmployeeContriCurrentMonth'] + $data['ProfessionalTax'] + $data['ESIEmployeeContribution']);
         $data['NetSalaryC'] = number_format($NetSalaryC, 2, '.', '');
 
         // Labour Welfare Fund (Gujarat) Employer Contribution
@@ -198,6 +213,7 @@ class SalaryController extends Controller
         }
         else
         {
+            // dd($request->all());
             $salary = Salary::updateOrCreate(
                 ['user_id' => $userId, 'month_year' => $monthYear],
                 [
@@ -236,8 +252,41 @@ class SalaryController extends Controller
                 ]
             );
 
+            if($request->is_salary_slip_generate == 1)
+            {
+                $pdf = Pdf::loadView('salary::salary_slip', compact('salary'));
+                
+                $content = $pdf->download()->getOriginalContent();
+                
+                $rootPath = storage_path('app/public').'/salary-slip';
+                
+                $client = Storage::createLocalDriver(['root' => $rootPath]);
+                $pdf_name = $salary->user->emp_id.'-'.$salary->month_year.'.pdf';
+
+                $client->put($pdf_name, $content);
+                $salary->update(['is_salary_slip_generate' => 1, 'salary_slip_path' => 'salary-slip/'.$pdf_name]);
+            }
+
             return $salary;
         }
+    }
+
+    public function generateslip(Request $request)
+    {
+        $salary = Salary::find($request->id);
+        
+        // return view('salary::salary_slip', compact('salary'));
+
+        $pdf = Pdf::loadView('salary::salary_slip', compact('salary'));
+
+        $content = $pdf->download()->getOriginalContent();
+                
+        $rootPath = storage_path('app/public').'/salary-slip';
+        
+        $client = Storage::createLocalDriver(['root' => $rootPath]);
+        $pdf_name = $salary->user->emp_id.'-'.$salary->month_year.'.pdf';
+
+        $client->put($pdf_name, $content);
     }
 
     public function countWeekends($year, $month)
@@ -264,7 +313,7 @@ class SalaryController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request) {
-
+        
         if ($request->ajax()) {
             
             $data = User::select([
@@ -309,31 +358,8 @@ class SalaryController extends Controller
         return view('salary::index');
     }
 
-    public function employeeSalary(Request $request)
+    public function employeesalary(Request $request)
     {
-        if ($request->ajax()) {
-            
-            $data = Salary::select('id', 'final_amount', 'month_year')->where('user_id', Auth::user()->id)->get();
-    
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('month_year', function($row){
-                        return date('M-Y', strtotime($row->month_year));
-                    })
-                    ->addColumn('final_amount', function($row){
-                        return config('constant.currency_symbol').' '.$row->final_amount;
-                    })
-                    ->addColumn('checkbox', function($row){
-                        $btn = '<input type="checkbox" name="id[]" class="form-check-input jsCheckBoxes" value="'.$row->id.'">';
-                        return $btn;
-                    })
-                    ->addColumn('action', function($row){
-                        return view('salary::action', compact('row'));
-                    })
-                    ->rawColumns(['action', 'checkbox'])
-                    ->make(true);
-        }
-
         $user = User::where('id', Auth::user()->id)->first();
         
         return view('salary::monthlist', compact('user'));
@@ -345,19 +371,24 @@ class SalaryController extends Controller
         
         if ($request->ajax()) {
             
-            $data = Salary::select('id', 'final_amount', 'month_year')->where('user_id', $request->user)->get();
+            $data = Salary::select('id', 'final_amount', 'month_year', 'is_salary_slip_generate', 'salary_slip_path')->where('user_id', $request->user)->latest();
     
             return Datatables::of($data)
+                    ->filter(function ($query) use ($request) {
+                        if ($request->has('month_year')) {
+                            $query->where('month_year', 'like', "%" . $request->get('month_year') . "%");
+                        }
+                    })
                     ->addIndexColumn()
+                    ->addColumn('checkbox', function($row){
+                        $btn = '<input type="checkbox" name="id[]" class="form-check-input jsCheckBoxes" value="'.$row->id.'">';
+                        return $btn;
+                    })
                     ->addColumn('month_year', function($row){
                         return date('M-Y', strtotime($row->month_year));
                     })
                     ->addColumn('final_amount', function($row){
                         return config('constant.currency_symbol').' '.$row->final_amount;
-                    })
-                    ->addColumn('checkbox', function($row){
-                        $btn = '<input type="checkbox" name="id[]" class="form-check-input jsCheckBoxes" value="'.$row->id.'">';
-                        return $btn;
                     })
                     ->addColumn('action', function($row){
                         return view('salary::action', compact('row'));
@@ -393,6 +424,8 @@ class SalaryController extends Controller
         
         if($this->calculateAllDaysWithSalary($request))
         {
+            Session::forget('user');
+
             return redirect()->route('salary.monthlist', $userSession)->with('success', 'Salary Credited Successfully');
         }
 
@@ -404,7 +437,9 @@ class SalaryController extends Controller
      */
     public function show($id)
     {
-        return view('salary::show');
+        $salary = Salary::where(['user_id' => Auth::user()->id, 'id' => $id])->firstOrFail();
+
+        return view('salary::show', compact('salary'));
     }
 
     /**
