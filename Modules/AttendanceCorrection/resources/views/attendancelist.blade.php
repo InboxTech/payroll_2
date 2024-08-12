@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th>Date</th>
-            <th>Present / Absent</th>
+            <th>Present / Absent Status</th>
             <th>Punch In Time</th>
             <th>Punch Out Time</th>
             <th>Total Hours</th>

@@ -8,6 +8,11 @@
                         <a href="{{ route('attendencereport.index') }}" class="text-reset">Attendence Report</a> /
                     </span> {{ $user->full_name }}
                 </h4>
+                <div class="d-flex align-content-center flex-wrap gap-3">
+                    <div class="d-flex gap-3">
+                        <a href="{{ route('attendencereport.index') }}" class="btn btn-outline-danger"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;Back</a>
+                    </div>
+                </div>
             </div>
             
             <div class="col-xl justify-content-center d-flex">

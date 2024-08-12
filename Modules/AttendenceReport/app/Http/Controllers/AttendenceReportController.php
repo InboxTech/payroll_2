@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\User;
 use App\Models\PunchInOut;
+use App\Models\HolidayLeave;
 use Illuminate\Support\Facades\DB;
 use DataTables;
 use Illuminate\Support\Carbon;
@@ -38,14 +39,6 @@ class AttendenceReportController extends Controller
                             $query->where(DB::raw("CONCAT(first_name, ' ', last_name)"), 'like', "%" . $request->get('full_name') . "%");
                         }
 
-                        if ($request->has('email')) {
-                            $query->where('email', 'like', "%" . $request->get('email') . "%");
-                        }
-
-                        if ($request->has('mobile_no')) {
-                            $query->where('mobile_no', 'like', "%" . $request->get('mobile_no') . "%");
-                        }
-                        
                         if ($request->has('emp_id')) {
                             $query->where('emp_id', 'like', "%" . $request->get('emp_id') . "%");
                         }
@@ -77,8 +70,10 @@ class AttendenceReportController extends Controller
         $endDate = Carbon::createFromDate($request->monthYear)->endOfMonth();
         
         $data = PunchInOut::whereBetween('date', [$startDate, $endDate])->where('user_id', $request->user_id)->orderBy('date', 'ASC')->get();
+
+        $holidayleave = HolidayLeave::whereBetween('holiday_date', [$startDate, $endDate])->orderBy('holiday_date', 'ASC')->get();
         
-        return view('attendencereport::report_details', compact('data'));
+        return view('attendencereport::report_details', compact('data', 'request', 'holidayleave'));
     }
 
     /**

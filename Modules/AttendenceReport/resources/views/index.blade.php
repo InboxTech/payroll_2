@@ -20,20 +20,12 @@
                                 <div class="accordion-body">
                                     <div class="row g-3">
                                         <div class="col-md-3">
+                                            <label class="form-label" for="collapsible-fullname">Employee Name</label>
+                                            <input type="text" name="full_name" class="form-control jsEmployeeName"/>
+                                        </div>
+                                        <div class="col-md-3">
                                             <label class="form-label" for="collapsible-phone">Employee Id</label>
                                             <input type="text" class="form-control phone-mask jsEmployeeId"/>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="form-label" for="collapsible-fullname">Name</label>
-                                            <input type="text" name="full_name" class="form-control jsName"/>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="form-label" for="collapsible-email">Email</label>
-                                            <input type="text" class="form-control jsEmail" name="email"/>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="form-label" for="collapsible-phone">Mobile No</label>
-                                            <input type="text" class="form-control phone-mask jsMobileNo"/>
                                         </div>
                                     </div>
                                 </div>
@@ -74,9 +66,7 @@
                         url:"{{ route('attendencereport.index') }}",
                         data: function (d) {
                             d.emp_id = $('.jsEmployeeId').val(),
-                            d.full_name = $('.jsName').val(),
-                            d.email = $('.jsEmail').val(),
-                            d.mobile_no = $('.jsMobileNo').val()
+                            d.full_name = $('.jsEmployeeName').val(),
                         }
                     },
                     columns: [
