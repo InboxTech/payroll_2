@@ -157,19 +157,27 @@ class PermissionTableSeeder extends Seeder
                 'group_name' => 'PunchInOut'
             ],
             [
-                'name' => 'edit-punchinout',
-                'group_name' => 'PunchInOut'
-            ],
-            [
                 'name' => 'view-location',
                 'group_name' => 'PunchInOut'
             ],
             [
-                'name' => 'employee-list',
+                'name' => 'employee-list-attendance-correction',
+                'group_name' => 'AttendanceCorrection'
+            ],
+            [
+                'name' => 'attendance-list-attendancecorrection',
+                'group_name' => 'AttendanceCorrection'
+            ],
+            [
+                'name' => 'edit-attendance-correction',
+                'group_name' => 'AttendanceCorrection'
+            ],
+            [
+                'name' => 'employee-list-attendancereport',
                 'group_name' => 'AttendanceReport'
             ],
             [
-                'name' => 'view-attendance-report',
+                'name' => 'attendance-report',
                 'group_name' => 'AttendanceReport'
             ],
             [

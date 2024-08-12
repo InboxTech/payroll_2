@@ -3,9 +3,10 @@
         <div class="container-xxl flex-grow-1 container-p-y">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
                 <h4 class="py-3 mb-4">
-                    <a href="{{ route('dashboard') }}" class="text-reset">Dashboard</a> / 
-                    <a href="{{ route('user.index') }}" class="text-reset">User</a> / Add
-                    <span class="text-muted fw-light"></span>
+                    <span class="text-muted fw-light">
+                        <a href="{{ route('dashboard') }}" class="text-reset">Dashboard</a> / 
+                        <a href="{{ route('user.index') }}" class="text-reset">Employee</a>
+                    </span> / Add
                 </h4>
             </div>
             <div class="row">
@@ -24,6 +25,11 @@
                                     </button>
                                 </li>
                                 <li class="nav-item">
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#form-tabs-pf-details" role="tab" aria-selected="false">
+                                        PF Details
+                                    </button>
+                                </li>
+                                <li class="nav-item">
                                     <button class="nav-link" data-bs-toggle="tab" data-bs-target="#form-tabs-assign-leaves" role="tab" aria-selected="false">
                                         Assign Leaves
                                     </button>
@@ -35,7 +41,7 @@
                                 </li>
                             </ul>
                         </div>
-                        
+
                         <form action="{{ route('user.store') }}" method="post" autocomplete="off" class="FormValidate">
                             @csrf
                             <div class="tab-content">
@@ -96,6 +102,10 @@
                                             <input type="date" name="joining_date" class="form-control"/>
                                         </div>
                                         <div class="col-sm-4 mb-2">
+                                            <label class="form-label" for="probation-end-date">Probation End Date <span class="text-danger">*</span></label>
+                                            <input type="date" name="probation_end_date" class="form-control" data-rule-required="true" data-msg-required="Please Select Probation End Date"/>
+                                        </div>
+                                        <div class="col-sm-4 mb-2">
                                             <label class="form-label" for="releaving-date">Releaving Date </label>
                                             <input type="date" name="releaving_date" class="form-control"/>
                                         </div>
@@ -151,12 +161,20 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="tab-pane fade" id="form-tabs-pf-details" role="tabpanel">
+                                    <div class="row">
+                                        <div class="col-md-4 mt-2">
+                                            <label class="form-label" for="pf-number">UAN Number </label>
+                                            <input type="text" name="uan_number" class="form-control"/>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="tab-pane fade" id="form-tabs-assign-leaves" role="tabpanel">
                                     <div class="row">
                                         @foreach($assignLeave as $leave => $value)
                                             <div class="col-md-4 mt-2">
                                                 <label class="form-label" for="previlege-leave">{{ $value->leave_type_name }} </label>
-                                                <input type="text" name="assign_leave[{{ $value->id }}]" class="form-control" value="{{ $value->number_of_leaves }}"/>
+                                                <input type="text" name="assign_leave[{{ $value->id }}]" class="form-control float_numbers" value="{{ $value->number_of_leaves }}"/>
                                             </div>
                                         @endforeach
                                     </div>
@@ -402,7 +420,7 @@
                                     <a href="{{ route('user.index') }}" class="btn btn-label-secondary waves-effect">Back</a>
                                 </div>
                             </div>
-                        </form>                        
+                        </form>
                     </div>
                 </div>
             </div>

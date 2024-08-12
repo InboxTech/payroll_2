@@ -33,6 +33,7 @@ class User extends Authenticatable
         'dob',
         'joining_date',
         'releaving_date',
+        'probation_end_date',
         'profile_image',
         'status',
     ];

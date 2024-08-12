@@ -11,5 +11,6 @@
     "PunchInOut": true,
     "AttendenceReport": true,
     "Designation": true,
-    "Department": true
+    "Department": true,
+    "AttendanceCorrection": true
 }

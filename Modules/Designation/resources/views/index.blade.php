@@ -49,7 +49,7 @@
             <!--  Model End -->
             <div class="card">
                 <div class="card-datatable text-nowrap">
-                    <table class="data-table table text-center" id="Designation">
+                    <table class="data-table table text-center table-responsive text-nowrap" id="Designation">
                         <thead>
                             <tr>
                                 <th class="text-center">Designation name</th>

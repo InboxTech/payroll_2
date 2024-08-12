@@ -226,7 +226,7 @@ class UserController extends Controller
             }
         }
 
-        return redirect()->route('user.index')->with('success', 'User added successfully!');
+        return redirect()->route('user.index')->with('success', 'Employee added successfully!');
     }
 
     /**
@@ -322,7 +322,7 @@ class UserController extends Controller
 
             UserDetail::where('user_id', $user->id)->update($filteredInput);
 
-            return redirect()->route('user.index')->with('success', 'User Updated Successfully!');
+            return redirect()->route('user.index')->with('success', 'Employee Updated Successfully!');
         }
     }
 

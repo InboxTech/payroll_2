@@ -44,12 +44,12 @@
             </div>
             <div class="card">
                 <div class="card-datatable text-nowrap">
-                    <table class="data-table table text-center" id="AttendenceReport">
+                    <table class="data-table table text-center table-responsive text-nowrap" id="AttendenceReport">
                         <thead>
                             <tr>
                                 <th class="text-center">Employee Name</th>
                                 <th class="text-center">Employee Id</th>
-                                @can('view-attendance-report')
+                                @can('attendance-report')
                                     <th class="text-center">Attendence Report</th>
                                 @endcan
                             </tr>
@@ -82,7 +82,7 @@
                     columns: [
                         { data: 'full_name', name: 'full_name' },
                         { data: 'emp_id', name: 'emp_id' },
-                        @can('view-attendance-report')
+                        @can('attendance-report')
                             { data: 'report', name: 'report', orderable: false, searchable: false },
                         @endcan
                     ],

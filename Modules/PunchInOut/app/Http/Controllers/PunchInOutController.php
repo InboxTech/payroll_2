@@ -34,10 +34,15 @@ class PunchInOutController extends Controller
                 $endDate = Carbon::parse($request->end_date)->format('Y-m-d');
 
                 $data->whereBetween('date', [$startDate, $endDate]);
-                
+
             }elseif ($request->filled('start_date')) {
                 $startDate = Carbon::parse($request->start_date)->format('Y-m-d');
                 $data->whereDate('date', $startDate);
+            }
+
+            if(!$request->filled('start_date') && !$request->filled('end_date'))
+            {
+                $data->where('date', date('Y-m-d'));
             }
 
             $data = $data->orderBy('date', 'DESC')->get();
@@ -64,9 +69,6 @@ class PunchInOutController extends Controller
                             return $timeDifference = $punchIn->diff($punchOut)->format('%H:%I'). ' Hr';
                         }
                         return '00:00'.' Hr';
-                    })
-                    ->addColumn('action', function($row){       
-                        return view('punchinout::action', compact('row'));
                     })
                     ->rawColumns(['action'])
                     ->make(true);

@@ -1,0 +1,11 @@
+{
+    "name": "AttendanceCorrection",
+    "alias": "attendancecorrection",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\AttendanceCorrection\\Providers\\AttendanceCorrectionServiceProvider"
+    ],
+    "files": []
+}

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('bank_branch_name', 150)->nullable();
             $table->string('account_number', 150)->nullable();
             $table->string('ifsc_code', 150)->nullable();
+            $table->string('uan_number',)->nullable();
             $table->decimal('gross_salary_yearly', 8, 2)->nullable();
             $table->decimal('gross_salary_monthly', 8, 2)->nullable();
             $table->decimal('basic_yearly', 8, 2)->nullable();

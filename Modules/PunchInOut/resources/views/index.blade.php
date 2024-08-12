@@ -57,7 +57,7 @@
             </div>
             <div class="card">
                 <div class="card-datatable text-nowrap">
-                    <table class="data-table table text-center">
+                    <table class="data-table table text-center table-responsive text-nowrap">
                         <thead>
                             <tr>
                                 <th class="text-center">Your Name</th>
@@ -65,9 +65,6 @@
                                 <th class="text-center">Punch In</th>
                                 <th class="text-center">Punch Out</th>
                                 <th class="text-center">Total Time</th>
-                                @can('edit-punchinout')
-                                    <th class="text-center">Action</th>
-                                @endcan
                             </tr>
                         </thead>
                     </table>
@@ -116,9 +113,6 @@
                         { data: 'punch_in', name: 'punch_in', orderable: false, searchable: false},
                         { data: 'punch_out', name: 'punch_out', orderable: false, searchable: false},
                         { data: 'total_time', name: 'total_time', orderable: false, searchable: false },
-                        @can('edit-punchinout')
-                            { data: 'action', name: 'action', orderable: false, searchable: false },
-                        @endcan
                     ],
                 });
         

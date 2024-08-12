@@ -15,6 +15,7 @@ class UserDetail extends Model
         'bank_branch_name',
         'account_number',
         'ifsc_code',
+        'uan_number',
         'gross_salary_yearly',
         'gross_salary_monthly',
         'basic_yearly',

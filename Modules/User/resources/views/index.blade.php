@@ -54,7 +54,7 @@
             </div>
             <div class="card">
                 <div class="card-datatable text-nowrap">
-                    <table class="data-table table text-center" id="User">
+                    <table class="data-table table text-center table-responsive text-nowrap" id="User">
                         <thead>
                             <tr>
                                 <th class="text-center"><input type="checkbox" class="form-check-input jsCheckAll"></th>

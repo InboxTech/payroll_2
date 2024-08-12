@@ -33,7 +33,7 @@
         @canany(['view-designation', 'view-department'])
             <li class="menu-item {{ in_array($current_controller,$controller)? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons ti ti-calendar"></i>
+                    <i class="menu-icon tf-icons ti ti-box"></i>
                     <div data-i18n="Master">Master</div>
                 </a>
                 <ul class="menu-sub">
@@ -125,7 +125,7 @@
         @endcan
 
         @php
-            $controller = array('PunchInOutController', 'AttendenceReportController');
+            $controller = array('PunchInOutController', 'AttendenceReportController', 'AttendanceCorrectionController');
             $action = array('index');
         @endphp
         <li class="menu-item {{ in_array($current_controller,$controller)? 'active open' : '' }}">
@@ -139,7 +139,14 @@
                         <div data-i18n="Punch In-Out">Punch In-Out</div>
                     </a>
                 </li>
-                @can('employee-list')
+                @can('employee-list-attendance-correction')
+                    <li class="menu-item @if($current_controller == 'AttendanceCorrectionController') active @endif">
+                        <a href="{{ route('attendancecorrection.index') }}" class="menu-link">
+                            <div data-i18n="Attendance Correction">Attendance Correction</div>
+                        </a>
+                    </li>
+                @endcan
+                @can('employee-list-attendancereport')
                     <li class="menu-item @if($current_controller == 'AttendenceReportController') active @endif">
                         <a href="{{ route('attendencereport.index') }}" class="menu-link">
                             <div data-i18n="Attendance Report">Attendance Report</div>

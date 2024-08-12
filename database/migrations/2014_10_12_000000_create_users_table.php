@@ -27,6 +27,7 @@ return new class extends Migration
             $table->date('dob')->nullable();
             $table->date('joining_date')->nullable();
             $table->date('releaving_date')->nullable();
+            $table->date('probation_end_date')->nullable();
             $table->string('profile_image')->nullable();
             $table->rememberToken();
             $table->integer('status')->default(1)->comment('1 for active, 0 for inactive');

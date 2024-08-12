@@ -8,7 +8,7 @@
                 <h4 class="py-3 mb-4">
                     <span class="text-muted fw-light">
                         <a href="{{ route('dashboard') }}" class="text-reset">Dashboard</a> /
-                        <a href="{{ route('punchinout.index') }}" class="text-reset">PunchInOut</a> /
+                        <a href="{{ route('attendancecorrection.index') }}" class="text-reset">Attendance Correction</a> /
                     </span> Edit
                 </h4>
             </div>
@@ -16,7 +16,7 @@
                 <div class="col-xl">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <form class="FormValidate" action="{{ route('punchinout.update', $punchinout->id) }}" method="post">
+                            <form class="FormValidate" action="{{ route('attendancecorrection.update', $punchinout->id) }}" method="post">
                                 @csrf 
                                 @method('put')
                                 <div class="row">
@@ -24,6 +24,8 @@
                                         <label class="form-label" for="employee-name">Employee Name <span class="text-danger">*</span></label>
                                         <input type="text" name="" class="form-control" value="{{ $punchinout->user->full_name }}" readonly>
                                         <input type="hidden" name="user_id" value="{{ $punchinout->user_id }}">
+                                        <input type="hidden" id="latitude" name='latitude' value="">
+                                        <input type="hidden" id="longitude" name='longitude' value="">
                                     </div>
                                     <div class="col-md-3 mt-2">
                                         <label for="dateRangePicker" class="form-label">Date <span class="text-danger">*</span></label>
@@ -40,7 +42,7 @@
                                 </div>
                                 <div class="mt-3">
                                     <button type="submit" class="btn btn-primary">Update</button>
-                                    <a href="{{ route('punchinout.index') }}" class="btn btn-label-secondary waves-effect">Back</a>
+                                    <a href="{{ route('attendancecorrection.index') }}" class="btn btn-label-secondary waves-effect">Back</a>
                                 </div>
                             </form>
                         </div>
@@ -51,6 +53,25 @@
     @endsection
     @push('script')
         <script type="text/javascript">
+            getLocation();
+            function getLocation() 
+            {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                } else {
+                    // If geolocation is not supported
+                    document.getElementById('latitude').value = "";
+                    document.getElementById('longitude').value = "";
+                    console.log('Geolocation is not supported by this browser.');
+                }
+            }
+
+            function showPosition(position) 
+            {
+                document.getElementById('latitude').value = position.coords.latitude;
+                document.getElementById('longitude').value = position.coords.longitude;
+            }
+
             $('.FormValidate').validate({
                 rules:{
                     'from_date': {

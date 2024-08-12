@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/attendancecorrection",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\AttendanceCorrection\\": "app/",
+            "Modules\\AttendanceCorrection\\Database\\Factories\\": "database/factories/",
+            "Modules\\AttendanceCorrection\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\AttendanceCorrection\\Tests\\": "tests/"
+        }
+    }
+}

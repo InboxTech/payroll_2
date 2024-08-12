@@ -5,7 +5,7 @@
                 <h4 class="py-3 mb-4">
                     <span class="text-muted fw-light">
                         <a href="{{ route('dashboard') }}" class="text-reset">Dashboard</a> / 
-                        <a href="{{ route('user.index') }}" class="text-reset">User</a> / 
+                        <a href="{{ route('user.index') }}" class="text-reset">Employee</a> / 
                     </span> Edit
                 </h4>
             </div>
@@ -22,6 +22,11 @@
                                 <li class="nav-item">
                                     <button class="nav-link" data-bs-toggle="tab" data-bs-target="#form-tabs-bank-details" role="tab" aria-selected="false">
                                         Bank Details
+                                    </button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#form-tabs-pf-details" role="tab" aria-selected="false">
+                                        PF Details
                                     </button>
                                 </li>
                                 <li class="nav-item">
@@ -60,7 +65,7 @@
                                             <input type="text" name="last_name" class="form-control" value="{{ $user->last_name }}"/>
                                         </div>
                                         <div class="col-md-4 mb-2">
-                                            <label class="form-label" for="basic-default-fullname">Email(official) <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="basic-default-fullname">Email (official) <span class="text-danger">*</span></label>
                                             <input type="text" name="email" class="form-control" value="{{ $user->email }}"/>
                                         </div>
                                         <div class="col-md-4 mb-2">
@@ -96,6 +101,10 @@
                                         <div class="col-sm-4 mb-2">
                                             <label class="form-label" for="joining-date">Joining Date <span class="text-danger">*</span></label>
                                             <input type="date" name="joining_date" class="form-control" value="{{ $user->joining_date }}"/>
+                                        </div>
+                                        <div class="col-sm-4 mb-2">
+                                            <label class="form-label" for="probation-end-date">Probation End Date <span class="text-danger">*</span></label>
+                                            <input type="date" name="probation_end_date" class="form-control" value="{{ $user->probation_end_date }}" data-rule-required="true" data-msg-required="Please Select Probation End Date"/>
                                         </div>
                                         <div class="col-sm-4 mb-2">
                                             <label class="form-label" for="releaving-date">Releaving Date </label>
@@ -138,6 +147,14 @@
                                         <div class="col-md-4 mt-2">
                                             <label class="form-label" for="ifsc-code">IFSC Code </label>
                                             <input type="text" name="ifsc_code" class="form-control" value="{{ $user->userdetail->ifsc_code ?? '' }}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="form-tabs-pf-details" role="tabpanel">
+                                    <div class="row">
+                                        <div class="col-md-4 mt-2">
+                                            <label class="form-label" for="pf-number">UAN Number </label>
+                                            <input type="text" name="uan_number" class="form-control" value="{{ $user->user_detail->uan_number }}"/>
                                         </div>
                                     </div>
                                 </div>

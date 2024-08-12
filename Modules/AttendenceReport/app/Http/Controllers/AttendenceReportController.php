@@ -16,13 +16,8 @@ class AttendenceReportController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:employee-list', ['only' => ['index','show']]);
-        $this->middleware('permission:view-attendance-report', ['only' => ['report']]);
-        
-        /* $this->middleware('permission:view-attendance-report|create-attendance-report|edit-attendance-report|delete-attendance-report', ['only' => ['index','show']]);
-        $this->middleware('permission:create-attendance-report', ['only' => ['create','store']]);
-        $this->middleware('permission:edit-attendance-report', ['only' => ['edit','update']]);
-        $this->middleware('permission:delete-attendance-report', ['only' => ['destroy']]); */
+        $this->middleware('permission:employee-list-attendancereport', ['only' => ['index','show']]);
+        $this->middleware('permission:attendance-report', ['only' => ['report']]);
     }
 
     /**

@@ -8,6 +8,12 @@
         }
     });
 
+    /* Float Number */
+    $(".float_numbers").keyup(function() {
+        var $this = $(this);
+        $this.val($this.val().replace(/[^\d.]/g, ''));
+    });
+
     // Change Status 
     $(document).on('change', '.jsStatus', function(){
         var status_id = $(this).val();

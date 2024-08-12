@@ -15,7 +15,7 @@
             </div>
             <div class="card">
                 <div class="card-datatable text-nowrap">
-                    <table class="data-table table text-center">
+                    <table class="data-table table text-center table-responsive text-nowrap">
                         <thead>
                             <tr>
                                 <th class="text-center"><input type="checkbox" id="select_all" class="form-check-input"></th>
