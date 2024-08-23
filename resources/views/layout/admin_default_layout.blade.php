@@ -62,8 +62,8 @@
                                         ©
                                         <script>
                                             document.write(new Date().getFullYear());
-                                        </script>, made with ❤️ by
-                                        <a href="https://pixinvent.com" target="_blank" class="footer-link text-primary fw-medium">Pixinvent</a>
+                                        </script>, Design & Developed By
+                                        <a href="javascript:void(0);" class="footer-link text-primary fw-medium">{{ getSettingData('config_company_name') }}</a>
                                     </div>
                                 </div>
                             </div>

@@ -1,6 +1,9 @@
     @extends('layout.admin_default_layout')
     @section('content')
         <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="jsFlashMessage">
+                @include('flashmessage.flashmessage')
+            </div>
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
                 <h4 class="py-3 mb-4">
                     <span class="text-muted fw-light">
@@ -77,7 +80,7 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-3 col-form-label" for="basic-default-name">Is Approved <span class="text-danger">*</span></label>
                                     <div class="col-sm-9">
-                                        <select name="is_approved" class="form-select" disabled>
+                                        <select name="is_approved" class="form-select">
                                             <option value="">Select Status</option>
                                             @foreach(config('constant.leave_status') as $lskey => $lsvalue)
                                                 <option value="{{ $lskey }}" @if($lskey == $model->is_approved) selected @endif>{{ $lsvalue }}</option>

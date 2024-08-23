@@ -128,6 +128,14 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <div class="col-sm-4 mb-2">
+                                            <label for="is-generate-offer-letter" class="form-label">Is Generate Offer Letter <span class="text-danger">*</span></label>
+                                            <select name="is_generate_offer_letter" class="form-select" data-rule-required="true" data-msg-required="Please Select Option">
+                                                <option value="">Select Option</option>
+                                                <option value="1" @if($user->is_generate_offer_letter == 1) selected @endif>Yes</option>
+                                                <option value="0" @if($user->is_generate_offer_letter == 0) selected @endif>No</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="form-tabs-bank-details" role="tabpanel">
@@ -160,10 +168,11 @@
                                 </div>
                                 <div class="tab-pane fade" id="form-tabs-assign-leaves" role="tabpanel">
                                     <div class="row">
-                                        @foreach($assignLeave as $leave => $value)
+                                        @foreach($user->assign_leave as $leave => $value)
                                             <div class="col-md-4 mt-2">
-                                                <label class="form-label" for="previlege-leave">{{ $value->leave_type_name }} </label>
-                                                <input type="text" name="assign_leave[{{ $value->id }}]" class="form-control" value="{{ $value->number_of_leaves }}" readonly/>
+                                                <label class="form-label" for="previlege-leave">{{ $value->leave->leave_type_name ?? ''}} </label>
+                                                <input type="text" name="assign_leave[{{ $value->id }}]" class="form-control" value="{{ $value->assign_leave ?? '' }}"/>
+                                                <span class="text-danger">Leave Balance : {{ $value->leave_balance }}</span>
                                             </div>
                                         @endforeach
                                     </div>

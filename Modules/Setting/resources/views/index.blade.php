@@ -28,21 +28,29 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade active show" id="form-tabs-personal" role="tabpanel">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 mb-3">
                                             <label class="form-label" for="formtabs-company-name">Company Name</label>
                                             <input type="text" name="config_company_name" class="form-control" value="{{ getSettingData('config_company_name') }}"/>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 mb-3">
                                             <label class="form-label" for="formtabs-company-email">Company Email</label>
                                             <input type="text" name="config_company_email" class="form-control" value="{{ getSettingData('config_company_email') }}" />
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 mb-3">
                                             <label class="form-label" for="formtabs-company-mobile-number">Company Mobile Number</label>
                                             <input type="text" name="config_company_mobile_no" class="form-control" value="{{ getSettingData('config_company_mobile_no') }}" />
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 mb-3">
                                             <label class="form-label" for="formtabs-birth-date">Company Address</label>
                                             <textarea name="config_company_address" class="form-control">{{ getSettingData("config_company_address") }}</textarea>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="start-financial-year" class="form-label">Start Financial Year</label>
+                                            <select name="config_start_financial_year" class="form-select">
+                                                @for($month = 1; $month <= 12; $month++)
+                                                    <option value="{{ $month }}">{{ date("F", mktime(0, 0, 0, $month, 1)) }}</option>
+                                                @endfor
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

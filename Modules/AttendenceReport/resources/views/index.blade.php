@@ -66,7 +66,7 @@
                         url:"{{ route('attendencereport.index') }}",
                         data: function (d) {
                             d.emp_id = $('.jsEmployeeId').val(),
-                            d.full_name = $('.jsEmployeeName').val(),
+                            d.full_name = $('.jsEmployeeName').val()
                         }
                     },
                     columns: [

@@ -29,6 +29,8 @@ return new class extends Migration
             $table->date('releaving_date')->nullable();
             $table->date('probation_end_date')->nullable();
             $table->string('profile_image')->nullable();
+            $table->integer('is_generate_offer_letter')->nullable()->comment('1 for Generate, 0 for Not Generate');
+            $table->string('offer_letter')->nullable();
             $table->rememberToken();
             $table->integer('status')->default(1)->comment('1 for active, 0 for inactive');
             $table->timestamps();

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Leave;
 use App\Models\LeaveApply;
+use App\Models\AssignLeave;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use DataTables;
@@ -89,11 +90,26 @@ class LeaveApplyController extends Controller
 
         $request->merge(['user_id' => Auth::user()->id, 'number_of_days' => $leaveCount]);
 
-        if(LeaveApply::create($request->all())) {
-            return redirect()->route('leaveapply.index')->with('success', 'Your Leave successfully applied');
-        }
+        $assignLeave = AssignLeave::where(['user_id' => Auth::user()->id, 'leave_id' => $request->leave_id])->first();
 
-        return redirect()->route('leaveapply.index')->with('error', 'Something went wrong');
+        if($assignLeave)
+        {
+            $newLeaveBalance = $assignLeave->leave_balance - $leaveCount;
+
+            if ($newLeaveBalance < 0) {
+                return redirect()->route('leaveapply.create')->with('error', 'Insufficient Leave Balance');
+            }
+
+            if(LeaveApply::create($request->all())) {
+                return redirect()->route('leaveapply.index')->with('success', 'Your Leave successfully applied');
+            }
+    
+            return redirect()->route('leaveapply.index')->with('error', 'Something went wrong');
+        }
+        else
+        {
+            return redirect()->route('leaveapply.index')->with('error', 'Leave Not Assign');
+        }
     }
 
     /**
@@ -137,11 +153,26 @@ class LeaveApplyController extends Controller
         
         $request->merge(['user_id' => Auth::user()->id, 'number_of_days' => $leaveCount]);
 
-        if($leaveapply->update($request->all())) {
-            return redirect()->route('leaveapply.index')->with('success', 'Your Leave Successfully Updated');
-        }
+        $assignLeave = AssignLeave::where(['user_id' => Auth::user()->id, 'leave_id' => $request->leave_id])->first();
 
-        return redirect()->route('leaveapply.edit', $leaveapply->id)->with('error', 'Something Went Wrong. Please Try Again!');
+        if($assignLeave)
+        {
+            $newLeaveBalance = $assignLeave->leave_balance - $leaveCount;
+
+            if ($newLeaveBalance < 0) {
+                return redirect()->route('leaveapply.edit', $leaveapply->id)->with('error', 'Insufficient Leave Balance');
+            }
+
+            if($leaveapply->update($request->all())) {
+                return redirect()->route('leaveapply.index')->with('success', 'Your Leave Successfully Updated');
+            }
+
+            return redirect()->route('leaveapply.edit', $leaveapply->id)->with('error', 'Something Went Wrong. Please Try Again!');
+        }
+        else
+        {
+            return redirect()->route('leaveapply.index')->with('error', 'Leave Not Assign');
+        }
     }
 
     /**

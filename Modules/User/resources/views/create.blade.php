@@ -29,7 +29,7 @@
                                         PF Details
                                     </button>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item d-none">
                                     <button class="nav-link" data-bs-toggle="tab" data-bs-target="#form-tabs-assign-leaves" role="tab" aria-selected="false">
                                         Assign Leaves
                                     </button>
@@ -127,6 +127,14 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <div class="col-sm-4 mb-2">
+                                            <label for="is-generate-offer-letter" class="form-label">Is Generate Offer Letter <span class="text-danger">*</span></label>
+                                            <select name="is_generate_offer_letter" class="form-select" data-rule-required="true" data-msg-required="Please Select Option">
+                                                <option value="">Select Option</option>
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <hr>
                                     <h4>Login Details</h4>
@@ -169,7 +177,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="form-tabs-assign-leaves" role="tabpanel">
+                                {{-- <div class="tab-pane fade" id="form-tabs-assign-leaves" role="tabpanel">
                                     <div class="row">
                                         @foreach($assignLeave as $leave => $value)
                                             <div class="col-md-4 mt-2">
@@ -178,7 +186,7 @@
                                             </div>
                                         @endforeach
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="tab-pane fade" id="form-tabs-salary-structure" role="tabpanel">
                                     <div class="table-responsive text-nowrap">
                                         <table class="table">

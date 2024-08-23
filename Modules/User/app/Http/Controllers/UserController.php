@@ -19,6 +19,9 @@ use App\Models\Leave;
 use DataTables;
 use Modules\User\Http\Requests\CreateUserRequest;
 use Modules\User\Http\Requests\UpdateUserRequest;
+use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -28,6 +31,83 @@ class UserController extends Controller
         $this->middleware('permission:create-employee', ['only' => ['create','store']]);
         $this->middleware('permission:edit-employee', ['only' => ['edit','update']]);
         $this->middleware('permission:delete-employee', ['only' => ['destroy']]);
+    }
+
+    public function assignleaves()
+    {
+        $today = '2025-08-31';
+
+        $users = User::where('status', 1)->where('probation_end_date', $today)->get();
+        $leaveList = Leave::get();
+        $totalLeaves = Leave::sum('number_of_leaves');
+        $monthsInYear = 12;
+
+        foreach ($users as $user) {
+            $probationEndDate = Carbon::createFromDate($user->probation_end_date);
+            $probationMonth = $probationEndDate->month;
+            $remainingMonths = 12 - $probationMonth;
+
+            $calculatedLeaves = ($totalLeaves / $monthsInYear) * $remainingMonths;
+
+            foreach ($leaveList as $leave) {
+                $assignedLeave = 0;
+
+                switch ($leave->id) {
+                    // Privilege Leave (PL)
+                    case 1:
+                        if ($remainingMonths > 2) {
+                            $assignedLeave = ($calculatedLeaves * $leave->number_of_leaves) / $totalLeaves; // Distribute based on PL proportion
+
+                            // check probation end in Jun to Dec
+                            if($remainingMonths <= 7) {
+                                $assignedLeave -= 1;
+                            }
+                        } else {
+                            $assignedLeave = 0;
+                        }
+
+                        break;
+                    // Sick Leave (SL)
+                    case 2:
+                        $assignedLeave = ($calculatedLeaves * $leave->number_of_leaves) / $totalLeaves;
+
+                        break;
+                    // Casual Leave (CL)
+                    case 3:
+                        $assignedLeave = ($calculatedLeaves * $leave->number_of_leaves) / $totalLeaves;
+
+                        break;
+                    default:
+                        $assignedLeave = 0;
+                        break;
+                }
+
+                if ($remainingMonths == 0) {
+                    $assignedLeave = $leave->number_of_leaves;
+                }
+
+                $rounded = floor($assignedLeave);
+
+                $fractional = $assignedLeave - $rounded;
+
+                if($fractional > 0.51) {
+                    $assignedLeave = round($assignedLeave);
+                }
+                else {
+                    $assignedLeave = $rounded;
+                }
+
+                $assignedLeave = max($assignedLeave, 0);
+
+                // Create a new AssignLeave record for the user
+                $assignLeave = new AssignLeave;
+                $assignLeave->user_id = $user->id;
+                $assignLeave->leave_id = $leave->id;
+                $assignLeave->assign_leave = $assignedLeave;
+                $assignLeave->leave_balance = $assignedLeave;
+                $assignLeave->save();
+            }
+        }
     }
 
     public function check_duplication(Request $request)
@@ -88,7 +168,7 @@ class UserController extends Controller
             $data = User::select([
                 'users.*',
                 DB::raw("CONCAT(first_name, ' ', last_name) as full_name")
-            ])->whereNot('id', 1);
+            ])->whereNot('id', 1)->latest();
 
             return Datatables::of($data)
                     ->filter(function ($query) use ($request) {
@@ -210,23 +290,34 @@ class UserController extends Controller
 
             $userDetails = UserDetail::create($request->all());
 
-            if($request->assign_leave) {
+            if($request->is_generate_offer_letter == 1)
+            {
+                /* $offerLetter = $this->generateOfferLetter($user->id);
 
-                foreach($request->assign_leave as $key => $value) {
-
-                    $assignLeave = new AssignLeave;
-
-                    $assignLeave->user_id = $user->id;
-                    $assignLeave->leave_id = $key;
-                    $assignLeave->assign_leave = $value;
-                    $assignLeave->leave_balance = $value;
-
-                    $assignLeave->save();
-                }
+                $user->offer_letter = $offerLetter;
+                $user->save(); */
             }
         }
 
         return redirect()->route('user.index')->with('success', 'Employee added successfully!');
+    }
+
+    public function generateOfferLetter($userId)
+    {
+        $userData = User::where('id', $userId)->first();
+
+        $pdf = Pdf::loadView('user::offer_letter', compact('userData'));
+        
+        $content = $pdf->download()->getOriginalContent();
+                
+        $rootPath = storage_path('app/public').'/offer-letter';
+
+        $client = Storage::createLocalDriver(['root' => $rootPath]);
+        $pdf_name = $userData->emp_id.'-'.$userData->joining_date.'.pdf';
+
+        $client->put($pdf_name, $content);
+
+        return $pdf_name;
     }
 
     /**
@@ -245,12 +336,11 @@ class UserController extends Controller
         $roles = Role::whereNot('id', 1)->pluck('name','name')->all();
 
         $selectedRole = $user->roles->first()->name ?? null;
-        $assignLeave = Leave::get();
-
+             
         $designation = Designation::where('status', 1)->pluck('name', 'id');
         $department = Department::where('status', 1)->pluck('name', 'id');
 
-        return view('user::edit', compact('user','roles', 'selectedRole', 'assignLeave', 'designation', 'department'));
+        return view('user::edit', compact('user','roles', 'selectedRole', 'designation', 'department'));
     }
 
     /**
@@ -321,6 +411,29 @@ class UserController extends Controller
             $user->assignRole($request->input('role'));
 
             UserDetail::where('user_id', $user->id)->update($filteredInput);
+
+            if($request->is_generate_offer_letter == 1)
+            {
+                $offerLetter = $this->generateOfferLetter($user->id);
+
+                $user->offer_letter = $offerLetter;
+                $user->save();
+            }
+
+            if($request->assign_leave) {
+
+                foreach($request->assign_leave as $key => $value) {
+
+                    $assignLeave = new AssignLeave;
+
+                    $assignLeave->user_id = $user->id;
+                    $assignLeave->leave_id = $key;
+                    $assignLeave->assign_leave = $value;
+                    $assignLeave->leave_balance = $value;
+
+                    $assignLeave->save();
+                }
+            }
 
             return redirect()->route('user.index')->with('success', 'Employee Updated Successfully!');
         }

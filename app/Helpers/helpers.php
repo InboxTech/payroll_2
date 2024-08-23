@@ -52,3 +52,18 @@
 
         return $image;
     }
+
+    function formatIndianNumber($number) {
+        $numberString = (string)$number;
+        
+        $wholeNumber = floor($number);
+        $decimalPart = substr($numberString, strpos($numberString, '.') + 1);
+        
+        $formattedWholeNumber = preg_replace('/(\d+?)(?=(\d\d)+(\d)(?!\d))/', '$1,', $wholeNumber);
+        
+        if ($decimalPart) {
+            return $formattedWholeNumber . '.' . $decimalPart;
+        }
+        
+        return $formattedWholeNumber;
+    }

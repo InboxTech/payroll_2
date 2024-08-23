@@ -153,10 +153,6 @@ class PermissionTableSeeder extends Seeder
                 'group_name' => 'AppliedLeave'
             ],
             [
-                'name' => 'view-punchinout',
-                'group_name' => 'PunchInOut'
-            ],
-            [
                 'name' => 'view-location',
                 'group_name' => 'PunchInOut'
             ],

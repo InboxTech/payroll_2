@@ -213,7 +213,6 @@ class SalaryController extends Controller
         }
         else
         {
-            // dd($request->all());
             $salary = Salary::updateOrCreate(
                 ['user_id' => $userId, 'month_year' => $monthYear],
                 [

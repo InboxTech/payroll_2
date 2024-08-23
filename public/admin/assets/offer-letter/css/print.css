@@ -1,0 +1,21 @@
+@media print {
+    @page {
+        size: A4;
+        margin: 0mm 0mm !important;
+    }
+
+    body {
+        margin: 0;
+        width: 100%;
+    }
+
+    .container-fluid {
+        width: 90%;
+        margin: 0mm 12mm !important;
+        /* page-break-after:always !important; */
+
+    }
+    .footer {
+        bottom: 0;
+    }
+}

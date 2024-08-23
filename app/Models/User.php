@@ -35,6 +35,8 @@ class User extends Authenticatable
         'releaving_date',
         'probation_end_date',
         'profile_image',
+        'is_generate_offer_letter',
+        'offer_letter',
         'status',
     ];
 

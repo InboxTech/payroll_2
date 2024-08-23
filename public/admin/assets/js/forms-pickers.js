@@ -7,7 +7,7 @@
 (function () {
   // Flat Picker
   // --------------------------------------------------------------------
-  const flatpickrDate = document.querySelector('.flatpickr-date'),
+  const flatpickrDate = document.querySelector('#flatpickr-date'),
     flatpickrTime = document.querySelector('#flatpickr-time'),
     flatpickrDateTime = document.querySelector('#flatpickr-datetime'),
     flatpickrMulti = document.querySelector('#flatpickr-multi'),

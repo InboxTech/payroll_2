@@ -13,13 +13,6 @@ use DataTables;
 
 class PunchInOutController extends Controller
 {
-    function __construct()
-    {
-        $this->middleware('permission:view-punchinout|edit-punchinout|view-location', ['only' => ['index','show']]);
-        $this->middleware('permission:edit-punchinout', ['only' => ['edit','update']]);
-        $this->middleware('permission:view-location', ['only' => ['']]);
-    }
-
     /**
      * Display a listing of the resource.
      */
@@ -132,7 +125,7 @@ class PunchInOutController extends Controller
         $punchInOut->punch_out_long = $request->longitude;
         $punchInOut->punch_in_out_status = 0;
         
-        if($request)
+        if($request->punch_out)
         {
             $punchInOut->punch_out = $request->punch_out;
             $punchInOut->save();

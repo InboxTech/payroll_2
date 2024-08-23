@@ -48,6 +48,9 @@
                                             <label class="form-label" for="collapsible-end-date">End Date</label>
                                             <input type="date" name="full_name" class="form-control jsEndDate"/>
                                         </div>
+                                        <div class="col-md-3">
+                                            <a href="{{ route('punchinout.index') }}" class="btn btn-primary mt-4">Reset</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
