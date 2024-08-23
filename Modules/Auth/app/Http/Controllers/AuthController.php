@@ -12,6 +12,7 @@ use App\Models\PasswordResetToken;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Mail\ForgotPasswordMail;
+use App\Models\LeaveApply;
 use Illuminate\Support\Carbon;
 
 class AuthController extends Controller
@@ -62,7 +63,27 @@ class AuthController extends Controller
     
     public function dashboard()
     {
-        return view('auth::dashboard');
+        $todayDate = Carbon::now()->format('Y-m-d');
+        $todayDate = '1995-06-28';
+        $todaysBirthDay = User::where('dob', $todayDate)->get();
+        
+        switch (Auth::user()->roles->pluck("id")->first()) {
+            case 1:
+            case 2:
+                $leaveList = LeaveApply::where('is_approved', 1)
+                            ->whereRaw('? BETWEEN from_date AND to_date', [$todayDate])
+                            ->get();
+                
+                return view('auth::admin_hr_dashboard', compact('leaveList', 'todaysBirthDay'));
+                break;
+            case 3:
+            case 4:
+                return view('auth::employee_dashboard', compact('todaysBirthDay'));
+                break;
+            
+            default:                
+                break;
+        }
     }
 
     public function logout()

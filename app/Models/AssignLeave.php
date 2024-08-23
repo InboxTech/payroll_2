@@ -12,6 +12,7 @@ class AssignLeave extends Model
     protected $fillable = [
         'user_id',
         'leave_id',
+        'year',
         'assign_leave',
         'leave_balance',
     ];

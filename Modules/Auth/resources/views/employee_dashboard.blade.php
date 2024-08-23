@@ -4,7 +4,32 @@
             <div class="jsFlashMessage">
                 @include('flashmessage.flashmessage')
             </div>
-            <h4 class="py-3 mb-4">Dashboard</h4>
+            <h4 class="py-2">Dashboard</h4>
+
+            @foreach($todaysBirthDay as $bkey => $bvalue)
+                @if($bvalue->id != Auth::user()->id)
+                    <div class="alert alert-success alert-dismissible d-flex align-items-baseline" role="alert">
+                        <span class="alert-icon alert-icon-lg text-success me-2">
+                            <i class="ti ti-cake ti-sm"></i>
+                        </span>
+                        <div class="d-flex flex-column ps-1">
+                            <h5 class="alert-heading mb-2">Today's Birth Day</h5>
+                            <p class="mb-0">
+                                Today is {{ $bvalue->full_name }} birth day wish them.
+                            </p>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @else
+                    <div class="alert alert-success alert-dismissible d-flex align-items-center" role="alert">
+                        <span class="alert-icon text-success me-2">
+                            <i class="ti ti-cake ti-xs"></i>
+                        </span>
+                        Happy Birth Day {{ $bvalue->full_name }}. Wish You Many Many Happy Returns of the Day.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+            @endforeach
 
             <!-- Card Border Shadow -->
             <div class="row">

@@ -29,14 +29,14 @@ class AssignLeavesCron extends Command
      */
     public function handle()
     {
-        // $today = date('Y-m-d');
-        $today = '2024-08-31';
+        $today = date('Y-m-d');
+        // $today = '2024-11-30';
 
         $users = User::where('status', 1)->where('probation_end_date', $today)->get();
-
         $leaveList = Leave::get();
         $totalLeaves = Leave::sum('number_of_leaves');
         $monthsInYear = 12;
+        $now = Carbon::now();
 
         foreach ($users as $user) {
             $probationEndDate = Carbon::createFromDate($user->probation_end_date);
@@ -65,12 +65,13 @@ class AssignLeavesCron extends Command
                         break;
                     // Sick Leave (SL)
                     case 2:
-                        $assignedLeave = ($calculatedLeaves * $leave->number_of_leaves) / $totalLeaves;
 
-                        break;
                     // Casual Leave (CL)
                     case 3:
-                        $assignedLeave = ($calculatedLeaves * $leave->number_of_leaves) / $totalLeaves;
+                        // $assignedLeave = ($calculatedLeaves * $leave->number_of_leaves) / $totalLeaves;
+                        $assignedLeave = $leave->number_of_leaves / $monthsInYear * $remainingMonths;
+
+                        $assignedLeave = ceil($assignedLeave);
 
                         break;
                     default:
@@ -101,6 +102,12 @@ class AssignLeavesCron extends Command
                 $assignLeave->leave_id = $leave->id;
                 $assignLeave->assign_leave = $assignedLeave;
                 $assignLeave->leave_balance = $assignedLeave;
+                $assignLeave->year = $now->year;
+
+                if ($remainingMonths == 0) {
+                    $assignLeave->year += 1;
+                }
+
                 $assignLeave->save();
             }
         }

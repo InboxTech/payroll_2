@@ -117,12 +117,8 @@
             }
 
             #required-doc h2{
-                font-family: "Gideon Roman", serif;
                 text-align: center;
                 text-decoration: underline;
-            }
-            #required-doc table{
-                font-family: "Gideon Roman", serif;
             }
             #required-doc table {
                 width: 100%;
