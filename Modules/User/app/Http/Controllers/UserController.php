@@ -45,13 +45,13 @@ class UserController extends Controller
 
     public function assignleaves()
     {
-        $today = '2024-08-30';
-
+        $now = Carbon::now();
+        $today = $now->format('Y-m-d');
+        
         $users = User::where(['status' => 1], ['job_type' => 1])->where('probation_end_date', $today)->get();
         $leaveList = Leave::get();
         $totalLeaves = Leave::sum('number_of_leaves');
         $monthsInYear = 12;
-        $now = Carbon::now();
 
         foreach ($users as $user) {
             $probationEndDate = Carbon::createFromDate($user->probation_end_date);
