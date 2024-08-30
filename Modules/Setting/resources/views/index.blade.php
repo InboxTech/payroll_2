@@ -48,7 +48,7 @@
                                             <label for="start-financial-year" class="form-label">Start Financial Year</label>
                                             <select name="config_start_financial_year" class="form-select">
                                                 @for($month = 1; $month <= 12; $month++)
-                                                    <option value="{{ $month }}">{{ date("F", mktime(0, 0, 0, $month, 1)) }}</option>
+                                                    <option value="{{ $month }}" @if($month == getSettingData("config_start_financial_year")) selected @endif>{{ date("F", mktime(0, 0, 0, $month, 1)) }}</option>
                                                 @endfor
                                             </select>
                                         </div>

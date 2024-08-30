@@ -21,4 +21,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function(){
     Route::post('user_check_duplication', [UserController::class, 'check_duplication'])->name('user_check_duplication');
     Route::get('assign-leaves', [UserController::class, 'assignleaves'])->name('user.assignleaves');
     Route::get('offer-letter/{userId}', [UserController::class, 'generateOfferLetter']);
+    Route::get('user/{userId}/leave-history', [UserController::class, 'leavehistory'])->name('user.leavehistory');
+    Route::get('user/{userId}/salary-history', [UserController::class, 'salaryhistory'])->name('user.salaryhistory');
+    Route::get('user/{userId}/view-letter', [UserController::class, 'viewletter'])->name('user.viewletter');
 });

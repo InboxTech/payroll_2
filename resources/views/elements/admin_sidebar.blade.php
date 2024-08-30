@@ -182,4 +182,30 @@
                 </a>
             </li>
         @endcan
+
+        @php
+            $controller = array('ProjectController', 'TaskController');
+            $action = array('index');
+        @endphp
+        <li class="menu-item {{ in_array($current_controller,$controller)? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-calendar-stats"></i>
+                <div data-i18n="Project & Task Management">Project & Task Management</div>
+            </a>
+            <ul class="menu-sub">
+                
+                    <li class="menu-item @if($current_controller == 'ProjectController') active @endif">
+                        <a href="{{ route('project.index') }}" class="menu-link">
+                            <div data-i18n="Project">Project</div>
+                        </a>
+                    </li>
+                
+                    <li class="menu-item @if($current_controller == 'TaskController') active @endif">
+                        <a href="{{ route('task.index') }}" class="menu-link">
+                            <div data-i18n="Task">Task</div>
+                        </a>
+                    </li>
+                
+            </ul>
+        </li>
     </ul>

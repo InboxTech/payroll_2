@@ -31,6 +31,15 @@
                 @endif
             @endforeach
 
+            @foreach($todaysProbationEnd as $pkey => $pvalue)
+                <div class="alert alert-info d-flex align-items-center" role="alert">
+                    <span class="alert-icon text-info me-2">
+                        <i class="ti ti-calendar ti-xs"></i>
+                    </span>
+                    Todays {{ $pvalue->full_name }} probation end day
+                </div>
+            @endforeach
+
             <!-- Card Border Shadow -->
             <div class="row">
                 <div class="col-sm-6 col-lg-3 mb-4">

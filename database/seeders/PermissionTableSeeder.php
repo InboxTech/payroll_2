@@ -61,6 +61,10 @@ class PermissionTableSeeder extends Seeder
                 'group_name' => 'Employee'
             ],
             [
+                'name' => 'leave-history',
+                'group_name' => 'Employee'
+            ],
+            [
                 'name' => 'view-designation',
                 'group_name' => 'Designation'
             ],

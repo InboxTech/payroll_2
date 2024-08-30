@@ -30,7 +30,6 @@ class AssignLeavesCron extends Command
     public function handle()
     {
         $today = date('Y-m-d');
-        // $today = '2024-11-30';
 
         $users = User::where('status', 1)->where('probation_end_date', $today)->get();
         $leaveList = Leave::get();

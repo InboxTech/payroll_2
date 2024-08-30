@@ -11,6 +11,7 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\SalaryHistory;
 use App\Models\Designation;
 use App\Models\Department;
 use App\Models\UserDetail;
@@ -33,11 +34,20 @@ class UserController extends Controller
         $this->middleware('permission:delete-employee', ['only' => ['destroy']]);
     }
 
+    public function salaryhistory(Request $request)
+    {
+        $userData = User::where('id', $request->userId)->first();
+
+        $salHistoryData = SalaryHistory::where('user_id', $request->userId)->orderBy('id', 'DESC')->get();
+        
+        return view('user::salaryhistory', compact('salHistoryData', 'userData'));
+    }
+
     public function assignleaves()
     {
-        $today = '2024-09-30';
+        $today = '2024-08-30';
 
-        $users = User::where('status', 1)->where('probation_end_date', $today)->get();
+        $users = User::where(['status' => 1], ['job_type' => 1])->where('probation_end_date', $today)->get();
         $leaveList = Leave::get();
         $totalLeaves = Leave::sum('number_of_leaves');
         $monthsInYear = 12;
@@ -166,6 +176,13 @@ class UserController extends Controller
         }
     }
 
+    public function leavehistory(Request $request) {
+
+        $userData = User::where('status', 1)->where('id', $request->userId)->first();
+        
+        return view('user::leavehistory', compact('userData'));
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -233,8 +250,8 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
+        
         $input = $request->all();
 
         // Yearly Deduction
@@ -294,23 +311,20 @@ class UserController extends Controller
 
         if($user) {
 
-            $request->merge(['user_id' => $user->id]);
+            $input['user_id'] = $user->id;
+            $input['year'] = Carbon::now()->year;
 
-            $userDetails = UserDetail::create($request->all());
+            $userDetails = UserDetail::create($input);
 
-            if($request->is_generate_offer_letter == 1)
-            {
-                /* $offerLetter = $this->generateOfferLetter($user->id);
+            $salaryHistory = SalaryHistory::create($input);
 
-                $user->offer_letter = $offerLetter;
-                $user->save(); */
-            }
+            // $this->generateLetter($request->type_of_letter, $user->id);
         }
 
         return redirect()->route('user.index')->with('success', 'Employee added successfully!');
     }
 
-    public function generateOfferLetter($userId)
+    public function generateOfferLetter($typeOfLetter = null, $userId)
     {
         $userData = User::where('id', $userId)->first();
 
@@ -319,6 +333,24 @@ class UserController extends Controller
         $content = $pdf->download()->getOriginalContent();
                 
         $rootPath = storage_path('app/public').'/offer-letter';
+
+        $client = Storage::createLocalDriver(['root' => $rootPath]);
+        $pdf_name = $userData->emp_id.'-'.$userData->joining_date.'.pdf';
+
+        $client->put($pdf_name, $content);
+
+        return $pdf_name;
+    }
+
+    public function generateAppoitmentLetter($userId)
+    {
+        $userData = User::where('id', $userId)->first();
+
+        $pdf = Pdf::loadView('user::appoitment_letter', compact('userData'));
+
+        $content = $pdf->download()->getOriginalContent();
+                
+        $rootPath = storage_path('app/public').'/appoitment-letter';
 
         $client = Storage::createLocalDriver(['root' => $rootPath]);
         $pdf_name = $userData->emp_id.'-'.$userData->joining_date.'.pdf';
@@ -420,13 +452,13 @@ class UserController extends Controller
 
             UserDetail::where('user_id', $user->id)->update($filteredInput);
 
-            if($request->is_generate_offer_letter == 1)
-            {
-                $offerLetter = $this->generateOfferLetter($user->id);
+            $filteredInput['year'] = Carbon::now()->year;
+            $filteredInput['user_id'] = $user->id;
 
-                $user->offer_letter = $offerLetter;
-                $user->save();
-            }
+            SalaryHistory::updateOrCreate(
+                ['user_id' => $filteredInput['user_id'], 'year' => $filteredInput['year'], 'job_type' => $input['job_type']],
+                $filteredInput
+            );
 
             /* if($request->assign_leave) {
 

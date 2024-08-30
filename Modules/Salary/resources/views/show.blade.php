@@ -88,7 +88,7 @@
                                     @php
                                         $remainingLeave = 0;
                                     @endphp
-                                    @foreach($salary->user->assign_leave as $alkey => $alvalue)
+                                    @foreach($salary->user->assign_leave->where('year', Carbon\Carbon::parse($salary->month_year)->year) as $alkey => $alvalue)
                                         <tr>
                                             <td>{{ $alkey + 1 }})</td>
                                             <td>{{ $alvalue->leave->leave_type_name }}</td>

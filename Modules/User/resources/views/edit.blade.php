@@ -99,18 +99,6 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-4 mb-2">
-                                            <label class="form-label" for="joining-date">Joining Date <span class="text-danger">*</span></label>
-                                            <input type="date" name="joining_date" class="form-control" value="{{ $user->joining_date }}"/>
-                                        </div>
-                                        <div class="col-sm-4 mb-2">
-                                            <label class="form-label" for="probation-end-date">Probation End Date <span class="text-danger">*</span></label>
-                                            <input type="date" name="probation_end_date" class="form-control" value="{{ $user->probation_end_date }}" data-rule-required="true" data-msg-required="Please Select Probation End Date"/>
-                                        </div>
-                                        <div class="col-sm-4 mb-2">
-                                            <label class="form-label" for="releaving-date">Releaving Date </label>
-                                            <input type="date" name="releaving_date" class="form-control" value="{{ $user->releaving_date }}"/>
-                                        </div>
-                                        <div class="col-sm-4 mb-2">
                                             <label for="designation-list" class="form-label">Designation <span class="text-danger">*</span></label>
                                             <select name="designation_id" class="form-select" data-rule-required="true" data-msg-required="Please Select Designation">
                                                 <option value="">Select Designation</option>
@@ -129,11 +117,33 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-4 mb-2">
-                                            <label for="is-generate-offer-letter" class="form-label">Is Generate Offer Letter <span class="text-danger">*</span></label>
-                                            <select name="is_generate_offer_letter" class="form-select" data-rule-required="true" data-msg-required="Please Select Option">
+                                            <label class="form-label" for="joining-date">Joining Date <span class="text-danger">*</span></label>
+                                            <input type="date" name="joining_date" class="form-control" value="{{ $user->joining_date }}"/>
+                                        </div>
+                                        <div class="col-sm-4 mb-2">
+                                            <label for="job-type" class="form-label">Select Job Type <span class="text-danger">*</span></label>
+                                            <select name="job_type" class="form-select" data-rule-required="true" data-msg-required="Please Select Job Type">
+                                                <option value="">Select Job Type</option>
+                                                <option value="1" @if($user->job_type == 1) selected @endif>Job</option>
+                                                <option value="2" @if($user->job_type == 2) selected @endif>Internship</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-4 mb-2">
+                                            <label class="form-label" for="probation-end-date">Probation End Date or Internship End Date<span class="text-danger">*</span></label>
+                                            <input type="date" name="probation_end_date" class="form-control" value="{{ $user->probation_end_date }}" data-rule-required="true" data-msg-required="Please Select Probation End Date or Internship End Date"/>
+                                        </div>
+                                        <div class="col-sm-4 mb-2">
+                                            <label class="form-label" for="releaving-date">Releaving Date </label>
+                                            <input type="date" name="releaving_date" class="form-control" value="{{ $user->releaving_date }}"/>
+                                        </div>
+                                        <div class="col-sm-4 mb-2">
+                                            <label for="is-generate-offer-letter" class="form-label">Which letter do you want to generate?<span class="text-danger">*</span></label>
+                                            <select name="type_of_letter" class="form-select">
                                                 <option value="">Select Option</option>
-                                                <option value="1" @if($user->is_generate_offer_letter == 1) selected @endif>Yes</option>
-                                                <option value="0" @if($user->is_generate_offer_letter == 0) selected @endif>No</option>
+                                                <option value="1">Internship Offer Letter</option>
+                                                <option value="2">Confirmation Letter</option>
+                                                <option value="3">Job Offer</option>
+                                                <option value="4">Appoitment Offer</option>
                                             </select>
                                         </div>
                                     </div>

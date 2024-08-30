@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('designation_id')->nullable();
             $table->integer('department_id')->nullable();
             $table->string('emp_id')->nullable();
+            $table->integer('job_type')->nullable()->comment('1 for Job, 2 for Internship');
             $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
             $table->string('last_name')->nullable();
@@ -29,8 +30,6 @@ return new class extends Migration
             $table->date('releaving_date')->nullable();
             $table->date('probation_end_date')->nullable();
             $table->string('profile_image')->nullable();
-            $table->integer('is_generate_offer_letter')->nullable()->comment('1 for Generate, 0 for Not Generate');
-            $table->string('offer_letter')->nullable();
             $table->rememberToken();
             $table->integer('status')->default(1)->comment('1 for active, 0 for inactive');
             $table->timestamps();

@@ -61,12 +61,14 @@ class AuthController extends Controller
         return redirect()->route('login')->with('error', 'Invalid Credentials');
     }
     
-    public function dashboard()
-    {
+    public function dashboard() {
+
         $todayDate = Carbon::now()->format('Y-m-d');
-        $todayDate = '1995-06-28';
-        $todaysBirthDay = User::where('dob', $todayDate)->get();
         
+        $todaysBirthDay = User::where('dob', $todayDate)->get();
+
+        $todaysProbationEnd = User::where('probation_end_date', $todayDate)->get();
+
         switch (Auth::user()->roles->pluck("id")->first()) {
             case 1:
             case 2:
@@ -74,7 +76,7 @@ class AuthController extends Controller
                             ->whereRaw('? BETWEEN from_date AND to_date', [$todayDate])
                             ->get();
                 
-                return view('auth::admin_hr_dashboard', compact('leaveList', 'todaysBirthDay'));
+                return view('auth::admin_hr_dashboard', compact('leaveList', 'todaysBirthDay', 'todaysProbationEnd'));
                 break;
             case 3:
             case 4:

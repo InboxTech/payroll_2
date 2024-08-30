@@ -20,9 +20,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'emp_id',
         'designation_id',
         'department_id',
+        'emp_id',
+        'job_type',
         'first_name',
         'middle_name',
         'last_name',
@@ -35,8 +36,6 @@ class User extends Authenticatable
         'releaving_date',
         'probation_end_date',
         'profile_image',
-        'is_generate_offer_letter',
-        'offer_letter',
         'status',
     ];
 
@@ -69,6 +68,11 @@ class User extends Authenticatable
     public function user_detail()
     {
         return $this->hasOne(UserDetail::class);
+    }
+
+    public function salary_history()
+    {
+        return $this->hasMany(SalaryHistory::class);
     }
 
     public function assign_leave()

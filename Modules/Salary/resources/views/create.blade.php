@@ -89,9 +89,21 @@
                                     </thead>
                                     <tbody class="border-bottom">
                                         @php
+                                            use Carbon\Carbon;
+
+                                            $currentYear = Carbon::now()->year;
+                                            $currentMonth = Carbon::now()->month;
+
+                                            // Check if the current month is January
+                                            if ($currentMonth == 1) {
+                                                $yearToFetch = $currentYear - 1; // Fetch leaves for the last year if it's January
+                                            } else {
+                                                $yearToFetch = $currentYear; // Otherwise, fetch leaves for the current year
+                                            }
+
                                             $remainingLeave = 0;
                                         @endphp
-                                        @foreach($userData->assign_leave as $alkey => $alvalue)
+                                        @foreach($userData->assign_leave->where('year', $yearToFetch) as $alkey => $alvalue)
                                             <tr>
                                                 <td>{{ $alkey + 1 }})</td>
                                                 <td>{{ $alvalue->leave->leave_type_name }}</td>

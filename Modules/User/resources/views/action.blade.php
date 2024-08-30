@@ -6,8 +6,10 @@
         @can('edit-employee')
             <a href="{{ route('user.edit', $row->id) }}" class="dropdown-item" title="Edit Employee"><i class="ti ti-pencil me-1"></i> Edit</a>
         @endcan
-        @if($row->is_generate_offer_letter == 1)
-            <a href="{{ asset('storage/offer-letter/'.$row->offer_letter) }}" target="_blank" class="dropdown-item" title="View Offer Letter"><i class="ti ti-file-description"></i> View Offer Letter</a>
-        @endif
+        <a href="{{ route('user.viewletter', $row->id) }}" class="dropdown-item" title="View Letters"><i class="ti ti-file-description"></i> View Letters</a>
+        @can('leave-history')
+            <a href="{{ route('user.leavehistory', $row->id) }}" class="dropdown-item" title="View Lieave History"><i class="ti ti-calendar me-1"></i> Leave History</a>
+        @endcan
+        <a href="{{ route('user.salaryhistory', $row->id) }}" class="dropdown-item" title="Salary History"><i class="tf-icons ti ti-file-dollar"></i> Salary History</a>
     </div>
 </div>

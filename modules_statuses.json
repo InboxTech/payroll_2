@@ -12,5 +12,7 @@
     "AttendenceReport": true,
     "Designation": true,
     "Department": true,
-    "AttendanceCorrection": true
+    "AttendanceCorrection": true,
+    "Project": true,
+    "Task": true
 }
