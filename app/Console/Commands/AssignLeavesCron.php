@@ -29,13 +29,13 @@ class AssignLeavesCron extends Command
      */
     public function handle()
     {
-        $today = date('Y-m-d');
+        $now = Carbon::now();
+        $today = $now->format('Y-m-d');
 
         $users = User::where('status', 1)->where('probation_end_date', $today)->get();
         $leaveList = Leave::get();
         $totalLeaves = Leave::sum('number_of_leaves');
         $monthsInYear = 12;
-        $now = Carbon::now();
 
         foreach ($users as $user) {
             $probationEndDate = Carbon::createFromDate($user->probation_end_date);
