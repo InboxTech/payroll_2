@@ -21,10 +21,11 @@ class SalaryController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:view-salary|create-salary|edit-salary|delete-salary', ['only' => ['monthlist','show']]);
+        $this->middleware('permission:view-salary|create-salary|edit-salary|delete-salary|show-salary', ['only' => ['monthlist','show']]);
         $this->middleware('permission:create-salary', ['only' => ['create','store']]);
         $this->middleware('permission:edit-salary', ['only' => ['edit','update']]);
         $this->middleware('permission:delete-salary', ['only' => ['destroy']]);
+        $this->middleware('permission:show-salary', ['only' => ['show']]);
         $this->middleware('permission:employee-list-salary', ['only' => ['index']]);
     }
 
@@ -436,7 +437,7 @@ class SalaryController extends Controller
      */
     public function show($id)
     {
-        $salary = Salary::where(['user_id' => Auth::user()->id, 'id' => $id])->firstOrFail();
+        $salary = Salary::where(['id' => $id])->firstOrFail();
 
         return view('salary::show', compact('salary'));
     }

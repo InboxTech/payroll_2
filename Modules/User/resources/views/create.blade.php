@@ -141,8 +141,8 @@
                                                 <option value="">Select Option</option>
                                                 <option value="1">Internship Offer Letter</option>
                                                 <option value="2">Confirmation Letter</option>
-                                                <option value="3">Job Offer</option>
-                                                <option value="4">Appoitment Offer</option>
+                                                <option value="3">Offer Letter</option>
+                                                <option value="4">Appoitment Letter</option>
                                             </select>
                                         </div>
                                     </div>

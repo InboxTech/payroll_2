@@ -5,7 +5,11 @@
                 <h4 class="py-3 mb-4">
                     <span class="text-muted fw-light">
                         <a href="{{ route('dashboard') }}" class="text-reset">Dashboard</a> / 
-                        <a href="{{ route('salary.employeesalary') }}" class="text-reset">Salary</a> / 
+                        @if(Auth::user()->roles()->first()->id == 1 || Auth::user()->roles()->first()->id == 2)
+                            <a href="{{ route('salary.index') }}" class="text-reset">Salary</a> /
+                        @else
+                            <a href="{{ route('salary.employeesalary') }}" class="text-reset">Salary</a> /
+                        @endif
                     </span> Show
                 </h4>
             </div>
