@@ -49,7 +49,7 @@
                                     <div class="row">
                                         <div class="col-sm-4 mb-2">
                                             <label class="form-label" for="basic-default-fullname">Employee Id <span class="text-danger">*</span></label>
-                                            <input type="text" name="emp_id" class="form-control" value="{{ generateEmployee() }}" readonly/>
+                                            <input type="text" name="emp_id" class="form-control" value="{{ generateEmployee() }}"/>
                                         </div>
                                         <div class="col-md-4">
                                             <label class="form-label" for="basic-default-fullname">First Name <span class="text-danger">*</span></label>
