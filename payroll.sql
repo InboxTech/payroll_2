@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 30, 2024 at 05:44 AM
+-- Generation Time: Aug 31, 2024 at 10:59 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.19
 
@@ -43,12 +43,9 @@ CREATE TABLE `tbl_assign_leaves` (
 --
 
 INSERT INTO `tbl_assign_leaves` (`id`, `user_id`, `leave_id`, `year`, `assign_leave`, `leave_balance`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, '2024', 2.00, 1.00, '2024-08-24 04:19:09', '2024-08-24 04:27:49'),
-(2, 2, 2, '2024', 3.00, 3.00, '2024-08-24 04:19:09', '2024-08-24 04:19:09'),
-(3, 2, 3, '2024', 2.00, 2.00, '2024-08-24 04:19:09', '2024-08-24 04:19:09'),
-(4, 2, 1, '2025', 10.00, 10.00, '2024-08-24 04:19:09', '2024-08-24 04:27:49'),
-(5, 2, 2, '2025', 7.00, 7.00, '2024-08-24 04:19:09', '2024-08-24 04:19:09'),
-(6, 2, 3, '2025', 4.00, 4.00, '2024-08-24 04:19:09', '2024-08-24 04:19:09');
+(1, 2, 1, '2024', 2.00, 2.00, '2024-08-30 05:56:46', '2024-08-30 05:56:46'),
+(2, 2, 2, '2024', 3.00, 3.00, '2024-08-30 05:56:46', '2024-08-30 05:56:46'),
+(3, 2, 3, '2024', 2.00, 2.00, '2024-08-30 05:56:46', '2024-08-30 05:56:46');
 
 -- --------------------------------------------------------
 
@@ -230,7 +227,8 @@ INSERT INTO `tbl_migrations` (`id`, `migration`, `batch`) VALUES
 (48, '2024_08_06_121818_create_salaries_table', 25),
 (49, '2024_08_09_145849_create_departments_table', 26),
 (50, '2024_06_11_155155_create_assign_leaves_table', 27),
-(52, '2024_08_24_153505_create_salary_histories_table', 28);
+(52, '2024_08_24_153505_create_salary_histories_table', 28),
+(54, '2024_08_30_173548_create_projects_table', 29);
 
 -- --------------------------------------------------------
 
@@ -312,50 +310,56 @@ CREATE TABLE `tbl_permissions` (
 --
 
 INSERT INTO `tbl_permissions` (`id`, `name`, `guard_name`, `group_name`, `created_at`, `updated_at`) VALUES
-(1, 'view-role', 'web', 'Role', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(2, 'create-role', 'web', 'Role', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(3, 'edit-role', 'web', 'Role', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(4, 'delete-role', 'web', 'Role', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(5, 'view-employee', 'web', 'Employee', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(6, 'create-employee', 'web', 'Employee', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(7, 'edit-employee', 'web', 'Employee', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(8, 'delete-employee', 'web', 'Employee', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(9, 'leave-history', 'web', 'Employee', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(10, 'view-designation', 'web', 'Designation', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(11, 'create-designation', 'web', 'Designation', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(12, 'edit-designation', 'web', 'Designation', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(13, 'delete-designation', 'web', 'Designation', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(14, 'view-department', 'web', 'Department', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(15, 'create-department', 'web', 'Department', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(16, 'edit-department', 'web', 'Department', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(17, 'delete-department', 'web', 'Department', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(18, 'view-leave', 'web', 'Leave', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(19, 'create-leave', 'web', 'Leave', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(20, 'edit-leave', 'web', 'Leave', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(21, 'delete-leave', 'web', 'Leave', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(22, 'view-holiday-leave', 'web', 'HolidayLeave', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(23, 'create-holiday-leave', 'web', 'HolidayLeave', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(24, 'edit-holiday-leave', 'web', 'HolidayLeave', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(25, 'delete-holiday-leave', 'web', 'HolidayLeave', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(26, 'view-leave-apply', 'web', 'LeaveApply', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(27, 'create-leave-apply', 'web', 'LeaveApply', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(28, 'edit-leave-apply', 'web', 'LeaveApply', '2024-08-24 07:06:59', '2024-08-24 07:06:59'),
-(29, 'delete-leave-apply', 'web', 'LeaveApply', '2024-08-24 07:07:00', '2024-08-24 07:07:00'),
-(30, 'view-applied-leave', 'web', 'AppliedLeave', '2024-08-24 07:07:00', '2024-08-24 07:07:00'),
-(31, 'edit-applied-leave', 'web', 'AppliedLeave', '2024-08-24 07:07:00', '2024-08-24 07:07:00'),
-(32, 'delete-applied-leave', 'web', 'AppliedLeave', '2024-08-24 07:07:00', '2024-08-24 07:07:00'),
-(33, 'view-location', 'web', 'PunchInOut', '2024-08-24 07:07:00', '2024-08-24 07:07:00'),
-(34, 'employee-list-attendance-correction', 'web', 'AttendanceCorrection', '2024-08-24 07:07:00', '2024-08-24 07:07:00'),
-(35, 'attendance-list-attendancecorrection', 'web', 'AttendanceCorrection', '2024-08-24 07:07:00', '2024-08-24 07:07:00'),
-(36, 'edit-attendance-correction', 'web', 'AttendanceCorrection', '2024-08-24 07:07:00', '2024-08-24 07:07:00'),
-(37, 'employee-list-attendancereport', 'web', 'AttendanceReport', '2024-08-24 07:07:00', '2024-08-24 07:07:00'),
-(38, 'attendance-report', 'web', 'AttendanceReport', '2024-08-24 07:07:00', '2024-08-24 07:07:00'),
-(39, 'view-salary', 'web', 'Salary', '2024-08-24 07:07:00', '2024-08-24 07:07:00'),
-(40, 'create-salary', 'web', 'Salary', '2024-08-24 07:07:00', '2024-08-24 07:07:00'),
-(41, 'edit-salary', 'web', 'Salary', '2024-08-24 07:07:00', '2024-08-24 07:07:00'),
-(42, 'show-salary', 'web', 'Salary', '2024-08-24 07:07:00', '2024-08-24 07:07:00'),
-(43, 'employee-list-salary', 'web', 'Salary', '2024-08-24 07:07:00', '2024-08-24 07:07:00'),
-(44, 'edit-setting', 'web', 'Setting', '2024-08-24 07:07:00', '2024-08-24 07:07:00');
+(1, 'view-role', 'web', 'Role', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(2, 'create-role', 'web', 'Role', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(3, 'edit-role', 'web', 'Role', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(4, 'delete-role', 'web', 'Role', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(5, 'view-employee', 'web', 'Employee', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(6, 'create-employee', 'web', 'Employee', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(7, 'edit-employee', 'web', 'Employee', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(8, 'delete-employee', 'web', 'Employee', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(9, 'leave-history', 'web', 'Employee', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(10, 'view-designation', 'web', 'Designation', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(11, 'create-designation', 'web', 'Designation', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(12, 'edit-designation', 'web', 'Designation', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(13, 'delete-designation', 'web', 'Designation', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(14, 'view-department', 'web', 'Department', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(15, 'create-department', 'web', 'Department', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(16, 'edit-department', 'web', 'Department', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(17, 'delete-department', 'web', 'Department', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(18, 'view-leave', 'web', 'Leave', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(19, 'create-leave', 'web', 'Leave', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(20, 'edit-leave', 'web', 'Leave', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(21, 'delete-leave', 'web', 'Leave', '2024-08-31 10:24:07', '2024-08-31 10:24:07'),
+(22, 'view-holiday-leave', 'web', 'HolidayLeave', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(23, 'create-holiday-leave', 'web', 'HolidayLeave', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(24, 'edit-holiday-leave', 'web', 'HolidayLeave', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(25, 'delete-holiday-leave', 'web', 'HolidayLeave', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(26, 'view-leave-apply', 'web', 'LeaveApply', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(27, 'create-leave-apply', 'web', 'LeaveApply', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(28, 'edit-leave-apply', 'web', 'LeaveApply', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(29, 'delete-leave-apply', 'web', 'LeaveApply', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(30, 'view-applied-leave', 'web', 'AppliedLeave', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(31, 'edit-applied-leave', 'web', 'AppliedLeave', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(32, 'delete-applied-leave', 'web', 'AppliedLeave', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(33, 'view-location', 'web', 'PunchInOut', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(34, 'employee-list-attendance-correction', 'web', 'AttendanceCorrection', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(35, 'attendance-list-attendancecorrection', 'web', 'AttendanceCorrection', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(36, 'edit-attendance-correction', 'web', 'AttendanceCorrection', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(37, 'employee-list-attendancereport', 'web', 'AttendanceReport', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(38, 'attendance-report', 'web', 'AttendanceReport', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(39, 'view-salary', 'web', 'Salary', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(40, 'create-salary', 'web', 'Salary', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(41, 'edit-salary', 'web', 'Salary', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(42, 'show-salary', 'web', 'Salary', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(43, 'employee-list-salary', 'web', 'Salary', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(44, 'view-project', 'web', 'Project', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(45, 'create-project', 'web', 'Project', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(46, 'edit-project', 'web', 'Project', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(47, 'delete-project', 'web', 'Project', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(48, 'show-deleted-project', 'web', 'Project', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(49, 'restore-deleted-project', 'web', 'Project', '2024-08-31 10:24:08', '2024-08-31 10:24:08'),
+(50, 'edit-setting', 'web', 'Setting', '2024-08-31 10:24:08', '2024-08-31 10:24:08');
 
 -- --------------------------------------------------------
 
@@ -375,6 +379,36 @@ CREATE TABLE `tbl_personal_access_tokens` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_projects`
+--
+
+CREATE TABLE `tbl_projects` (
+  `id` bigint UNSIGNED NOT NULL,
+  `project_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `expected_end_date` date DEFAULT NULL,
+  `project_domain_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `running_status` int DEFAULT NULL,
+  `client_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mobile_no` bigint DEFAULT NULL,
+  `address` text COLLATE utf8mb4_unicode_ci,
+  `project_team` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbl_projects`
+--
+
+INSERT INTO `tbl_projects` (`id`, `project_name`, `start_date`, `expected_end_date`, `project_domain_name`, `running_status`, `client_name`, `email`, `mobile_no`, `address`, `project_team`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Checkeeper', NULL, NULL, NULL, 1, 'Client', NULL, NULL, NULL, '{\"0\":{\"designation_id\":\"7\",\"user_id\":\"5\"},\"2\":{\"designation_id\":\"9\",\"user_id\":\"6\"}}', '2024-08-31 06:58:56', '2024-08-31 10:27:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -427,7 +461,8 @@ INSERT INTO `tbl_punch_in_outs` (`id`, `user_id`, `date`, `punch_in`, `punch_in_
 (29, 2, '2024-08-22', '17:19:00', '22.3084544', '73.170944', '18:04:00', '22.3084544', '73.170944', 0, '2024-08-22 11:49:02', '2024-08-22 12:34:18'),
 (30, 2, '2024-08-23', '09:18:00', '22.3084544', '73.170944', '18:02:00', '22.3084544', '73.170944', 0, '2024-08-23 03:48:39', '2024-08-23 12:32:26'),
 (31, 2, '2024-08-24', '09:34:00', '22.3084544', '73.170944', '18:34:00', '22.3117312', '73.170944', 0, '2024-08-24 04:04:47', '2024-08-30 04:00:07'),
-(32, 2, '2024-08-30', '09:25:00', '22.3189706', '73.1675021', NULL, NULL, NULL, 1, '2024-08-30 03:55:40', '2024-08-30 03:55:40');
+(32, 2, '2024-08-30', '09:25:00', '22.3189706', '73.1675021', '18:01:00', '22.3191903', '73.1675936', 0, '2024-08-30 03:55:40', '2024-08-30 12:31:27'),
+(33, 2, '2024-08-31', '09:19:00', '22.3091842', '73.1703512', NULL, NULL, NULL, 1, '2024-08-31 03:49:34', '2024-08-31 03:49:34');
 
 -- --------------------------------------------------------
 
@@ -513,6 +548,12 @@ INSERT INTO `tbl_role_has_permissions` (`permission_id`, `role_id`) VALUES
 (42, 1),
 (43, 1),
 (44, 1),
+(45, 1),
+(46, 1),
+(47, 1),
+(48, 1),
+(49, 1),
+(50, 1),
 (1, 2),
 (2, 2),
 (3, 2),
@@ -569,7 +610,10 @@ INSERT INTO `tbl_role_has_permissions` (`permission_id`, `role_id`) VALUES
 (27, 4),
 (28, 4),
 (39, 4),
-(42, 4);
+(42, 4),
+(44, 4),
+(48, 4),
+(49, 4);
 
 -- --------------------------------------------------------
 
@@ -762,13 +806,13 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `designation_id`, `department_id`, `emp_id`, `job_type`, `first_name`, `middle_name`, `last_name`, `email`, `email_verified_at`, `mobile_no`, `personal_email`, `password`, `dob`, `joining_date`, `releaving_date`, `probation_end_date`, `profile_image`, `is_generate_offer_letter`, `offer_letter`, `is_generate_appoitment_letter`, `appoitment_letter`, `remember_token`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, NULL, 'emp-101', NULL, 'Admin', NULL, 'Admin', 'admin@example.com', NULL, 1234567890, NULL, '$2y$10$.yA3BEYGU6ySCHVN9ffCWOjKT0JGkunXs2SN5fAQnt7wqK7REUusO', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, 'A0tav7UWhwMwxMqaKcOHYFwx2vN8TJFl2WD2C1VLkZ51DCn8CgIskJTtD9dH', 1, '2024-06-11 16:57:20', '2024-06-25 20:12:48', NULL),
+(1, 1, NULL, 'emp-101', NULL, 'Admin', NULL, 'Admin', 'admin@example.com', NULL, 1234567890, NULL, '$2y$10$.yA3BEYGU6ySCHVN9ffCWOjKT0JGkunXs2SN5fAQnt7wqK7REUusO', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, 'Izwvi72w4uq38K8XxbUE0tNCANy3OsDbqprkdATTPkK9M7qU7OnaMyfLQIxz', 1, '2024-06-11 16:57:20', '2024-06-25 20:12:48', NULL),
 (2, 9, 1, 'emp-102', 1, 'Rahul', 'Kailas', 'Patil', 'rahul.patil@inbox-infotech.com', NULL, 9545276255, 'rahulpatil2163@gmail.com', '$2y$10$iGknubf80F7nZdeOYMdVyOkgI5mV.ll6yWu.undpyTIYz8869Nf9C', '1995-06-29', '2024-07-03', NULL, '2024-08-30', NULL, 1, 'emp-102-2024-07-03.pdf', NULL, NULL, NULL, 1, '2024-07-30 23:44:09', '2024-08-24 11:07:38', NULL),
 (3, 5, 2, 'emp-103', 1, 'Pratik', NULL, 'Shah', 'pratik.shah@inbox-infotech.com', NULL, 1234567899, 'pratikshah@gmail.com', '$2y$10$jGs2S1D5S7TPhnG4bl0OBu2RWQviaYtG3LPX0ai7K1YSf9OJCuyY.', '2024-08-01', '2024-06-03', NULL, '2024-08-22', NULL, 1, 'emp-103-2024-06-03.pdf', NULL, NULL, NULL, 1, '2024-08-01 00:33:16', '2024-08-24 11:21:56', NULL),
-(4, 8, 3, 'emp-104', NULL, 'Hiren', NULL, 'Tadvi', 'hiren@inbox-infotech.com', NULL, 7894561230, 'hiren@gmail.com', '$2y$10$wBbO09z6a5/NQ3LIVteimuKCe6vFhxWEz3Z.bJgigKxw53s4BRYaa', '2024-08-06', '2024-06-03', NULL, '2024-08-31', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-08-06 00:17:07', '2024-08-20 04:49:43', NULL),
+(4, 8, 3, 'emp-104', 1, 'Hiren', NULL, 'Tadvi', 'hiren@inbox-infotech.com', NULL, 7894561230, 'hiren@gmail.com', '$2y$10$wBbO09z6a5/NQ3LIVteimuKCe6vFhxWEz3Z.bJgigKxw53s4BRYaa', '2024-08-06', '2024-06-03', NULL, '2024-08-31', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-08-06 00:17:07', '2024-08-20 04:49:43', NULL),
 (5, 7, 1, 'emp-105', NULL, 'Hiren', NULL, 'Makwana', 'hiren.makwana@inbox-infotech.com', NULL, 1234567898, 'hiren.mk@gmail.com', '$2y$10$1cSMUEkLwQwcAF45KE9KVe14iTTz2xY4JtWefv.Kysny5laxcyQzy', '2024-08-06', '2024-02-01', NULL, '2024-04-30', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-08-06 00:39:04', '2024-08-20 04:50:20', NULL),
 (6, 9, 1, 'emp-106', NULL, 'Dipak', NULL, 'Gohil', 'dipak@inbox-infotech.com', NULL, 9876543210, 'dipak@gmail.com', '$2y$10$ljap4B.3Z151VR9pUwiC3.ROVXADbI9FebUMbBC4gAuLd/WMWc7AO', '2024-08-01', '2024-05-01', NULL, '2024-07-31', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-08-22 09:53:15', '2024-08-22 09:53:15', NULL),
-(8, 9, 1, 'emp-107', 1, 'Aadil', NULL, 'Shaikh', 'aadil@inbox-infotech.com', NULL, 1234567888, 'aadil@gmail.com', '$2y$10$MXhxHujflJrPt/3F5OBz8.rJp8QhFcKjCSw6.qHoPyl692ohqYJ.6', '2024-08-01', '2024-08-01', NULL, '2024-08-31', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-08-24 11:36:54', '2024-08-24 11:43:41', NULL);
+(8, 9, 1, 'emp-107', 2, 'Aadil', NULL, 'Shaikh', 'aadil@inbox-infotech.com', NULL, 1234567888, 'aadil@gmail.com', '$2y$10$MXhxHujflJrPt/3F5OBz8.rJp8QhFcKjCSw6.qHoPyl692ohqYJ.6', '2024-08-01', '2024-08-01', NULL, '2024-08-31', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-08-24 11:36:54', '2024-08-24 11:43:41', NULL);
 
 -- --------------------------------------------------------
 
@@ -923,6 +967,12 @@ ALTER TABLE `tbl_personal_access_tokens`
   ADD KEY `tbl_personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `tbl_projects`
+--
+ALTER TABLE `tbl_projects`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_punch_in_outs`
 --
 ALTER TABLE `tbl_punch_in_outs`
@@ -982,7 +1032,7 @@ ALTER TABLE `tbl_user_details`
 -- AUTO_INCREMENT for table `tbl_assign_leaves`
 --
 ALTER TABLE `tbl_assign_leaves`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_departments`
@@ -1024,13 +1074,13 @@ ALTER TABLE `tbl_leave_applies`
 -- AUTO_INCREMENT for table `tbl_migrations`
 --
 ALTER TABLE `tbl_migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `tbl_permissions`
 --
 ALTER TABLE `tbl_permissions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `tbl_personal_access_tokens`
@@ -1039,10 +1089,16 @@ ALTER TABLE `tbl_personal_access_tokens`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `tbl_projects`
+--
+ALTER TABLE `tbl_projects`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `tbl_punch_in_outs`
 --
 ALTER TABLE `tbl_punch_in_outs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tbl_roles`
