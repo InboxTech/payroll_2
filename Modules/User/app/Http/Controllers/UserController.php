@@ -17,6 +17,7 @@ use App\Models\Department;
 use App\Models\UserDetail;
 use App\Models\AssignLeave;
 use App\Models\Leave;
+use App\Models\UserDocument;
 use DataTables;
 use Modules\User\Http\Requests\CreateUserRequest;
 use Modules\User\Http\Requests\UpdateUserRequest;
@@ -181,6 +182,13 @@ class UserController extends Controller
         $userData = User::where('status', 1)->where('id', $request->userId)->first();
         
         return view('user::leavehistory', compact('userData'));
+    }
+
+    public function viewletter(Request $request)
+    {
+        $userDocument = UserDocument::where('user_id', $request->userId)->get();
+
+        return view('user::viewletter', compact('userDocument'));
     }
 
     /**
