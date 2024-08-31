@@ -36,7 +36,11 @@
                     <span class="alert-icon text-info me-2">
                         <i class="ti ti-calendar ti-xs"></i>
                     </span>
-                    Todays {{ $pvalue->full_name }} probation end day
+                    @if($pvalue->job_type == 1)
+                        Todays {{ $pvalue->full_name }} probation end day
+                    @else 
+                        Todays {{ $pvalue->full_name }} Internship end day
+                    @endif
                 </div>
             @endforeach
 

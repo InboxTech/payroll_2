@@ -201,6 +201,30 @@ class PermissionTableSeeder extends Seeder
                 'group_name' => 'Salary'
             ],
             [
+                'name' => 'view-project',
+                'group_name' => 'Project'
+            ],
+            [
+                'name' => 'create-project',
+                'group_name' => 'Project'
+            ],
+            [
+                'name' => 'edit-project',
+                'group_name' => 'Project'
+            ],
+            [
+                'name' => 'delete-project',
+                'group_name' => 'Project'
+            ],
+            [
+                'name' => 'show-deleted-project',
+                'group_name' => 'Project'
+            ],
+            [
+                'name' => 'restore-deleted-project',
+                'group_name' => 'Project'
+            ],
+            [
                 'name' => 'edit-setting',
                 'group_name' => 'Setting'
             ],

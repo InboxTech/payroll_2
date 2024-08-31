@@ -24,6 +24,7 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->text('project_team')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

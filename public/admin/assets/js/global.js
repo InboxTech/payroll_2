@@ -130,4 +130,62 @@
         }
     });
     //================= MULTIPLE DELETE END=================//
+
+    // Restore Deleted Project
+    $(document).on('click','.jsRestoreRecords',function(){
+        var data_id=[];
+
+        $('.jsCheckBoxes').each(function(){
+            if ($(this).is(":checked")) {
+                data_id.push($(this).val());
+            }
+        });
+
+        if (data_id.length > 0)
+        {
+            if (confirm("Are you sure you want to Restore record ?")) {
+                $.ajax({
+                    url:restore_url,
+                    method:"POST",
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    data:{data_id:JSON.stringify(data_id)},
+                    success:function(data){
+                        table_id.DataTable().ajax.reload();
+                        if (data.status==true)
+                        {
+                            var success_html=ERROR_MESSAGE;
+                            $(".jsFlashMessage").html(success_html.replace("FLASH_MESSAGE", data.message));
+
+                            if ($("html, body").animate({ scrollTop: 0 }, "slow"))
+                            {
+                                setTimeout(function() { $('.alert').alert('close'); }, 5000);
+                            }
+                        }
+                        else
+                        {
+                            var error_html=ERROR_MESSAGE;
+                            $(".jsFlashMessage").html(error_html.replace("FLASH_MESSAGE", data.message));
+
+                            if ($("html, body").animate({ scrollTop: 0 }, "slow"))
+                            {
+                                setTimeout(function() { $('.alert').alert('close'); }, 5000);
+                            }
+                        }
+                    }
+                });
+            }
+        }
+        else
+        {
+            var error_html=ERROR_MESSAGE;
+
+            $(".flash_messages").html(error_html.replace("FLASH_MESSAGE", "Please select at least one record"));
+
+            if ($("html, body").animate({ scrollTop: 0 }, "slow")) {
+                setTimeout(function() { $('.alert').alert('close'); }, 5000);
+            }
+
+            return false;
+        }
+    });
     

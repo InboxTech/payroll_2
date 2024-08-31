@@ -36,17 +36,17 @@
                     <td>
                         @if($holidayName)
                             Holiday - {{ $holidayName }}
-                        @elseif($date->isWeekend())
-                            Week Off
                         @elseif($dayData)
                             @php $dataFound = true; @endphp
                             Present
+                        @elseif($date->isWeekend())
+                            Week Off
                         @else
                             Absent
                         @endif
                     </td>
                     <td>
-                        @if($dayData && !$date->isWeekend() && !$holidayName)
+                        @if($dayData && (!$date->isWeekend() || ($date->isSaturday() && $dayData->punch_in)) && !$holidayName)
                             {{ date('h:i A', strtotime($dayData->punch_in)) }} 
                             &nbsp;<a href="https://www.google.com/maps?q={{ $dayData->punch_in_lat }},{{ $dayData->punch_in_long }}" target="_blank"><i class="fa-solid fa-location-dot"></i></a>
                         @else

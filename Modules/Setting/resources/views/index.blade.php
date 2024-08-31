@@ -44,14 +44,14 @@
                                             <label class="form-label" for="formtabs-birth-date">Company Address</label>
                                             <textarea name="config_company_address" class="form-control">{{ getSettingData("config_company_address") }}</textarea>
                                         </div>
-                                        <div class="col-md-6 mb-3">
+                                        {{-- <div class="col-md-6 mb-3">
                                             <label for="start-financial-year" class="form-label">Start Financial Year</label>
                                             <select name="config_start_financial_year" class="form-select">
                                                 @for($month = 1; $month <= 12; $month++)
                                                     <option value="{{ $month }}" @if($month == getSettingData("config_start_financial_year")) selected @endif>{{ date("F", mktime(0, 0, 0, $month, 1)) }}</option>
                                                 @endfor
                                             </select>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="logo" role="tabpanel">

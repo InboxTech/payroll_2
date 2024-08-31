@@ -14,6 +14,11 @@ use Modules\Project\Http\Controllers\ProjectController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('project', ProjectController::class)->names('project');
+Route::prefix('admin')->middleware(['auth'])->group(function(){
+    Route::resource('project', ProjectController::class);
+    Route::post('/project/delete', [ProjectController::class, 'destroy'])->name('project.delete');
+    Route::post('project_change_status', [ProjectController::class, 'change_status'])->name('project.change_status');
+    Route::post('geEmployeeList', [ProjectController::class, 'getEmployeeList'])->name('project.getEmployeeList');
+    Route::get('removedproject', [ProjectController::class, 'removedproject'])->name('project.removedproject');
+    Route::post('project_restore', [ProjectController::class, 'restoreproject'])->name('project.restoreproject');
 });

@@ -13,4 +13,9 @@ class Designation extends Model
         'name',
         'status',
     ];
+
+    public function user()
+    {
+        return $this->hasMany(User::class);
+    }
 }
