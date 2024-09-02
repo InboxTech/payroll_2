@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('user_documents', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('document_type')->comment('1 for Internship Offer Letter, 2 for Confirmation Letter, 3 Offer Letter, 4 Appoitment Offer');
+            $table->integer('document_type')->comment('1 for Internship Offer Letter, 2 for Confirmation Letter, 3 Offer Letter, 4 Appoitment Offer, 5 Experience Letter');
             $table->string('document_name');
             $table->timestamps();
         });
