@@ -31,11 +31,14 @@ class User extends Authenticatable
         'mobile_no',
         'personal_email',
         'password',
+        'gender',
         'dob',
         'joining_date',
         'releaving_date',
         'probation_end_date',
         'profile_image',
+        'temporary_address',
+        'permanent_address',
         'status',
     ];
 
@@ -93,5 +96,10 @@ class User extends Authenticatable
     public function department()
     {
         return $this->belongsTo(Department::class);
+    }
+
+    public function user_document()
+    {
+        return $this->hasMany(UserDocument::class);
     }
 }

@@ -98,6 +98,14 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-4 mb-2">
+                                            <label for="gender" class="form-label">Gender <span class="text-danger">*</span></label>
+                                            <select name="gender" class="form-select" data-rule-required="true" data-msg-required="Please Select Gender">
+                                                <option value="">Select Gender</option>
+                                                <option value="1">Male</option>
+                                                <option value="2">Female</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-4 mb-2">
                                             <label for="designation-list" class="form-label">Designation <span class="text-danger">*</span></label>
                                             <select name="designation_id" class="form-select" data-rule-required="true" data-msg-required="Please Select Designation">
                                                 <option value="">Select Designation</option>
@@ -144,6 +152,14 @@
                                                 <option value="3">Offer Letter</option>
                                                 <option value="4">Appoitment Letter</option>
                                             </select>
+                                        </div>
+                                        <div class="col-sm-4 mb-2">
+                                            <label for="address" class="form-label">Temporary Address</label>
+                                            <textarea name="temporary_address" class="form-control"></textarea>
+                                        </div>
+                                        <div class="col-sm-4 mb-2">
+                                            <label for="address" class="form-label">Permanent Address</label>
+                                            <textarea name="permanent_address" class="form-control"></textarea>
                                         </div>
                                     </div>
                                     <hr>

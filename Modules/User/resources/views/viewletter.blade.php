@@ -21,6 +21,40 @@
                                 <th class="text-center">View</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            @forelse($userDocument as $key => $value)
+                                <tr>
+                                    @switch($value->document_type)
+                                        @case(1)
+                                            <td>Internship Offer Letter</td>
+                                            <td><a href="{{ asset('storage/'.$value->document_name) }}" target="_blank"><i class="menu-icon tf-icons ti ti-file-arrow-right"></i></a></td>
+                                            @break
+                                        @case(2)
+                                            <td>Confirmation Letter</td>
+                                            <td><a href="{{ asset('storage/'.$value->document_name) }}" target="_blank"><i class="menu-icon tf-icons ti ti-file-arrow-right"></i></a></td>
+                                            @break
+                                        @case(3)
+                                            <td>Offer Letter</td>
+                                            <td><a href="{{ asset('storage/'.$value->document_name) }}" target="_blank"><i class="menu-icon tf-icons ti ti-file-arrow-right"></i></a></td>
+                                            @break
+                                        @case(4)
+                                            <td>Appoitment Letter</td>
+                                            <td><a href="{{ asset('storage/'.$value->document_name) }}" target="_blank"><i class="menu-icon tf-icons ti ti-file-arrow-right"></i></a></td>
+                                            @break
+                                        @case(5)
+                                            <td>Experience or Releaving Letter</td>
+                                            <td><a href="{{ asset('storage/'.$value->document_name) }}" target="_blank"><i class="menu-icon tf-icons ti ti-file-arrow-right"></i></a></td>
+                                            @break
+                                        @default
+                                            @break
+                                    @endswitch
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="2" class="text-center">No Data Found</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
                     </table>
                 </div>
             </div>

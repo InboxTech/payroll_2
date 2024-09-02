@@ -326,13 +326,79 @@ class UserController extends Controller
 
             $salaryHistory = SalaryHistory::create($input);
 
-            // $this->generateLetter($request->type_of_letter, $user->id);
+            if($input['type_of_letter']) {
+                switch ($input['type_of_letter']) {
+                    case '1':
+                        $this->generateInternshipOfferLetter($user->id);
+                        break;
+                    case '2':
+                        $this->generateConfirmationLetter($user->id);
+                        break;
+                    case '3':
+                        $this->generateOfferLetter($user->id);
+                        break;
+                    case '4':
+                        $this->generateAppoitmentLetter($user->id);
+                        break;
+                    
+                    default:
+                        break;
+                }
+            }
         }
 
         return redirect()->route('user.index')->with('success', 'Employee added successfully!');
     }
 
-    public function generateOfferLetter($typeOfLetter = null, $userId)
+    public function generateInternshipOfferLetter($userId) {
+
+        $userData = User::where('id', $userId)->first();
+
+        $pdf = Pdf::loadView('user::internship_offer_letter', compact('userData'));
+
+        $content = $pdf->download()->getOriginalContent();
+                
+        $rootPath = storage_path('app/public').'/internship-offer-letter';
+
+        $client = Storage::createLocalDriver(['root' => $rootPath]);
+        $pdf_name = $userData->emp_id.'-'.$userData->joining_date.'-internship-offer-letter.pdf';
+
+        $client->put($pdf_name, $content);
+
+        $data['user_id'] = $userId;
+        $data['document_type'] = 1;
+        $data['document_name'] = 'internship-offer-letter/'.$pdf_name;
+
+        UserDocument::updateOrCreate(['user_id' => $userId, 'document_type' => 1], $data);
+
+        return;
+    }
+
+    public function generateConfirmationLetter($userId) {
+        
+        $userData = User::where('id', $userId)->first();
+
+        $pdf = Pdf::loadView('user::confirmation_letter', compact('userData'));
+
+        $content = $pdf->download()->getOriginalContent();
+                
+        $rootPath = storage_path('app/public').'/confirmation-letter';
+
+        $client = Storage::createLocalDriver(['root' => $rootPath]);
+        $pdf_name = $userData->emp_id.'-'.$userData->joining_date.'-confirmation-letter.pdf';
+
+        $client->put($pdf_name, $content);
+
+        $data['user_id'] = $userId;
+        $data['document_type'] = 2;
+        $data['document_name'] = 'confirmation-letter/'.$pdf_name;
+
+        UserDocument::updateOrCreate(['user_id' => $userId, 'document_type' => 2], $data);
+
+        return;
+    }
+
+    public function generateOfferLetter($userId)
     {
         $userData = User::where('id', $userId)->first();
 
@@ -347,7 +413,13 @@ class UserController extends Controller
 
         $client->put($pdf_name, $content);
 
-        return $pdf_name;
+        $data['user_id'] = $userId;
+        $data['document_type'] = 3;
+        $data['document_name'] = 'offer-letter/'.$pdf_name;
+
+        UserDocument::updateOrCreate(['user_id' => $userId, 'document_type' => 3], $data);
+
+        return;
     }
 
     public function generateAppoitmentLetter($userId)
@@ -357,15 +429,46 @@ class UserController extends Controller
         $pdf = Pdf::loadView('user::appoitment_letter', compact('userData'));
 
         $content = $pdf->download()->getOriginalContent();
-                
+
         $rootPath = storage_path('app/public').'/appoitment-letter';
 
         $client = Storage::createLocalDriver(['root' => $rootPath]);
-        $pdf_name = $userData->emp_id.'-'.$userData->joining_date.'.pdf';
+        $pdf_name = $userData->emp_id.'-'.$userData->joining_date.'appoitment-letter.pdf';
 
         $client->put($pdf_name, $content);
 
-        return $pdf_name;
+        $data['user_id'] = $userId;
+        $data['document_type'] = 4;
+        $data['document_name'] = 'appoitment-letter/'.$pdf_name;
+
+        UserDocument::updateOrCreate(['user_id' => $userId, 'document_type' => 4], $data);
+
+        return;
+    }
+
+    public function generateExperienceLetter($userId)
+    {
+        $userData = User::where('id', $userId)->first();
+        
+        $pdf = Pdf::loadView('user::experience_letter', compact('userData'));
+
+        $content = $pdf->download()->getOriginalContent();
+                
+        $rootPath = storage_path('app/public').'/experience-letter';
+
+        $client = Storage::createLocalDriver(['root' => $rootPath]);
+        $pdf_name = $userData->emp_id.'-'.$userData->joining_date.'-experience-letter.pdf';
+
+        $client->put($pdf_name, $content);
+
+        
+        $data['user_id'] = $userId;
+        $data['document_type'] = 5;
+        $data['document_name'] = 'experience-letter/'.$pdf_name;
+
+        UserDocument::updateOrCreate(['user_id' => $userId, 'document_type' => 5], $data);
+
+        return;
     }
 
     /**
@@ -451,12 +554,34 @@ class UserController extends Controller
         $userDetailColumns = \Schema::getColumnListing('user_details');
 
         $filteredInput = array_intersect_key($input, array_flip($userDetailColumns));
-        
+
         if($user->update($input))
         {
             DB::table('model_has_roles')->where('model_id',$user->id)->delete();
 
             $user->assignRole($request->input('role'));
+
+            if($user->releaving_date) {
+                $this->generateExperienceLetter($user->id);
+            }
+
+            switch ($input['type_of_letter']) {
+                case '1':
+                    $this->generateInternshipOfferLetter($user->id);
+                    break;
+                case '2':
+                    $this->generateConfirmationLetter($user->id);
+                    break;
+                case '3':
+                    $this->generateOfferLetter($user->id);
+                    break;
+                case '4':
+                    $this->generateAppoitmentLetter($user->id);
+                    break;
+                
+                default:
+                    break;
+            }
 
             UserDetail::where('user_id', $user->id)->update($filteredInput);
 

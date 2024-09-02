@@ -99,6 +99,14 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-4 mb-2">
+                                            <label for="gender" class="form-label">Gender <span class="text-danger">*</span></label>
+                                            <select name="gender" class="form-select" data-rule-required="true" data-msg-required="Please Select Gender">
+                                                <option value="">Select Gender</option>
+                                                <option value="1" @if($user->gender == 1) selected @endif>Male</option>
+                                                <option value="2" @if($user->gender == 2) selected @endif>Female</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-4 mb-2">
                                             <label for="designation-list" class="form-label">Designation <span class="text-danger">*</span></label>
                                             <select name="designation_id" class="form-select" data-rule-required="true" data-msg-required="Please Select Designation">
                                                 <option value="">Select Designation</option>
@@ -137,17 +145,77 @@
                                             <input type="date" name="releaving_date" class="form-control" value="{{ $user->releaving_date }}"/>
                                         </div>
                                         <div class="col-sm-4 mb-2">
-                                            <label for="is-generate-offer-letter" class="form-label">Which letter do you want to generate?<span class="text-danger">*</span></label>
+                                            <label for="is-generate-offer-letter" class="form-label">Which letter do you want to generate? <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#lettersmodal">View Generated Letters</a></label>
                                             <select name="type_of_letter" class="form-select">
                                                 <option value="">Select Option</option>
                                                 <option value="1">Internship Offer Letter</option>
                                                 <option value="2">Confirmation Letter</option>
-                                                <option value="3">Job Offer</option>
+                                                <option value="3">Offer Letter</option>
                                                 <option value="4">Appoitment Offer</option>
                                             </select>
                                         </div>
+                                        <div class="col-sm-4 mb-2">
+                                            <label for="address" class="form-label">Temporary Address</label>
+                                            <textarea name="temporary_address" class="form-control">{{ $user->temporary_address }}</textarea>
+                                        </div>
+                                        <div class="col-sm-4 mb-2">
+                                            <label for="address" class="form-label">Permanent Address</label>
+                                            <textarea name="permanent_address" class="form-control">{{ $user->permanent_address }}</textarea>
+                                        </div>
                                     </div>
                                 </div>
+                                <!-- view generated letters modal statrt -->
+                                <div class="modal fade" id="lettersmodal" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered1 modal-simple modal-add-new-cc">
+                                        <div class="modal-content p-3 p-md-5">
+                                            <div class="modal-body">
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                <div class="text-center mb-4">
+                                                    <h3 class="mb-2">Generated Letters</h3>
+                                                </div>
+                                                <div class="card-datatable text-nowrap">
+                                                    <table class="data-table table text-center table-responsive text-nowrap" id="User">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="text-center">Letter Name</th>
+                                                                <th class="text-center">View</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @if($user->user_document)
+                                                                @foreach($user->user_document as $key => $value)
+                                                                    <tr>
+                                                                        @switch($value->document_type)
+                                                                            @case(1)
+                                                                                <td>Internship Offer Letter</td>
+                                                                                <td><a href="{{ asset('storage/'.$value->document_name) }}" target="_blank"><i class="menu-icon tf-icons ti ti-file-arrow-right"></i></a></td>
+                                                                                @break
+                                                                            @case(2)
+                                                                                <td>Confirmation Letter</td>
+                                                                                <td><a href="{{ asset('storage/'.$value->document_name) }}" target="_blank"><i class="menu-icon tf-icons ti ti-file-arrow-right"></i></a></td>
+                                                                                @break
+                                                                            @case(3)
+                                                                                <td>Offer Letter</td>
+                                                                                <td><a href="{{ asset('storage/'.$value->document_name) }}" target="_blank"><i class="menu-icon tf-icons ti ti-file-arrow-right"></i></a></td>
+                                                                                @break
+                                                                            @case(4)
+                                                                                <td>Appoitment Letter</td>
+                                                                                <td><a href="{{ asset('storage/'.$value->document_name) }}" target="_blank"><i class="menu-icon tf-icons ti ti-file-arrow-right"></i></a></td>
+                                                                                @break
+                                                                            @default
+                                                                                @break
+                                                                        @endswitch
+                                                                    </tr>
+                                                                @endforeach
+                                                            @endif
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- view generated letters modal end -->
                                 <div class="tab-pane fade" id="form-tabs-bank-details" role="tabpanel">
                                     <div class="row">
                                         <div class="col-md-4 mt-2">

@@ -147,7 +147,7 @@
                     <p>We welcome you on behalf of INBOX INFOTECH PVT. LTD.</p>
                     <p>We are pleased to inform you that you have been selected for the <strong>{{ $userData->designation->name }}</strong> position at INBOX
                         INFOTECH
-                        PVT. LTD. Your anticipated date of joining is scheduled <strong>on/before {{ \Carbon\Carbon::parse($userData->joining_date)->format('d M, Y')}},</strong> in accordance with
+                        PVT. LTD. Your anticipated date of joining is scheduled <strong>on/before {{ \Carbon\Carbon::parse($userData->joining_date)->format('d M, Y') }},</strong> in accordance with
                         our
                         previous discussions. Below, we outline the proposal for your compensation package:</p>
                     <p>You will receive an annual remuneration of CTC INR <strong>{{ formatIndianNumber($userData->user_detail->gross_salary_yearly) }}/-</strong> and a monthly
@@ -207,7 +207,7 @@
             </div>
             <div class="footer">
                 <br>
-                <img src="{{ public_path('admin/assets/offer-letter/images/offer_latter_footer_crop.jpg') }}" alt="">
+                <img src="{{ public_path('admin/assets/offer-letter/images/offer_latter_footer.jpg') }}" alt="">
             </div>
         </section>
 
@@ -332,7 +332,7 @@
                 </table>
             </div>
             <div class="footer">
-                <img src="{{ public_path('admin/assets/offer-letter/images/offer_latter_footer_crop.jpg') }}" alt="">
+                <img src="{{ public_path('admin/assets/offer-letter/images/offer_latter_footer.jpg') }}" alt="">
             </div>
         </section>
 
@@ -433,7 +433,7 @@
             </div>
             <div class="footer">
                 <br>
-                <img src="{{ public_path('admin/assets/offer-letter/images/offer_latter_footer_crop.jpg') }}" alt="">
+                <img src="{{ public_path('admin/assets/offer-letter/images/offer_latter_footer.jpg') }}" alt="">
             </div>
         </section>
     </body>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 31, 2024 at 10:59 AM
+-- Generation Time: Sep 02, 2024 at 10:30 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.19
 
@@ -228,7 +228,9 @@ INSERT INTO `tbl_migrations` (`id`, `migration`, `batch`) VALUES
 (49, '2024_08_09_145849_create_departments_table', 26),
 (50, '2024_06_11_155155_create_assign_leaves_table', 27),
 (52, '2024_08_24_153505_create_salary_histories_table', 28),
-(54, '2024_08_30_173548_create_projects_table', 29);
+(54, '2024_08_30_173548_create_projects_table', 29),
+(56, '2024_08_31_165813_create_user_documents_table', 30),
+(59, '2024_09_02_111141_add_address_and_gender_to_users_table', 31);
 
 -- --------------------------------------------------------
 
@@ -462,7 +464,8 @@ INSERT INTO `tbl_punch_in_outs` (`id`, `user_id`, `date`, `punch_in`, `punch_in_
 (30, 2, '2024-08-23', '09:18:00', '22.3084544', '73.170944', '18:02:00', '22.3084544', '73.170944', 0, '2024-08-23 03:48:39', '2024-08-23 12:32:26'),
 (31, 2, '2024-08-24', '09:34:00', '22.3084544', '73.170944', '18:34:00', '22.3117312', '73.170944', 0, '2024-08-24 04:04:47', '2024-08-30 04:00:07'),
 (32, 2, '2024-08-30', '09:25:00', '22.3189706', '73.1675021', '18:01:00', '22.3191903', '73.1675936', 0, '2024-08-30 03:55:40', '2024-08-30 12:31:27'),
-(33, 2, '2024-08-31', '09:19:00', '22.3091842', '73.1703512', NULL, NULL, NULL, 1, '2024-08-31 03:49:34', '2024-08-31 03:49:34');
+(33, 2, '2024-08-31', '09:19:00', '22.3091842', '73.1703512', '18:01:00', '22.3091842', '73.1703512', 0, '2024-08-31 03:49:34', '2024-08-31 12:31:31'),
+(34, 2, '2024-09-02', '09:21:00', '22.3188291', '73.1674176', NULL, NULL, NULL, 1, '2024-09-02 03:51:23', '2024-09-02 03:51:23');
 
 -- --------------------------------------------------------
 
@@ -610,10 +613,7 @@ INSERT INTO `tbl_role_has_permissions` (`permission_id`, `role_id`) VALUES
 (27, 4),
 (28, 4),
 (39, 4),
-(42, 4),
-(44, 4),
-(48, 4),
-(49, 4);
+(42, 4);
 
 -- --------------------------------------------------------
 
@@ -734,8 +734,9 @@ CREATE TABLE `tbl_salary_histories` (
 INSERT INTO `tbl_salary_histories` (`id`, `year`, `job_type`, `user_id`, `gross_salary_yearly`, `gross_salary_monthly`, `basic_yearly`, `basic_monthly`, `hra_yearly`, `hra_monthly`, `medical_yearly`, `medical_monthly`, `education_yearly`, `education_monthly`, `conveyance_yearly`, `conveyance_monthly`, `special_allowance_yearly`, `special_allowance_monthly`, `gross_salary_A_yearly`, `gross_salary_A_monthly`, `is_pf_deduct_yearly`, `is_pf_deduct_monthly`, `employee_contribution_yearly`, `employee_contribution_monthly`, `esi_employee_contribution_yearly`, `esi_employee_contribution_monthly`, `labour_welfare_employee_yearly`, `labour_welfare_employee_monthly`, `professional_tax_yearly`, `professional_tax_monthly`, `employee_contribution_B_yearly`, `employee_contribution_B_monthly`, `net_salary_C_yearly`, `net_salary_C_monthly`, `employer_contribution_yearly`, `employer_contribution_monthly`, `esi_employer_contribution_yearly`, `esi_employer_contribution_monthly`, `labour_welfare_employer_yearly`, `labour_welfare_employer_monthly`, `employer_contri_D_yearly`, `employer_contri_D_monthly`, `ctc_bcd_yearly`, `ctc_bcd_monthly`, `created_at`, `updated_at`) VALUES
 (1, '2024', 1, 2, 324000.00, 27000.00, 129600.00, 10800.00, 51840.00, 4320.00, 15000.00, 1250.00, 12000.00, 1000.00, 19200.00, 1600.00, 96360.00, 8030.00, 324000.00, 27000.00, 'Yes', 'Yes', 15552.00, 1296.00, 0.00, 0.00, 12.00, 1.00, 2400.00, 200.00, 17964.00, 1497.00, 306036.00, 25503.00, NULL, NULL, NULL, NULL, 24.00, 2.00, 24.00, 2.00, 324024.00, 27002.00, '2024-08-24 11:04:16', '2024-08-24 11:17:53'),
 (2, '2024', 1, 3, 324000.00, 27000.00, 129600.00, 10800.00, 51840.00, 4320.00, 15000.00, 1250.00, 12000.00, 1000.00, 19200.00, 1600.00, 96360.00, 8030.00, 324000.00, 27000.00, 'Yes', 'Yes', 15552.00, 1296.00, 0.00, 0.00, 12.00, 1.00, 2400.00, 200.00, 17964.00, 1497.00, 306036.00, 25503.00, NULL, NULL, NULL, NULL, 24.00, 2.00, 24.00, 2.00, 324024.00, 27002.00, '2024-08-24 11:21:56', '2024-08-24 11:21:56'),
-(4, '2024', 2, 8, 18000.00, 6000.00, 6000.00, 6000.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 6000.00, 6000.00, 'No', 'No', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 18000.00, 6000.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 18000.00, 6000.00, '2024-08-24 11:36:54', '2024-08-24 11:36:54'),
-(5, '2024', 1, 8, 180000.00, 15000.00, 72000.00, 6000.00, 28800.00, 2400.00, 15000.00, 1250.00, 12000.00, 1000.00, 19200.00, 1600.00, 33000.00, 2750.00, 180000.00, 15000.00, 'No', 'No', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 2400.00, 200.00, 2400.00, 200.00, 177600.00, 14800.00, 0.00, 0.00, 0.00, 0.00, 24.00, 2.00, 24.00, 2.00, 180024.00, 15002.00, '2024-08-24 11:41:06', '2024-08-24 11:41:06');
+(4, '2024', 2, 8, 180000.00, 15000.00, 72000.00, 6000.00, 28800.00, 2400.00, 15000.00, 1250.00, 12000.00, 1000.00, 19200.00, 1600.00, 33000.00, 2750.00, 180000.00, 15000.00, 'No', 'No', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 2400.00, 200.00, 2400.00, 200.00, 177600.00, 14800.00, 0.00, 0.00, 0.00, 0.00, 24.00, 2.00, 24.00, 2.00, 180024.00, 15002.00, '2024-08-24 11:36:54', '2024-09-02 09:58:21'),
+(5, '2024', 1, 8, 180000.00, 15000.00, 72000.00, 6000.00, 28800.00, 2400.00, 15000.00, 1250.00, 12000.00, 1000.00, 19200.00, 1600.00, 33000.00, 2750.00, 180000.00, 15000.00, 'No', 'No', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 2400.00, 200.00, 2400.00, 200.00, 177600.00, 14800.00, 0.00, 0.00, 0.00, 0.00, 24.00, 2.00, 24.00, 2.00, 180024.00, 15002.00, '2024-08-24 11:41:06', '2024-08-24 11:41:06'),
+(6, '2024', 1, 6, 324000.00, 27000.00, 129600.00, 10800.00, 51840.00, 4320.00, 15000.00, 1250.00, 12000.00, 1000.00, 19200.00, 1600.00, 96360.00, 8030.00, 324000.00, 27000.00, 'Yes', 'Yes', 15552.00, 1296.00, 0.00, 0.00, 12.00, 1.00, 2400.00, 200.00, 17964.00, 1497.00, 306036.00, 25503.00, NULL, NULL, NULL, NULL, 24.00, 2.00, 24.00, 2.00, 324024.00, 27002.00, '2024-09-02 07:19:51', '2024-09-02 07:21:10');
 
 -- --------------------------------------------------------
 
@@ -785,15 +786,14 @@ CREATE TABLE `tbl_users` (
   `mobile_no` bigint DEFAULT NULL,
   `personal_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gender` int DEFAULT NULL COMMENT '1 for Male, 2 for Female',
   `dob` date DEFAULT NULL,
   `joining_date` date DEFAULT NULL,
   `releaving_date` date DEFAULT NULL,
   `probation_end_date` date DEFAULT NULL,
   `profile_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `is_generate_offer_letter` int DEFAULT NULL COMMENT '1 for Generate, 0 for Not Generate',
-  `offer_letter` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `is_generate_appoitment_letter` int DEFAULT NULL COMMENT '1 for Generate, 0 for Not Generate',
-  `appoitment_letter` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `temporary_address` text COLLATE utf8mb4_unicode_ci,
+  `permanent_address` text COLLATE utf8mb4_unicode_ci,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` int NOT NULL DEFAULT '1' COMMENT '1 for active, 0 for inactive',
   `created_at` timestamp NULL DEFAULT NULL,
@@ -805,14 +805,14 @@ CREATE TABLE `tbl_users` (
 -- Dumping data for table `tbl_users`
 --
 
-INSERT INTO `tbl_users` (`id`, `designation_id`, `department_id`, `emp_id`, `job_type`, `first_name`, `middle_name`, `last_name`, `email`, `email_verified_at`, `mobile_no`, `personal_email`, `password`, `dob`, `joining_date`, `releaving_date`, `probation_end_date`, `profile_image`, `is_generate_offer_letter`, `offer_letter`, `is_generate_appoitment_letter`, `appoitment_letter`, `remember_token`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, NULL, 'emp-101', NULL, 'Admin', NULL, 'Admin', 'admin@example.com', NULL, 1234567890, NULL, '$2y$10$.yA3BEYGU6ySCHVN9ffCWOjKT0JGkunXs2SN5fAQnt7wqK7REUusO', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, 'Izwvi72w4uq38K8XxbUE0tNCANy3OsDbqprkdATTPkK9M7qU7OnaMyfLQIxz', 1, '2024-06-11 16:57:20', '2024-06-25 20:12:48', NULL),
-(2, 9, 1, 'emp-102', 1, 'Rahul', 'Kailas', 'Patil', 'rahul.patil@inbox-infotech.com', NULL, 9545276255, 'rahulpatil2163@gmail.com', '$2y$10$iGknubf80F7nZdeOYMdVyOkgI5mV.ll6yWu.undpyTIYz8869Nf9C', '1995-06-29', '2024-07-03', NULL, '2024-08-30', NULL, 1, 'emp-102-2024-07-03.pdf', NULL, NULL, NULL, 1, '2024-07-30 23:44:09', '2024-08-24 11:07:38', NULL),
-(3, 5, 2, 'emp-103', 1, 'Pratik', NULL, 'Shah', 'pratik.shah@inbox-infotech.com', NULL, 1234567899, 'pratikshah@gmail.com', '$2y$10$jGs2S1D5S7TPhnG4bl0OBu2RWQviaYtG3LPX0ai7K1YSf9OJCuyY.', '2024-08-01', '2024-06-03', NULL, '2024-08-22', NULL, 1, 'emp-103-2024-06-03.pdf', NULL, NULL, NULL, 1, '2024-08-01 00:33:16', '2024-08-24 11:21:56', NULL),
-(4, 8, 3, 'emp-104', 1, 'Hiren', NULL, 'Tadvi', 'hiren@inbox-infotech.com', NULL, 7894561230, 'hiren@gmail.com', '$2y$10$wBbO09z6a5/NQ3LIVteimuKCe6vFhxWEz3Z.bJgigKxw53s4BRYaa', '2024-08-06', '2024-06-03', NULL, '2024-08-31', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-08-06 00:17:07', '2024-08-20 04:49:43', NULL),
-(5, 7, 1, 'emp-105', NULL, 'Hiren', NULL, 'Makwana', 'hiren.makwana@inbox-infotech.com', NULL, 1234567898, 'hiren.mk@gmail.com', '$2y$10$1cSMUEkLwQwcAF45KE9KVe14iTTz2xY4JtWefv.Kysny5laxcyQzy', '2024-08-06', '2024-02-01', NULL, '2024-04-30', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-08-06 00:39:04', '2024-08-20 04:50:20', NULL),
-(6, 9, 1, 'emp-106', NULL, 'Dipak', NULL, 'Gohil', 'dipak@inbox-infotech.com', NULL, 9876543210, 'dipak@gmail.com', '$2y$10$ljap4B.3Z151VR9pUwiC3.ROVXADbI9FebUMbBC4gAuLd/WMWc7AO', '2024-08-01', '2024-05-01', NULL, '2024-07-31', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-08-22 09:53:15', '2024-08-22 09:53:15', NULL),
-(8, 9, 1, 'emp-107', 2, 'Aadil', NULL, 'Shaikh', 'aadil@inbox-infotech.com', NULL, 1234567888, 'aadil@gmail.com', '$2y$10$MXhxHujflJrPt/3F5OBz8.rJp8QhFcKjCSw6.qHoPyl692ohqYJ.6', '2024-08-01', '2024-08-01', NULL, '2024-08-31', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-08-24 11:36:54', '2024-08-24 11:43:41', NULL);
+INSERT INTO `tbl_users` (`id`, `designation_id`, `department_id`, `emp_id`, `job_type`, `first_name`, `middle_name`, `last_name`, `email`, `email_verified_at`, `mobile_no`, `personal_email`, `password`, `gender`, `dob`, `joining_date`, `releaving_date`, `probation_end_date`, `profile_image`, `temporary_address`, `permanent_address`, `remember_token`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, NULL, 'emp-101', NULL, 'Admin', NULL, 'Admin', 'admin@example.com', NULL, 1234567890, NULL, '$2y$10$.yA3BEYGU6ySCHVN9ffCWOjKT0JGkunXs2SN5fAQnt7wqK7REUusO', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, 'Izwvi72w4uq38K8XxbUE0tNCANy3OsDbqprkdATTPkK9M7qU7OnaMyfLQIxz', 1, '2024-06-11 16:57:20', '2024-06-25 20:12:48', NULL),
+(2, 9, 1, 'emp-102', 1, 'Rahul', 'Kailas', 'Patil', 'rahul.patil@inbox-infotech.com', NULL, 9545276255, 'rahulpatil2163@gmail.com', '$2y$10$iGknubf80F7nZdeOYMdVyOkgI5mV.ll6yWu.undpyTIYz8869Nf9C', NULL, '1995-06-29', '2024-07-03', NULL, '2024-08-30', NULL, NULL, NULL, NULL, 1, '2024-07-30 23:44:09', '2024-08-24 11:07:38', NULL),
+(3, 5, 2, 'emp-103', 1, 'Pratik', NULL, 'Shah', 'pratik.shah@inbox-infotech.com', NULL, 1234567899, 'pratikshah@gmail.com', '$2y$10$jGs2S1D5S7TPhnG4bl0OBu2RWQviaYtG3LPX0ai7K1YSf9OJCuyY.', NULL, '2024-08-01', '2024-06-03', NULL, '2024-08-22', NULL, NULL, NULL, NULL, 1, '2024-08-01 00:33:16', '2024-08-24 11:21:56', NULL),
+(4, 8, 3, 'emp-104', 1, 'Hiren', NULL, 'Tadvi', 'hiren@inbox-infotech.com', NULL, 7894561230, 'hiren@gmail.com', '$2y$10$wBbO09z6a5/NQ3LIVteimuKCe6vFhxWEz3Z.bJgigKxw53s4BRYaa', NULL, '2024-08-06', '2024-06-03', NULL, '2024-08-31', NULL, NULL, NULL, NULL, 1, '2024-08-06 00:17:07', '2024-08-20 04:49:43', NULL),
+(5, 7, 1, 'emp-105', NULL, 'Hiren', NULL, 'Makwana', 'hiren.makwana@inbox-infotech.com', NULL, 1234567898, 'hiren.mk@gmail.com', '$2y$10$1cSMUEkLwQwcAF45KE9KVe14iTTz2xY4JtWefv.Kysny5laxcyQzy', NULL, '2024-08-06', '2024-02-01', NULL, '2024-04-30', NULL, NULL, NULL, NULL, 1, '2024-08-06 00:39:04', '2024-08-20 04:50:20', NULL),
+(6, 9, 1, 'emp-106', 1, 'Dipak', NULL, 'Gohil', 'dipak@inbox-infotech.com', NULL, 9876543210, 'dipak@gmail.com', '$2y$10$ljap4B.3Z151VR9pUwiC3.ROVXADbI9FebUMbBC4gAuLd/WMWc7AO', NULL, '2024-08-01', '2024-05-01', NULL, '2024-07-31', NULL, NULL, NULL, NULL, 1, '2024-08-22 09:53:15', '2024-09-02 07:17:44', NULL),
+(8, 9, 1, 'emp-107', 2, 'Aadil', NULL, 'Shaikh', 'aadil@inbox-infotech.com', NULL, 1234567888, 'aadil@gmail.com', '$2y$10$MXhxHujflJrPt/3F5OBz8.rJp8QhFcKjCSw6.qHoPyl692ohqYJ.6', 1, '2024-08-01', '2024-08-01', '2024-09-02', '2024-08-31', NULL, NULL, NULL, NULL, 1, '2024-08-24 11:36:54', '2024-09-02 09:06:53', NULL);
 
 -- --------------------------------------------------------
 
@@ -881,8 +881,32 @@ INSERT INTO `tbl_user_details` (`id`, `user_id`, `bank_name`, `bank_branch_name`
 (2, 3, NULL, NULL, NULL, NULL, NULL, 324000.00, 27000.00, 129600.00, 10800.00, 51840.00, 4320.00, 15000.00, 1250.00, 12000.00, 1000.00, 19200.00, 1600.00, 96360.00, 8030.00, 324000.00, 27000.00, 'Yes', 'Yes', 15552.00, 1296.00, 0.00, 0.00, 12.00, 1.00, 2400.00, 200.00, 17964.00, 1497.00, 306036.00, 25503.00, NULL, NULL, NULL, NULL, 24.00, 2.00, 24.00, 2.00, 324024.00, 27002.00, '2024-08-01 06:03:16', '2024-08-24 11:21:56'),
 (3, 4, NULL, NULL, NULL, NULL, NULL, 240000.00, 20000.00, 96000.00, 8000.00, 38400.00, 3200.00, 15000.00, 1250.00, 6000.00, 500.00, 19200.00, 1600.00, 65400.00, 5450.00, 240000.00, 20000.00, 'Fix', 'Fix', 21600.00, 1800.00, 0.00, 0.00, 12.00, 1.00, 2400.00, 200.00, 24012.00, 2001.00, 215988.00, 17999.00, NULL, NULL, NULL, NULL, 24.00, 2.00, 24.00, 2.00, 240024.00, 20002.00, '2024-08-06 05:47:07', '2024-08-20 04:49:43'),
 (4, 5, NULL, NULL, NULL, NULL, NULL, 602412.00, 50201.00, 240965.00, 20081.00, 96386.00, 8032.00, 15000.00, 1250.00, 12000.00, 1000.00, 19200.00, 1600.00, 218861.00, 18238.00, 602412.00, 50201.00, 'No', 'No', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 2400.00, 200.00, 2400.00, 200.00, 600012.00, 50001.00, NULL, NULL, NULL, NULL, 24.00, 2.00, 24.00, 2.00, 602436.00, 50203.00, '2024-08-06 06:09:04', '2024-08-20 04:50:20'),
-(5, 6, NULL, NULL, NULL, NULL, NULL, 324000.00, 27000.00, 129600.00, 10800.00, 51840.00, 4320.00, 15000.00, 1250.00, 12000.00, 1000.00, 19200.00, 1600.00, 96360.00, 8030.00, 324000.00, 27000.00, 'Yes', 'Yes', 15552.00, 1296.00, 0.00, 0.00, 12.00, 1.00, 2400.00, 200.00, 17964.00, 1497.00, 306036.00, 25503.00, NULL, NULL, NULL, NULL, 24.00, 2.00, 24.00, 2.00, 324024.00, 27002.00, '2024-08-22 09:53:15', '2024-08-22 09:53:15'),
-(7, 8, NULL, NULL, NULL, NULL, NULL, 180000.00, 15000.00, 72000.00, 6000.00, 28800.00, 2400.00, 15000.00, 1250.00, 12000.00, 1000.00, 19200.00, 1600.00, 33000.00, 2750.00, 180000.00, 15000.00, 'No', 'No', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 2400.00, 200.00, 2400.00, 200.00, 177600.00, 14800.00, 0.00, 0.00, 0.00, 0.00, 24.00, 2.00, 24.00, 2.00, 180024.00, 15002.00, '2024-08-24 11:36:54', '2024-08-24 11:41:06');
+(5, 6, NULL, NULL, NULL, NULL, NULL, 324000.00, 27000.00, 129600.00, 10800.00, 51840.00, 4320.00, 15000.00, 1250.00, 12000.00, 1000.00, 19200.00, 1600.00, 96360.00, 8030.00, 324000.00, 27000.00, 'Yes', 'Yes', 15552.00, 1296.00, 0.00, 0.00, 12.00, 1.00, 2400.00, 200.00, 17964.00, 1497.00, 306036.00, 25503.00, NULL, NULL, NULL, NULL, 24.00, 2.00, 24.00, 2.00, 324024.00, 27002.00, '2024-08-22 09:53:15', '2024-09-02 07:21:10'),
+(7, 8, NULL, NULL, NULL, NULL, NULL, 180000.00, 15000.00, 72000.00, 6000.00, 28800.00, 2400.00, 15000.00, 1250.00, 12000.00, 1000.00, 19200.00, 1600.00, 33000.00, 2750.00, 180000.00, 15000.00, 'No', 'No', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 2400.00, 200.00, 2400.00, 200.00, 177600.00, 14800.00, 0.00, 0.00, 0.00, 0.00, 24.00, 2.00, 24.00, 2.00, 180024.00, 15002.00, '2024-08-24 11:36:54', '2024-09-02 09:58:21');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_user_documents`
+--
+
+CREATE TABLE `tbl_user_documents` (
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` int NOT NULL,
+  `document_type` int NOT NULL COMMENT '1 for Internship Offer Letter, 2 for Confirmation Letter, 3 Offer Letter, 4 Appoitment Offer',
+  `document_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbl_user_documents`
+--
+
+INSERT INTO `tbl_user_documents` (`id`, `user_id`, `document_type`, `document_name`, `created_at`, `updated_at`) VALUES
+(1, 8, 1, 'internship-offer-letter/emp-107-2024-08-01-internship-offer-letter.pdf', '2024-09-02 06:56:49', '2024-09-02 06:56:49'),
+(2, 8, 2, 'confirmation-letter/emp-107-2024-08-01-confirmation-letter.pdf', '2024-09-02 06:57:03', '2024-09-02 06:57:03'),
+(3, 6, 3, 'offer-letter/emp-106-2024-05-01.pdf', '2024-09-02 07:21:10', '2024-09-02 07:21:10');
 
 --
 -- Indexes for dumped tables
@@ -1025,6 +1049,12 @@ ALTER TABLE `tbl_user_details`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_user_documents`
+--
+ALTER TABLE `tbl_user_documents`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1074,7 +1104,7 @@ ALTER TABLE `tbl_leave_applies`
 -- AUTO_INCREMENT for table `tbl_migrations`
 --
 ALTER TABLE `tbl_migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `tbl_permissions`
@@ -1098,7 +1128,7 @@ ALTER TABLE `tbl_projects`
 -- AUTO_INCREMENT for table `tbl_punch_in_outs`
 --
 ALTER TABLE `tbl_punch_in_outs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `tbl_roles`
@@ -1116,7 +1146,7 @@ ALTER TABLE `tbl_salaries`
 -- AUTO_INCREMENT for table `tbl_salary_histories`
 --
 ALTER TABLE `tbl_salary_histories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_settings`
@@ -1135,6 +1165,12 @@ ALTER TABLE `tbl_users`
 --
 ALTER TABLE `tbl_user_details`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `tbl_user_documents`
+--
+ALTER TABLE `tbl_user_documents`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
