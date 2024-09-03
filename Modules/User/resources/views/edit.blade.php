@@ -174,11 +174,11 @@
                                                     <h3 class="mb-2">Generated Letters</h3>
                                                 </div>
                                                 <div class="card-datatable text-nowrap">
-                                                    <table class="data-table table text-center table-responsive text-nowrap" id="User">
+                                                    <table class="data-table table table-responsive text-nowrap" id="User">
                                                         <thead>
                                                             <tr>
-                                                                <th class="text-center">Letter Name</th>
-                                                                <th class="text-center">View</th>
+                                                                <th>Letter Name</th>
+                                                                <th>View</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>

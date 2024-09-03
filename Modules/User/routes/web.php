@@ -24,4 +24,6 @@ Route::prefix('admin')->middleware(['auth'])->group(function(){
     Route::get('user/{userId}/leave-history', [UserController::class, 'leavehistory'])->name('user.leavehistory');
     Route::get('user/{userId}/salary-history', [UserController::class, 'salaryhistory'])->name('user.salaryhistory');
     Route::get('user/{userId}/view-letter', [UserController::class, 'viewletter'])->name('user.viewletter');
+    // Route::get('user-import', [UserController::class, 'import'])->name('user.import');
+    Route::match(['get', 'post'], 'user-import', [UserController::class, 'import'])->name('user.import');
 });

@@ -11,6 +11,7 @@
                         @can('delete-employee')
                             <a href="javascript:void(0);" class="btn btn-outline-danger delete_records"><i class="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>
                         @endcan
+                        <a href="{{ route('user.import') }}" class="btn btn-outline-success"><i class="fas fa-upload"></i>&nbsp;&nbsp;Import</a>
                         @can('create-employee')
                             <a href="{{ route('user.create') }}" class="btn btn-outline-primary"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a>
                         @endcan

@@ -24,6 +24,8 @@ use Modules\User\Http\Requests\UpdateUserRequest;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Storage;
+use App\Imports\UsersImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -175,6 +177,17 @@ class UserController extends Controller
                 die;
             }
         }
+    }
+
+    public function import(Request $request)
+    {
+        if($request->isMethod('post')) {
+            Excel::import(new UsersImport,request()->file('import_file'));
+
+            return redirect()->route('user.index')->with('success', 'Your Data Import Successfully');
+        }
+
+        return view('user::import');
     }
 
     public function leavehistory(Request $request) {

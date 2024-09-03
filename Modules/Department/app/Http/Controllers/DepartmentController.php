@@ -26,7 +26,7 @@ class DepartmentController extends Controller
     {
         if ($request->ajax()) 
         {
-            $data = Department::latest();
+            $data = Department::get();
         
             return Datatables::of($data)
                     ->addIndexColumn()

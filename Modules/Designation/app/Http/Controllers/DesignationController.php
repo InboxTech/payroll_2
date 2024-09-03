@@ -26,7 +26,7 @@ class DesignationController extends Controller
     {
         if ($request->ajax()) 
         {
-            $data = Designation::latest();
+            $data = Designation::get();
         
             return Datatables::of($data)
                     ->addIndexColumn()

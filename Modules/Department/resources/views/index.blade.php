@@ -52,7 +52,8 @@
                     <table class="data-table table text-center table-responsive text-nowrap" id="Department">
                         <thead>
                             <tr>
-                                <th class="text-center">Department name</th>
+                                <th class="text-center">Sr. No.</th>
+                                <th class="text-center">Department Name</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Action</th>
                             </tr>
@@ -73,9 +74,10 @@
                     processing: true,
                     serverSide: true,
                     searching: false,
-                    order: [],
+                    order: [[0, 'desc']],
                     ajax: "{{ route('department.index') }}",
                     columns: [
+                        {data: 'id', name: 'id'},
                         {data: 'name', name: 'name'},
                         { data: 'status', name: 'status' },
                         {data: 'action', name: 'action', orderable: false, searchable: false},

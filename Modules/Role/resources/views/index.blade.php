@@ -8,7 +8,7 @@
                 <h4 class="py-3 mb-4"><span class="text-muted fw-light">Dashboard /</span> Role</h4>
                 <div class="d-flex align-content-center flex-wrap gap-3">
                     <div class="d-flex gap-3">
-                        <a href="javascript:void(0);" class="btn btn-outline-danger" id="delete-selected"><i class="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>
+                        <a href="javascript:void(0);" class="btn btn-outline-danger d-none" id="delete-selected"><i class="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>
                         <a href="{{ route('role.create') }}" class="btn btn-outline-primary"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a>
                     </div>
                 </div>
@@ -18,7 +18,8 @@
                     <table class="data-table table text-center table-responsive text-nowrap">
                         <thead>
                             <tr>
-                                <th class="text-center"><input type="checkbox" id="select_all" class="form-check-input"></th>
+                                {{-- <th class="text-center"><input type="checkbox" id="select_all" class="form-check-input"></th> --}}
+                                <th class="text-center">Sr. No.</th>
                                 <th class="text-center">Role name</th>
                                 <th class="text-center">Permission Count</th>
                                 <th class="text-center">Action</th>
@@ -40,10 +41,11 @@
                     processing: true,
                     serverSide: true,
                     searching: false,
-                    order: [],
+                    order: [[0, 'desc']],
                     ajax: "{{ route('role.index') }}",
                     columns: [
-                        {data: 'checkbox', name: 'checkbox', orderable: false, searchable: false},
+                        // {data: 'checkbox', name: 'checkbox', orderable: false, searchable: false},
+                        {data: 'id', name: 'id'},
                         {data: 'name', name: 'name'},
                         {data: 'permission_count', name: 'permission_count', orderable: false},
                         {data: 'action', name: 'action', orderable: false, searchable: false},
