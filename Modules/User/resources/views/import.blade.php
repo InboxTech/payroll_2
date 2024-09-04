@@ -25,7 +25,7 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="sample-file" class="form-label">Download Sample File</label><br>
-                                        <a href="{{ asset('admin/samplefile/employee-import-sample.xlsx') }}" class="btn btn-outline-primary" download><i class="fas fa-download"></i>&nbsp;&nbsp;Download </a>
+                                        <a href="{{ asset('admin/samplefiles/employee-import-sample.xlsx') }}" class="btn btn-outline-primary" download><i class="fas fa-download"></i>&nbsp;&nbsp;Download </a>
                                     </div>
                                 </div>
                                 <div class="mt-3">
