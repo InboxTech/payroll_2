@@ -220,19 +220,19 @@
                                     <div class="row">
                                         <div class="col-md-4 mt-2">
                                             <label class="form-label" for="bank-name">Bank Name </label>
-                                            <input type="text" name="bank_name" class="form-control" value="{{ $user->userdetail->bank_name ?? '' }}"/>
+                                            <input type="text" name="bank_name" class="form-control" value="{{ $user->user_detail->bank_name ?? '' }}"/>
                                         </div>
                                         <div class="col-md-4 mt-2">
                                             <label class="form-label" for="bank-branch-name">Bank Branch Name </label>
-                                            <input type="text" name="bank_branch_name" class="form-control" value="{{ $user->userdetail->bank_branch_name ?? '' }}"/>
+                                            <input type="text" name="bank_branch_name" class="form-control" value="{{ $user->user_detail->bank_branch_name ?? '' }}"/>
                                         </div>
                                         <div class="col-md-4 mt-2">
                                             <label class="form-label" for="account-number">Account Number </label>
-                                            <input type="text" name="account_number" class="form-control" value="{{ $user->userdetail->account_number ?? '' }}"/>
+                                            <input type="text" name="account_number" class="form-control" value="{{ $user->user_detail->account_number ?? '' }}"/>
                                         </div>
                                         <div class="col-md-4 mt-2">
                                             <label class="form-label" for="ifsc-code">IFSC Code </label>
-                                            <input type="text" name="ifsc_code" class="form-control" value="{{ $user->userdetail->ifsc_code ?? '' }}"/>
+                                            <input type="text" name="ifsc_code" class="form-control" value="{{ $user->user_detail->ifsc_code ?? '' }}"/>
                                         </div>
                                     </div>
                                 </div>
