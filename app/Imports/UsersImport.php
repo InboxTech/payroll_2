@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Carbon;
+use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
 
-class UsersImport implements ToModel, WithHeadingRow
+class UsersImport implements ToModel, WithHeadingRow, WithCalculatedFormulas
 {
     /**
     * @param array $row
