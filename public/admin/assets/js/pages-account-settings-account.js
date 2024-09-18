@@ -7,11 +7,11 @@
 document.addEventListener('DOMContentLoaded', function (e) {
   (function () {
     const formAccSettings = document.querySelector('#formAccountSettings'),
-      deactivateAcc = document.querySelector('#formAccountDeactivation'),
-      deactivateButton = deactivateAcc.querySelector('.deactivate-account');
+      deactivateAcc = document.querySelector('#formAccountDeactivation');
+    //   deactivateButton = deactivateAcc.querySelector('.deactivate-account');
 
     // Form validation for Add new record
-    if (formAccSettings) {
+    /* if (formAccSettings) {
       const fv = FormValidation.formValidation(formAccSettings, {
         fields: {
           firstName: {
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
           });
         }
       });
-    }
+    } */
 
     if (deactivateAcc) {
       const fv = FormValidation.formValidation(deactivateAcc, {
@@ -95,43 +95,43 @@ document.addEventListener('DOMContentLoaded', function (e) {
     const accountActivation = document.querySelector('#accountActivation');
 
     // Alert With Functional Confirm Button
-    if (deactivateButton) {
-      deactivateButton.onclick = function () {
-        if (accountActivation.checked == true) {
-          Swal.fire({
-            text: 'Are you sure you would like to deactivate your account?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes',
-            customClass: {
-              confirmButton: 'btn btn-primary me-2 waves-effect waves-light',
-              cancelButton: 'btn btn-label-secondary waves-effect waves-light'
-            },
-            buttonsStyling: false
-          }).then(function (result) {
-            if (result.value) {
-              Swal.fire({
-                icon: 'success',
-                title: 'Deleted!',
-                text: 'Your file has been deleted.',
-                customClass: {
-                  confirmButton: 'btn btn-success waves-effect waves-light'
-                }
-              });
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-              Swal.fire({
-                title: 'Cancelled',
-                text: 'Deactivation Cancelled!!',
-                icon: 'error',
-                customClass: {
-                  confirmButton: 'btn btn-success waves-effect waves-light'
-                }
-              });
+    /* if (deactivateButton) {
+        deactivateButton.onclick = function () {
+            if (accountActivation.checked == true) {
+                Swal.fire({
+                    text: 'Are you sure you would like to deactivate your account?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    customClass: {
+                    confirmButton: 'btn btn-primary me-2 waves-effect waves-light',
+                    cancelButton: 'btn btn-label-secondary waves-effect waves-light'
+                    },
+                    buttonsStyling: false
+                }).then(function (result) {
+                    if (result.value) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Deleted!',
+                        text: 'Your file has been deleted.',
+                        customClass: {
+                        confirmButton: 'btn btn-success waves-effect waves-light'
+                        }
+                    });
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire({
+                        title: 'Cancelled',
+                        text: 'Deactivation Cancelled!!',
+                        icon: 'error',
+                        customClass: {
+                        confirmButton: 'btn btn-success waves-effect waves-light'
+                        }
+                    });
+                    }
+                });
             }
-          });
-        }
-      };
-    }
+        };
+    } */
 
     // CleaveJS validation
 

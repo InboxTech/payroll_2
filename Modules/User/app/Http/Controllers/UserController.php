@@ -422,7 +422,7 @@ class UserController extends Controller
         $rootPath = storage_path('app/public').'/offer-letter';
 
         $client = Storage::createLocalDriver(['root' => $rootPath]);
-        $pdf_name = $userData->emp_id.'-'.$userData->joining_date.'.pdf';
+        $pdf_name = $userData->emp_id.'-'.$userData->joining_date.'-offer-letter.pdf';
 
         $client->put($pdf_name, $content);
 

@@ -50,7 +50,7 @@
                                     <div class="row">
                                         <div class="col-sm-4 mb-2">
                                             <label class="form-label" for="basic-default-fullname">Employee Id <span class="text-danger">*</span></label>
-                                            <input type="text" name="emp_id" class="form-control" value="{{ $user->emp_id }}" readonly/>
+                                            <input type="text" name="emp_id" class="form-control" value="{{ $user->emp_id }}"/>
                                         </div>
                                         <div class="col-md-4">
                                             <label class="form-label" for="basic-default-fullname">First Name <span class="text-danger">*</span></label>
@@ -794,6 +794,18 @@
                         required: 'Please Enter Confirm Password',
                         equalTo: 'Password and Confirm Password Not Match'
                     }
+                },
+                invalidHandler: function(event, validator) {
+                    var firstInvalidElement = $(validator.errorList[0].element);
+
+                    var tabPaneId = firstInvalidElement.closest('.tab-pane').attr('id');
+
+                    $('button[data-bs-target="#' + tabPaneId + '"]').tab('show');
+                },
+                submitHandler: function(form) {
+                    $(form).find(':submit').prop('disabled', true);
+                    $(form).find(':submit').text('Please Wait');
+                    form.submit();
                 }
             });
 

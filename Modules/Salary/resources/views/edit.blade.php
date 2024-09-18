@@ -10,7 +10,7 @@
                 </h4>
             </div>
             
-            <form action="{{ route('salary.update', $salary->id) }}" method="post" class="FormValidate">
+            <form action="{{ route('salary.update', $salary->id) }}" method="post" class="jsFormValidate">
                 @csrf
                 @method('put')
                 <div class="col-xl justify-content-center d-flex">
@@ -615,6 +615,12 @@
                 $('.jsFinalAmount').val(Math.round(Ctcbcd).toFixed(2));
             }
 
-            $('.FormValidate').validate();
+            $('.jsFormValidate').validate({
+                submitHandler: function(form) {
+                    $(form).find(':submit').prop('disabled', true);
+                    $(form).find(':submit').text('Please Wait');
+                    form.submit();
+                }
+            });
         </script>
     @endpush

@@ -10,7 +10,7 @@
                 <div class="d-flex align-content-center flex-wrap gap-3">
                     <div class="d-flex gap-3">
                         @if (!empty($punchRecord) && $punchRecord->punch_in_out_status == 1)
-                            <form action="{{ route('punchinout.update', $punchRecord->id) }}" method="post">
+                            <form action="{{ route('punchinout.update', $punchRecord->id) }}" method="post" class="jsFormValidate">
                                 @csrf
                                 @method('put')
                                 <input type="hidden" id="latitude" name='latitude' value="">
@@ -18,7 +18,7 @@
                                 <button type="submit" class="btn btn-outline-danger"><i class="fa-solid fa-user-clock"></i>&nbsp;&nbsp;Punch Out</button>
                             </form>
                         @else
-                            <form action="{{ route('punchinout.store') }}" method="post">
+                            <form action="{{ route('punchinout.store') }}" method="post" class="jsFormValidate">
                                 @csrf
                                 <input type="hidden" id="latitude" name='latitude' value="">
                                 <input type="hidden" id="longitude" name='longitude' value="">
@@ -126,6 +126,14 @@
                 $(".form-control").change(function(){
                     table.draw();
                 });
+            });
+
+            $('.jsFormValidate').validate({
+                submitHandler: function(form) {
+                    $(form).find(':submit').prop('disabled', true);
+                    $(form).find(':submit').text('Please Wait');
+                    form.submit();
+                }
             });
         </script>
     @endpush

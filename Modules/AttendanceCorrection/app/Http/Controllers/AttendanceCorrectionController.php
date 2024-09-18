@@ -123,13 +123,15 @@ class AttendanceCorrectionController extends Controller
     {
         $punchInOut = PunchInOut::findorFail($id);
 
-        $punchInOut->punch_out_lat = $request->latitude;
-        $punchInOut->punch_out_long = $request->longitude;
-        $punchInOut->punch_in_out_status = 0;
-        $punchInOut->punch_out = $request->punch_out;
-        $punchInOut->save();
+        if($request->punch_out) {
+            $punchInOut->punch_out_lat = $request->latitude;
+            $punchInOut->punch_out_long = $request->longitude;
+            $punchInOut->punch_in_out_status = 0;
+            $punchInOut->punch_out = $request->punch_out;
+            $punchInOut->save();
 
-        return redirect()->route('attendancecorrection.index')->with('success', 'Attendance Update Successfully');
+            return redirect()->route('attendancecorrection.index')->with('success', 'Attendance Update Successfully');
+        }
     }
 
     /**

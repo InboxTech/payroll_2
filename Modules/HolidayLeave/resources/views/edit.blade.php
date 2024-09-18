@@ -24,29 +24,26 @@
                             <h5 class="mb-0">Holiday Leave Edit</h5>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('holidayleave.update', $model->id) }}" method="post">
+                            <form action="{{ route('holidayleave.update', $model->id) }}" method="post" class="jsFormValidate">
                                 @csrf
                                 @method('put')
                                 <div class="mb-3">
                                     <label class="form-label" for="leave-type-name">Holiday Name <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="holiday_name" value="{{ old('holiday_name', $model->holiday_name) }}"/>
-                                    <span class="error">{{ $errors->first('holiday_name') }}</span>
+                                    <input type="text" class="form-control" name="holiday_name" value="{{ old('holiday_name', $model->holiday_name) }}" data-rule-required="true" data-msg-required="Please Enter Holiday Name"/>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="number-of-leaves">Holiday Date <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="holiday_date" value="{{ old('holiday_date', $model->holiday_date) }}" placeholder="YYYY-MM-DD" id="flatpickr-date"/>
-                                    <span class="error">{{ $errors->first('holiday_date') }}</span>
+                                    <input type="text" class="form-control" name="holiday_date" value="{{ old('holiday_date', $model->holiday_date) }}" placeholder="YYYY-MM-DD" id="flatpickr-date" data-rule-required="true" data-msg-required="Please Select Holiday Date"/>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="number-of-leaves">Status <span class="text-danger">*</span></label>
-                                    <select name="status" class="form-select">
-                                        <option value=""  @if(old('status', $model->status) === '') selected @endif>Select Status</option>
-                                        <option value="1" @if(old('status', $model->status) == 1) selected @endif>Active</option>
-                                        <option value="0" @if(old('status', $model->status) == 0) selected @endif>Inactive</option>
+                                    <select name="status" class="form-select" data-rule-required="true" data-msg-required="Please Select Status">
+                                        <option value="">Select Status</option>
+                                        <option value="1" @selected($model->status == 1)>Active</option>
+                                        <option value="0" @selected($model->status == 0)>Inactive</option>
                                     </select>
-                                    <span class="error">{{ $errors->first('status') }}</span>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                                 <a href="{{ route('leave.index') }}" class="btn btn-label-secondary waves-effect">Back</a>
                             </form>
                         </div>
@@ -55,3 +52,15 @@
             </div>
         </div>
     @endsection
+
+    @push('script')
+        <script type="text/javascript">
+            $('.jsFormValidate').validate({
+                submitHandler: function(form) {
+                    $(form).find(':submit').prop('disabled', true);
+                    $(form).find(':submit').text('Please Wait');
+                    form.submit();
+                }
+            });
+        </script>
+    @endpush

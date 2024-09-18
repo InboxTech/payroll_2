@@ -98,35 +98,44 @@ class AuthController extends Controller
     public function profile(Request $request)
     {
         $user = Auth::user();
-        
-        if($request->isMethod('POST'))
-        {
+
+        if ($request->isMethod('POST')) {
+
             $validatedData = $request->validate([
-                'first_name' =>'required',
-                'last_name' =>'required',
-                'email' =>'required|email|unique:users,email,'.$user->id,
-                'mobile_no' =>'required|numeric|min:10|unique:users,mobile_no,'.$user->id,
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'email' => 'required|email|unique:users,email,' . $user->id,
+                'mobile_no' => 'required|digits:10|unique:users,mobile_no,' . $user->id,
+                'profile_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048' // Optional, but must be a valid image file
             ], [
                 'first_name.required' => 'Please Enter First Name',
-                'last_name.string' => 'Please Enter Last Name',
+                'last_name.required' => 'Please Enter Last Name',
                 'email.required' => 'Please Enter Email',
                 'email.email' => 'Invalid Email',
-                'email.unique' => 'This Email All Ready Exists. Use Another',
+                'email.unique' => 'This Email Already Exists. Use Another',
                 'mobile_no.required' => 'Please Enter Mobile Number',
-                'mobile_no.numeric' => 'Enter Valid Mobile Number',
-                'mobile_no.max' => 'Please Enter 10 digit Mobile Number',
-                'mobile_no.unique' => 'This Mobile Number All Ready Exist'
+                'mobile_no.digits' => 'Please Enter a Valid 10-digit Mobile Number',
+                'mobile_no.unique' => 'This Mobile Number Already Exists',
+                'profile_image.image' => 'Uploaded file must be an image',
+                'profile_image.mimes' => 'Image must be in jpeg, png, jpg, or gif format',
+                'profile_image.max' => 'Image size should not exceed 2MB'
             ]);
-
-            if($request->hasFile('profile_image')){
+    
+            // Handle profile image upload if available
+            if ($request->hasFile('profile_image')) {
                 $image = $request->file('profile_image');
-                $image_name = date('dmY').rand(111,999).'.'.$image->getClientOriginalExtension();
+                $image_name = date('dmY') . rand(111, 999) . '.' . $image->getClientOriginalExtension();
                 $image->storeAs('public/profile_image', $image_name);
-                $user->profile_image = 'profile_image/'.$image_name;
+                $user->profile_image = 'profile_image/' . $image_name;
             }
-            
-            $user->update($request->all());
-
+    
+            // Update user fields
+            $user->first_name = $request->first_name;
+            $user->last_name = $request->last_name;
+            $user->email = $request->email;
+            $user->mobile_no = $request->mobile_no;
+            $user->save();
+    
             return redirect()->route('profile')->with('success', 'Profile Updated Successfully!');
         }
 

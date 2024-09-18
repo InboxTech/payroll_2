@@ -48,7 +48,7 @@ class HolidayLeaveController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateHolidayLeaveRequest $request) {
+    public function store(Request $request) {
 
         if(HolidayLeave::create($request->all())) {
             return redirect()->route('leave.index')->with('sccess', 'Holiday Leave Data Successfully Submitted');
@@ -77,7 +77,7 @@ class HolidayLeaveController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CreateHolidayLeaveRequest $request, HolidayLeave $holidayleave) {
+    public function update(Request $request, HolidayLeave $holidayleave) {
 
         if($holidayleave->update($request->all())) {
             return redirect()->route('leave.index')->with('success', 'Holiday Leave updated successfully');

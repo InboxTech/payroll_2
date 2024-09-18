@@ -71,7 +71,7 @@ class AttendenceReportController extends Controller
         
         $data = PunchInOut::whereBetween('date', [$startDate, $endDate])->where('user_id', $request->user_id)->orderBy('date', 'ASC')->get();
 
-        $holidayleave = HolidayLeave::whereBetween('holiday_date', [$startDate, $endDate])->orderBy('holiday_date', 'ASC')->get();
+        $holidayleave = HolidayLeave::where('status', 1)->whereBetween('holiday_date', [$startDate, $endDate])->orderBy('holiday_date', 'ASC')->get();
         
         return view('attendencereport::report_details', compact('data', 'request', 'holidayleave'));
     }

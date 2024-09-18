@@ -16,7 +16,7 @@
                 <div class="col-xl">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <form class="FormValidate" action="{{ route('attendancecorrection.update', $punchinout->id) }}" method="post">
+                            <form class="jsFormValidate" action="{{ route('attendancecorrection.update', $punchinout->id) }}" method="post">
                                 @csrf 
                                 @method('put')
                                 <div class="row">
@@ -72,47 +72,22 @@
                 document.getElementById('longitude').value = position.coords.longitude;
             }
 
-            $('.FormValidate').validate({
+            $('.jsFormValidate').validate({
                 rules:{
-                    'from_date': {
+                    'punch_out': {
                         required: true
                     },
-                    'to_date': {
-                        required: true
-                    },
-                    'is_leave_cancle': {
-                        required: true
-                    },
-                    'reason': {
-                        required: true
-                    },
-                    'leave_id': {
-                        required: true
-                    },
-                    'leave_mode': {
-                        required: true
-                    }
                 },
                 messages:{
-                    'from_date': {
-                        required: 'Please Select From Date'
-                    },
-                    'to_date' : {
-                        required: 'Please Select To Date'
-                    },
-                    'is_leave_cancle': {
-                        required: 'Please Select Leave Cancle'
-                    },
-                    'reason': {
-                        required: 'Please Enter Reason'
-                    },
-                    'leave_id': {
-                        required: 'Please Select Leave Type'
-                    },
-                    'leave_mode': {
-                        required: 'Please Select Leave Mode'
+                    'punch_out': {
+                        required: 'Please Select Punch Out'
                     },
                 },
+                submitHandler: function(form) {
+                    $(form).find(':submit').prop('disabled', true);
+                    $(form).find(':submit').text('Please Wait');
+                    form.submit();
+                }
             });
         </script>
     @endpush

@@ -16,7 +16,7 @@
                 <div class="col-xl">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <form class="FormValidate" action="{{ route('leaveapply.store') }}" method="post">
+                            <form class="jsFormValidate" action="{{ route('leaveapply.store') }}" method="post">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-3 mt-2">
@@ -63,7 +63,7 @@
     @endsection
     @push('script')
         <script type="text/javascript">
-            $('.FormValidate').validate({
+            $('.jsFormValidate').validate({
                 rules:{
                     'from_date': {
                         required: true
@@ -104,6 +104,11 @@
                         required: 'Please Select Leave Mode'
                     },
                 },
+                submitHandler: function(form) {
+                    $(form).find(':submit').prop('disabled', true);
+                    $(form).find(':submit').text('Please Wait');
+                    form.submit();
+                }
             });
         </script>
     @endpush

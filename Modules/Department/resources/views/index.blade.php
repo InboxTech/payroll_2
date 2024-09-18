@@ -90,10 +90,12 @@
                 });
             });
 
-            $(document).ready(function() {
-                $('.FormValidate').each(function() {
-                    $(this).validate();
-                });
+            $('.FormValidate').validate({
+                submitHandler: function(form) {
+                    $(form).find(':submit').prop('disabled', true);
+                    $(form).find(':submit').text('Please Wait');
+                    form.submit();
+                }
             });
         </script>
     @endpush

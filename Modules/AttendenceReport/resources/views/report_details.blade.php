@@ -14,7 +14,6 @@
 
                 $startDate = Carbon::createFromDate($request->monthYear)->startOfMonth();
                 $endDate = Carbon::createFromDate($request->monthYear)->endOfMonth();
-                $dataFound = false;
 
                 // Create an array of holiday dates for easy lookup
                 $holidayMap = $holidayleave->pluck('holiday_name', 'holiday_date')->toArray();
@@ -37,7 +36,6 @@
                         @if($holidayName)
                             Holiday - {{ $holidayName }}
                         @elseif($dayData)
-                            @php $dataFound = true; @endphp
                             Present
                         @elseif($date->isWeekend())
                             Week Off
@@ -76,11 +74,5 @@
                     </td>
                 </tr>
             @endfor
-
-            @if (!$dataFound)
-                <tr>
-                    <td colspan="5" class="text-center">No Data Found</td>
-                </tr>
-            @endif
         </tbody>
     </table>

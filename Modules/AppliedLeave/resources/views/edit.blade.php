@@ -69,7 +69,7 @@
                             <h5 class="mb-0">Leave Status</h5>
                         </div>
                         <div class="card-body">
-                            <form class="FormValidate" action="{{ route('appliedleave.update', $model->id) }}" method="post">
+                            <form class="jsFormValidate" action="{{ route('appliedleave.update', $model->id) }}" method="post">
                                 @csrf
                                 @method('put')
                                 <div class="row mb-3">
@@ -99,7 +99,7 @@
 
     @push('script')
         <script type="text/javascript">
-            $('.FormValidate').validate({
+            $('.jsFormValidate').validate({
                 rules: {
                     leave_status: {
                         required: true
@@ -109,6 +109,11 @@
                     leave_status: {
                         required: "Please Select Leave Status"
                     }
+                },
+                submitHandler: function(form) {
+                    $(form).find(':submit').prop('disabled', true);
+                    $(form).find(':submit').text('Please Wait');
+                    form.submit();
                 }
             });
         </script>

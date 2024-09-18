@@ -183,12 +183,64 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-6 mb-4 order-2 order-xxl-2">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between">
+                            <h5 class="card-title m-0 me-2">Leave Applied</h5>
+                            <div class="dropdown">
+                                Date : {{ \Carbon\Carbon::now()->format('d-m-Y') }}
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-borderless border-top">
+                                <thead class="border-bottom">
+                                    <tr>
+                                        <th>Employee Name</th>
+                                        <th>Leave Type</th>
+                                        <th>Leave Mode</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($leaveList as $key => $value)
+                                        <tr>
+                                            <td>
+                                                {{ $value->user->full_name }}
+                                            </td>
+                                            <td>
+                                                {{ $value->leave->leave_type_name }}
+                                            </td>
+                                            <td>
+                                                @switch($value->leave_mode)
+                                                    @case(1)
+                                                        Full Day
+                                                        @break
+                                                    @case(2)
+                                                        Half Day - 1st
+                                                        @break
+                                                    @case(2)
+                                                        Half Day - 2nd
+                                                        @break
+                                                    @default
+                                                        @break
+                                                @endswitch
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3" class="text-center">Today's no one on leave</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="col-12 order-5">
                     <div class="card">
                         <div class="card-header d-flex align-items-center justify-content-between">
                             <div class="card-title mb-0">
-                                <h5 class="m-0 me-2">On route vehicles</h5>
+                                <h5 class="m-0 me-2">Today's Punch In-Out</h5>
                             </div>
                             <div class="dropdown">
                                 <button class="btn p-0" type="button" id="routeVehicles" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

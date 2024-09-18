@@ -144,7 +144,7 @@
                                             <input type="date" name="releaving_date" class="form-control"/>
                                         </div>                                        
                                         <div class="col-sm-4 mb-2">
-                                            <label for="is-generate-offer-letter" class="form-label">Which letter do you want to generate?<span class="text-danger">*</span></label>
+                                            <label for="is-generate-offer-letter" class="form-label">Which letter do you want to generate?</label>
                                             <select name="type_of_letter" class="form-select">
                                                 <option value="">Select Option</option>
                                                 <option value="1">Internship Offer Letter</option>
@@ -750,6 +750,18 @@
                         required: 'Please Enter Confirm Password',
                         equalTo: 'Password and Confirm Password Not Match'
                     }
+                },
+                invalidHandler: function(event, validator) {
+                    var firstInvalidElement = $(validator.errorList[0].element);
+
+                    var tabPaneId = firstInvalidElement.closest('.tab-pane').attr('id');
+
+                    $('button[data-bs-target="#' + tabPaneId + '"]').tab('show');
+                },
+                submitHandler: function(form) {
+                    $(form).find(':submit').prop('disabled', true);
+                    $(form).find(':submit').text('Please Wait');
+                    form.submit();
                 }
             });
 

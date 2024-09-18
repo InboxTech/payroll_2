@@ -13,12 +13,12 @@
                 <div class="col-xl">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <form action="{{ route('role.store') }}" method="post">
+                            <form action="{{ route('role.store') }}" method="post" class="FormValidate">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label class="form-label" for="basic-default-fullname">Role name <span class="text-danger">*</span></label>
-                                        <input type="text" name="name" class="form-control"/>
+                                        <input type="text" name="name" class="form-control" data-rule-required="true" data-msg-required="Please Enter Role Name"/>
                                     </div>
                                 </div>
                                 <h4 class="mt-3">Permissions</h4>
@@ -29,9 +29,9 @@
                                             <div class="row">
                                                 @foreach($perms as $permGroup)
                                                     <div class="col-md-3 d-flex gap-2 mb-3">
-                                                        <input class="form-check-input" type="checkbox" name="permission[]" value="{{ $permGroup->name }}">
+                                                        <input class="form-check-input" type="checkbox" name="permission[]" value="{{ $permGroup->name }}" data-rule-required="true" data-msg-required="Select At One Permission">
                                                         <label class="form-check-label" for="defaultCheck1">{{ $permGroup->name }}</label>
-                                                    </div>                                                    
+                                                    </div>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -48,3 +48,15 @@
             </div>
         </div>
     @endsection
+
+    @push('script')
+        <script type="text/javascript">
+            $('.FormValidate').validate({
+                submitHandler: function(form) {
+                    $(form).find(':submit').prop('disabled', true);
+                    $(form).find(':submit').text('Please Wait');
+                    form.submit();
+                }
+            });
+        </script>
+    @endpush

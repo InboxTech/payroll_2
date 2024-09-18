@@ -10,7 +10,7 @@
                 </h4>
             </div>
             
-            <form action="{{ route('salary.store') }}" method="post" class="FormValidate">
+            <form action="{{ route('salary.store') }}" method="post" class="jsFormValidate">
                 @csrf
                 <div class="col-xl justify-content-center d-flex">
                     <div class="card mb-4 w-px-500">
@@ -629,6 +629,12 @@
                 $('.jsFinalAmount').val(Math.round(Ctcbcd).toFixed(2));
             }
 
-            $('.FormValidate').validate();
+            $('.jsFormValidate').validate({
+                submitHandler: function(form) {
+                    $(form).find(':submit').prop('disabled', true);
+                    $(form).find(':submit').text('Please Wait');
+                    form.submit();
+                }
+            });
         </script>
     @endpush
