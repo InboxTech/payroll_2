@@ -32,7 +32,7 @@
                             </ul>
                         </div>
 
-                        <form action="{{ route('project.update', $project->id) }}" class="FormValidate" method="post" autocomplete="off">
+                        <form action="{{ route('project.update', $project->id) }}" class="jsFormValidate" method="post" autocomplete="off">
                             @csrf
                             @method('put')
                             <div class="tab-content">
@@ -100,8 +100,11 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody class="table-border-bottom-0">
-                                                        @if($project->project_team)
-                                                            @foreach(json_decode($project->project_team) as $key => $value)
+                                                        @php
+                                                            $projectTeam = json_decode($project->project_team);
+                                                        @endphp
+                                                        @if($projectTeam)
+                                                            @foreach($projectTeam as $key => $value)
                                                                 <tr id="rowno{{ $key }}">
                                                                     <td>
                                                                         <select name="project_team[{{ $key }}][designation_id]" class="form-select jsSelectedDesignation" data-rule-required="true" data-msg-required="Please Select Designation">
@@ -141,7 +144,7 @@
                                     </div>
                                 </div>
                                 <div class="pt-4">
-                                    <button type="submit" class="btn btn-primary me-sm-3">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                     <a href="{{ route('project.index') }}" class="btn btn-label-secondary waves-effect">Back</a>
                                 </div>
                             </div>
@@ -187,8 +190,16 @@
                 teamrowno++;
             }
 
-            $('.FormValidate').validate({
+            $('.jsFormValidate').validate({
                 ignore: "",
+                highlight: function(element) {
+                    $(element).removeClass('label .error');
+                },
+                submitHandler: function(form) {
+                    $(form).find(':submit').prop('disabled', true);
+                    $(form).find(':submit').text('Please Wait');
+                    form.submit();
+                }
             });
 
             $('#jsTeamTable').on('change', '.jsSelectedDesignation', function(){

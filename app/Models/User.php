@@ -36,6 +36,7 @@ class User extends Authenticatable
         'joining_date',
         'releaving_date',
         'probation_end_date',
+        'confirmation_date',
         'profile_image',
         'temporary_address',
         'permanent_address',

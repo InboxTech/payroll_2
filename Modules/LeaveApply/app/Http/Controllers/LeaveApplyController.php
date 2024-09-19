@@ -56,7 +56,9 @@ class LeaveApplyController extends Controller
                     ->make(true);
         }
 
-        return view('leaveapply::index');
+        $assignLeaveList = AssignLeave::where(['user_id' => Auth::user()->id, 'year' => Carbon::now()->year])->with('leave')->get();
+        
+        return view('leaveapply::index', compact('assignLeaveList'));
     }
 
     /**

@@ -45,6 +45,9 @@
     @push('script')
         <script type="text/javascript">
             $('.FormValidate').validate({
+                highlight: function(element) {
+                    $(element).removeClass('label .error');
+                },
                 submitHandler: function(form) {
                     $(form).find(':submit').prop('disabled', true);
                     $(form).find(':submit').text('Please Wait');

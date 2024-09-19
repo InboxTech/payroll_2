@@ -75,8 +75,9 @@ class AuthController extends Controller
                 $leaveList = LeaveApply::where('is_approved', 1)
                             ->whereRaw('? BETWEEN from_date AND to_date', [$todayDate])
                             ->get();
+                $leaveApply = LeaveApply::whereDate('created_at', $todayDate)->get();
                 
-                return view('auth::admin_hr_dashboard', compact('leaveList', 'todaysBirthDay', 'todaysProbationEnd'));
+                return view('auth::admin_hr_dashboard', compact('leaveList', 'leaveApply', 'todaysBirthDay', 'todaysProbationEnd'));
                 break;
             case 3:
             case 4:

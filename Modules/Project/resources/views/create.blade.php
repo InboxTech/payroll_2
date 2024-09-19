@@ -32,7 +32,7 @@
                             </ul>
                         </div>
 
-                        <form action="{{ route('project.store') }}" class="FormValidate" method="post" autocomplete="off">
+                        <form action="{{ route('project.store') }}" class="jsFormValidate" method="post" autocomplete="off">
                             @csrf
                             <div class="tab-content">
                                 <div class="tab-pane fade active show" id="form-tabs-personal" role="tabpanel">
@@ -113,7 +113,7 @@
                                     </div>
                                 </div>
                                 <div class="pt-4">
-                                    <button type="submit" class="btn btn-primary me-sm-3">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                     <a href="{{ route('project.index') }}" class="btn btn-label-secondary waves-effect">Back</a>
                                 </div>
                             </div>
@@ -153,8 +153,16 @@
                 teamrowno++;
             }
 
-            $('.FormValidate').validate({
+            $('.jsFormValidate').validate({
                 ignore: "",
+                highlight: function(element) {
+                    $(element).removeClass('label .error');
+                },
+                submitHandler: function(form) {
+                    $(form).find(':submit').prop('disabled', true);
+                    $(form).find(':submit').text('Please Wait');
+                    form.submit();
+                }
             });
 
             $('#jsTeamTable').on('change', '.jsSelectedDesignation', function(){

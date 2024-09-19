@@ -84,7 +84,7 @@
                                             <select name="role" class="form-select">
                                                 <option value="">Select Role</option>
                                                 @foreach($roles as $key => $value)
-                                                    <option value="{{ $value }}">{{ $value }}</option>
+                                                    <option value="{{ $value }}" @selected($value == 'Employee')>{{ $value }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -103,6 +103,7 @@
                                                 <option value="">Select Gender</option>
                                                 <option value="1">Male</option>
                                                 <option value="2">Female</option>
+                                                <option value="3">Transgender</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-4 mb-2">
@@ -140,9 +141,13 @@
                                             <input type="date" name="probation_end_date" class="form-control" data-rule-required="true" data-msg-required="Please Select Probation End Date or Internship End Date"/>
                                         </div>
                                         <div class="col-sm-4 mb-2">
+                                            <label class="form-label" for="confirmation-date">Confirmation Date </label>
+                                            <input type="date" name="confirmation_date" class="form-control"/>
+                                        </div>
+                                        <div class="col-sm-4 mb-2">
                                             <label class="form-label" for="releaving-date">Releaving Date </label>
                                             <input type="date" name="releaving_date" class="form-control"/>
-                                        </div>                                        
+                                        </div>
                                         <div class="col-sm-4 mb-2">
                                             <label for="is-generate-offer-letter" class="form-label">Which letter do you want to generate?</label>
                                             <select name="type_of_letter" class="form-select">
@@ -187,7 +192,7 @@
                                         </div>
                                         <div class="col-md-4 mt-2">
                                             <label class="form-label" for="account-number">Account Number </label>
-                                            <input type="text" name="account_number" class="form-control"/>
+                                            <input type="text" name="ac_no" class="form-control"/>
                                         </div>
                                         <div class="col-md-4 mt-2">
                                             <label class="form-label" for="ifsc-code">IFSC Code </label>
@@ -240,10 +245,10 @@
                                                         <p>Basic</p>
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="basic_yearly" class="form-control jsCalculateGrossSalaryYearly" data-rule-required="true" data-msg-required="Please Enter Basic" value=""/>
+                                                        <input type="number" name="basic_yearly" class="form-control jsBasicYearly jsCalculateGrossSalaryYearly" data-rule-required="true" data-msg-required="Please Enter Basic" value=""/>
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="basic_monthly" class="form-control jsCalculateGrossSalaryMonthly" onchange="calculateEmployeeContriMonthly()" onkeyup="calculateEmployeeContriMonthly()" data-rule-required="true" data-msg-required="Please Enter Basic" value="">
+                                                        <input type="number" name="basic_monthly" class="form-control jsBasicMonthly jsCalculateGrossSalaryMonthly" data-rule-required="true" data-msg-required="Please Enter Basic" value="">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -486,7 +491,7 @@
 
             // Yearly Deduction
             function calculateEmployeeContriYearly() {
-                var basicValue = parseFloat($('.jsCalculateGrossSalaryYearly').val()) || 0;
+                var basicValue = parseFloat($('.jsBasicYearly').val()) || 0;
                 var employeeContriYearly = basicValue * 12 / 100;
                 $('.jsEmployeeContributionYearly').val(employeeContriYearly.toFixed(2));
 
@@ -565,7 +570,7 @@
 
             function calculateEmployeeContriMonthly()
             {
-                var basicValue = $('.jsCalculateGrossSalaryMonthly').val();
+                var basicValue = parseFloat($('.jsBasicMonthly').val()) || 0;
                 var employeeContriMonthly = basicValue * 12 / 100;
                 $('.jsEmployeeContributionMonthly').val(employeeContriMonthly);
 
@@ -641,6 +646,16 @@
             $('.FormValidate').validate({
                 ignore: "",
                 rules:{
+                    'emp_id': {
+                        required: true,
+                        remote: {
+                            data :{
+                                '_token': token,
+                            },
+                            url: "{{ route('user_check_duplication') }}",
+                            type: "post"
+                        },
+                    },
                     'first_name': {
                         required: true
                     },
@@ -707,6 +722,10 @@
                     }
                 },
                 messages:{
+                    'emp_id': {
+                        required: "Please Enter Employee Id",
+                        remote: "This Employee Id Already Exist"
+                    },
                     'first_name': {
                         required: 'Please Enter First Name'
                     },
@@ -750,6 +769,9 @@
                         required: 'Please Enter Confirm Password',
                         equalTo: 'Password and Confirm Password Not Match'
                     }
+                },
+                highlight: function(element) {
+                    $(element).removeClass('label .error');
                 },
                 invalidHandler: function(event, validator) {
                     var firstInvalidElement = $(validator.errorList[0].element);

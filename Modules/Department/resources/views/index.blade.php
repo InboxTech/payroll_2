@@ -66,6 +66,11 @@
 
     @push('script')
         <script type="text/javascript">
+            var validator = $("#addNew").validate();
+            $('#addNew').on('shown.bs.modal', function (){
+                validator.resetForm();
+            });
+
             var table_id = $("#Department");
             var status_url = "{{ route('department.change_status') }}";
 
@@ -91,6 +96,9 @@
             });
 
             $('.FormValidate').validate({
+                highlight: function(element) {
+                    $(element).removeClass('label .error');
+                },
                 submitHandler: function(form) {
                     $(form).find(':submit').prop('disabled', true);
                     $(form).find(':submit').text('Please Wait');

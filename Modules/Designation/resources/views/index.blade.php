@@ -66,10 +66,15 @@
 
     @push('script')
         <script type="text/javascript">
+            var validator = $("#addNew").validate();
+            $('#addNew').on('shown.bs.modal', function (){
+                validator.resetForm();
+            });
+
             var table_id = $("#Designation");
             var status_url = "{{ route('designation.change_status') }}";
 
-            $(function () {                
+            $(function () {
                 window.table = $('.data-table').DataTable({
                     processing: true,
                     serverSide: true,
@@ -91,6 +96,9 @@
             });
 
             $('.FormValidate').validate({
+                highlight: function(element) {
+                    $(element).removeClass('label .error');
+                },
                 submitHandler: function(form) {
                     $(form).find(':submit').prop('disabled', true);
                     $(form).find(':submit').text('Please Wait');

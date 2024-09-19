@@ -140,7 +140,7 @@ class UserController extends Controller
             $check_dup = '';
             if($request->email)
             {
-                $check_dup = User::where('email', $request->email)
+                $check_dup = User::withTrashed()->where('email', $request->email)
                                     ->where(function ($query) use ($userId) {
                                         $query->where('id', '!=', $userId)
                                               ->orWhereNull('id');
@@ -149,7 +149,7 @@ class UserController extends Controller
             }
             elseif($request->mobile_no)
             {
-                $check_dup = User::where('mobile_no', $request->mobile_no)
+                $check_dup = User::withTrashed()->where('mobile_no', $request->mobile_no)
                                     ->where(function ($query) use ($userId) {
                                         $query->where('id', '!=', $userId)
                                             ->orWhereNull('id');
@@ -158,7 +158,16 @@ class UserController extends Controller
             }
             elseif($request->personal_email)
             {
-                $check_dup = User::where('personal_email', $request->personal_email)
+                $check_dup = User::withTrashed()->where('personal_email', $request->personal_email)
+                                    ->where(function ($query) use ($userId) {
+                                        $query->where('id', '!=', $userId)
+                                            ->orWhereNull('id');
+                                    })
+                                    ->first();
+            }
+            elseif($request->emp_id)
+            {
+                $check_dup = User::withTrashed()->where('emp_id', $request->emp_id)
                                     ->where(function ($query) use ($userId) {
                                         $query->where('id', '!=', $userId)
                                             ->orWhereNull('id');
@@ -166,7 +175,7 @@ class UserController extends Controller
                                     ->first();
             }
 
-            if(isset($check_dup))
+            if($check_dup)
             {
                 echo "false"; //already registered
                 die;

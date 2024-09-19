@@ -17,6 +17,28 @@
                     </div>
                 </div>
             </div>
+            <div class="row justify-content-center">
+                @forelse ($assignLeaveList as $key => $value)
+                    <div class="col-sm-6 col-lg-3 mb-4">
+                        <div class="card card-border-shadow-primary">
+                            <div class="card-body text-center">
+                                <p class="mb-1"><strong>{{ $value->leave->leave_type_name }}</strong></p>
+                                <p class="mb-0">
+                                    <span class="fw-medium me-1">Leave Balance : {{ $value->leave_balance }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-md-12">
+                        <div class="card card-border-shadow-primary align-items-center">
+                            <div class="card-body">
+                                <p class="mb-1">No Leaves Assign</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforelse()
+            </div>
             <div class="card">
                 <div class="card-datatable text-nowrap">
                     <table class="data-table table text-center table-responsive text-nowrap" id="LeaveApply">

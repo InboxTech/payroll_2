@@ -9,6 +9,7 @@ use Illuminate\Http\Response;
 use App\Models\HolidayLeave;
 use Modules\HolidayLeave\Http\Requests\CreateHolidayLeaveRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class HolidayLeaveController extends Controller
 {
@@ -49,6 +50,7 @@ class HolidayLeaveController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request) {
+        $request->merge(['holiday_date' => Carbon::parse($request->holiday_date)->format('Y-m-d')]);
 
         if(HolidayLeave::create($request->all())) {
             return redirect()->route('leave.index')->with('sccess', 'Holiday Leave Data Successfully Submitted');
@@ -78,6 +80,7 @@ class HolidayLeaveController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, HolidayLeave $holidayleave) {
+        $request->merge(['holiday_date' => Carbon::parse($request->holiday_date)->format('Y-m-d')]);
 
         if($holidayleave->update($request->all())) {
             return redirect()->route('leave.index')->with('success', 'Holiday Leave updated successfully');

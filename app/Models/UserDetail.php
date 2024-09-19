@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Crypt;
 
 class UserDetail extends Model
 {
@@ -13,7 +14,7 @@ class UserDetail extends Model
         'user_id',
         'bank_name',
         'bank_branch_name',
-        'account_number',
+        'ac_no',
         'ifsc_code',
         'uan_number',
         'gross_salary_yearly',
@@ -57,4 +58,44 @@ class UserDetail extends Model
         'ctc_bcd_yearly',
         'ctc_bcd_monthly',
     ];
+    
+    public function setBankNameAttribute($value)
+    {
+        $this->attributes['bank_name'] = Crypt::encrypt($value);
+    }
+    
+    public function setBankBranchNameAttribute($value)
+    {
+        $this->attributes['bank_branch_name'] = Crypt::encrypt($value);
+    }
+
+    public function setAcNoAttribute($value)
+    {
+        $this->attributes['ac_no'] = Crypt::encrypt($value);
+    }
+    
+    public function setIfscCodeAttribute($value)
+    {
+        $this->attributes['ifsc_code'] = Crypt::encrypt($value);
+    }
+    
+    public function getBankNameAttribute($value)
+    {
+        return Crypt::decrypt($value);
+    }
+    
+    public function getBankBranchNameAttribute($value)
+    {
+        return Crypt::decrypt($value);
+    }
+
+    public function getAcNoAttribute($value)
+    {
+        return Crypt::decrypt($value);
+    }
+    
+    public function getIfscCodeAttribute($value)
+    {
+        return Crypt::decrypt($value);
+    }
 }

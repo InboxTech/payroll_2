@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="number-of-leaves">Holiday Date <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="holiday_date" value="{{ old('holiday_date', $model->holiday_date) }}" placeholder="YYYY-MM-DD" id="flatpickr-date" data-rule-required="true" data-msg-required="Please Select Holiday Date"/>
+                                    <input type="text" class="form-control" name="holiday_date" value="{{ \Carbon\Carbon::parse($model->holiday_date)->format('d-m-Y') }}" placeholder="DD-MM-YYYY" id="flatpickr-date" data-rule-required="true" data-msg-required="Please Select Holiday Date"/>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="number-of-leaves">Status <span class="text-danger">*</span></label>
@@ -56,6 +56,9 @@
     @push('script')
         <script type="text/javascript">
             $('.jsFormValidate').validate({
+                highlight: function(element) {
+                    $(element).removeClass('label .error');
+                },
                 submitHandler: function(form) {
                     $(form).find(':submit').prop('disabled', true);
                     $(form).find(':submit').text('Please Wait');

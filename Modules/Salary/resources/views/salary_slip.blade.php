@@ -80,13 +80,13 @@
                         <th>Department</th>
                         <td>{{ $salary->user->department->name ?? '-' }}</td>
                         <th>Bank Name</th>
-                        <td>{{ $salary->user->bank_name }}</td>
+                        <td>{{ $salary->user->user_detail->bank_name }}</td>
                     </tr>
                     <tr>
                         <th>DOJ</th>
                         <td>{{ \Carbon\Carbon::parse($salary->user->joining_date)->format('d-m-Y') }}</td>
                         <th>Bank A/C No</th>
-                        <td>{{ $salary->user->account_number }}</td>
+                        <td>{{ $salary->user->user_detail->ac_no }}</td>
                     </tr>
                     <tr>
                         <td colspan="4" style="height: 30px"></td>

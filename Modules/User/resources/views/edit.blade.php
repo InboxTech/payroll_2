@@ -50,7 +50,7 @@
                                     <div class="row">
                                         <div class="col-sm-4 mb-2">
                                             <label class="form-label" for="basic-default-fullname">Employee Id <span class="text-danger">*</span></label>
-                                            <input type="text" name="emp_id" class="form-control" value="{{ $user->emp_id }}"/>
+                                            <input type="text" name="emp_id" class="form-control" value="{{ $user->emp_id }}" data-rule-required="true" data-msg-required="Please Enter Employee Id"/>
                                         </div>
                                         <div class="col-md-4">
                                             <label class="form-label" for="basic-default-fullname">First Name <span class="text-danger">*</span></label>
@@ -102,8 +102,9 @@
                                             <label for="gender" class="form-label">Gender <span class="text-danger">*</span></label>
                                             <select name="gender" class="form-select" data-rule-required="true" data-msg-required="Please Select Gender">
                                                 <option value="">Select Gender</option>
-                                                <option value="1" @if($user->gender == 1) selected @endif>Male</option>
-                                                <option value="2" @if($user->gender == 2) selected @endif>Female</option>
+                                                <option value="1" @selected($user->gender == 1)>Male</option>
+                                                <option value="2" @selected($user->gender == 2)>Female</option>
+                                                <option value="3" @selected($user->gender == 3)>Transgender</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-4 mb-2">
@@ -139,6 +140,10 @@
                                         <div class="col-sm-4 mb-2">
                                             <label class="form-label" for="probation-end-date">Probation End Date or Internship End Date<span class="text-danger">*</span></label>
                                             <input type="date" name="probation_end_date" class="form-control" value="{{ $user->probation_end_date }}" data-rule-required="true" data-msg-required="Please Select Probation End Date or Internship End Date"/>
+                                        </div>
+                                        <div class="col-sm-4 mb-2">
+                                            <label class="form-label" for="confirmation-date">Confirmation Date </label>
+                                            <input type="date" name="confirmation_date" class="form-control" value="{{ $user->confirmation_date }}"/>
                                         </div>
                                         <div class="col-sm-4 mb-2">
                                             <label class="form-label" for="releaving-date">Releaving Date </label>
@@ -228,7 +233,7 @@
                                         </div>
                                         <div class="col-md-4 mt-2">
                                             <label class="form-label" for="account-number">Account Number </label>
-                                            <input type="text" name="account_number" class="form-control" value="{{ $user->user_detail->account_number ?? '' }}"/>
+                                            <input type="text" name="ac_no" class="form-control" value="{{ $user->user_detail->ac_no ?? '' }}"/>
                                         </div>
                                         <div class="col-md-4 mt-2">
                                             <label class="form-label" for="ifsc-code">IFSC Code </label>
@@ -794,6 +799,9 @@
                         required: 'Please Enter Confirm Password',
                         equalTo: 'Password and Confirm Password Not Match'
                     }
+                },
+                highlight: function(element) {
+                    $(element).removeClass('label .error');
                 },
                 invalidHandler: function(event, validator) {
                     var firstInvalidElement = $(validator.errorList[0].element);

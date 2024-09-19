@@ -13,7 +13,7 @@
                             <h5 class="mb-0">Leave Type Add</h5>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('leave.store') }}" method="post" class="FormValidate">
+                            <form action="{{ route('leave.store') }}" method="post" class="jsFormValidate">
                                 @csrf
                                 <div class="mb-3">
                                     <label class="form-label" for="leave-type-name">Leave Type Name <span class="text-danger">*</span></label>
@@ -48,7 +48,7 @@
 
     @push('script')
         <script type="text/javascript">
-            $('.FormValidate').validate({
+            $('.jsFormValidate').validate({
                 submitHandler: function(form) {
                     $(form).find(':submit').prop('disabled', true);
                     $(form).find(':submit').text('Please Wait');

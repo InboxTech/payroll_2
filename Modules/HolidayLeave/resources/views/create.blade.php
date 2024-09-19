@@ -11,7 +11,7 @@
                     <div class="card mb-4">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h5 class="mb-0">Leave Type</h5>
-                            <h5 class="mb-0"><a href="{{ route('role.create') }}" class="float-end"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a></h5>
+                            <h5 class="mb-0"><a href="{{ route('leave.create') }}" class="float-end"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a></h5>
                         </div>
                         <div class="table-responsive text-nowrap">
                             @livewire('leave-list')
@@ -32,13 +32,13 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="number-of-leaves">Holiday Date <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="holiday_date" value="{{ old('holiday_date') }}" placeholder="YYYY-MM-DD" id="flatpickr-date" data-rule-required="true" data-msg-required="Please Select Holiday Date"/>
+                                    <input type="text" class="form-control" name="holiday_date" value="{{ old('holiday_date') }}" placeholder="DD-MM-YYYY" id="flatpickr-date" data-rule-required="true" data-msg-required="Please Select Holiday Date"/>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="number-of-leaves">Status <span class="text-danger">*</span></label>
                                     <select name="status" class="form-select" data-rule-required="true" data-msg-required="Please Select Status">
                                         <option value="">Select Status</option>
-                                        <option value="1">Active</option>
+                                        <option value="1" selected>Active</option>
                                         <option value="0">Inactive</option>
                                     </select>
                                 </div>
@@ -55,6 +55,9 @@
     @push('script')
         <script type="text/javascript">
             $('.jsFormValidate').validate({
+                highlight: function(element) {
+                    $(element).removeClass('label .error');
+                },
                 submitHandler: function(form) {
                     $(form).find(':submit').prop('disabled', true);
                     $(form).find(':submit').text('Please Wait');
