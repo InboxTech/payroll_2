@@ -79,14 +79,14 @@ class ProjectController extends Controller
         if ($request->ajax()) {
             
             $data = Project::latest();
-
+            
             return Datatables::of($data)
                     ->filter(function ($query) use ($request) {
-                        if ($request->has('project_name')) {
+                        if ($request->project_name) {
                             $query->where('project_name', 'like', "%" . $request->get('project_name') . "%");
                         }
 
-                        if ($request->has('client_name')) {
+                        if ($request->client_name) {
                             $query->where('client_name', 'like', "%" . $request->get('client_name') . "%");
                         }
                     })

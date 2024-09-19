@@ -81,21 +81,33 @@ class UserDetail extends Model
     
     public function getBankNameAttribute($value)
     {
-        return Crypt::decrypt($value);
+        if($value) {
+            return Crypt::decrypt($value);
+        }
+        return;
     }
     
     public function getBankBranchNameAttribute($value)
     {
-        return Crypt::decrypt($value);
+        if($value) {
+            return Crypt::decrypt($value);
+        }
+        return;
     }
 
     public function getAcNoAttribute($value)
     {
-        return Crypt::decrypt($value);
+        if($value) {
+            return Crypt::decrypt($value);
+        }
+        return;
     }
     
     public function getIfscCodeAttribute($value)
     {
-        return Crypt::decrypt($value);
+        if($value) {
+            return Crypt::decrypt($value);
+        }
+        return;
     }
 }

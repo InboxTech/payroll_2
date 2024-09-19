@@ -283,6 +283,16 @@ class UserController extends Controller
     public function store(Request $request) {
         
         $input = $request->all();
+        
+        $checkEmpId = User::where('emp_id', $request->emp_id)->first();
+
+        if($checkEmpId) {
+            $getNo = explode('-', $request->emp_id);
+
+            $incNo = $getNo[1] + 1;
+
+            $input['emp_id'] = $getNo[0].'-'.$incNo;
+        }
 
         // Yearly Deduction
         $input['gross_salary_A_yearly'] = $input['basic_yearly'] + $input['hra_yearly'] + $input['medical_yearly'] + $input['education_yearly'] + $input['conveyance_yearly'] + $input['special_allowance_yearly'];
@@ -522,6 +532,14 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $input = $request->all();
+
+        // This fields are encrypted
+        $userDetailData = [
+            'bank_name' => $input['bank_name'],
+            'bank_branch_name' => $input['bank_branch_name'],
+            'ac_no' => $input['ac_no'],
+            'user_id' => $user->id,
+        ];
         
         // Yearly Deduction
         $input['gross_salary_A_yearly'] = $input['basic_yearly'] + $input['hra_yearly'] + $input['medical_yearly'] + $input['education_yearly'] + $input['conveyance_yearly'] + $input['special_allowance_yearly'];
@@ -605,7 +623,10 @@ class UserController extends Controller
                     break;
             }
 
-            UserDetail::where('user_id', $user->id)->update($filteredInput);
+            UserDetail::updateOrCreate(
+                ['user_id' => $user->id],
+                array_merge($filteredInput, $userDetailData)
+            );
 
             $filteredInput['year'] = Carbon::now()->year;
             $filteredInput['user_id'] = $user->id;
