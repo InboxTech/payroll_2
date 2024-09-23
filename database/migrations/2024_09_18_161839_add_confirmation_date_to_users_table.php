@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->integer('hod_id')->nullable()->after('gender')->comment('hod_id is the user id from users table');
             $table->date('confirmation_date')->nullable()->after('probation_end_date');
         });
     }
@@ -22,6 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('hod_id');
             $table->dropColumn('confirmation_date');
         });
     }

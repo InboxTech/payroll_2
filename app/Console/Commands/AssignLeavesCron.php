@@ -32,15 +32,15 @@ class AssignLeavesCron extends Command
         $now = Carbon::now();
         $today = $now->format('Y-m-d');
 
-        $users = User::where('status', 1)->where('probation_end_date', $today)->get();
+        $users = User::where('status', 1)->where('confirmation_date', $today)->get();
         $leaveList = Leave::get();
         $totalLeaves = Leave::sum('number_of_leaves');
         $monthsInYear = 12;
 
         foreach ($users as $user) {
-            $probationEndDate = Carbon::createFromDate($user->probation_end_date);
-            $probationMonth = $probationEndDate->month;
-            $remainingMonths = 12 - $probationMonth;
+            $confirmationDate = Carbon::createFromDate($user->confirmation_date);
+            $confirmationMonth = $confirmationDate->month;
+            $remainingMonths = 12 - $confirmationMonth;
 
             $calculatedLeaves = ($totalLeaves / $monthsInYear) * $remainingMonths;
 

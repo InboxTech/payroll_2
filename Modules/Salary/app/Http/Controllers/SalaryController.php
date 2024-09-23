@@ -51,7 +51,7 @@ class SalaryController extends Controller
 
         $date = Carbon::parse($monthYear);
 
-        $numberOfDays = $date->daysInMonth;
+        $numberOfDaysInMonth = $date->daysInMonth;
 
         $startDate = $date->startOfMonth()->format('Y-m-d');
         $endDate = $date->endOfMonth()->format('Y-m-d');
@@ -76,11 +76,11 @@ class SalaryController extends Controller
         }
 
         // Count Week off
-        $totalWeekOff = $this->countWeekends($date->year, $date->month);
+        $totalWeekOff = $this->countWeekends($date->year, $date->month, $presentDaysResult);
         $data['totalWeekOff'] = $totalWeekOff;
 
         // paid holiday
-        $paidHoliday = HolidayLeave::whereYear('holiday_date', $date->year)->whereMonth('holiday_date', $date->month)->count();
+        $paidHoliday = HolidayLeave::whereYear('holiday_date', $date->year)->whereMonth('holiday_date', $date->month)->where('status', 1)->count();
         $data['paidHoliday'] = $paidHoliday;
 
         $presentDays = $fullDays + ($halfDays * 0.5);
@@ -91,7 +91,7 @@ class SalaryController extends Controller
             $data['presentDays'] = 0;
             $data['totalWeekOff'] = $totalWeekOff;
             $data['paidHoliday'] = $paidHoliday;
-            $data['absentDays'] = $numberOfDays;
+            $data['absentDays'] = $numberOfDaysInMonth;
             $data['numberOfWorkDay'] = 0;
             $data['Basic'] = 0.00;
             $data['Hra'] = 0.00;
@@ -115,7 +115,7 @@ class SalaryController extends Controller
         }
 
         // Absent days 
-        $data['absentDays'] = $numberOfDays - ($presentDays + $totalWeekOff + $paidHoliday);
+        $data['absentDays'] = $numberOfDaysInMonth - ($presentDays + $totalWeekOff + $paidHoliday);
 
         // Number of Work Days
         $data['numberOfWorkDay'] = $presentDays + $totalWeekOff + $paidHoliday + $NumberofPaidLeaves;
@@ -123,26 +123,26 @@ class SalaryController extends Controller
         // Per Day Salary
         $userData = User::where('id', $userId)->with('user_detail')->first();
 
-        $perDaySalary = $userData->user_detail->gross_salary_A_monthly / $numberOfDays;
+        $perDaySalary = $userData->user_detail->gross_salary_A_monthly / $numberOfDaysInMonth;
         $data['perDaySalary'] = number_format(round($perDaySalary), 2, '.');
 
         // basic salary
-        $data['Basic'] = ($data['numberOfWorkDay'] * $userData->user_detail->basic_monthly) / $numberOfDays;
+        $data['Basic'] = ($data['numberOfWorkDay'] * $userData->user_detail->basic_monthly) / $numberOfDaysInMonth;
         
         // Hra
-        $data['Hra'] = ($data['numberOfWorkDay'] * $userData->user_detail->hra_monthly) / $numberOfDays;        
+        $data['Hra'] = ($data['numberOfWorkDay'] * $userData->user_detail->hra_monthly) / $numberOfDaysInMonth;        
         
         // Medical
-        $data['Medical'] = ($data['numberOfWorkDay'] * $userData->user_detail->medical_monthly) / $numberOfDays;        
+        $data['Medical'] = ($data['numberOfWorkDay'] * $userData->user_detail->medical_monthly) / $numberOfDaysInMonth;        
         
         // Education
-        $data['Education'] = ($data['numberOfWorkDay'] * $userData->user_detail->education_monthly) / $numberOfDays;        
+        $data['Education'] = ($data['numberOfWorkDay'] * $userData->user_detail->education_monthly) / $numberOfDaysInMonth;        
         
         // Conveyance
-        $data['Conveyance'] = ($data['numberOfWorkDay'] * $userData->user_detail->conveyance_monthly) / $numberOfDays;        
+        $data['Conveyance'] = ($data['numberOfWorkDay'] * $userData->user_detail->conveyance_monthly) / $numberOfDaysInMonth;        
         
         // Special Allowance
-        $data['SplAllowance'] = ($data['numberOfWorkDay'] * $userData->user_detail->special_allowance_monthly) / $numberOfDays;        
+        $data['SplAllowance'] = ($data['numberOfWorkDay'] * $userData->user_detail->special_allowance_monthly) / $numberOfDaysInMonth;        
         
         // Gross Salary (A)
         $data['GrossSalaryA'] = $data['Basic'] + $data['Hra'] + $data['Medical'] + $data['Education'] + $data['Conveyance'] + $data['SplAllowance'];
@@ -224,7 +224,7 @@ class SalaryController extends Controller
                     'paid_holiday' => $data['paidHoliday'],
                     'number_of_paid_leaves' => $request->number_of_paid_leaves,
                     'absent_days' => $data['absentDays'],
-                    'total_days' => $numberOfDays,
+                    'total_days' => $numberOfDaysInMonth,
                     'number_of_days_work' => $data['numberOfWorkDay'],
                     'per_day_salary' => $data['perDaySalary'],
                     'basic' => $data['Basic'],
@@ -289,23 +289,29 @@ class SalaryController extends Controller
         $client->put($pdf_name, $content);
     }
 
-    public function countWeekends($year, $month)
+    public function countWeekends($year, $month, $presentDaysResult)
     {
         $startDate = Carbon::create($year, $month, 1);
         $endDate = $startDate->copy()->endOfMonth();
-    
+
+        $punchInOutDates = $presentDaysResult->pluck('date')->toArray();
+
         $saturdayssundays = 0;
-            
+
         while ($startDate->lte($endDate)) {
-            if ($startDate->isSaturday()) {
-                $saturdayssundays++;
-            }
-            if ($startDate->isSunday()) {
-                $saturdayssundays++;
+
+            if ($startDate->isSaturday() || $startDate->isSunday()) {
+
+                $currentDateStr = $startDate->format('Y-m-d');
+
+                if (!in_array($currentDateStr, $punchInOutDates)) {
+
+                    $saturdayssundays++;
+                }
             }
             $startDate->addDay();
         }
-    
+
         return $saturdayssundays;
     }
 

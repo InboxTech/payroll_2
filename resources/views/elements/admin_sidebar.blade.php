@@ -102,7 +102,7 @@
                     @can('view-leave')
                         <li class="menu-item @if($current_controller == 'LeaveController') active @endif">
                             <a href="{{ route('leave.index') }}" class="menu-link">
-                                <div data-i18n="Leave">Leave</div>
+                                <div data-i18n="Leave & HolidayLeave"></div>
                             </a>
                         </li>
                     @endcan

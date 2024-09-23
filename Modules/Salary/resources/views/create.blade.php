@@ -453,6 +453,105 @@
         </script>
 
         <script type="text/javascript">
+            let initialNumberOfDaysWork = 0;
+            let initialAbsentDays = 0;
+
+            $(document).on('change', '.jsNumberofPaidLeaves', calculateSalary);
+            $(document).on('keyup', '.jsNumberofPaidLeaves', calculateSalary);
+
+            let previousPaidLeaves = 0;
+
+            function calculateSalary() {
+                let currentPaidLeaves = parseFloat($('.jsNumberofPaidLeaves').val()) || 0;
+                let totalDays = parseFloat($('.jsTotalDays').val());
+                
+                // Fetch number of days worked and absent days from the DOM, or use initial values
+                let numberOfDaysWork = parseFloat($('.jsNumberOfDayWork').val()) || initialNumberOfDaysWork;
+                let currentAbsentDays = parseFloat($('.jsAbsentDay').val()) || initialAbsentDays;
+
+                let changeInPaidLeaves = currentPaidLeaves - previousPaidLeaves;
+                
+                if (currentPaidLeaves > currentAbsentDays) {
+                    let excessPaidLeaves = currentPaidLeaves - currentAbsentDays;
+                    numberOfDaysWork += excessPaidLeaves;
+                    currentAbsentDays = 0;
+                } else {
+                    // If paid leaves are less than or equal to absent days, adjust both values accordingly
+                    currentAbsentDays -= changeInPaidLeaves;
+                    numberOfDaysWork += changeInPaidLeaves;
+                }
+
+                if (currentAbsentDays < 0) {
+                    currentAbsentDays = 0;
+                }
+
+                if (numberOfDaysWork > totalDays) {
+                    numberOfDaysWork = totalDays;
+                }
+
+                if (numberOfDaysWork < 0) {
+                    numberOfDaysWork = 0;
+                }
+
+                // Update the value of number of days worked
+                $('.jsNumberOfDayWork').val(numberOfDaysWork);
+                $('.jsAbsentDay').val(currentAbsentDays);
+
+                initialNumberOfDaysWork = numberOfDaysWork;
+                initialAbsentDays = currentAbsentDays;
+
+                // Update previous paid leaves to the current value
+                previousPaidLeaves = currentPaidLeaves;
+                
+                var Basic = (numberOfDaysWork * parseFloat('{{ $userData->user_detail->basic_monthly }}')) / totalDays;
+                    Hra = (numberOfDaysWork * parseFloat('{{ $userData->user_detail->hra_monthly }}')) / totalDays;
+                    Medical = (numberOfDaysWork * parseFloat('{{ $userData->user_detail->medical_monthly }}')) / totalDays;
+                    Education = (numberOfDaysWork * parseFloat('{{ $userData->user_detail->education_monthly }}')) / totalDays;
+                    Conveyance = (numberOfDaysWork * parseFloat('{{ $userData->user_detail->conveyance_monthly }}')) / totalDays;
+                    SplAllowance = (numberOfDaysWork * parseFloat('{{ $userData->user_detail->special_allowance_monthly }}')) / totalDays;
+
+                    GrossSalaryA = Basic + Hra + Medical + Education + Conveyance + SplAllowance;
+                    
+                    pfDeductionStatus = "{{ $userData->user_detail->is_pf_deduct_monthly }}";
+                    LabourWelfareFund = parseFloat("{{ $userData->user_detail->labour_welfare_employee_monthly }}");
+                    ProfessionalTaxCurrentMonth = parseFloat("{{ $userData->user_detail->professional_tax_monthly }}");
+
+                    switch (pfDeductionStatus) {
+                        case 'Yes':
+                            EmployeeContriCurrentMonth = (Basic * 12) / 100;
+                            break;
+                        case 'No':
+                            EmployeeContriCurrentMonth = 0;
+                            break;
+                        case 'Fix':
+                            EmployeeContriCurrentMonth = parseFloat("{{ $userData->user_detail->employee_contribution_monthly }}");
+                        default:
+                            EmployeeContriCurrentMonth = 0;
+                            break;
+                    }
+
+                    EmployeeContriBCurrentMonth = EmployeeContriCurrentMonth + LabourWelfareFund + ProfessionalTaxCurrentMonth;
+                    
+                    NetSalaryC = GrossSalaryA - (EmployeeContriCurrentMonth + LabourWelfareFund + ProfessionalTaxCurrentMonth);
+
+                    Ctcbcd = EmployeeContriBCurrentMonth + NetSalaryC + parseFloat("{{ $userData->user_detail->employer_contri_D_monthly }}");
+
+                $('.jsBasic').val(Basic.toFixed(2));
+                $('.jsHra').val(Hra.toFixed(2));
+                $('.jsMedical').val(Medical.toFixed(2));
+                $('.jsEducation').val(Education.toFixed(2));
+                $('.jsConveyance').val(Conveyance.toFixed(2));
+                $('.jsSplAllowance').val(SplAllowance.toFixed(2));
+                $('.jsGrossSalaryA').text('{{ config("constant.currency_symbol") }}'+' '+Math.round(GrossSalaryA).toFixed(2));
+                $('.jsInputGrossSalaryA').val(Math.round(GrossSalaryA).toFixed(2));
+                $('.jsEmployeeContribution').val(Math.round(EmployeeContriCurrentMonth).toFixed(2));
+                $('.jsEmployeeContributionBCurrentMonthly').text('{{ config("constant.currency_symbol") }}'+' '+Math.round(EmployeeContriBCurrentMonth).toFixed(2));
+                $('.jsNetSalaryC').text('{{ config("constant.currency_symbol") }}'+' '+Math.round(NetSalaryC).toFixed(2));
+                $('.jsCTCBCD').text('{{ config("constant.currency_symbol") }}'+' '+Math.round(Ctcbcd).toFixed(2))
+                $('.jsInputCTCBCD').val(Math.round(Ctcbcd).toFixed(2));
+                $('.jsFinalAmount').val(Math.round(Ctcbcd).toFixed(2));
+            }
+
             $(document).ready(function() {
                 function calculateDaysInMonth(year, month) {
                     // Month is 0-indexed in JavaScript Date object (0 = January, 1 = February, etc.)
@@ -515,13 +614,19 @@
                                 $('.jsEmployerContributionD').text('{{ config("constant.currency_symbol") }}'+' '+response.data.EmployerContributionD);
                                 $('.jsCTCBCD').text('{{ config("constant.currency_symbol") }}'+' '+response.data.Ctcbcd);
                                 $('.jsFinalAmount').val(response.data.Ctcbcd);
+                                $('.jsNumberofPaidLeaves').attr('max', response.data.absentDays);
+
+                                initialNumberOfDaysWork = response.data.numberOfWorkDay;
+                                initialAbsentDays = response.data.absentDays;
+
+                                // Reset previous paid leaves when AJAX is completed to ensure consistent calculations
+                                previousPaidLeaves = parseFloat($('.jsNumberofPaidLeaves').val()) || 0;
                             }
                         }
                     })
                 }
             });
-
-            $(document).on('keyup change', '.jsNumberofPaidLeaves', calculateSalary);
+            
             $(document).on('keyup change', '.jsESIEmployeeContribution', calculateESI);
 
             function calculateESI()
@@ -555,73 +660,6 @@
                     
                     Ctcbcd = EmployeeContriBCurrentMonth + NetSalaryC + parseFloat("{{ $userData->user_detail->employer_contri_D_monthly }}");
 
-                $('.jsEmployeeContributionBCurrentMonthly').text('{{ config("constant.currency_symbol") }}'+' '+Math.round(EmployeeContriBCurrentMonth).toFixed(2));
-                $('.jsNetSalaryC').text('{{ config("constant.currency_symbol") }}'+' '+Math.round(NetSalaryC).toFixed(2));
-                $('.jsCTCBCD').text('{{ config("constant.currency_symbol") }}'+' '+Math.round(Ctcbcd).toFixed(2))
-                $('.jsInputCTCBCD').val(Math.round(Ctcbcd).toFixed(2));
-                $('.jsFinalAmount').val(Math.round(Ctcbcd).toFixed(2));
-            }
-
-            let previousPaidLeaves = 0;
-
-            function calculateSalary() {
-                let currentPaidLeaves = parseFloat($(this).val()) || 0;
-                let numberOfDaysWork = parseFloat($('.jsNumberOfDayWork').val()) || 0;
-                let totalDays = parseFloat($('.jsTotalDays').val());
-
-                let changeInPaidLeaves = currentPaidLeaves - previousPaidLeaves;
-
-                // Update number of days worked
-                numberOfDaysWork += changeInPaidLeaves;
-
-                // Update the value of number of days worked
-                $('.jsNumberOfDayWork').val(numberOfDaysWork);
-
-                // Update previous paid leaves to the current value
-                previousPaidLeaves = currentPaidLeaves;
-                
-                var Basic = (numberOfDaysWork * parseFloat('{{ $userData->user_detail->basic_monthly }}')) / totalDays;
-                    Hra = (numberOfDaysWork * parseFloat('{{ $userData->user_detail->hra_monthly }}')) / totalDays;
-                    Medical = (numberOfDaysWork * parseFloat('{{ $userData->user_detail->medical_monthly }}')) / totalDays;
-                    Education = (numberOfDaysWork * parseFloat('{{ $userData->user_detail->education_monthly }}')) / totalDays;
-                    Conveyance = (numberOfDaysWork * parseFloat('{{ $userData->user_detail->conveyance_monthly }}')) / totalDays;
-                    SplAllowance = (numberOfDaysWork * parseFloat('{{ $userData->user_detail->special_allowance_monthly }}')) / totalDays;
-
-                    GrossSalaryA = Basic + Hra + Medical + Education + Conveyance + SplAllowance;
-                    
-                    pfDeductionStatus = "{{ $userData->user_detail->is_pf_deduct_monthly }}";
-                    LabourWelfareFund = parseFloat("{{ $userData->user_detail->labour_welfare_employee_monthly }}");
-                    ProfessionalTaxCurrentMonth = parseFloat("{{ $userData->user_detail->professional_tax_monthly }}");
-
-                    switch (pfDeductionStatus) {
-                        case 'Yes':
-                            EmployeeContriCurrentMonth = (Basic * 12) / 100;
-                            break;
-                        case 'No':
-                            EmployeeContriCurrentMonth = 0;
-                            break;
-                        case 'Fix':
-                            EmployeeContriCurrentMonth = parseFloat("{{ $userData->user_detail->employee_contribution_monthly }}");
-                        default:
-                            EmployeeContriCurrentMonth = 0;
-                            break;
-                    }
-
-                    EmployeeContriBCurrentMonth = EmployeeContriCurrentMonth + LabourWelfareFund + ProfessionalTaxCurrentMonth;
-                    
-                    NetSalaryC = GrossSalaryA - (EmployeeContriCurrentMonth + LabourWelfareFund + ProfessionalTaxCurrentMonth);
-
-                    Ctcbcd = EmployeeContriBCurrentMonth + NetSalaryC + parseFloat("{{ $userData->user_detail->employer_contri_D_monthly }}");
-
-                $('.jsBasic').val(Basic.toFixed(2));
-                $('.jsHra').val(Hra.toFixed(2));
-                $('.jsMedical').val(Medical.toFixed(2));
-                $('.jsEducation').val(Education.toFixed(2));
-                $('.jsConveyance').val(Conveyance.toFixed(2));
-                $('.jsSplAllowance').val(SplAllowance.toFixed(2));
-                $('.jsGrossSalaryA').text('{{ config("constant.currency_symbol") }}'+' '+Math.round(GrossSalaryA).toFixed(2));
-                $('.jsInputGrossSalaryA').val(Math.round(GrossSalaryA).toFixed(2));
-                $('.jsEmployeeContribution').val(Math.round(EmployeeContriCurrentMonth).toFixed(2));
                 $('.jsEmployeeContributionBCurrentMonthly').text('{{ config("constant.currency_symbol") }}'+' '+Math.round(EmployeeContriBCurrentMonth).toFixed(2));
                 $('.jsNetSalaryC').text('{{ config("constant.currency_symbol") }}'+' '+Math.round(NetSalaryC).toFixed(2));
                 $('.jsCTCBCD').text('{{ config("constant.currency_symbol") }}'+' '+Math.round(Ctcbcd).toFixed(2))

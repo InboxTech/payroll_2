@@ -51,13 +51,13 @@ class UserController extends Controller
         $now = Carbon::now();
         $today = $now->format('Y-m-d');
         
-        $users = User::where(['status' => 1], ['job_type' => 1])->where('probation_end_date', $today)->get();
+        $users = User::where(['status' => 1], ['job_type' => 1])->where('confirmation_date', $today)->get();
         $leaveList = Leave::get();
         $totalLeaves = Leave::sum('number_of_leaves');
         $monthsInYear = 12;
 
         foreach ($users as $user) {
-            $probationEndDate = Carbon::createFromDate($user->probation_end_date);
+            $probationEndDate = Carbon::createFromDate($user->confirmation_date);
             $probationMonth = $probationEndDate->month;
             $remainingMonths = 12 - $probationMonth;
 
@@ -273,6 +273,7 @@ class UserController extends Controller
 
         $designation = Designation::where('status', 1)->pluck('name', 'id');
         $department = Department::where('status', 1)->pluck('name', 'id');
+        // $hodList = 
         
         return view('user::create', compact('roles', 'assignLeave', 'designation', 'department'));
     }
@@ -519,7 +520,7 @@ class UserController extends Controller
         $roles = Role::whereNot('id', 1)->pluck('name','name')->all();
 
         $selectedRole = $user->roles->first()->name ?? null;
-             
+
         $designation = Designation::where('status', 1)->pluck('name', 'id');
         $department = Department::where('status', 1)->pluck('name', 'id');
 

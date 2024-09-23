@@ -93,7 +93,7 @@
                     </tr>
                     <tr>
                         <th>Total Working Days</th>
-                        <td>{{ $salary->number_of_days_work }}</td>
+                        <td>{{ $salary->total_days }}</td>
                         <th>Paid Days</th>
                         <td>{{ $salary->total_week_off + $salary->paid_holiday }}</td>
                     </tr>

@@ -142,7 +142,7 @@
                                         </div>
                                         <div class="col-sm-4 mb-2">
                                             <label class="form-label" for="confirmation-date">Confirmation Date </label>
-                                            <input type="date" name="confirmation_date" class="form-control"/>
+                                            <input type="date" name="confirmation_date" class="form-control" min={{ date('Y-m-d', strtotime('+1 Day')) }}/>
                                         </div>
                                         <div class="col-sm-4 mb-2">
                                             <label class="form-label" for="releaving-date">Releaving Date </label>
