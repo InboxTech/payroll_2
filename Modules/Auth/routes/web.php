@@ -23,6 +23,7 @@ Route::prefix('admin')->group(function () {
     Route::get('back', [AuthController::class, 'route_back'])->name('back');
 
     Route::middleware(['auth'])->group(function (){
+        Route::resource('auth', AuthController::class);
         Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
         Route::get('logout', [AuthController::class, 'logout'])->name('logout');
         Route::match(['get', 'post'], 'profile', [AuthController::class, 'profile'])->name('profile');

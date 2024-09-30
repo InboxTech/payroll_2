@@ -9,7 +9,7 @@
 
     function generateEmployee()
     {
-        $result = \App\Models\User::orderBy('id', 'DESC')->first();
+        $result = \App\Models\User::withTrashed()->orderBy('id', 'DESC')->first();
 
         if ($result && $result->emp_id != NULL) 
         {

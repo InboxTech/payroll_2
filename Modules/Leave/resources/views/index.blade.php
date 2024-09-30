@@ -24,9 +24,17 @@
                     <div class="card mb-4">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h5 class="mb-0">Holiday Leave</h5>
-                            @can('create-holiday-leave')
-                                <h5 class="mb-0"><a href="{{ route('holidayleave.create') }}" class="float-end"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a></h5>
-                            @endcan
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>
+                                <div class="dropdown-menu">
+                                    @can('edit-leave')
+                                        <a class="dropdown-item" href="{{ route('holidayleave.create') }}"><i class="ti ti-plus me-1"></i> Add</a>
+                                    @endcan
+                                    @can('delete-leave')
+                                        <a class="dropdown-item" href="{{ route('holidayleave.previousleave') }}"><i class="ti ti-arrow-back-up me-1"></i> Previous Leaves</a>
+                                    @endcan
+                                </div>
+                            </div>
                         </div>
                         <div class="table-responsive text-nowrap p-2">
                             @livewire('holiday-leave-list')

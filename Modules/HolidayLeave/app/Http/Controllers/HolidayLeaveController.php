@@ -10,6 +10,7 @@ use App\Models\HolidayLeave;
 use Modules\HolidayLeave\Http\Requests\CreateHolidayLeaveRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use DataTables;
 
 class HolidayLeaveController extends Controller
 {
@@ -19,6 +20,38 @@ class HolidayLeaveController extends Controller
         $this->middleware('permission:create-holiday-leave', ['only' => ['create','store']]);
         $this->middleware('permission:edit-holiday-leave', ['only' => ['edit','update']]);
         $this->middleware('permission:delete-holiday-leave', ['only' => ['destroy']]);
+    }
+
+    public function previousleave(Request $request) {
+
+        if ($request->ajax()) 
+        {
+            $yesterday = Carbon::yesterday()->endOfDay();
+
+            $data = HolidayLeave::where('holiday_date', '<=', $yesterday)->latest();
+
+            $searchValue = $request->input('search.value');
+
+            if (!empty($searchValue)) {
+                $data->where(function ($query) use ($searchValue) {
+                    $query->where('holiday_name', 'like', "%{$searchValue}%")
+                          ->orWhere('status', 'like', "%{$searchValue}%")
+                          ->orWhere('holiday_date', 'like', "%{$searchValue}%");
+                });
+            }
+        
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('holiday_name', function($row){
+                        return view('holidayleave::holidayname', compact('row'));
+                    })
+                    ->addColumn('status', function($row){
+                        return view('holidayleave::status', compact('row'));
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+        return view('holidayleave::previousleave');
     }
 
     public function getnumberofholiday(Request $request)

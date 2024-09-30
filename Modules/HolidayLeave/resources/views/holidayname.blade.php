@@ -1,0 +1,1 @@
+{{ $row->holiday_name }}<br><strong>Date : </strong>{{ date('d-m-Y', strtotime($row->holiday_date)) }}

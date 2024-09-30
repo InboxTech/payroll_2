@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Sep 19, 2024 at 08:20 AM
+-- Host: localhost:3306
+-- Generation Time: Sep 30, 2024 at 11:54 AM
 -- Server version: 8.0.30
--- PHP Version: 8.2.19
+-- PHP Version: 8.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,6 +37,27 @@ CREATE TABLE `tbl_assign_leaves` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbl_assign_leaves`
+--
+
+INSERT INTO `tbl_assign_leaves` (`id`, `user_id`, `leave_id`, `year`, `assign_leave`, `leave_balance`, `created_at`, `updated_at`) VALUES
+(1, 4, 1, 2024, '1.00', '0.00', '2024-09-24 05:16:05', '2024-09-24 06:36:54'),
+(2, 4, 2, 2024, '2.00', '-1.50', '2024-09-24 05:16:05', '2024-09-25 05:39:22'),
+(3, 4, 3, 2024, '1.00', '1.00', '2024-09-24 05:16:05', '2024-09-24 05:16:05'),
+(4, 4, 1, 2024, '1.00', '1.00', '2024-09-24 09:13:45', '2024-09-24 09:13:45'),
+(5, 4, 2, 2024, '2.00', '2.00', '2024-09-24 09:13:45', '2024-09-24 09:13:45'),
+(6, 4, 3, 2024, '1.00', '1.00', '2024-09-24 09:13:45', '2024-09-24 09:13:45'),
+(7, 5, 1, 2024, '1.00', '1.00', '2024-09-24 09:13:45', '2024-09-24 09:13:45'),
+(8, 5, 2, 2024, '2.00', '2.00', '2024-09-24 09:13:45', '2024-09-24 09:13:45'),
+(9, 5, 3, 2024, '1.00', '1.00', '2024-09-24 09:13:45', '2024-09-24 09:13:45'),
+(10, 4, 1, 2024, '1.00', '1.00', '2024-09-24 09:14:00', '2024-09-24 09:14:00'),
+(11, 4, 2, 2024, '2.00', '2.00', '2024-09-24 09:14:00', '2024-09-24 09:14:00'),
+(12, 4, 3, 2024, '1.00', '1.00', '2024-09-24 09:14:00', '2024-09-24 09:14:00'),
+(16, 2, 1, 2024, '1.00', '1.00', '2024-09-25 08:57:58', '2024-09-25 08:57:58'),
+(17, 2, 2, 2024, '2.00', '2.00', '2024-09-25 08:57:58', '2024-09-25 08:57:58'),
+(18, 2, 3, 2024, '1.00', '1.00', '2024-09-25 08:57:58', '2024-09-25 08:57:58');
 
 -- --------------------------------------------------------
 
@@ -92,7 +113,7 @@ INSERT INTO `tbl_designations` (`id`, `name`, `status`, `created_at`, `updated_a
 (5, 'Degital Marketing', 1, '2024-08-07 04:23:46', '2024-08-07 04:23:46'),
 (6, 'Accountant', 1, '2024-08-07 04:23:56', '2024-08-07 04:23:56'),
 (7, 'Project Manager', 1, '2024-08-07 04:24:06', '2024-08-07 05:08:12'),
-(8, 'Piun', 1, '2024-08-07 05:18:40', '2024-08-07 05:38:01'),
+(8, 'Piun', 1, '2024-08-07 05:18:40', '2024-09-24 08:25:49'),
 (9, 'PHP Developer', 1, NULL, NULL),
 (10, 'HR', 1, NULL, NULL),
 (11, 'Quality Analyst', 1, '2024-09-10 06:24:53', '2024-09-10 06:25:27'),
@@ -167,7 +188,9 @@ INSERT INTO `tbl_holiday_leaves` (`id`, `holiday_date`, `holiday_name`, `status`
 (32, '2024-09-19', NULL, 1, '2024-09-19 07:20:41', '2024-09-19 08:18:15', '2024-09-19 08:18:15'),
 (33, '2024-09-19', NULL, 1, '2024-09-19 08:19:52', '2024-09-19 08:20:37', '2024-09-19 08:20:37'),
 (34, '2024-09-19', NULL, 1, '2024-09-19 08:20:29', '2024-09-19 08:20:29', NULL),
-(35, '2024-09-19', NULL, 1, '2024-09-19 08:20:30', '2024-09-19 08:20:30', NULL);
+(35, '2024-09-19', NULL, 1, '2024-09-19 08:20:30', '2024-09-19 08:20:30', NULL),
+(36, '2024-10-02', 'Gandhi Jayanti', 1, '2024-09-24 07:02:49', '2024-09-24 07:02:57', '2024-09-24 07:02:57'),
+(37, '2024-10-11', 'dassehra', 1, '2024-09-25 06:58:10', '2024-09-25 06:58:10', NULL);
 
 -- --------------------------------------------------------
 
@@ -191,7 +214,8 @@ CREATE TABLE `tbl_leaves` (
 INSERT INTO `tbl_leaves` (`id`, `leave_type_name`, `number_of_leaves`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Privilege Leave', 10, '2024-06-10 06:41:00', '2024-09-18 06:34:58', NULL),
 (2, 'Sick Leave', 7, '2024-06-10 06:47:44', '2024-06-11 04:31:03', NULL),
-(3, 'Casual Leave', 4, '2024-06-10 06:49:59', '2024-08-20 05:48:26', NULL);
+(3, 'Casual Leave', 4, '2024-06-10 06:49:59', '2024-08-20 05:48:26', NULL),
+(6, 'cl', 2, '2024-09-24 07:02:27', '2024-09-24 07:02:35', '2024-09-24 07:02:35');
 
 -- --------------------------------------------------------
 
@@ -221,10 +245,12 @@ CREATE TABLE `tbl_leave_applies` (
 --
 
 INSERT INTO `tbl_leave_applies` (`id`, `user_id`, `from_date`, `to_date`, `leave_id`, `leave_mode`, `is_leave_cancle`, `reason`, `is_approved`, `number_of_days`, `deleted_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 2, '2024-08-20', '2024-08-20', 1, 1, 2, 'at home', 1, 1.00, NULL, '2024-09-03 03:59:50', '2024-09-03 04:01:09', NULL),
-(2, 3, '2024-09-18', '2024-09-18', 1, 1, 1, 'test', 1, 1.00, NULL, '2024-09-11 07:16:35', '2024-09-18 11:14:04', NULL),
-(3, 9, '2024-09-14', '2024-09-14', 1, 1, 1, 'test', 1, 1.00, NULL, '2024-09-13 09:51:02', '2024-09-13 10:11:37', NULL),
-(4, 9, '2024-09-16', '2024-09-16', 2, 2, 1, 'test', 0, 0.50, NULL, '2024-09-18 11:20:09', '2024-09-13 11:20:09', NULL);
+(1, 4, '2024-09-25', '2024-09-25', 2, 2, 2, 'TEST', 0, 0.50, NULL, '2024-09-24 05:17:23', '2024-09-24 05:18:19', '2024-09-24 05:18:19'),
+(2, 4, '2024-09-25', '2024-09-25', 2, 2, 1, 'TEST', 0, 0.50, 1, '2024-09-24 05:31:18', '2024-09-24 06:49:31', '2024-09-24 06:49:31'),
+(3, 4, '2024-09-25', '2024-09-25', 2, 2, 1, 'TEST', 1, 0.50, NULL, '2024-09-24 06:04:05', '2024-09-25 05:39:22', NULL),
+(4, 4, '2024-09-28', '2024-09-28', 1, 1, 1, 'test', 1, 1.00, NULL, '2024-09-24 06:32:50', '2024-09-24 06:36:54', NULL),
+(5, 4, '2024-09-26', '2024-09-27', 2, 1, 1, 'test', 1, 2.00, 1, '2024-09-24 06:44:41', '2024-09-24 06:51:39', '2024-09-24 06:51:39'),
+(6, 2, '2024-09-26', '2024-09-26', 1, 1, 1, 'test', 0, 1.00, NULL, '2024-09-25 09:02:11', '2024-09-25 09:02:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -296,9 +322,9 @@ INSERT INTO `tbl_model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\Models\\User', 1),
 (4, 'App\\Models\\User', 2),
 (4, 'App\\Models\\User', 3),
-(4, 'App\\Models\\User', 4),
-(4, 'App\\Models\\User', 5),
-(4, 'App\\Models\\User', 6),
+(3, 'App\\Models\\User', 4),
+(7, 'App\\Models\\User', 5),
+(2, 'App\\Models\\User', 6),
 (4, 'App\\Models\\User', 7),
 (4, 'App\\Models\\User', 8),
 (4, 'App\\Models\\User', 9);
@@ -446,10 +472,10 @@ INSERT INTO `tbl_projects` (`id`, `project_name`, `start_date`, `expected_end_da
 (1, 'Checkeeper', NULL, NULL, NULL, 1, 'Client123', NULL, NULL, NULL, 'null', '2024-08-31 06:58:56', '2024-09-16 08:54:29', NULL),
 (2, 'Payroll', '2024-09-11', '2024-09-30', NULL, 1, NULL, NULL, NULL, NULL, 'null', '2024-09-12 12:31:51', '2024-09-12 12:31:51', NULL),
 (3, 'Payroll', '2024-09-11', '2024-09-30', NULL, 1, NULL, NULL, NULL, NULL, 'null', '2024-09-12 12:31:51', '2024-09-12 12:31:51', NULL),
-(4, 'Payroll', '2024-09-11', '2024-09-30', NULL, 1, NULL, NULL, NULL, NULL, 'null', '2024-09-12 12:35:36', '2024-09-12 12:35:36', NULL),
+(4, 'Payroll', '2024-09-11', '2024-09-30', NULL, 1, NULL, NULL, NULL, NULL, 'null', '2024-09-12 12:35:36', '2024-09-26 12:06:29', '2024-09-26 12:06:29'),
 (5, 'pay', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 'null', '2024-09-12 12:36:02', '2024-09-12 12:36:02', NULL),
 (6, 'Payroll', '2024-09-16', '2024-09-17', NULL, 1, NULL, NULL, NULL, NULL, 'null', '2024-09-16 07:14:24', '2024-09-16 07:14:24', NULL),
-(7, 'Attandance', '2024-09-16', '2024-09-20', NULL, 3, NULL, NULL, NULL, NULL, 'null', '2024-09-16 07:16:12', '2024-09-16 07:16:12', NULL);
+(7, 'Attandance', '2024-09-16', '2024-09-20', NULL, 3, NULL, NULL, NULL, NULL, 'null', '2024-09-16 07:16:12', '2024-09-26 12:07:27', '2024-09-26 12:07:27');
 
 -- --------------------------------------------------------
 
@@ -471,6 +497,22 @@ CREATE TABLE `tbl_punch_in_outs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbl_punch_in_outs`
+--
+
+INSERT INTO `tbl_punch_in_outs` (`id`, `user_id`, `date`, `punch_in`, `punch_in_lat`, `punch_in_long`, `punch_out`, `punch_out_lat`, `punch_out_long`, `punch_in_out_status`, `created_at`, `updated_at`) VALUES
+(1, 1, '2024-09-24', '12:24:00', NULL, NULL, '18:28:00', NULL, NULL, 0, '2024-09-24 06:54:19', '2024-09-24 12:58:27'),
+(2, 4, '2024-09-24', '12:28:00', NULL, NULL, '18:28:00', NULL, NULL, 0, '2024-09-24 06:58:41', '2024-09-24 12:58:07'),
+(3, 6, '2024-09-24', '15:36:00', NULL, NULL, '18:27:00', NULL, NULL, 0, '2024-09-24 10:06:05', '2024-09-24 12:57:25'),
+(4, 2, '2024-09-25', '11:05:00', NULL, NULL, '18:30:00', NULL, NULL, 0, '2024-09-25 05:35:34', '2024-09-26 03:57:34'),
+(5, 1, '2024-09-25', '11:18:00', NULL, NULL, NULL, NULL, NULL, 1, '2024-09-25 05:48:25', '2024-09-25 05:48:25'),
+(6, 6, '2024-09-25', '11:18:00', NULL, NULL, NULL, NULL, NULL, 1, '2024-09-25 05:48:54', '2024-09-25 05:48:54'),
+(7, 1, '2024-09-26', '10:26:00', NULL, NULL, NULL, NULL, NULL, 1, '2024-09-26 04:56:19', '2024-09-26 04:56:19'),
+(8, 4, '2024-09-26', '10:35:00', NULL, NULL, NULL, NULL, NULL, 1, '2024-09-26 05:05:24', '2024-09-26 05:05:24'),
+(9, 1, '2024-09-30', '10:11:00', NULL, NULL, NULL, NULL, NULL, 1, '2024-09-30 04:41:48', '2024-09-30 04:41:48'),
+(10, 4, '2024-09-30', '10:20:00', NULL, NULL, NULL, NULL, NULL, 1, '2024-09-30 04:50:36', '2024-09-30 04:50:36');
 
 -- --------------------------------------------------------
 
@@ -497,7 +539,7 @@ INSERT INTO `tbl_roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`)
 (4, 'Employee', 'web', '2024-06-06 05:05:16', '2024-06-06 05:05:16'),
 (5, 'Project Manager', 'web', '2024-09-10 12:03:14', '2024-09-10 12:03:14'),
 (6, 'HOD', 'web', '2024-09-10 12:07:04', '2024-09-18 05:33:02'),
-(7, 'ceo', 'web', '2024-09-18 12:43:48', '2024-09-18 12:43:48'),
+(7, 'CEO', 'web', '2024-09-18 12:43:48', '2024-09-24 09:08:58'),
 (8, 'pqr', 'web', '2024-09-18 12:45:48', '2024-09-18 12:45:48'),
 (9, 'ABC', 'web', '2024-09-18 12:48:06', '2024-09-18 12:48:06');
 
@@ -610,29 +652,34 @@ INSERT INTO `tbl_role_has_permissions` (`permission_id`, `role_id`) VALUES
 (41, 2),
 (42, 2),
 (43, 2),
-(29, 3),
-(30, 3),
-(31, 3),
-(32, 3),
-(36, 3),
-(37, 3),
-(38, 3),
+(10, 3),
+(14, 3),
+(18, 3),
+(19, 3),
+(20, 3),
+(21, 3),
+(22, 3),
+(23, 3),
+(24, 3),
+(25, 3),
+(26, 3),
+(27, 3),
+(28, 3),
 (18, 4),
-(20, 4),
-(22, 4),
 (26, 4),
 (27, 4),
 (28, 4),
-(38, 4),
-(39, 4),
-(42, 4),
-(44, 4),
+(10, 5),
+(14, 5),
 (1, 6),
 (2, 6),
 (3, 6),
 (4, 6),
 (1, 7),
 (5, 7),
+(10, 7),
+(18, 7),
+(26, 7),
 (1, 8),
 (1, 9),
 (5, 9);
@@ -684,6 +731,13 @@ CREATE TABLE `tbl_salaries` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbl_salaries`
+--
+
+INSERT INTO `tbl_salaries` (`id`, `user_id`, `month_year`, `present_days`, `total_week_off`, `paid_holiday`, `number_of_paid_leaves`, `absent_days`, `total_days`, `number_of_days_work`, `per_day_salary`, `overtime_work_hr`, `ot_per_hr_rs`, `basic`, `hra`, `medical`, `education`, `conveyance`, `special_allowance`, `gross_salary_A`, `is_pf_deduct`, `employee_contribution`, `esi_employee_contribution`, `labour_welfare_employee`, `professional_tax`, `employee_contri_B`, `net_salary_C`, `employer_contribution`, `esi_employer_contribution`, `labour_welfare_employer`, `employee_contri_D`, `ctc_BCD`, `final_amount`, `payment_mode`, `remark`, `is_salary_slip_generate`, `salary_slip_path`, `created_at`, `updated_at`) VALUES
+(1, 4, '2024-09', '2.00', 9, 6, NULL, '13.00', 30, '17.00', '500.00', NULL, NULL, '5666.67', '566.67', '566.67', '566.67', '566.67', '566.67', '8500.00', 'No', '0.00', '120.00', '1.00', '200.00', '321.00', '8179.00', '0.00', NULL, NULL, '0.00', '8500.00', '8500.00', 2, NULL, 1, 'salary-slip/emp-103-2024-09.pdf', '2024-09-30 06:25:00', '2024-09-30 06:25:03');
 
 -- --------------------------------------------------------
 
@@ -745,9 +799,12 @@ CREATE TABLE `tbl_salary_histories` (
 --
 
 INSERT INTO `tbl_salary_histories` (`id`, `year`, `job_type`, `user_id`, `gross_salary_yearly`, `gross_salary_monthly`, `basic_yearly`, `basic_monthly`, `hra_yearly`, `hra_monthly`, `medical_yearly`, `medical_monthly`, `education_yearly`, `education_monthly`, `conveyance_yearly`, `conveyance_monthly`, `special_allowance_yearly`, `special_allowance_monthly`, `gross_salary_A_yearly`, `gross_salary_A_monthly`, `is_pf_deduct_yearly`, `is_pf_deduct_monthly`, `employee_contribution_yearly`, `employee_contribution_monthly`, `esi_employee_contribution_yearly`, `esi_employee_contribution_monthly`, `labour_welfare_employee_yearly`, `labour_welfare_employee_monthly`, `professional_tax_yearly`, `professional_tax_monthly`, `employee_contribution_B_yearly`, `employee_contribution_B_monthly`, `net_salary_C_yearly`, `net_salary_C_monthly`, `employer_contribution_yearly`, `employer_contribution_monthly`, `esi_employer_contribution_yearly`, `esi_employer_contribution_monthly`, `labour_welfare_employer_yearly`, `labour_welfare_employer_monthly`, `employer_contri_D_yearly`, `employer_contri_D_monthly`, `ctc_bcd_yearly`, `ctc_bcd_monthly`, `created_at`, `updated_at`) VALUES
-(1, '2024', 1, 2, 324000.00, 27000.00, 129600.00, 10800.00, 51840.00, 4320.00, 15000.00, 1250.00, 12000.00, 1000.00, 19200.00, 1600.00, 96360.00, 8030.00, 324000.00, 27000.00, 'Yes', 'Yes', 15552.00, 1296.00, 0.00, 0.00, 12.00, 1.00, 2400.00, 200.00, 17964.00, 1497.00, 306036.00, 25503.00, 0.00, 0.00, 0.00, 0.00, 24.00, 2.00, 24.00, 2.00, 324024.00, 27002.00, '2024-09-19 04:12:27', '2024-09-19 04:12:27'),
-(2, '2024', 1, 2, 200000.00, 15000.00, 180000.00, 5000.00, 4000.00, 2000.00, 4000.00, 2000.00, 4000.00, 2000.00, 4000.00, 2000.00, 4000.00, 2000.00, 200000.00, 15000.00, 'No', 'No', 0.00, 0.00, 1200.00, 120.00, 12.00, 1.00, 2400.00, 200.00, 3612.00, 321.00, 196388.00, 14679.00, NULL, NULL, NULL, NULL, NULL, NULL, 0.00, 0.00, 200000.00, 15000.00, '2024-09-19 06:26:54', '2024-09-19 06:26:54'),
-(3, '2024', 1, 3, 324000.00, 27000.00, 129600.00, 10800.00, 51840.00, 4320.00, 15000.00, 1250.00, 12000.00, 1000.00, 19200.00, 1600.00, 96360.00, 8030.00, 324000.00, 27000.00, 'Yes', 'Yes', 15552.00, 1296.00, 0.00, 0.00, 12.00, 1.00, 2400.00, 200.00, 17964.00, 1497.00, 306036.00, 25503.00, 0.00, 0.00, 0.00, 0.00, 24.00, 2.00, 24.00, 2.00, 324024.00, 27002.00, '2024-09-19 06:27:09', '2024-09-19 06:27:09');
+(1, 2024, 1, 2, '200000.00', '15000.00', '180000.00', '5000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '200000.00', '15000.00', 'No', 'No', '0.00', '0.00', '1200.00', '120.00', '12.00', '1.00', '2400.00', '200.00', '3612.00', '321.00', '196388.00', '14679.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '200000.00', '15000.00', '2024-09-19 04:12:27', '2024-09-25 08:55:28'),
+(2, 2024, 1, 2, '200000.00', '15000.00', '180000.00', '5000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '200000.00', '15000.00', 'No', 'No', '0.00', '0.00', '1200.00', '120.00', '12.00', '1.00', '2400.00', '200.00', '3612.00', '321.00', '196388.00', '14679.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '200000.00', '15000.00', '2024-09-19 06:26:54', '2024-09-19 06:26:54'),
+(3, 2024, 1, 3, '324000.00', '27000.00', '129600.00', '10800.00', '51840.00', '4320.00', '15000.00', '1250.00', '12000.00', '1000.00', '19200.00', '1600.00', '96360.00', '8030.00', '324000.00', '27000.00', 'Yes', 'Yes', '15552.00', '1296.00', '0.00', '0.00', '12.00', '1.00', '2400.00', '200.00', '17964.00', '1497.00', '306036.00', '25503.00', '0.00', '0.00', '0.00', '0.00', '24.00', '2.00', '24.00', '2.00', '324024.00', '27002.00', '2024-09-19 06:27:09', '2024-09-19 06:27:09'),
+(4, 2024, 1, 4, '200000.00', '15000.00', '180000.00', '10000.00', '4000.00', '1000.00', '4000.00', '1000.00', '4000.00', '1000.00', '4000.00', '1000.00', '4000.00', '1000.00', '200000.00', '15000.00', 'No', 'No', '0.00', '0.00', '1200.00', '120.00', '12.00', '1.00', '2400.00', '200.00', '3612.00', '321.00', '196388.00', '14679.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '200000.00', '15000.00', '2024-09-24 05:15:05', '2024-09-24 05:51:02'),
+(5, 2024, 1, 5, '250000.00', '20000.00', '200000.00', '15000.00', '10000.00', '1000.00', '10000.00', '1000.00', '10000.00', '1000.00', '10000.00', '1000.00', '10000.00', '1000.00', '250000.00', '20000.00', 'Yes', 'Yes', '24000.00', '1800.00', '20000.00', '1200.00', '12.00', '1.00', '2400.00', '200.00', '46412.00', '3201.00', '203588.00', '16799.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '250000.00', '20000.00', '2024-09-24 08:35:28', '2024-09-24 09:12:39'),
+(6, 2024, 1, 6, '240000.00', '20000.00', '200000.00', '15000.00', '8000.00', '1000.00', '8000.00', '1000.00', '8000.00', '1000.00', '8000.00', '1000.00', '8000.00', '1000.00', '240000.00', '20000.00', 'No', 'No', '0.00', '0.00', '12000.00', '1200.00', '120.00', '10.00', '2400.00', '200.00', '14520.00', '1410.00', '225480.00', '18590.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '240000.00', '20000.00', '2024-09-24 09:55:02', '2024-09-24 11:22:19');
 
 -- --------------------------------------------------------
 
@@ -818,9 +875,12 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `designation_id`, `department_id`, `emp_id`, `job_type`, `first_name`, `middle_name`, `last_name`, `email`, `email_verified_at`, `mobile_no`, `personal_email`, `password`, `gender`, `dob`, `joining_date`, `releaving_date`, `probation_end_date`, `confirmation_date`, `profile_image`, `temporary_address`, `permanent_address`, `remember_token`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, NULL, 'emp-101', NULL, 'Admin', NULL, 'Admin', 'admin@example.com', NULL, 1234567890, NULL, '$2y$10$.yA3BEYGU6ySCHVN9ffCWOjKT0JGkunXs2SN5fAQnt7wqK7REUusO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'U5edGn4YZXATaxVLq1aTfGuO4Msrxl2LnVsuxhE9cOfB2Jt0tHMMxWvkUuDK', 1, '2024-06-11 16:57:20', '2024-09-17 12:21:31', NULL),
-(2, 9, 1, 'emp-102', 1, 'Payal', NULL, 'Khanvilkar', 'payal.khanvilkar@inbox-infotech.com', NULL, 9874563210, NULL, '$2y$10$7j.3W2U9cfmcbdcAAs3h6Ov7ONNkULuGwN3yxXmG8L6OV7TOAJah6', 2, '2016-04-22', '2024-01-01', NULL, '2024-02-29', '2024-03-01', NULL, NULL, NULL, NULL, 1, '2024-09-19 06:26:54', '2024-09-19 06:26:54', NULL),
-(3, 9, 1, 'emp-102', 1, 'Rahul', NULL, 'Patil', 'rahul.patil@inbox-infotech.com', NULL, 9545276255, 'rahulpatil2163@gmail.com', '$2y$10$r8VjKU9yqIch1AsKyru9celbFrQurzbSyGzK1Rn/yxvs6rZRepa8y', 1, '2024-09-01', '2024-06-03', NULL, '2024-08-31', NULL, NULL, 'Vadodara', 'Vadodara', NULL, 1, '2024-09-19 06:27:09', '2024-09-19 06:27:09', NULL);
+(1, 1, NULL, 'emp-101', NULL, 'Admin', NULL, 'Admin', 'admin@example.com', NULL, 1234567890, NULL, '$2y$10$.yA3BEYGU6ySCHVN9ffCWOjKT0JGkunXs2SN5fAQnt7wqK7REUusO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'BiiLKuTfiueuuFfP65xczenOujGtRCyCcXUBZjSGga18Kkvc7GGALkt0kCGq', 1, '2024-06-11 16:57:20', '2024-09-17 12:21:31', NULL),
+(2, 9, 1, 'emp-102', 1, 'Payal', NULL, 'Khanvilkar', 'payal.khanvilkar@inbox-infotech.com', NULL, 9874563210, NULL, '$2y$10$7j.3W2U9cfmcbdcAAs3h6Ov7ONNkULuGwN3yxXmG8L6OV7TOAJah6', 2, '2016-04-22', '2024-01-01', NULL, '2024-02-29', '2024-09-25', NULL, NULL, NULL, NULL, 1, '2024-09-19 06:26:54', '2024-09-25 08:55:27', NULL),
+(3, 9, 1, 'emp-102', 1, 'Rahul', NULL, 'Patil', 'rahul.patil@inbox-infotech.com', NULL, 9545276255, 'rahulpatil2163@gmail.com', '$2y$10$r8VjKU9yqIch1AsKyru9celbFrQurzbSyGzK1Rn/yxvs6rZRepa8y', 1, '2024-09-01', '2024-06-03', NULL, '2024-08-31', NULL, NULL, 'Vadodara', 'Vadodara', NULL, 1, '2024-09-19 06:27:09', '2024-09-19 06:27:09', NULL),
+(4, 6, 6, 'emp-103', 1, 'Rhythm', NULL, 'Patel', 'Rhythm@gmail.com', NULL, 1236412300, NULL, '$2y$10$0K9XQXf3oP/9y1rXuDVUW.RdOuCa5BzGfWlUCYtZqcw5jUiJEwnLG', 1, '2016-02-02', '2024-01-01', NULL, '2024-06-30', '2024-09-24', 'profile_image/24092024335.jpg', NULL, NULL, NULL, 1, '2024-09-24 05:15:05', '2024-09-24 07:10:28', NULL),
+(5, 1, 6, 'emp-104', 1, 'Pratham', NULL, 'P', 'Pratham@gmail.com', NULL, 1236541235, NULL, '$2y$10$80qlIRCEvwlNMT2Vx80zquMD2gbwjK4ZVJ6jWAoUOK/JQbkNiBw5u', 1, '2015-01-01', '2023-01-16', NULL, '2024-01-31', '2024-09-24', NULL, NULL, NULL, NULL, 1, '2024-09-24 08:35:28', '2024-09-24 09:36:47', '2024-09-24 09:36:47'),
+(6, 10, 6, 'emp-105', 1, 'Pihu', NULL, 'Patel', 'pihu@gmail.com', NULL, 4563214560, NULL, '$2y$10$9BisahFYuR8DmX6Pr57lm.K3ndhGTLNUC6qgfqt99/nMyU3GFYlby', 2, '2013-02-06', '2024-03-01', NULL, '2024-05-29', '2024-09-24', NULL, NULL, NULL, NULL, 1, '2024-09-24 09:55:02', '2024-09-27 06:57:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -885,8 +945,11 @@ CREATE TABLE `tbl_user_details` (
 --
 
 INSERT INTO `tbl_user_details` (`id`, `user_id`, `bank_name`, `bank_branch_name`, `ac_no`, `ifsc_code`, `uan_number`, `gross_salary_yearly`, `gross_salary_monthly`, `basic_yearly`, `basic_monthly`, `hra_yearly`, `hra_monthly`, `medical_yearly`, `medical_monthly`, `education_yearly`, `education_monthly`, `conveyance_yearly`, `conveyance_monthly`, `special_allowance_yearly`, `special_allowance_monthly`, `gross_salary_A_yearly`, `gross_salary_A_monthly`, `is_pf_deduct_yearly`, `is_pf_deduct_monthly`, `employee_contribution_yearly`, `employee_contribution_monthly`, `esi_employee_contribution_yearly`, `esi_employee_contribution_monthly`, `labour_welfare_employee_yearly`, `labour_welfare_employee_monthly`, `professional_tax_yearly`, `professional_tax_monthly`, `employee_contribution_B_yearly`, `employee_contribution_B_monthly`, `net_salary_C_yearly`, `net_salary_C_monthly`, `employer_contribution_yearly`, `employer_contribution_monthly`, `esi_employer_contribution_yearly`, `esi_employer_contribution_monthly`, `labour_welfare_employer_yearly`, `labour_welfare_employer_monthly`, `employer_contri_D_yearly`, `employer_contri_D_monthly`, `ctc_bcd_yearly`, `ctc_bcd_monthly`, `created_at`, `updated_at`) VALUES
-(1, 2, 'eyJpdiI6ImFoRWF5VHExa2ZKL3NqVDhlODJXZWc9PSIsInZhbHVlIjoiVk5WdlNiY09rR21VbE9GekpoYzRQZz09IiwibWFjIjoiZTUyN2M0YzEwMTVjY2I1NWE3MmVmMzU1ZDc5ZjAwYzg3ZGExYjQwMGRjOTIwNjEzZWI4YmYwOWVkYzE5MGE3MiIsInRhZyI6IiJ9', 'eyJpdiI6IlFGTGgvVmptanV0RXRNNE9BMmM1V2c9PSIsInZhbHVlIjoiUlNmVU1uM0xXMEFzQXZvOGV4OU92UT09IiwibWFjIjoiNjMzMGNhZTM1ZjFlY2NjZGRjOGUyMmRkNzBlNjdjMWFiNjAyMWVlNGNhYjgzMDk1MzMzZTdmYzU0OTI1Njg5NSIsInRhZyI6IiJ9', 'eyJpdiI6InYrdmlHcC9IZzhsNXg3ejB3Skc1SGc9PSIsInZhbHVlIjoiajQ4QXNhbVErRTFmTmcyenNPeHZkUT09IiwibWFjIjoiMmY0OGI2NTNlOTg4NGZlZGRkOTYyZWYwMjRmMjc2NjIxMmI1NjE3ZGUyMTMyMGMwODUwYzhjOTc3Y2U0MzFmYiIsInRhZyI6IiJ9', 'eyJpdiI6IlIxSWg0dTFuMVhmM1VJRUcyam1uR3c9PSIsInZhbHVlIjoiUVhXT2Y0UTVsam9VeVVBYis2M0N0dz09IiwibWFjIjoiMjAzZDU3NDMxNDNkY2ZkOGQwNDUzNzI2YWNiOTY3NTlhN2IwNjBiNDZkNmFlMjkzNDhmZTRkODdhMWMyZGQ0NCIsInRhZyI6IiJ9', '123654123', 200000.00, 15000.00, 180000.00, 5000.00, 4000.00, 2000.00, 4000.00, 2000.00, 4000.00, 2000.00, 4000.00, 2000.00, 4000.00, 2000.00, 200000.00, 15000.00, 'No', 'No', 0.00, 0.00, 1200.00, 120.00, 12.00, 1.00, 2400.00, 200.00, 3612.00, 321.00, 196388.00, 14679.00, NULL, NULL, NULL, NULL, NULL, NULL, 0.00, 0.00, 200000.00, 15000.00, '2024-09-19 06:26:54', '2024-09-19 06:26:54'),
-(2, 3, 'eyJpdiI6InFtVGd0aGZLZlYxVDd3QldpTGFDVlE9PSIsInZhbHVlIjoiSTFOdnlibTJXdzg4dGFhaUJPL0dXRGtURGdZZmRVNEw0dzFjMXhNb0RSYz0iLCJtYWMiOiJjYThlZjY2NTE1NDgyZmUyMTEzNmFmOGQ1MDVmMDA5ZDY1YTZiYTU2MjM2Zjg1NzI1ZjQ2YWVkNDYxZTQ2OWQyIiwidGFnIjoiIn0=', 'eyJpdiI6IithQkcrSGcrbCtDakpmMUo3d1RVN1E9PSIsInZhbHVlIjoid3UwVHpBNElwckYyN1E4eTM3QmNEZz09IiwibWFjIjoiYTkwZDRjYjMxNGI0ODYzZTRiZjRmYTQ4M2IwMWM3N2MwNTRjZmY2MGE0YTg3NWZiYWViODZjZDkwYWE0ODUxNyIsInRhZyI6IiJ9', 'eyJpdiI6IllvTVoyRk12R3dGb0Z2QXlvZFU5RkE9PSIsInZhbHVlIjoiWk5laGtMTFZESmFlQ0xZOE5jWGtNeTJrZUVqWTN1c1JvZ2txcVB4MzZpZz0iLCJtYWMiOiJiY2I2N2U3NTY0MTM1MGY4MTk3ZTEyZTFkOGIzYmJmODdhNTI3MWYxYWYxMWJjNjQ2MjM4YWQ3ZTlmMzA2YTI1IiwidGFnIjoiIn0=', 'eyJpdiI6ImFXVUoyeUNUSkFUZ0krdDZWRVBQZmc9PSIsInZhbHVlIjoiSjBMMWxUckpEVXRaRllnZ0R6VVAySHFUTG1PYTFNL3dEK2c1b0xnV2dGbz0iLCJtYWMiOiJkMTQyOTkyODdiNjIxNzhkMWU0YTIwMmI3YmNmMWE3YTY0NTdkYmI0OTQ1NmM5ZTNjODIwOGNhYjExZjgzMTFhIiwidGFnIjoiIn0=', NULL, 324000.00, 27000.00, 129600.00, 10800.00, 51840.00, 4320.00, 15000.00, 1250.00, 12000.00, 1000.00, 19200.00, 1600.00, 96360.00, 8030.00, 324000.00, 27000.00, 'Yes', 'Yes', 15552.00, 1296.00, 0.00, 0.00, 12.00, 1.00, 2400.00, 200.00, 17964.00, 1497.00, 306036.00, 25503.00, 0.00, 0.00, 0.00, 0.00, 24.00, 2.00, 24.00, 2.00, 324024.00, 27002.00, '2024-09-19 06:27:09', '2024-09-19 06:27:09');
+(1, 2, 'eyJpdiI6IlB6OHJpMnE2WDRFRDZ4UmxVZzN6R1E9PSIsInZhbHVlIjoiZCtXaUUyQlVCbGJqME5vNVQ4eXBpZz09IiwibWFjIjoiYjFjYmMxOTYxNTViNTQ3M2JkMzA2NDkwYmRjODk0ZGUzMThhYzcxMGY3YWVjOTZlOTEyYTFkOWI0OWQxYzQ4NCIsInRhZyI6IiJ9', 'eyJpdiI6InJoeVhvMFZZZVFSY3ZrYmx2cDdxekE9PSIsInZhbHVlIjoiQlZSemFDL2JiaUtuaW5WUU1iWmlwQT09IiwibWFjIjoiNGRkMDRjOTZiZDc1ODA5ZDYxNDg1Y2UyYjMzOTllNDg4Y2ZhMmJhZjhhYWEyNDA2MTI0MDFkMjM5NGJjNDk4MiIsInRhZyI6IiJ9', 'eyJpdiI6Ik1SWndWVzJ6L1EreFhTd3Jrb2ljOHc9PSIsInZhbHVlIjoiWlZBZ0hIUk1xMnBicEFQR2M4NzFiQT09IiwibWFjIjoiOGJiYzllNGUyNzg0N2YxYmZkYzQyYTZjNjQxY2QwMmI3YWNmNTdiNTdkYTA4ZTQ2ZTA2M2YyNzhiNGQ4NjA0OSIsInRhZyI6IiJ9', 'eyJpdiI6Ik8yNjRFMzlkbW9neklOVENja0FxbUE9PSIsInZhbHVlIjoicTZtTVk5YVdVUlAxTlVkaXEydG1OQT09IiwibWFjIjoiOGZlMTM3ZmNiNWE1NjZmMGQ3ZDNmZTdkM2Q4MTNiNmY5NTE0NDE2OTMyNDg5ZDc0ZjJiYzM0ODU2MjU4NGFmMyIsInRhZyI6IiJ9', '123654123', '200000.00', '15000.00', '180000.00', '5000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '200000.00', '15000.00', 'No', 'No', '0.00', '0.00', '1200.00', '120.00', '12.00', '1.00', '2400.00', '200.00', '3612.00', '321.00', '196388.00', '14679.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '200000.00', '15000.00', '2024-09-19 06:26:54', '2024-09-25 08:55:27'),
+(2, 3, 'eyJpdiI6InFtVGd0aGZLZlYxVDd3QldpTGFDVlE9PSIsInZhbHVlIjoiSTFOdnlibTJXdzg4dGFhaUJPL0dXRGtURGdZZmRVNEw0dzFjMXhNb0RSYz0iLCJtYWMiOiJjYThlZjY2NTE1NDgyZmUyMTEzNmFmOGQ1MDVmMDA5ZDY1YTZiYTU2MjM2Zjg1NzI1ZjQ2YWVkNDYxZTQ2OWQyIiwidGFnIjoiIn0=', 'eyJpdiI6IithQkcrSGcrbCtDakpmMUo3d1RVN1E9PSIsInZhbHVlIjoid3UwVHpBNElwckYyN1E4eTM3QmNEZz09IiwibWFjIjoiYTkwZDRjYjMxNGI0ODYzZTRiZjRmYTQ4M2IwMWM3N2MwNTRjZmY2MGE0YTg3NWZiYWViODZjZDkwYWE0ODUxNyIsInRhZyI6IiJ9', 'eyJpdiI6IllvTVoyRk12R3dGb0Z2QXlvZFU5RkE9PSIsInZhbHVlIjoiWk5laGtMTFZESmFlQ0xZOE5jWGtNeTJrZUVqWTN1c1JvZ2txcVB4MzZpZz0iLCJtYWMiOiJiY2I2N2U3NTY0MTM1MGY4MTk3ZTEyZTFkOGIzYmJmODdhNTI3MWYxYWYxMWJjNjQ2MjM4YWQ3ZTlmMzA2YTI1IiwidGFnIjoiIn0=', 'eyJpdiI6ImFXVUoyeUNUSkFUZ0krdDZWRVBQZmc9PSIsInZhbHVlIjoiSjBMMWxUckpEVXRaRllnZ0R6VVAySHFUTG1PYTFNL3dEK2c1b0xnV2dGbz0iLCJtYWMiOiJkMTQyOTkyODdiNjIxNzhkMWU0YTIwMmI3YmNmMWE3YTY0NTdkYmI0OTQ1NmM5ZTNjODIwOGNhYjExZjgzMTFhIiwidGFnIjoiIn0=', NULL, '324000.00', '27000.00', '129600.00', '10800.00', '51840.00', '4320.00', '15000.00', '1250.00', '12000.00', '1000.00', '19200.00', '1600.00', '96360.00', '8030.00', '324000.00', '27000.00', 'Yes', 'Yes', '15552.00', '1296.00', '0.00', '0.00', '12.00', '1.00', '2400.00', '200.00', '17964.00', '1497.00', '306036.00', '25503.00', '0.00', '0.00', '0.00', '0.00', '24.00', '2.00', '24.00', '2.00', '324024.00', '27002.00', '2024-09-19 06:27:09', '2024-09-19 06:27:09'),
+(3, 4, 'eyJpdiI6IjVvaCsrbjJUL1p6UitpRmRvNmFVL2c9PSIsInZhbHVlIjoiWGVzNStpd3lwZ0RQQ2xzTExQYjdmZz09IiwibWFjIjoiM2E5N2RiN2NhNzI2NTBlYTc0M2U0YWRlOTNiZGM3NjkxZjI1YjRjOGYyMTY5ZTQ5Y2VkYzA1NGUxZTFhNTIxNyIsInRhZyI6IiJ9', 'eyJpdiI6IkU0Mm1SUVdZNXhNdU5IaXlOZXZ0OEE9PSIsInZhbHVlIjoiL0pmdldhb1VvbGZWenRVcFhBc2ZjQT09IiwibWFjIjoiYjU4ODRiY2FlNDM3YjA2MTczZjI3ZGYwNTdiYjBhMTBlZGRjMGQ0MDBiYWU5ZWRjZWVhYmE5M2Q3N2NjZTBiYiIsInRhZyI6IiJ9', 'eyJpdiI6InVCWkR6Z1FvQ1BqNTVacERrbGwwTnc9PSIsInZhbHVlIjoiZmV0R0Qyaks1ejNXLy9hUTBZQkZldz09IiwibWFjIjoiZjI3OWZhM2M1ZDgxZDI5Y2ZiN2U4YTliMTNmYWMyYmFiYmUzNmRiMTg0MWU3ZjIxODdjZDE0OTA4MGZhOGUxZiIsInRhZyI6IiJ9', 'eyJpdiI6ImdYQ3BFdjdOOEF1WEQ1bjh1NzErZmc9PSIsInZhbHVlIjoidDNraXBoTzlmaVMxa2NiYTJBeldFUT09IiwibWFjIjoiOTNkZmNjOGU3NmMwOTQzNzdlMGE5M2IxOThmZWFmNWY4YjlhYjNjMTFiODQ4MzUyYjdlOTI4NWU5YjM4YmFlZCIsInRhZyI6IiJ9', NULL, '200000.00', '15000.00', '180000.00', '10000.00', '4000.00', '1000.00', '4000.00', '1000.00', '4000.00', '1000.00', '4000.00', '1000.00', '4000.00', '1000.00', '200000.00', '15000.00', 'No', 'No', '0.00', '0.00', '1200.00', '120.00', '12.00', '1.00', '2400.00', '200.00', '3612.00', '321.00', '196388.00', '14679.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '200000.00', '15000.00', '2024-09-24 05:15:05', '2024-09-24 05:51:02'),
+(4, 5, 'eyJpdiI6IkxhS2txVThnQmhWNHdFaTdhSDlWOHc9PSIsInZhbHVlIjoiUEtwL1BTYWtveWV3alQ2UzlaeDdlQT09IiwibWFjIjoiZWRiYTc5YjZkMmFiYzdlM2M3ZGJhM2UzODgxMTU0NjQ5MDhiZGYzNmFmZjFhODEzZjcyZmNiNzQ0MWUwYTk0NSIsInRhZyI6IiJ9', 'eyJpdiI6InJlUThJMGw3NzNTb2RIT01NNW43cmc9PSIsInZhbHVlIjoiTXkxMjljM1lpM3lhNXV5K2Z4TW5xdz09IiwibWFjIjoiYjU4MGQ1MDZmZjljM2QwOTdiYTc5OWVlNDIzOGRlMzY2NDdmMDNkY2NlNGU4NDNkYTA1OTU4ZWU5NjliNTkzOSIsInRhZyI6IiJ9', 'eyJpdiI6Ik10UXlsRzNlYnZLMG1CU0xjMGIyNXc9PSIsInZhbHVlIjoiMzZtTGJYSmJISWtZZ0Q0MUUyTjQyUT09IiwibWFjIjoiYTE4ZjU2YjlhZTc5MjU2MjI2NTk3YmVmNWNiZTY2MjBkYzQzNWZjZTYwNDEwMjUzMDlhMDM3MjY0NWNjOWIzYiIsInRhZyI6IiJ9', 'eyJpdiI6InpRYjlUVEwrUm1Wcm5VR0pvaFlHTUE9PSIsInZhbHVlIjoiRTlmS2pJZWRHZTJlaUUrK240a1NZdz09IiwibWFjIjoiNzYzMmE0MjA4NGVkMzlkNjdhNTM2ODYzYzlhYmNjNTkzM2FhNjJmNWVhZmY3YjEwNmE0ZTFmYThlYzQzYzNkMCIsInRhZyI6IiJ9', NULL, '250000.00', '20000.00', '200000.00', '15000.00', '10000.00', '1000.00', '10000.00', '1000.00', '10000.00', '1000.00', '10000.00', '1000.00', '10000.00', '1000.00', '250000.00', '20000.00', 'Yes', 'Yes', '24000.00', '1800.00', '20000.00', '1200.00', '12.00', '1.00', '2400.00', '200.00', '46412.00', '3201.00', '203588.00', '16799.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '250000.00', '20000.00', '2024-09-24 08:35:28', '2024-09-24 09:12:39'),
+(5, 6, 'eyJpdiI6IjJyRm9SeEpmcHl3RlU1b0VGb2Q0Rnc9PSIsInZhbHVlIjoiYVdJV1JFVHBzUmlVNmZWOStyMkR4QT09IiwibWFjIjoiZjU3YzFkOGUzMDc1NDdlZmNlZGMxZmE5MGVjZWY1ZmZhZTQ4Y2RhODA2YjRmMWUzNTk0ZmI0NTkxOTVkODQyYyIsInRhZyI6IiJ9', 'eyJpdiI6Ikx5Umg5NDY5dlNidnF6MklBUzQ5dXc9PSIsInZhbHVlIjoiWDV6Ly83UmVaR1JvWHUzWms1ckZ1Zz09IiwibWFjIjoiZjkxNWUxZTE1M2NlZjAzNWQ4NGU3NTExZTJlNmQ4YTJiNDA2OWJkMWRlNzBkOTkxMDA2NzlhM2Y1YjMwMGQ2MiIsInRhZyI6IiJ9', 'eyJpdiI6IkQxZmtSQnQ5cm90U0VtcGhSd21uMVE9PSIsInZhbHVlIjoibmdwNVBUUEh6VUVGb05UWFJmdStyZz09IiwibWFjIjoiMzMwNWI0N2MzMzUxMTI4YTVhZTE0ODgxMjQ1N2VhM2MyYzhlYzg2YjY4MWIxZjE5M2Q0YzkwYWE1NzJiYzdjNyIsInRhZyI6IiJ9', 'eyJpdiI6ImpTeUdnc1ExdjdSSXdCT2lxc0ZiTXc9PSIsInZhbHVlIjoiNDNUV3doY2srMkFHZ1pLcXJJeUVHdz09IiwibWFjIjoiMDAyMDFjZWVhY2NlODRhMjIzZmNjN2IzYzI1YzhhZGYyNzU1OWIwOWJkOGM4NDUwY2RjNjBlNGM5YjdmNmJiNyIsInRhZyI6IiJ9', '14566122', '240000.00', '20000.00', '200000.00', '15000.00', '8000.00', '1000.00', '8000.00', '1000.00', '8000.00', '1000.00', '8000.00', '1000.00', '8000.00', '1000.00', '240000.00', '20000.00', 'No', 'No', '0.00', '0.00', '12000.00', '1200.00', '120.00', '10.00', '2400.00', '200.00', '14520.00', '1410.00', '225480.00', '18590.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '240000.00', '20000.00', '2024-09-24 09:55:02', '2024-09-24 11:22:19');
 
 -- --------------------------------------------------------
 
@@ -1057,7 +1120,7 @@ ALTER TABLE `tbl_user_documents`
 -- AUTO_INCREMENT for table `tbl_assign_leaves`
 --
 ALTER TABLE `tbl_assign_leaves`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tbl_departments`
@@ -1081,19 +1144,19 @@ ALTER TABLE `tbl_failed_jobs`
 -- AUTO_INCREMENT for table `tbl_holiday_leaves`
 --
 ALTER TABLE `tbl_holiday_leaves`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `tbl_leaves`
 --
 ALTER TABLE `tbl_leaves`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_leave_applies`
 --
 ALTER TABLE `tbl_leave_applies`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_migrations`
@@ -1123,7 +1186,7 @@ ALTER TABLE `tbl_projects`
 -- AUTO_INCREMENT for table `tbl_punch_in_outs`
 --
 ALTER TABLE `tbl_punch_in_outs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_roles`
@@ -1135,13 +1198,13 @@ ALTER TABLE `tbl_roles`
 -- AUTO_INCREMENT for table `tbl_salaries`
 --
 ALTER TABLE `tbl_salaries`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_salary_histories`
 --
 ALTER TABLE `tbl_salary_histories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_settings`
@@ -1153,13 +1216,13 @@ ALTER TABLE `tbl_settings`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_user_details`
 --
 ALTER TABLE `tbl_user_details`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_user_documents`

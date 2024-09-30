@@ -225,492 +225,483 @@
                 <!--/ Vehicles overview -->
                 <!-- Shipment statistics-->
                 <div class="col-lg-6 col-xxl-6 mb-4 order-3 order-xxl-1">
-                <div class="card">
-                    <div class="card-header d-flex align-items-center justify-content-between">
-                    <div class="card-title mb-0">
-                        <h5 class="m-0 me-2">Shipment statistics</h5>
-                        <small class="text-muted">Total number of deliveries 23.8k</small>
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <div class="card-title mb-0">
+                                <h5 class="m-0 me-2">Shipment statistics</h5>
+                                <small class="text-muted">Total number of deliveries 23.8k</small>
+                            </div>
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-label-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> January</button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="javascript:void(0);">January</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">February</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">March</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">April</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">May</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">June</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">July</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">August</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">September</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">October</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">November</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">December</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="shipmentStatisticsChart"></div>
+                        </div>
                     </div>
-                    <div class="dropdown">
-                        <button
-                        type="button"
-                        class="btn btn-label-primary dropdown-toggle"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        January
-                        </button>
-                        <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="javascript:void(0);">January</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0);">February</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0);">March</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0);">April</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0);">May</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0);">June</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0);">July</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0);">August</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0);">September</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0);">October</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0);">November</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0);">December</a></li>
-                        </ul>
-                    </div>
-                    </div>
-                    <div class="card-body">
-                    <div id="shipmentStatisticsChart"></div>
-                    </div>
-                </div>
                 </div>
                 <!--/ Shipment statistics -->
                 <!-- Delivery Performance -->
                 <div class="col-lg-6 col-xxl-4 mb-4 order-2 order-xxl-2">
-                <div class="card h-100">
-                    <div class="card-header d-flex align-items-center justify-content-between mb-2">
-                    <div class="card-title mb-0">
-                        <h5 class="m-0 me-2">Delivery Performance</h5>
-                        <small class="text-muted">12% increase in this month</small>
+                    <div class="card h-100">
+                        <div class="card-header d-flex align-items-center justify-content-between mb-2">
+                            <div class="card-title mb-0">
+                                <h5 class="m-0 me-2">Delivery Performance</h5>
+                                <small class="text-muted">12% increase in this month</small>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn p-0" type="button" id="deliveryPerformance" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="ti ti-dots-vertical"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="deliveryPerformance">
+                                    <a class="dropdown-item" href="javascript:void(0);">Select All</a>
+                                    <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
+                                    <a class="dropdown-item" href="javascript:void(0);">Share</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="p-0 m-0">
+                                <li class="d-flex mb-4 pb-1">
+                                <div class="avatar flex-shrink-0 me-3">
+                                    <span class="avatar-initial rounded bg-label-primary"><i class="ti ti-package"></i></span>
+                                </div>
+                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                    <div class="me-2">
+                                    <h6 class="mb-0 fw-normal">Packages in transit</h6>
+                                    <small class="text-success fw-normal d-block">
+                                        <i class="ti ti-chevron-up mb-1"></i>
+                                        25.8%
+                                    </small>
+                                    </div>
+                                    <div class="user-progress">
+                                    <h6 class="mb-0">10k</h6>
+                                    </div>
+                                </div>
+                                </li>
+                                <li class="d-flex mb-4 pb-1">
+                                <div class="avatar flex-shrink-0 me-3">
+                                    <span class="avatar-initial rounded bg-label-info"><i class="ti ti-truck"></i></span>
+                                </div>
+                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                    <div class="me-2">
+                                    <h6 class="mb-0 fw-normal">Packages out for delivery</h6>
+                                    <small class="text-success fw-normal d-block">
+                                        <i class="ti ti-chevron-up mb-1"></i>
+                                        4.3%
+                                    </small>
+                                    </div>
+                                    <div class="user-progress">
+                                    <h6 class="mb-0">5k</h6>
+                                    </div>
+                                </div>
+                                </li>
+                                <li class="d-flex mb-4 pb-1">
+                                <div class="avatar flex-shrink-0 me-3">
+                                    <span class="avatar-initial rounded bg-label-success"
+                                    ><i class="ti ti-circle-check"></i
+                                    ></span>
+                                </div>
+                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                    <div class="me-2">
+                                    <h6 class="mb-0 fw-normal">Packages delivered</h6>
+                                    <small class="text-danger fw-normal d-block">
+                                        <i class="ti ti-chevron-down mb-1"></i>
+                                        12.5%
+                                    </small>
+                                    </div>
+                                    <div class="user-progress">
+                                    <h6 class="mb-0">15k</h6>
+                                    </div>
+                                </div>
+                                </li>
+                                <li class="d-flex mb-4 pb-1">
+                                <div class="avatar flex-shrink-0 me-3">
+                                    <span class="avatar-initial rounded bg-label-warning"
+                                    ><i class="ti ti-percentage"></i
+                                    ></span>
+                                </div>
+                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                    <div class="me-2">
+                                    <h6 class="mb-0 fw-normal">Delivery success rate</h6>
+                                    <small class="text-success fw-normal d-block">
+                                        <i class="ti ti-chevron-up mb-1"></i>
+                                        35.6%
+                                    </small>
+                                    </div>
+                                    <div class="user-progress">
+                                    <h6 class="mb-0">95%</h6>
+                                    </div>
+                                </div>
+                                </li>
+                                <li class="d-flex mb-4 pb-1">
+                                <div class="avatar flex-shrink-0 me-3">
+                                    <span class="avatar-initial rounded bg-label-secondary"><i class="ti ti-clock"></i></span>
+                                </div>
+                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                    <div class="me-2">
+                                    <h6 class="mb-0 fw-normal">Average delivery time</h6>
+                                    <small class="text-danger fw-normal d-block">
+                                        <i class="ti ti-chevron-down mb-1"></i>
+                                        2.15%
+                                    </small>
+                                    </div>
+                                    <div class="user-progress">
+                                    <h6 class="mb-0">2.5 Days</h6>
+                                    </div>
+                                </div>
+                                </li>
+                                <li class="d-flex">
+                                <div class="avatar flex-shrink-0 me-3">
+                                    <span class="avatar-initial rounded bg-label-danger"><i class="ti ti-users"></i></span>
+                                </div>
+                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                    <div class="me-2">
+                                    <h6 class="mb-0 fw-normal">Customer satisfaction</h6>
+                                    <small class="text-success fw-normal d-block">
+                                        <i class="ti ti-chevron-up mb-1"></i>
+                                        5.7%
+                                    </small>
+                                    </div>
+                                    <div class="user-progress">
+                                    <h6 class="mb-0">4.5/5</h6>
+                                    </div>
+                                </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="dropdown">
-                        <button
-                        class="btn p-0"
-                        type="button"
-                        id="deliveryPerformance"
-                        data-bs-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false">
-                        <i class="ti ti-dots-vertical"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="deliveryPerformance">
-                        <a class="dropdown-item" href="javascript:void(0);">Select All</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Share</a>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="card-body">
-                    <ul class="p-0 m-0">
-                        <li class="d-flex mb-4 pb-1">
-                        <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-primary"><i class="ti ti-package"></i></span>
-                        </div>
-                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                            <h6 class="mb-0 fw-normal">Packages in transit</h6>
-                            <small class="text-success fw-normal d-block">
-                                <i class="ti ti-chevron-up mb-1"></i>
-                                25.8%
-                            </small>
-                            </div>
-                            <div class="user-progress">
-                            <h6 class="mb-0">10k</h6>
-                            </div>
-                        </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                        <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-info"><i class="ti ti-truck"></i></span>
-                        </div>
-                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                            <h6 class="mb-0 fw-normal">Packages out for delivery</h6>
-                            <small class="text-success fw-normal d-block">
-                                <i class="ti ti-chevron-up mb-1"></i>
-                                4.3%
-                            </small>
-                            </div>
-                            <div class="user-progress">
-                            <h6 class="mb-0">5k</h6>
-                            </div>
-                        </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                        <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-success"
-                            ><i class="ti ti-circle-check"></i
-                            ></span>
-                        </div>
-                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                            <h6 class="mb-0 fw-normal">Packages delivered</h6>
-                            <small class="text-danger fw-normal d-block">
-                                <i class="ti ti-chevron-down mb-1"></i>
-                                12.5%
-                            </small>
-                            </div>
-                            <div class="user-progress">
-                            <h6 class="mb-0">15k</h6>
-                            </div>
-                        </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                        <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-warning"
-                            ><i class="ti ti-percentage"></i
-                            ></span>
-                        </div>
-                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                            <h6 class="mb-0 fw-normal">Delivery success rate</h6>
-                            <small class="text-success fw-normal d-block">
-                                <i class="ti ti-chevron-up mb-1"></i>
-                                35.6%
-                            </small>
-                            </div>
-                            <div class="user-progress">
-                            <h6 class="mb-0">95%</h6>
-                            </div>
-                        </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                        <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-secondary"><i class="ti ti-clock"></i></span>
-                        </div>
-                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                            <h6 class="mb-0 fw-normal">Average delivery time</h6>
-                            <small class="text-danger fw-normal d-block">
-                                <i class="ti ti-chevron-down mb-1"></i>
-                                2.15%
-                            </small>
-                            </div>
-                            <div class="user-progress">
-                            <h6 class="mb-0">2.5 Days</h6>
-                            </div>
-                        </div>
-                        </li>
-                        <li class="d-flex">
-                        <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-danger"><i class="ti ti-users"></i></span>
-                        </div>
-                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                            <h6 class="mb-0 fw-normal">Customer satisfaction</h6>
-                            <small class="text-success fw-normal d-block">
-                                <i class="ti ti-chevron-up mb-1"></i>
-                                5.7%
-                            </small>
-                            </div>
-                            <div class="user-progress">
-                            <h6 class="mb-0">4.5/5</h6>
-                            </div>
-                        </div>
-                        </li>
-                    </ul>
-                    </div>
-                </div>
                 </div>
                 <!--/ Delivery Performance -->
                 <!-- Reasons for delivery exceptions -->
                 <div class="col-md-6 col-xxl-4 mb-4 order-1 order-xxl-3">
-                <div class="card h-100">
-                    <div class="card-header d-flex align-items-center justify-content-between">
-                    <div class="card-title mb-0">
-                        <h5 class="m-0 me-2">Reasons for delivery exceptions</h5>
-                    </div>
-                    <div class="dropdown">
-                        <button
-                        class="btn p-0"
-                        type="button"
-                        id="deliveryExceptions"
-                        data-bs-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false">
-                        <i class="ti ti-dots-vertical"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="deliveryExceptions">
-                        <a class="dropdown-item" href="javascript:void(0);">Select All</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Share</a>
+                    <div class="card h-100">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                        <div class="card-title mb-0">
+                            <h5 class="m-0 me-2">Reasons for delivery exceptions</h5>
+                        </div>
+                        <div class="dropdown">
+                            <button
+                            class="btn p-0"
+                            type="button"
+                            id="deliveryExceptions"
+                            data-bs-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                            <i class="ti ti-dots-vertical"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="deliveryExceptions">
+                            <a class="dropdown-item" href="javascript:void(0);">Select All</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Share</a>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="card-body">
+                        <div id="deliveryExceptionsChart" class="pt-md-4"></div>
                         </div>
                     </div>
-                    </div>
-                    <div class="card-body">
-                    <div id="deliveryExceptionsChart" class="pt-md-4"></div>
-                    </div>
-                </div>
                 </div>
                 <!--/ Reasons for delivery exceptions -->
                 <!-- Orders by Countries -->
                 <div class="col-md-6 col-xxl-4 mb-4 order-0 order-xxl-4">
-                <div class="card h-100">
-                    <div class="card-header d-flex justify-content-between pb-2">
-                    <div class="card-title mb-1">
-                        <h5 class="m-0 me-2">Orders</h5>
-                        <small class="text-muted">62 Deliveries in Progress</small>
-                    </div>
-                    <div class="dropdown">
-                        <button
-                        class="btn p-0"
-                        type="button"
-                        id="salesByCountryTabs"
-                        data-bs-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false">
-                        <i class="ti ti-dots-vertical ti-sm text-muted"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="salesByCountryTabs">
-                        <a class="dropdown-item" href="javascript:void(0);">Download</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Share</a>
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between pb-2">
+                        <div class="card-title mb-1">
+                            <h5 class="m-0 me-2">Orders</h5>
+                            <small class="text-muted">62 Deliveries in Progress</small>
                         </div>
-                    </div>
-                    </div>
-                    <div class="card-body">
-                    <div class="nav-align-top">
-                        <ul class="nav nav-tabs nav-fill" role="tablist">
-                        <li class="nav-item">
+                        <div class="dropdown">
                             <button
+                            class="btn p-0"
                             type="button"
-                            class="nav-link active"
-                            role="tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#navs-justified-new"
-                            aria-controls="navs-justified-new"
-                            aria-selected="true">
-                            New
+                            id="salesByCountryTabs"
+                            data-bs-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                            <i class="ti ti-dots-vertical ti-sm text-muted"></i>
                             </button>
-                        </li>
-                        <li class="nav-item">
-                            <button
-                            type="button"
-                            class="nav-link"
-                            role="tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#navs-justified-link-preparing"
-                            aria-controls="navs-justified-link-preparing"
-                            aria-selected="false">
-                            Preparing
-                            </button>
-                        </li>
-                        <li class="nav-item">
-                            <button
-                            type="button"
-                            class="nav-link"
-                            role="tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#navs-justified-link-shipping"
-                            aria-controls="navs-justified-link-shipping"
-                            aria-selected="false">
-                            Shipping
-                            </button>
-                        </li>
-                        </ul>
-                        <div class="tab-content px-2 mx-1 pb-0">
-                        <div class="tab-pane fade show active" id="navs-justified-new" role="tabpanel">
-                            <ul class="timeline mb-0 pb-1">
-                            <li class="timeline-item ps-4 border-left-dashed pb-1">
-                                <span class="timeline-indicator-advanced timeline-indicator-success">
-                                <i class="ti ti-circle-check"></i>
-                                </span>
-                                <div class="timeline-event px-0 pb-0">
-                                <div class="timeline-header">
-                                    <small class="text-success text-uppercase fw-medium">sender</small>
-                                </div>
-                                <h6 class="mb-1">Myrtle Ullrich</h6>
-                                <p class="text-muted mb-0">101 Boulder, California(CA), 95959</p>
-                                </div>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="salesByCountryTabs">
+                            <a class="dropdown-item" href="javascript:void(0);">Download</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Share</a>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="card-body">
+                        <div class="nav-align-top">
+                            <ul class="nav nav-tabs nav-fill" role="tablist">
+                            <li class="nav-item">
+                                <button
+                                type="button"
+                                class="nav-link active"
+                                role="tab"
+                                data-bs-toggle="tab"
+                                data-bs-target="#navs-justified-new"
+                                aria-controls="navs-justified-new"
+                                aria-selected="true">
+                                New
+                                </button>
                             </li>
-                            <li class="timeline-item ps-4 border-transparent">
-                                <span class="timeline-indicator-advanced timeline-indicator-primary">
-                                <i class="ti ti-map-pin"></i>
-                                </span>
-                                <div class="timeline-event px-0 pb-0">
-                                <div class="timeline-header">
-                                    <small class="text-primary text-uppercase fw-medium">Receiver</small>
-                                </div>
-                                <h6 class="mb-1">Barry Schowalter</h6>
-                                <p class="text-muted mb-0">939 Orange, California(CA), 92118</p>
-                                </div>
+                            <li class="nav-item">
+                                <button
+                                type="button"
+                                class="nav-link"
+                                role="tab"
+                                data-bs-toggle="tab"
+                                data-bs-target="#navs-justified-link-preparing"
+                                aria-controls="navs-justified-link-preparing"
+                                aria-selected="false">
+                                Preparing
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button
+                                type="button"
+                                class="nav-link"
+                                role="tab"
+                                data-bs-toggle="tab"
+                                data-bs-target="#navs-justified-link-shipping"
+                                aria-controls="navs-justified-link-shipping"
+                                aria-selected="false">
+                                Shipping
+                                </button>
                             </li>
                             </ul>
-                            <div class="border-bottom border-bottom-dashed mt-0 mb-4"></div>
-                            <ul class="timeline mb-0">
-                            <li class="timeline-item ps-4 border-left-dashed pb-1">
-                                <span class="timeline-indicator-advanced timeline-indicator-success">
-                                <i class="ti ti-circle-check"></i>
-                                </span>
-                                <div class="timeline-event px-0 pb-0">
-                                <div class="timeline-header">
-                                    <small class="text-success text-uppercase fw-medium">sender</small>
-                                </div>
-                                <h6 class="mb-1">Veronica Herman</h6>
-                                <p class="text-muted mb-0">162 Windsor, California(CA), 95492</p>
-                                </div>
-                            </li>
-                            <li class="timeline-item ps-4 border-transparent">
-                                <span class="timeline-indicator-advanced timeline-indicator-primary">
-                                <i class="ti ti-map-pin"></i>
-                                </span>
-                                <div class="timeline-event px-0 pb-0">
-                                <div class="timeline-header">
-                                    <small class="text-primary text-uppercase fw-medium">Receiver</small>
-                                </div>
-                                <h6 class="mb-1">Helen Jacobs</h6>
-                                <p class="text-muted mb-0">487 Sunset, California(CA), 94043</p>
-                                </div>
-                            </li>
-                            </ul>
-                        </div>
+                            <div class="tab-content px-2 mx-1 pb-0">
+                            <div class="tab-pane fade show active" id="navs-justified-new" role="tabpanel">
+                                <ul class="timeline mb-0 pb-1">
+                                <li class="timeline-item ps-4 border-left-dashed pb-1">
+                                    <span class="timeline-indicator-advanced timeline-indicator-success">
+                                    <i class="ti ti-circle-check"></i>
+                                    </span>
+                                    <div class="timeline-event px-0 pb-0">
+                                    <div class="timeline-header">
+                                        <small class="text-success text-uppercase fw-medium">sender</small>
+                                    </div>
+                                    <h6 class="mb-1">Myrtle Ullrich</h6>
+                                    <p class="text-muted mb-0">101 Boulder, California(CA), 95959</p>
+                                    </div>
+                                </li>
+                                <li class="timeline-item ps-4 border-transparent">
+                                    <span class="timeline-indicator-advanced timeline-indicator-primary">
+                                    <i class="ti ti-map-pin"></i>
+                                    </span>
+                                    <div class="timeline-event px-0 pb-0">
+                                    <div class="timeline-header">
+                                        <small class="text-primary text-uppercase fw-medium">Receiver</small>
+                                    </div>
+                                    <h6 class="mb-1">Barry Schowalter</h6>
+                                    <p class="text-muted mb-0">939 Orange, California(CA), 92118</p>
+                                    </div>
+                                </li>
+                                </ul>
+                                <div class="border-bottom border-bottom-dashed mt-0 mb-4"></div>
+                                <ul class="timeline mb-0">
+                                <li class="timeline-item ps-4 border-left-dashed pb-1">
+                                    <span class="timeline-indicator-advanced timeline-indicator-success">
+                                    <i class="ti ti-circle-check"></i>
+                                    </span>
+                                    <div class="timeline-event px-0 pb-0">
+                                    <div class="timeline-header">
+                                        <small class="text-success text-uppercase fw-medium">sender</small>
+                                    </div>
+                                    <h6 class="mb-1">Veronica Herman</h6>
+                                    <p class="text-muted mb-0">162 Windsor, California(CA), 95492</p>
+                                    </div>
+                                </li>
+                                <li class="timeline-item ps-4 border-transparent">
+                                    <span class="timeline-indicator-advanced timeline-indicator-primary">
+                                    <i class="ti ti-map-pin"></i>
+                                    </span>
+                                    <div class="timeline-event px-0 pb-0">
+                                    <div class="timeline-header">
+                                        <small class="text-primary text-uppercase fw-medium">Receiver</small>
+                                    </div>
+                                    <h6 class="mb-1">Helen Jacobs</h6>
+                                    <p class="text-muted mb-0">487 Sunset, California(CA), 94043</p>
+                                    </div>
+                                </li>
+                                </ul>
+                            </div>
 
-                        <div class="tab-pane fade" id="navs-justified-link-preparing" role="tabpanel">
-                            <ul class="timeline mb-0 pb-1">
-                            <li class="timeline-item ps-4 border-left-dashed pb-1">
-                                <span class="timeline-indicator-advanced timeline-indicator-success">
-                                <i class="ti ti-circle-check"></i>
-                                </span>
-                                <div class="timeline-event px-0 pb-0">
-                                <div class="timeline-header">
-                                    <small class="text-success text-uppercase fw-medium">sender</small>
-                                </div>
-                                <h6 class="mb-1">Barry Schowalter</h6>
-                                <p class="text-muted mb-0">939 Orange, California(CA), 92118</p>
-                                </div>
-                            </li>
-                            <li class="timeline-item ps-4 border-transparent">
-                                <span class="timeline-indicator-advanced timeline-indicator-primary">
-                                <i class="ti ti-map-pin"></i>
-                                </span>
-                                <div class="timeline-event px-0 pb-0">
-                                <div class="timeline-header">
-                                    <small class="text-primary text-uppercase fw-medium">Receiver</small>
-                                </div>
-                                <h6 class="mb-1">Myrtle Ullrich</h6>
-                                <p class="text-muted mb-0">101 Boulder, California(CA), 95959</p>
-                                </div>
-                            </li>
-                            </ul>
-                            <div class="border-bottom border-bottom-dashed mt-0 mb-4"></div>
-                            <ul class="timeline mb-0">
-                            <li class="timeline-item ps-4 border-left-dashed pb-1">
-                                <span class="timeline-indicator-advanced timeline-indicator-success">
-                                <i class="ti ti-circle-check"></i>
-                                </span>
-                                <div class="timeline-event px-0 pb-0">
-                                <div class="timeline-header">
-                                    <small class="text-success text-uppercase fw-medium">sender</small>
-                                </div>
-                                <h6 class="mb-1">Veronica Herman</h6>
-                                <p class="text-muted mb-0">162 Windsor, California(CA), 95492</p>
-                                </div>
-                            </li>
-                            <li class="timeline-item ps-4 border-transparent">
-                                <span class="timeline-indicator-advanced timeline-indicator-primary">
-                                <i class="ti ti-map-pin"></i>
-                                </span>
-                                <div class="timeline-event px-0 pb-0">
-                                <div class="timeline-header">
-                                    <small class="text-primary text-uppercase fw-medium">Receiver</small>
-                                </div>
-                                <h6 class="mb-1">Helen Jacobs</h6>
-                                <p class="text-muted mb-0">487 Sunset, California(CA), 94043</p>
-                                </div>
-                            </li>
-                            </ul>
-                        </div>
-                        <div class="tab-pane fade" id="navs-justified-link-shipping" role="tabpanel">
-                            <ul class="timeline mb-0 pb-1">
-                            <li class="timeline-item ps-4 border-left-dashed pb-1">
-                                <span class="timeline-indicator-advanced timeline-indicator-success">
-                                <i class="ti ti-circle-check"></i>
-                                </span>
-                                <div class="timeline-event px-0 pb-0">
-                                <div class="timeline-header">
-                                    <small class="text-success text-uppercase fw-medium">sender</small>
-                                </div>
-                                <h6 class="mb-1">Veronica Herman</h6>
-                                <p class="text-muted mb-0">101 Boulder, California(CA), 95959</p>
-                                </div>
-                            </li>
-                            <li class="timeline-item ps-4 border-transparent">
-                                <span class="timeline-indicator-advanced timeline-indicator-primary">
-                                <i class="ti ti-map-pin"></i>
-                                </span>
-                                <div class="timeline-event px-0 pb-0">
-                                <div class="timeline-header">
-                                    <small class="text-primary text-uppercase fw-medium">Receiver</small>
-                                </div>
-                                <h6 class="mb-1">Barry Schowalter</h6>
-                                <p class="text-muted mb-0">939 Orange, California(CA), 92118</p>
-                                </div>
-                            </li>
-                            </ul>
-                            <div class="border-bottom border-bottom-dashed mt-0 mb-4"></div>
-                            <ul class="timeline mb-0">
-                            <li class="timeline-item ps-4 border-left-dashed pb-1">
-                                <span class="timeline-indicator-advanced timeline-indicator-success">
-                                <i class="ti ti-circle-check"></i>
-                                </span>
-                                <div class="timeline-event px-0 pb-0">
-                                <div class="timeline-header">
-                                    <small class="text-success text-uppercase fw-medium">sender</small>
-                                </div>
-                                <h6 class="mb-1">Myrtle Ullrich</h6>
-                                <p class="text-muted mb-0">162 Windsor, California(CA), 95492</p>
-                                </div>
-                            </li>
-                            <li class="timeline-item ps-4 border-transparent">
-                                <span class="timeline-indicator-advanced timeline-indicator-primary">
-                                <i class="ti ti-map-pin"></i>
-                                </span>
-                                <div class="timeline-event px-0 pb-0">
-                                <div class="timeline-header">
-                                    <small class="text-primary text-uppercase fw-medium">Receiver</small>
-                                </div>
-                                <h6 class="mb-1">Helen Jacobs</h6>
-                                <p class="text-muted mb-0">487 Sunset, California(CA), 94043</p>
-                                </div>
-                            </li>
-                            </ul>
+                            <div class="tab-pane fade" id="navs-justified-link-preparing" role="tabpanel">
+                                <ul class="timeline mb-0 pb-1">
+                                <li class="timeline-item ps-4 border-left-dashed pb-1">
+                                    <span class="timeline-indicator-advanced timeline-indicator-success">
+                                    <i class="ti ti-circle-check"></i>
+                                    </span>
+                                    <div class="timeline-event px-0 pb-0">
+                                    <div class="timeline-header">
+                                        <small class="text-success text-uppercase fw-medium">sender</small>
+                                    </div>
+                                    <h6 class="mb-1">Barry Schowalter</h6>
+                                    <p class="text-muted mb-0">939 Orange, California(CA), 92118</p>
+                                    </div>
+                                </li>
+                                <li class="timeline-item ps-4 border-transparent">
+                                    <span class="timeline-indicator-advanced timeline-indicator-primary">
+                                    <i class="ti ti-map-pin"></i>
+                                    </span>
+                                    <div class="timeline-event px-0 pb-0">
+                                    <div class="timeline-header">
+                                        <small class="text-primary text-uppercase fw-medium">Receiver</small>
+                                    </div>
+                                    <h6 class="mb-1">Myrtle Ullrich</h6>
+                                    <p class="text-muted mb-0">101 Boulder, California(CA), 95959</p>
+                                    </div>
+                                </li>
+                                </ul>
+                                <div class="border-bottom border-bottom-dashed mt-0 mb-4"></div>
+                                <ul class="timeline mb-0">
+                                <li class="timeline-item ps-4 border-left-dashed pb-1">
+                                    <span class="timeline-indicator-advanced timeline-indicator-success">
+                                    <i class="ti ti-circle-check"></i>
+                                    </span>
+                                    <div class="timeline-event px-0 pb-0">
+                                    <div class="timeline-header">
+                                        <small class="text-success text-uppercase fw-medium">sender</small>
+                                    </div>
+                                    <h6 class="mb-1">Veronica Herman</h6>
+                                    <p class="text-muted mb-0">162 Windsor, California(CA), 95492</p>
+                                    </div>
+                                </li>
+                                <li class="timeline-item ps-4 border-transparent">
+                                    <span class="timeline-indicator-advanced timeline-indicator-primary">
+                                    <i class="ti ti-map-pin"></i>
+                                    </span>
+                                    <div class="timeline-event px-0 pb-0">
+                                    <div class="timeline-header">
+                                        <small class="text-primary text-uppercase fw-medium">Receiver</small>
+                                    </div>
+                                    <h6 class="mb-1">Helen Jacobs</h6>
+                                    <p class="text-muted mb-0">487 Sunset, California(CA), 94043</p>
+                                    </div>
+                                </li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane fade" id="navs-justified-link-shipping" role="tabpanel">
+                                <ul class="timeline mb-0 pb-1">
+                                <li class="timeline-item ps-4 border-left-dashed pb-1">
+                                    <span class="timeline-indicator-advanced timeline-indicator-success">
+                                    <i class="ti ti-circle-check"></i>
+                                    </span>
+                                    <div class="timeline-event px-0 pb-0">
+                                    <div class="timeline-header">
+                                        <small class="text-success text-uppercase fw-medium">sender</small>
+                                    </div>
+                                    <h6 class="mb-1">Veronica Herman</h6>
+                                    <p class="text-muted mb-0">101 Boulder, California(CA), 95959</p>
+                                    </div>
+                                </li>
+                                <li class="timeline-item ps-4 border-transparent">
+                                    <span class="timeline-indicator-advanced timeline-indicator-primary">
+                                    <i class="ti ti-map-pin"></i>
+                                    </span>
+                                    <div class="timeline-event px-0 pb-0">
+                                    <div class="timeline-header">
+                                        <small class="text-primary text-uppercase fw-medium">Receiver</small>
+                                    </div>
+                                    <h6 class="mb-1">Barry Schowalter</h6>
+                                    <p class="text-muted mb-0">939 Orange, California(CA), 92118</p>
+                                    </div>
+                                </li>
+                                </ul>
+                                <div class="border-bottom border-bottom-dashed mt-0 mb-4"></div>
+                                <ul class="timeline mb-0">
+                                <li class="timeline-item ps-4 border-left-dashed pb-1">
+                                    <span class="timeline-indicator-advanced timeline-indicator-success">
+                                    <i class="ti ti-circle-check"></i>
+                                    </span>
+                                    <div class="timeline-event px-0 pb-0">
+                                    <div class="timeline-header">
+                                        <small class="text-success text-uppercase fw-medium">sender</small>
+                                    </div>
+                                    <h6 class="mb-1">Myrtle Ullrich</h6>
+                                    <p class="text-muted mb-0">162 Windsor, California(CA), 95492</p>
+                                    </div>
+                                </li>
+                                <li class="timeline-item ps-4 border-transparent">
+                                    <span class="timeline-indicator-advanced timeline-indicator-primary">
+                                    <i class="ti ti-map-pin"></i>
+                                    </span>
+                                    <div class="timeline-event px-0 pb-0">
+                                    <div class="timeline-header">
+                                        <small class="text-primary text-uppercase fw-medium">Receiver</small>
+                                    </div>
+                                    <h6 class="mb-1">Helen Jacobs</h6>
+                                    <p class="text-muted mb-0">487 Sunset, California(CA), 94043</p>
+                                    </div>
+                                </li>
+                                </ul>
+                            </div>
+                            </div>
                         </div>
                         </div>
                     </div>
-                    </div>
-                </div>
                 </div>
                 <!--/ Orders by Countries -->
 
                 <!-- On route vehicles Table -->
-
                 <div class="col-12 order-5">
-                <div class="card">
-                    <div class="card-header d-flex align-items-center justify-content-between">
-                    <div class="card-title mb-0">
-                        <h5 class="m-0 me-2">On route vehicles</h5>
-                    </div>
-                    <div class="dropdown">
-                        <button
-                        class="btn p-0"
-                        type="button"
-                        id="routeVehicles"
-                        data-bs-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false">
-                        <i class="ti ti-dots-vertical"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="routeVehicles">
-                        <a class="dropdown-item" href="javascript:void(0);">Select All</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Share</a>
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <div class="card-title mb-0">
+                                <h5 class="m-0 me-2">On route vehicles</h5>
+                            </div>
+                            <div class="dropdown d-none">
+                                <button class="btn p-0" type="button" id="routeVehicles" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="ti ti-dots-vertical"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="routeVehicles">
+                                    <a class="dropdown-item" href="javascript:void(0);">Select All</a>
+                                    <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
+                                    <a class="dropdown-item" href="javascript:void(0);">Share</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-datatable table-responsive">
+                            <table class="table">
+                                <thead class="border-top text-center">
+                                    <tr>
+                                        <th>Punch In</th>
+                                        <th>Punch Out</th>
+                                        <th>Total Work Time</th>
+                                        <th>Total Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{ $todaysPunchInOut->punch_in ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $todaysPunchInOut->punch_out ?? '' }}
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    </div>
-                    <div class="card-datatable table-responsive">
-                    <table class="dt-route-vehicles table">
-                        <thead class="border-top">
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th>location</th>
-                            <th>starting route</th>
-                            <th>ending route</th>
-                            <th>warnings</th>
-                            <th class="w-20">progress</th>
-                        </tr>
-                        </thead>
-                    </table>
-                    </div>
                 </div>
-                </div>
-
                 <!--/ On route vehicles Table -->
             </div>
         </div>

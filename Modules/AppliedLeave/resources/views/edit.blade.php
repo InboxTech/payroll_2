@@ -16,7 +16,7 @@
                 <div class="col-xl">
                     <div class="card mb-4">
                         <div class="card-header d-flex align-items-center justify-content-between">
-                            <h4 class="mb-0">Leave History</h4>
+                            <h4 class="mb-0">Leave Detail</h4>
                             <a href="{{ route('appliedleave.editleave', $model->id) }}" class="btn btn-outline-primary float-end"><i class="ti ti-pencil"></i>&nbsp;&nbsp;Edit Leave</a>
                         </div>
                         <div class="card-body">

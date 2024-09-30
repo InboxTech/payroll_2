@@ -8,12 +8,14 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\PunchInOut;
 use App\Models\PasswordResetToken;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Mail\ForgotPasswordMail;
 use App\Models\LeaveApply;
 use Illuminate\Support\Carbon;
+use DataTables;
 
 class AuthController extends Controller
 {
@@ -81,7 +83,9 @@ class AuthController extends Controller
                 break;
             case 3:
             case 4:
-                return view('auth::employee_dashboard', compact('todaysBirthDay'));
+                $todaysPunchInOut = PunchInOut::where(['date' => $todayDate, 'user_id' => Auth::user()->id])->first();
+
+                return view('auth::employee_dashboard', compact('todaysBirthDay', 'todaysPunchInOut'));
                 break;
             
             default:                
@@ -272,9 +276,38 @@ class AuthController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        return view('auth::index');
+    public function index(Request $request) {
+
+        if($request->ajax()) {
+
+            $startDate = Carbon::parse($request->start_date)->format('Y-m-d');
+            $endDate = Carbon::parse($request->end_date)->format('Y-m-d');
+
+            $data = PunchInOut::whereBetween('date', [$startDate, $endDate])->get();
+
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('name', function($row) {
+                        return $row->user->full_name;
+                    })
+                    ->addColumn('punch_in', function($row) {
+                        return view('auth::punch_in', compact('row'));
+                    })
+                    ->addColumn('punch_out', function($row){
+                        return view('auth::punch_out', compact('row'));
+                    })
+                    ->addColumn('total_time', function($row) {
+                        if($row->punch_out != null) {
+                            $punchIn = new Carbon($row->punch_in);
+                            $punchOut = new Carbon($row->punch_out);
+
+                            return $timeDifference = $punchIn->diff($punchOut)->format('%H:%I'). ' Hr';
+                        }
+                        return '00:00'.' Hr';
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
     }
 
     /**

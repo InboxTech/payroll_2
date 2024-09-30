@@ -161,7 +161,7 @@
                                                     @case(2)
                                                         Half Day - 1st
                                                         @break
-                                                    @case(2)
+                                                    @case(3)
                                                         Half Day - 2nd
                                                         @break
                                                     @default
@@ -227,7 +227,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="3" class="text-center">Today's no one on leave</td>
+                                            <td colspan="3" class="text-center">Today's no one leave applied</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -242,7 +242,7 @@
                             <div class="card-title mb-0">
                                 <h5 class="m-0 me-2">Today's Punch In-Out</h5>
                             </div>
-                            <div class="dropdown">
+                            <div class="dropdown d-none">
                                 <button class="btn p-0" type="button" id="routeVehicles" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="ti ti-dots-vertical"></i>
                                 </button>
@@ -254,16 +254,13 @@
                             </div>
                         </div>
                         <div class="card-datatable table-responsive">
-                            <table class="dt-route-vehicles table">
+                            <table class="table data-table">
                                 <thead class="border-top">
                                     <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th>location</th>
-                                        <th>starting route</th>
-                                        <th>ending route</th>
-                                        <th>warnings</th>
-                                        <th class="w-20">progress</th>
+                                        <th class="text-center">Employee Details</th>
+                                        <th class="text-center">PunchIn</th>
+                                        <th class="text-center">PunchOut</th>
+                                        <th class="text-center">Total Time</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -277,4 +274,54 @@
     @endsection
     @push('script')
         <script src="{{ asset('admin/assets/js/app-logistics-dashboard.js') }}"></script>
+
+        <script type="text/javascript">
+            $(function () {
+                window.table = $('.data-table').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    searching: false,
+                    order: [],
+                    ajax: {
+                        url:"{{ route('auth.index') }}",
+                        data: function (d) {
+                            d.start_date = $('.jsStartDate').val(),
+                            d.end_date = $('.jsEndDate').val()
+                        }
+                    },
+                    'columnDefs': [
+                        {
+                            "targets": 0, // your case first column
+                            "className": "text-center",                            
+                        },
+                        {
+                            "targets": 1,
+                            "className": "text-center",
+                        },
+                        {
+                            "targets": 2,
+                            "className": "text-center",
+                        },
+                        {
+                            "targets": 3,
+                            "className": "text-center",
+                        },
+                    ],
+                    columns: [
+                        { data: 'name', name: 'name', orderable: false},
+                        { data: 'punch_in', name: 'punch_in', orderable: false},
+                        { data: 'punch_out', name: 'punch_out', orderable: false},
+                        { data: 'total_time', name: 'total_time', orderable: false },
+                    ],
+                });
+        
+                $(".form-control").keyup(function(){
+                    table.draw();
+                });
+                
+                $(".form-control").change(function(){
+                    table.draw();
+                });
+            });
+        </script>
     @endpush
