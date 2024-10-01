@@ -50,6 +50,7 @@
                                 <th class="text-center">Total Leave Day</th>
                                 <th class="text-center">Approval Status</th>
                                 <th class="text-center">Apply Date</th>
+                                <th class="text-center">Is Leave Cancle</th>
                                 @can('edit-leave-apply')
                                     <th class="text-center">Action</th>
                                 @endcan
@@ -83,6 +84,7 @@
                         { data: 'number_of_days', name: 'number_of_days' },
                         { data: 'approval_status', name: 'approval_status'},
                         { data: 'apply_date', name: 'apply_date'},
+                        { data: 'is_leave_cancle', name: 'is_leave_cancle'},
                         @can('edit-leave-apply')
                             { data: 'action', name: 'action', orderable: false, searchable: false },
                         @endcan

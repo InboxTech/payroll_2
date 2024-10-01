@@ -19,7 +19,7 @@
                     <div class="card mb-4">
                         <h5 class="card-header">Profile Details</h5>
                         <!-- Account -->
-                        <form id="formAccountSettings" action="{{ route('profile') }}" method="post" enctype="multipart/form-data">
+                        <form id="formAccountSettings" action="{{ route('profile') }}" method="post" class="jsFormValidate" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="d-flex align-items-start align-items-sm-center gap-4">
@@ -92,4 +92,14 @@
 
     @push('script')
         <script src="{{ asset('admin/assets/js/pages-account-settings-account.js') }}"></script>
+
+        <script type="text/javascript">
+            $('.jsFormValidate').validate({
+                submitHandler: function(form) {
+                    $(form).find(':submit').prop('disabled', true);
+                    $(form).find(':submit').text('Please Wait');
+                    form.submit();
+                }
+            });
+        </script>
     @endpush

@@ -32,7 +32,7 @@ class AppliedLeaveController extends Controller
     {
         if($request->ajax()) {
 
-            $data = LeaveApply::where('is_leave_cancle', 1)->latest();
+            $data = LeaveApply::latest();
 
             return Datatables::of($data)
                     ->filter(function ($query) use ($request) {
@@ -259,7 +259,7 @@ class AppliedLeaveController extends Controller
                     $assignLeave->leave_balance += $originalLeaveCount;
                     $assignLeave->save();
 
-                    $leaveapply->delete();
+                    // $leaveapply->delete();
 
                     return redirect()->route('appliedleave.index')->with('success', 'Leave has been cancelled.');
                 }

@@ -136,6 +136,7 @@ class AuthController extends Controller
     
             // Update user fields
             $user->first_name = $request->first_name;
+            $user->middle_name = $request->middle_name;
             $user->last_name = $request->last_name;
             $user->email = $request->email;
             $user->mobile_no = $request->mobile_no;

@@ -30,7 +30,7 @@ class LeaveApplyController extends Controller
     {
         if($request->ajax()) {
             
-            $data = LeaveApply::where(['user_id' => Auth::user()->id, 'is_leave_cancle' => 1])->latest();
+            $data = LeaveApply::where(['user_id' => Auth::user()->id])->latest();
 
             return Datatables::of($data)
                     ->addColumn('checkbox', function($row) {
@@ -51,6 +51,12 @@ class LeaveApplyController extends Controller
                     })
                     ->addColumn('apply_date', function($row) {
                         return date('d-m-Y', strtotime($row->created_at));
+                    })
+                    ->addColumn('is_leave_cancle', function($row) {
+                        if($row->is_leave_cancle) {
+                            return 'Yes';
+                        }
+                        return '';
                     })
                     ->rawColumns(['action', 'checkbox'])
                     ->make(true);
