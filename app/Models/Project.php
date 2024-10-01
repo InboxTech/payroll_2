@@ -18,6 +18,8 @@ class Project extends Model
         'expected_end_date',
         'project_domain_name',
         'running_status',
+        'git_repository_link',
+        'project_backup_link_office_server',
         'client_name',
         'email',
         'mobile_no',

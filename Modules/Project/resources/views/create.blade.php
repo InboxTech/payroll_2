@@ -64,6 +64,14 @@
                                                 <option value="5">Not Started</option>
                                             </select>
                                         </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="project-domain-name">Git Repository with Final Branch link</label>
+                                            <input type="text" name="git_repository_link" class="form-control">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="project-domain-name">Project Backup link on Office Server</label>
+                                            <input type="text" name="project_backup_link_office_server" class="form-control">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="clientdetail" role="tabpanel">

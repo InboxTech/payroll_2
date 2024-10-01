@@ -18,6 +18,8 @@ return new class extends Migration
             $table->date('expected_end_date')->nullable();
             $table->string('project_domain_name')->nullable();
             $table->integer('running_status')->nullable();
+            $table->string('git_repository_link')->nullable();
+            $table->string('project_backup_link_office_server')->nullable();
             $table->string('client_name')->nullable();
             $table->string('email')->nullable();
             $table->bigInteger('mobile_no')->nullable();
