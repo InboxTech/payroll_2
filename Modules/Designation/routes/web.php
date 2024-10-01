@@ -14,7 +14,7 @@ use Modules\Designation\Http\Controllers\DesignationController;
 |
 */
 
-Route::prefix('admin')->middleware(['auth'])->group(function(){
+Route::prefix('admin')->middleware(['auth', 'checkuserstatus'])->group(function(){
     Route::post('designation_change_status', [DesignationController::class, 'change_status'])->name('designation.change_status');
     Route::resource('designation', DesignationController::class)->names('designation');
 });

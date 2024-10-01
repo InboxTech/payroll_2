@@ -14,7 +14,7 @@ use Modules\LeaveApply\Http\Controllers\LeaveApplyController;
 |
 */
 
-Route::prefix('admin')->middleware(['auth'])->group(function(){
+Route::prefix('admin')->middleware(['auth', 'checkuserstatus'])->group(function(){
     Route::resource('leaveapply', LeaveApplyController::class);
     Route::post('/leaveapply/delete', [LeaveApplyController::class, 'destroy'])->name('leaveapply.delete');
     Route::post('leaveapply_change_status', [LeaveApplyController::class, 'change_status'])->name('leaveapply.change_status');

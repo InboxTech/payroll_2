@@ -14,7 +14,7 @@ use Modules\Leave\Http\Controllers\LeaveController;
 |
 */
 
-Route::prefix('admin')->middleware(['auth'])->group(function(){
+Route::prefix('admin')->middleware(['auth', 'checkuserstatus'])->group(function(){
     Route::resource('leave', LeaveController::class);
     Route::get('leave/delete/{id}', [LeaveController::class, 'destroy'])->name('leave.delete');
 });

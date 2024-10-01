@@ -14,7 +14,7 @@ use Modules\Setting\Http\Controllers\SettingController;
 |
 */
 
-Route::prefix('admin')->middleware(['auth'])->group(function(){
+Route::prefix('admin')->middleware(['auth', 'checkuserstatus'])->group(function(){
     Route::resource('setting', SettingController::class);
     Route::post('setting_submit', [SettingController::class, 'setting_submit'])->name('setting_submit');
 });

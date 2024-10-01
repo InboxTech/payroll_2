@@ -14,7 +14,7 @@ use Modules\User\Http\Controllers\UserController;
 |
 */
 
-Route::prefix('admin')->middleware(['auth'])->group(function(){
+Route::prefix('admin')->middleware(['auth', 'checkuserstatus'])->group(function(){
     Route::resource('user', UserController::class);
     Route::post('/user/delete', [UserController::class, 'destroy'])->name('user.delete');
     Route::post('user_change_status', [UserController::class, 'change_status'])->name('user.change_status');
@@ -24,6 +24,5 @@ Route::prefix('admin')->middleware(['auth'])->group(function(){
     Route::get('user/{userId}/leave-history', [UserController::class, 'leavehistory'])->name('user.leavehistory');
     Route::get('user/{userId}/salary-history', [UserController::class, 'salaryhistory'])->name('user.salaryhistory');
     Route::get('user/{userId}/view-letter', [UserController::class, 'viewletter'])->name('user.viewletter');
-    // Route::get('user-import', [UserController::class, 'import'])->name('user.import');
     Route::match(['get', 'post'], 'user-import', [UserController::class, 'import'])->name('user.import');
 });

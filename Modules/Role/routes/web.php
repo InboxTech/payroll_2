@@ -14,7 +14,7 @@ use Modules\Role\Http\Controllers\RoleController;
 |
 */
 
-Route::prefix('admin')->middleware(['auth'])->group(function(){
+Route::prefix('admin')->middleware(['auth', 'checkuserstatus'])->group(function(){
     Route::resource('role', RoleController::class);
     Route::post('/role/delete', [RoleController::class, 'delete'])->name('role.delete');
 });

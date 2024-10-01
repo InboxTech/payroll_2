@@ -14,7 +14,7 @@ use Modules\Department\Http\Controllers\DepartmentController;
 |
 */
 
-Route::prefix('admin')->middleware(['auth'])->group(function(){
+Route::prefix('admin')->middleware(['auth', 'checkuserstatus'])->group(function(){
     Route::post('department_change_status', [DepartmentController::class, 'change_status'])->name('department.change_status');
     Route::resource('department', DepartmentController::class)->names('department');
 });

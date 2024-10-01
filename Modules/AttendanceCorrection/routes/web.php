@@ -14,7 +14,7 @@ use Modules\AttendanceCorrection\Http\Controllers\AttendanceCorrectionController
 |
 */
 
-Route::prefix('admin')->middleware(['auth'])->group(function(){
+Route::prefix('admin')->middleware(['auth', 'checkuserstatus'])->group(function(){
     Route::resource('attendancecorrection', AttendanceCorrectionController::class)->names('attendancecorrection');
     Route::get('attendancecorrection/{id}/correction', [AttendanceCorrectionController::class, 'correction'])->name('attendancecorrection.correction');
     Route::post('attendance-list', [AttendanceCorrectionController::class, 'attendancelist'])->name('attendancecorrection.attendancelist');

@@ -14,7 +14,7 @@ use Modules\Project\Http\Controllers\ProjectController;
 |
 */
 
-Route::prefix('admin')->middleware(['auth'])->group(function(){
+Route::prefix('admin')->middleware(['auth', 'checkuserstatus'])->group(function(){
     Route::resource('project', ProjectController::class);
     Route::post('/project/delete', [ProjectController::class, 'destroy'])->name('project.delete');
     Route::post('project_change_status', [ProjectController::class, 'change_status'])->name('project.change_status');

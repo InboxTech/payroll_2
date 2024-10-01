@@ -14,7 +14,7 @@ use Modules\AttendenceReport\Http\Controllers\AttendenceReportController;
 |
 */
 
-Route::prefix('admin')->middleware(['auth'])->group(function(){
+Route::prefix('admin')->middleware(['auth', 'checkuserstatus'])->group(function(){
     Route::resource('attendencereport', AttendenceReportController::class);
     Route::get('attendencereport/{id}/report', [AttendenceReportController::class, 'report'])->name('attendencereport.report');
     Route::post('report_details', [AttendenceReportController::class, 'report_details'])->name('attendencereport.report_details');

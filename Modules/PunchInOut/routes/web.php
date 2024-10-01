@@ -14,6 +14,6 @@ use Modules\PunchInOut\Http\Controllers\PunchInOutController;
 |
 */
 
-Route::prefix('admin')->middleware(['auth'])->group(function(){
+Route::prefix('admin')->middleware(['auth', 'checkuserstatus'])->group(function(){
     Route::resource('punchinout', PunchInOutController::class);
 });
