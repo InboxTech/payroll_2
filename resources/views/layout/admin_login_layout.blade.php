@@ -78,5 +78,7 @@
 
         <!-- Page JS -->
         <script src="{{ asset('admin/assets/js/pages-auth.js') }}"></script>
+
+        @stack('script')
     </body>
 </html>

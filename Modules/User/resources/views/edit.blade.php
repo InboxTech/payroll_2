@@ -167,6 +167,14 @@
                                             <label for="address" class="form-label">Permanent Address</label>
                                             <textarea name="permanent_address" class="form-control">{{ $user->permanent_address }}</textarea>
                                         </div>
+                                        <div class="col-sm-4 mb-2">
+                                            <label for="invite-email" class="form-label">Are you want to send login details? <span class="text-danger">*</span></label>
+                                            <select name="is_send_login_details" class="form-select">
+                                                <option value="">Select Option</option>
+                                                <option value="1">Yes</option>
+                                                <option value="0" selected>No</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- view generated letters modal statrt -->
@@ -754,6 +762,9 @@
                     'confirm_password': {
                         required : true,
                         equalTo: "#jsConfirmPass"
+                    },
+                    'is_send_login_details': {
+                        required: true
                     }
                 },
                 messages:{
@@ -798,6 +809,9 @@
                     'confirm_password' : {
                         required: 'Please Enter Confirm Password',
                         equalTo: 'Password and Confirm Password Not Match'
+                    },
+                    'is_send_login_details': {
+                        required: 'Please Select Option'
                     }
                 },
                 highlight: function(element) {

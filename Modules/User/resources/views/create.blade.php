@@ -42,7 +42,7 @@
                             </ul>
                         </div>
 
-                        <form action="{{ route('user.store') }}" method="post" autocomplete="off" class="FormValidate">
+                        <form action="{{ route('user.store') }}" method="post" autocomplete="off" class="jsFormValidate">
                             @csrf
                             <div class="tab-content">
                                 <div class="tab-pane fade active show" id="form-tabs-personal" role="tabpanel">
@@ -166,17 +166,13 @@
                                             <label for="address" class="form-label">Permanent Address</label>
                                             <textarea name="permanent_address" class="form-control"></textarea>
                                         </div>
-                                    </div>
-                                    <hr>
-                                    <h4>Login Details</h4>
-                                    <div class="row">
-                                        <div class="col-md-4 mb-2">
-                                            <label class="form-label" for="basic-default-password">Password <span class="text-danger">*</span></label>
-                                            <input type="password" name="password" id="jsConfirmPass" class="form-control"/>
-                                        </div>
-                                        <div class="col-md-4 mb-2">
-                                            <label class="form-label" for="basic-default-confirm-password">Confirm Password <span class="text-danger">*</span></label>
-                                            <input type="password" name="confirm_password" class="form-control"/>
+                                        <div class="col-sm-4 mb-2">
+                                            <label for="invite-email" class="form-label">Are you want to send login details? <span class="text-danger">*</span></label>
+                                            <select name="is_send_login_details" class="form-select">
+                                                <option value="">Select Option</option>
+                                                <option value="1" selected>Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -643,7 +639,7 @@
 
             var token = "{{ csrf_token() }}";
 
-            $('.FormValidate').validate({
+            $('.jsFormValidate').validate({
                 ignore: "",
                 rules:{
                     'emp_id': {
@@ -719,6 +715,9 @@
                     'confirm_password': {
                         required : true,
                         equalTo: "#jsConfirmPass"
+                    },
+                    'is_send_login_details': {
+                        required: true
                     }
                 },
                 messages:{
@@ -768,6 +767,9 @@
                     'confirm_password' : {
                         required: 'Please Enter Confirm Password',
                         equalTo: 'Password and Confirm Password Not Match'
+                    },
+                    'is_send_login_details': {
+                        required: "Please Select Option"
                     }
                 },
                 highlight: function(element) {

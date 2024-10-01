@@ -26,6 +26,8 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Storage;
 use App\Imports\UsersImport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Mail\LoginDetailsMail;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -345,7 +347,10 @@ class UserController extends Controller
 
         $input['ctc_bcd_monthly'] = $input['employee_contribution_B_monthly'] + $input['net_salary_monthly'] + $input['employer_contri_D_monthly'];
 
-        $input['password'] = Hash::make($input['password']);
+        $lastFourDigits = substr($input['mobile_no'], -4);
+
+        $input['viewpassword'] = $input['first_name'] . '@' . $lastFourDigits;
+        $input['password'] = Hash::make($input['viewpassword']);
 
         $user = User::create($input);
         $user->assignRole($request->role);
@@ -377,6 +382,10 @@ class UserController extends Controller
                     default:
                         break;
                 }
+            }
+
+            if($input['is_send_login_details'] == 1) {
+                Mail::to($input['email'])->send(new LoginDetailsMail($input));
             }
         }
 
@@ -636,6 +645,18 @@ class UserController extends Controller
                 ['user_id' => $filteredInput['user_id'], 'year' => $filteredInput['year'], 'job_type' => $input['job_type']],
                 $filteredInput
             );
+
+            $lastFourDigits = substr($input['mobile_no'], -4);
+
+            $input['viewpassword'] = $input['first_name'] . '@' . $lastFourDigits;
+
+            if($input['is_send_login_details'] == 1) {
+                
+                $user->password = Hash::make($input['viewpassword']);
+                $user->save();
+
+                Mail::to($input['email'])->send(new LoginDetailsMail($input));
+            }
 
             /* if($request->assign_leave) {
 

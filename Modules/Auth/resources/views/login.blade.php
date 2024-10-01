@@ -13,7 +13,7 @@
                                 <img src="{{ asset(getImage(getSettingData('config_company_logo'))) }}" style="width: 100%;">
                             </a>
                         </div>
-                        <form class="mb-3" action="{{ route('login_submit') }}" method="post">
+                        <form class="mb-3 jsFormValidate" action="{{ route('login_submit') }}" method="post">
                             @csrf
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email (official) <span class="text-danger">*</span></label>
@@ -71,3 +71,15 @@
             </div>
         </div>
     @endsection
+
+    @push('script')
+        <script type="text/javascript">
+            $('.jsFormValidate').validate({
+                submitHandler: function(form) {
+                    $(form).find(':submit').prop('disabled', true);
+                    $(form).find(':submit').text('Please Wait');
+                    form.submit();
+                }
+            });
+        </script>
+    @endpush
