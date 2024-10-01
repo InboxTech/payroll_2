@@ -32,7 +32,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithCalculatedFormulas
                 [
                     'bank_name' => $row['bank_name'],
                     'bank_branch_name' => $row['bank_branch_name'],
-                    'account_number' => $row['account_number'],
+                    'ac_no' => $row['account_number'],
                     'ifsc_code' => $row['ifsc_code'],
                     'uan_number' => $row['uan_number'],
                     'gross_salary_yearly' => $row['gross_salaray_yearly'],
@@ -155,7 +155,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithCalculatedFormulas
                 [
                     'bank_name' => $row['bank_name'],
                     'bank_branch_name' => $row['bank_branch_name'],
-                    'account_number' => $row['account_number'],
+                    'ac_no' => $row['account_number'],
                     'ifsc_code' => $row['ifsc_code'],
                     'uan_number' => $row['uan_number'],
                     'gross_salary_yearly' => $row['gross_salaray_yearly'],

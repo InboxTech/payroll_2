@@ -18,6 +18,7 @@ class UserTableSeeder extends Seeder
     {
         $user = new User();
 
+        $user->designation_id = 1;
         $user->first_name = 'Admin';
         $user->middle_name = '';
         $user->last_name = 'Admin';

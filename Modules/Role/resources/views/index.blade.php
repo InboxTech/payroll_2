@@ -8,8 +8,12 @@
                 <h4 class="py-3 mb-4"><span class="text-muted fw-light">Dashboard /</span> Role</h4>
                 <div class="d-flex align-content-center flex-wrap gap-3">
                     <div class="d-flex gap-3">
-                        <a href="javascript:void(0);" class="btn btn-outline-danger d-none" id="delete-selected"><i class="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>
-                        <a href="{{ route('role.create') }}" class="btn btn-outline-primary"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a>
+                        @can('delete-role')
+                            <a href="javascript:void(0);" class="btn btn-outline-danger d-none" id="delete-selected"><i class="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>
+                        @endcan
+                        @can('create-role')
+                            <a href="{{ route('role.create') }}" class="btn btn-outline-primary"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a>
+                        @endcan
                     </div>
                 </div>
             </div>
@@ -22,7 +26,9 @@
                                 <th class="text-center">Sr. No.</th>
                                 <th class="text-center">Role name</th>
                                 <th class="text-center">Permission Count</th>
-                                <th class="text-center">Action</th>
+                                @can('delete-role')
+                                    <th class="text-center">Action</th>
+                                @endcan
                             </tr>
                         </thead>
                     </table>
@@ -48,7 +54,9 @@
                         {data: 'id', name: 'id'},
                         {data: 'name', name: 'name'},
                         {data: 'permission_count', name: 'permission_count', orderable: false},
-                        {data: 'action', name: 'action', orderable: false, searchable: false},
+                        @can('delete-role')
+                            {data: 'action', name: 'action', orderable: false, searchable: false},
+                        @endcan
                     ],
                 });
                 
