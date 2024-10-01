@@ -12,7 +12,7 @@ class HolidayLeaveList extends Component
 
     public function render() {
         
-        $this->holidayLeaves = HolidayLeave::whereDate('holiday_date', '>=', Carbon::now())->get();
+        $this->holidayLeaves = HolidayLeave::whereDate('holiday_date', '>=', Carbon::now())->orderBy('holiday_date', 'ASC')->get();
 
         return view('livewire.holiday-leave-list');
     }

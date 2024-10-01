@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 30, 2024 at 11:54 AM
+-- Generation Time: Oct 01, 2024 at 04:53 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.9
 
@@ -55,7 +55,7 @@ INSERT INTO `tbl_assign_leaves` (`id`, `user_id`, `leave_id`, `year`, `assign_le
 (10, 4, 1, 2024, '1.00', '1.00', '2024-09-24 09:14:00', '2024-09-24 09:14:00'),
 (11, 4, 2, 2024, '2.00', '2.00', '2024-09-24 09:14:00', '2024-09-24 09:14:00'),
 (12, 4, 3, 2024, '1.00', '1.00', '2024-09-24 09:14:00', '2024-09-24 09:14:00'),
-(16, 2, 1, 2024, '1.00', '1.00', '2024-09-25 08:57:58', '2024-09-25 08:57:58'),
+(16, 2, 1, 2024, '1.00', '3.00', '2024-09-25 08:57:58', '2024-10-01 03:59:32'),
 (17, 2, 2, 2024, '2.00', '2.00', '2024-09-25 08:57:58', '2024-09-25 08:57:58'),
 (18, 2, 3, 2024, '1.00', '1.00', '2024-09-25 08:57:58', '2024-09-25 08:57:58');
 
@@ -250,7 +250,7 @@ INSERT INTO `tbl_leave_applies` (`id`, `user_id`, `from_date`, `to_date`, `leave
 (3, 4, '2024-09-25', '2024-09-25', 2, 2, 1, 'TEST', 1, 0.50, NULL, '2024-09-24 06:04:05', '2024-09-25 05:39:22', NULL),
 (4, 4, '2024-09-28', '2024-09-28', 1, 1, 1, 'test', 1, 1.00, NULL, '2024-09-24 06:32:50', '2024-09-24 06:36:54', NULL),
 (5, 4, '2024-09-26', '2024-09-27', 2, 1, 1, 'test', 1, 2.00, 1, '2024-09-24 06:44:41', '2024-09-24 06:51:39', '2024-09-24 06:51:39'),
-(6, 2, '2024-09-26', '2024-09-26', 1, 1, 1, 'test', 0, 1.00, NULL, '2024-09-25 09:02:11', '2024-09-25 09:02:11', NULL);
+(6, 2, '2024-09-26', '2024-09-26', 1, 1, 2, 'test', 2, 1.00, NULL, '2024-09-25 09:02:11', '2024-09-30 12:32:48', NULL);
 
 -- --------------------------------------------------------
 
@@ -454,6 +454,8 @@ CREATE TABLE `tbl_projects` (
   `expected_end_date` date DEFAULT NULL,
   `project_domain_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `running_status` int DEFAULT NULL,
+  `git_repository_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_backup_link_office_server` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `client_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mobile_no` bigint DEFAULT NULL,
@@ -468,14 +470,14 @@ CREATE TABLE `tbl_projects` (
 -- Dumping data for table `tbl_projects`
 --
 
-INSERT INTO `tbl_projects` (`id`, `project_name`, `start_date`, `expected_end_date`, `project_domain_name`, `running_status`, `client_name`, `email`, `mobile_no`, `address`, `project_team`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Checkeeper', NULL, NULL, NULL, 1, 'Client123', NULL, NULL, NULL, 'null', '2024-08-31 06:58:56', '2024-09-16 08:54:29', NULL),
-(2, 'Payroll', '2024-09-11', '2024-09-30', NULL, 1, NULL, NULL, NULL, NULL, 'null', '2024-09-12 12:31:51', '2024-09-12 12:31:51', NULL),
-(3, 'Payroll', '2024-09-11', '2024-09-30', NULL, 1, NULL, NULL, NULL, NULL, 'null', '2024-09-12 12:31:51', '2024-09-12 12:31:51', NULL),
-(4, 'Payroll', '2024-09-11', '2024-09-30', NULL, 1, NULL, NULL, NULL, NULL, 'null', '2024-09-12 12:35:36', '2024-09-26 12:06:29', '2024-09-26 12:06:29'),
-(5, 'pay', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 'null', '2024-09-12 12:36:02', '2024-09-12 12:36:02', NULL),
-(6, 'Payroll', '2024-09-16', '2024-09-17', NULL, 1, NULL, NULL, NULL, NULL, 'null', '2024-09-16 07:14:24', '2024-09-16 07:14:24', NULL),
-(7, 'Attandance', '2024-09-16', '2024-09-20', NULL, 3, NULL, NULL, NULL, NULL, 'null', '2024-09-16 07:16:12', '2024-09-26 12:07:27', '2024-09-26 12:07:27');
+INSERT INTO `tbl_projects` (`id`, `project_name`, `start_date`, `expected_end_date`, `project_domain_name`, `running_status`, `git_repository_link`, `project_backup_link_office_server`, `client_name`, `email`, `mobile_no`, `address`, `project_team`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Checkeeper', NULL, NULL, NULL, 1, NULL, NULL, 'Client123', NULL, NULL, NULL, 'null', '2024-08-31 06:58:56', '2024-09-16 08:54:29', NULL),
+(2, 'Payroll', '2024-09-11', '2024-09-30', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'null', '2024-09-12 12:31:51', '2024-09-12 12:31:51', NULL),
+(3, 'Payroll', '2024-09-11', '2024-09-30', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'null', '2024-09-12 12:31:51', '2024-09-12 12:31:51', NULL),
+(4, 'Payroll', '2024-09-11', '2024-09-30', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'null', '2024-09-12 12:35:36', '2024-09-26 12:06:29', '2024-09-26 12:06:29'),
+(5, 'pay', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'null', '2024-09-12 12:36:02', '2024-09-12 12:36:02', NULL),
+(6, 'Payroll', '2024-09-16', '2024-09-17', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'null', '2024-09-16 07:14:24', '2024-09-16 07:14:24', NULL),
+(7, 'Attandance', '2024-09-16', '2024-09-20', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, 'null', '2024-09-16 07:16:12', '2024-09-26 12:07:27', '2024-09-26 12:07:27');
 
 -- --------------------------------------------------------
 
@@ -875,7 +877,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `designation_id`, `department_id`, `emp_id`, `job_type`, `first_name`, `middle_name`, `last_name`, `email`, `email_verified_at`, `mobile_no`, `personal_email`, `password`, `gender`, `dob`, `joining_date`, `releaving_date`, `probation_end_date`, `confirmation_date`, `profile_image`, `temporary_address`, `permanent_address`, `remember_token`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, NULL, 'emp-101', NULL, 'Admin', NULL, 'Admin', 'admin@example.com', NULL, 1234567890, NULL, '$2y$10$.yA3BEYGU6ySCHVN9ffCWOjKT0JGkunXs2SN5fAQnt7wqK7REUusO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'BiiLKuTfiueuuFfP65xczenOujGtRCyCcXUBZjSGga18Kkvc7GGALkt0kCGq', 1, '2024-06-11 16:57:20', '2024-09-17 12:21:31', NULL),
+(1, 1, NULL, 'emp-101', NULL, 'Admin', 'test', 'Admin', 'admin@example.com', NULL, 1234567890, NULL, '$2y$10$.yA3BEYGU6ySCHVN9ffCWOjKT0JGkunXs2SN5fAQnt7wqK7REUusO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'BiiLKuTfiueuuFfP65xczenOujGtRCyCcXUBZjSGga18Kkvc7GGALkt0kCGq', 1, '2024-06-11 16:57:20', '2024-10-01 04:22:11', NULL),
 (2, 9, 1, 'emp-102', 1, 'Payal', NULL, 'Khanvilkar', 'payal.khanvilkar@inbox-infotech.com', NULL, 9874563210, NULL, '$2y$10$7j.3W2U9cfmcbdcAAs3h6Ov7ONNkULuGwN3yxXmG8L6OV7TOAJah6', 2, '2016-04-22', '2024-01-01', NULL, '2024-02-29', '2024-09-25', NULL, NULL, NULL, NULL, 1, '2024-09-19 06:26:54', '2024-09-25 08:55:27', NULL),
 (3, 9, 1, 'emp-102', 1, 'Rahul', NULL, 'Patil', 'rahul.patil@inbox-infotech.com', NULL, 9545276255, 'rahulpatil2163@gmail.com', '$2y$10$r8VjKU9yqIch1AsKyru9celbFrQurzbSyGzK1Rn/yxvs6rZRepa8y', 1, '2024-09-01', '2024-06-03', NULL, '2024-08-31', NULL, NULL, 'Vadodara', 'Vadodara', NULL, 1, '2024-09-19 06:27:09', '2024-09-19 06:27:09', NULL),
 (4, 6, 6, 'emp-103', 1, 'Rhythm', NULL, 'Patel', 'Rhythm@gmail.com', NULL, 1236412300, NULL, '$2y$10$0K9XQXf3oP/9y1rXuDVUW.RdOuCa5BzGfWlUCYtZqcw5jUiJEwnLG', 1, '2016-02-02', '2024-01-01', NULL, '2024-06-30', '2024-09-24', 'profile_image/24092024335.jpg', NULL, NULL, NULL, 1, '2024-09-24 05:15:05', '2024-09-24 07:10:28', NULL),

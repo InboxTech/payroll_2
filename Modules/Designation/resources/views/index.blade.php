@@ -55,7 +55,9 @@
                                 <th class="text-center">Sr. No.</th>
                                 <th class="text-center">Designation Name</th>
                                 <th class="text-center">Status</th>
-                                <th class="text-center">Action</th>
+                                @canany(['edit-designation', 'delete-designation'])
+                                    <th class="text-center">Action</th>
+                                @endcan
                             </tr>
                         </thead>
                     </table>
@@ -85,7 +87,9 @@
                         {data: 'id', name: 'id'},
                         {data: 'name', name: 'name'},
                         { data: 'status', name: 'status' },
-                        {data: 'action', name: 'action', orderable: false, searchable: false},
+                        @canany(['edit-designation', 'delete-designation'])
+                            {data: 'action', name: 'action', orderable: false, searchable: false},
+                        @endcan
                     ],
                 });
                 
