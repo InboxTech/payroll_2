@@ -129,6 +129,10 @@ class PermissionTableSeeder extends Seeder
                 'group_name' => 'HolidayLeave'
             ],
             [
+                'name' => 'view-previous-leave',
+                'group_name' => 'HolidayLeave'
+            ],
+            [
                 'name' => 'view-leave-apply',
                 'group_name' => 'LeaveApply'
             ],
