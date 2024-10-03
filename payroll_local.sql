@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 03, 2024 at 06:29 AM
+-- Generation Time: Oct 03, 2024 at 06:42 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.9
 
@@ -236,7 +236,7 @@ CREATE TABLE `tbl_leave_applies` (
   `to_date` date DEFAULT NULL,
   `leave_id` int DEFAULT NULL,
   `leave_mode` int DEFAULT NULL COMMENT '1 for Full Day, 2 for Half Day - 1st, 3 for Half Day - 2nd',
-  `is_leave_cancle` int DEFAULT '0' COMMENT '1 for No, 2 for Yes',
+  `is_leave_cancle` int DEFAULT '0' COMMENT '0 for default, 1 for No, 2 for Yes',
   `reason` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `is_approved` int DEFAULT '0' COMMENT '0 for pending, 1 for Approved, 2 for Rejected',
   `number_of_days` double(8,2) DEFAULT NULL,

@@ -53,7 +53,7 @@ class LeaveApplyController extends Controller
                         return date('d-m-Y', strtotime($row->created_at));
                     })
                     ->addColumn('is_leave_cancle', function($row) {
-                        if($row->is_leave_cancle) {
+                        if($row->is_leave_cancle == 2) {
                             return 'Yes';
                         }
                         return '';

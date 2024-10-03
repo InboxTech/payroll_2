@@ -28,7 +28,7 @@ class HolidayLeaveController extends Controller
         {
             $yesterday = Carbon::yesterday()->endOfDay();
 
-            $data = HolidayLeave::where('holiday_date', '<=', $yesterday)->latest();
+            $data = HolidayLeave::where('holiday_date', '<=', $yesterday)->orderBy('holiday_date', 'DESC')->get();
 
             $searchValue = $request->input('search.value');
 
