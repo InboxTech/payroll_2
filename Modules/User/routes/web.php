@@ -17,6 +17,7 @@ use Modules\User\Http\Controllers\UserController;
 Route::prefix('admin')->middleware(['auth', 'checkuserstatus'])->group(function(){
     Route::resource('user', UserController::class);
     Route::post('/user/delete', [UserController::class, 'destroy'])->name('user.delete');
+    Route::post('/delete-letters', [UserController::class, 'deleteletters'])->name('user.deleteletters');
     Route::post('user_change_status', [UserController::class, 'change_status'])->name('user.change_status');
     Route::post('user_check_duplication', [UserController::class, 'check_duplication'])->name('user_check_duplication');
     Route::get('assign-leaves', [UserController::class, 'assignleaves'])->name('user.assignleaves');

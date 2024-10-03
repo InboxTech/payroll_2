@@ -105,7 +105,7 @@
                 </div>
 
                 <div class="date">
-                    Date: {{ \Carbon\Carbon::parse($userData->joining_date)->format('d M, Y') }}
+                    Date: {!! \Carbon\Carbon::parse($userData->joining_date)->format('j') . '<sup>' . \Carbon\Carbon::parse($userData->joining_date)->format('S') . '</sup> ' . \Carbon\Carbon::parse($userData->joining_date)->format('F Y') !!}
                 </div>
                 <p>
                     <strong>To</strong><br>
@@ -122,7 +122,7 @@
                 </p>
                 <ul>
                     <li><strong>Internship Position:</strong> {{ $userData->designation->name }}</li>
-                    <li><strong>Internship Start Date:</strong> {{ \Carbon\Carbon::parse($userData->joining_date)->format('d M, Y') }}</li>
+                    <li><strong>Internship Start Date:</strong> {!! \Carbon\Carbon::parse($userData->joining_date)->format('j') . '<sup>' . \Carbon\Carbon::parse($userData->joining_date)->format('S') . '</sup> ' . \Carbon\Carbon::parse($userData->joining_date)->format('F Y') !!}</li>
                     <li><strong>Salary Stipend:</strong> {{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->basic_monthly) }}</li>
                     <li><strong>Location:</strong> Inbox Infotech Vadodara</li>
                 </ul>

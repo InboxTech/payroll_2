@@ -37,6 +37,7 @@ class UserController extends Controller
         $this->middleware('permission:create-employee', ['only' => ['create','store']]);
         $this->middleware('permission:edit-employee', ['only' => ['edit','update']]);
         $this->middleware('permission:delete-employee', ['only' => ['destroy']]);
+        $this->middleware('permission:delete-letters', ['only' => ['deleteletters']]);
     }
 
     public function salaryhistory(Request $request)
@@ -210,9 +211,48 @@ class UserController extends Controller
 
     public function viewletter(Request $request)
     {
-        $userDocument = UserDocument::where('user_id', $request->userId)->get();
+        if ($request->ajax()) {
+            
+            $data = UserDocument::where('user_id', $request->userId)->latest();
 
-        return view('user::viewletter', compact('userDocument'));
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('checkbox', function($row){
+                        $btn = '<input type="checkbox" name="id[]" class="form-check-input jsCheckBoxes" value="'.$row->id.'">';
+                        return $btn;
+                    })
+                    ->addColumn('letter_name', function($row) {
+                        switch($row->document_type) {
+                            case 1:
+                                $documentTypeName = 'Internship Offer Letter';
+                                break;
+                            case 2:
+                                $documentTypeName = 'Confirmation Letter';
+                                break;
+                            case 3:
+                                $documentTypeName = 'Offer Letter';
+                                break;
+                            case 4:
+                                $documentTypeName = 'Appointment Letter';
+                                break;
+                            case 5:
+                                $documentTypeName = 'Experience or Relieving Letter';
+                                break;
+                            default:
+                                $documentTypeName = 'Unknown Document Type';
+                                break;
+                        }
+                        return $documentTypeName;
+                    })
+                    
+                    ->addColumn('view', function($row){
+                        return view('user::letterview', compact('row'));
+                    })
+                    ->rawColumns(['action', 'checkbox'])
+                    ->make(true);
+        }
+
+        return view('user::viewletter', compact('request'));
     }
 
     /**
@@ -686,6 +726,32 @@ class UserController extends Controller
             $data_id = json_decode($request->data_id);
 
             if (User::whereIn('id',$data_id)->delete())
+            {
+                $status = true;
+                $message = "Record successfully deleted";
+            }
+            else
+            {
+                $status = false;
+                $message = "Opps Something went wrong";
+            }
+        }
+        else
+        {
+            $status = false;
+            $message = "Bad Request";
+        }
+
+        return response()->json(['status'=>$status,'message'=>$message]);
+    }
+    
+    public function deleteletters(Request $request)
+    {
+        if($request->ajax())
+        {
+            $data_id = json_decode($request->data_id);
+
+            if (UserDocument::whereIn('id',$data_id)->delete())
             {
                 $status = true;
                 $message = "Record successfully deleted";

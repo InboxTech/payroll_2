@@ -1,0 +1,1 @@
+<a href="{{ asset('storage/'.$row->document_name) }}" target="_blank"><i class="menu-icon tf-icons ti ti-file-arrow-right"></i></a>
