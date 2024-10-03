@@ -275,8 +275,7 @@ class UserController extends Controller
 
         $designation = Designation::whereNot('id', 1)->where('status', 1)->pluck('name', 'id');
         $department = Department::where('status', 1)->pluck('name', 'id');
-        // $departmentHead = User::where('status', 1)->()
-                
+                        
         return view('user::create', compact('roles', 'assignLeave', 'designation', 'department'));
     }
 
@@ -468,14 +467,14 @@ class UserController extends Controller
     {
         $userData = User::where('id', $userId)->first();
 
-        $pdf = Pdf::loadView('user::appoitment_letter', compact('userData'));
+        $pdf = Pdf::loadView('user::appointment_letter', compact('userData'))->setPaper('A4', 'portrait');
 
         $content = $pdf->download()->getOriginalContent();
 
         $rootPath = storage_path('app/public').'/appoitment-letter';
 
         $client = Storage::createLocalDriver(['root' => $rootPath]);
-        $pdf_name = $userData->emp_id.'-'.$userData->joining_date.'appoitment-letter.pdf';
+        $pdf_name = $userData->emp_id.'-'.$userData->joining_date.'-appoitment-letter.pdf';
 
         $client->put($pdf_name, $content);
 

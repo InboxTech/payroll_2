@@ -158,43 +158,43 @@
                     <tbody>
                         <tr>
                             <td><strong>Gross Salary</strong></td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->gross_salary_yearly) }}</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->gross_salary_monthly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->gross_salary_yearly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->gross_salary_monthly) }}</td>
                         </tr>
                         <tr>
                             <td>Basic</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->basic_yearly) }}</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->basic_monthly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->basic_yearly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->basic_monthly) }}</td>
                         </tr>
                         <tr>
                             <td>HRA</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->hra_yearly) }}</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->hra_monthly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->hra_yearly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->hra_monthly) }}</td>
                         </tr>
                         <tr>
                             <td>Medical</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->medical_yearly) }}</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->medical_monthly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->medical_yearly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->medical_monthly) }}</td>
                         </tr>
                         <tr>
                             <td>Education</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->education_yearly) }}</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->education_monthly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->education_yearly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->education_monthly) }}</td>
                         </tr>
                         <tr>
                             <td>Conveyance</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->conveyance_yearly) }}</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->conveyance_monthly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->conveyance_yearly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->conveyance_monthly) }}</td>
                         </tr>
                         <tr>
                             <td>Special Allowance</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->special_allowance_yearly) }}</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->special_allowance_monthly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->special_allowance_yearly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->special_allowance_monthly) }}</td>
                         </tr>
                         <tr>
                             <td class="td-highlight">Gross Salary (A)</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->gross_salary_A_yearly) }}</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->gross_salary_A_monthly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->gross_salary_A_yearly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->gross_salary_A_monthly) }}</td>
                         </tr>
                         <tr>
                             <td class="td-highlight">Less: Deduction</td>
@@ -203,58 +203,58 @@
                         </tr>
                         <tr>
                             <td>Employee Contribution 12% of basic gross or Rs. 1800/- whichever is less</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->employee_contribution_yearly) }}</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->employee_contribution_monthly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->employee_contribution_yearly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->employee_contribution_monthly) }}</td>
                         </tr>
                         <tr>
                             <td>ESI Employee Contribution (0.25%)</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->esi_employee_contribution_yearly) }}</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->esi_employee_contribution_monthly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->esi_employee_contribution_yearly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->esi_employee_contribution_monthly) }}</td>
                         </tr>
                         <tr>
                             <td>Labour Welfare Fund (Gujarat) Employee Contribution</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->labour_welfare_employee_yearly) }}</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->labour_welfare_employee_monthly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->labour_welfare_employee_yearly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->labour_welfare_employee_monthly) }}</td>
                         </tr>
                         <tr>
                             <td>Professional Tax</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->professional_tax_yearly) }}</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->professional_tax_monthly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->professional_tax_yearly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->professional_tax_monthly) }}</td>
                         </tr>
                         <tr>
                             <td class="td-highlight">Employee Contribution (B)</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->employee_contribution_B_yearly) }}</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->employee_contribution_B_monthly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->employee_contribution_B_yearly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->employee_contribution_B_monthly) }}</td>
                         </tr>
                         <tr>
                             <td class="td-highlight">Net Salary (C)</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->net_salary_C_yearly) }}</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->net_salary_C_monthly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->net_salary_C_yearly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->net_salary_C_monthly) }}</td>
                         </tr>
                         <tr>
                             <td>P.F. (Employer's Contribution 12% of Basic or Rs. 1800/- whichever is less)</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->employer_contribution_yearly) }}</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->employer_contribution_monthly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->employer_contribution_yearly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->employer_contribution_monthly) }}</td>
                         </tr>
                         <tr>
                             <td>ESI Employer Contribution</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->esi_employer_contribution_yearly) }}</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->esi_employer_contribution_monthly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->esi_employer_contribution_yearly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->esi_employer_contribution_monthly) }}</td>
                         </tr>
                         <tr>
                             <td>Labour Welfare Fund (Gujarat) Employer Contribution</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->labour_welfare_employer_yearly) }}</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->labour_welfare_employer_monthly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->labour_welfare_employer_yearly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->labour_welfare_employer_monthly) }}</td>
                         </tr>
                         <tr>
                             <td class="td-highlight">Employer Contribution (D)</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->employer_contri_D_yearly) }}</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->employer_contri_D_monthly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->employer_contri_D_yearly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->employer_contri_D_monthly) }}</td>
                         </tr>
                         <tr>
                             <td class="td-highlight">CTC (B+C+D)</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->ctc_bcd_yearly) }}</td>
-                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 1)->first()->ctc_bcd_monthly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->ctc_bcd_yearly) }}</td>
+                            <td>{{ formatIndianNumber($userData->salary_history->where('job_type', 2)->first()->ctc_bcd_monthly) }}</td>
                         </tr>
                     </tbody>
                 </table>
