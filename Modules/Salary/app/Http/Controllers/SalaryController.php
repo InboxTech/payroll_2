@@ -322,7 +322,7 @@ class SalaryController extends Controller
         $roleId= array(1, 2);
 
         if(!in_array(Auth::user()->roles->first()->id, $roleId)) {
-            return redirect()->back()->with('error', 'You have not permission');
+            abort(403);
         }
         
         if ($request->ajax()) {

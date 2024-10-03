@@ -38,6 +38,7 @@ class User extends Authenticatable
         'probation_end_date',
         'confirmation_date',
         'profile_image',
+        'emp_status',
         'temporary_address',
         'permanent_address',
         'status',

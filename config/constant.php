@@ -22,6 +22,13 @@
             '0' => 'Pending',
             '1' => 'Approved',
             '2' => 'Rejected',
+        ],
+        'empstatus' => [
+            '1' => 'Probation',
+            '2' => 'Confirmation',
+            '3' => 'Terminate',
+            '4' => 'Resign',
+            '5' => 'Retired',
         ]
     ];
  ?>

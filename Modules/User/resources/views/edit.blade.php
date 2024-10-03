@@ -175,6 +175,15 @@
                                                 <option value="0" selected>No</option>
                                             </select>
                                         </div>
+                                        <div class="col-sm-4 mb-2">
+                                            <label for="employee-status" class="form-label">Employee Status <span class="text-danger">*</span></label>
+                                            <select name="emp_status" class="form-select">
+                                                <option value="">Select Option</option>
+                                                @foreach(config('constant.empstatus') as $key => $value)
+                                                    <option value="{{ $key }}" @selected($key == $user->emp_status)>{{ $value }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- view generated letters modal statrt -->
