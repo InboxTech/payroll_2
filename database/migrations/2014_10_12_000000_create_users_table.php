@@ -25,7 +25,7 @@ return new class extends Migration
             $table->bigInteger('mobile_no')->nullable();
             $table->string('personal_email')->unique()->nullable();
             $table->string('password')->nullable();
-            $table->integer('gender')->nullable();
+            $table->integer('gender')->nullable()->comment('1 for Male, 2 for Female');
             $table->date('dob')->nullable();
             $table->date('joining_date')->nullable();
             $table->date('releaving_date')->nullable();
