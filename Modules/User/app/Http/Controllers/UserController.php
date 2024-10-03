@@ -275,6 +275,7 @@ class UserController extends Controller
 
         $designation = Designation::whereNot('id', 1)->where('status', 1)->pluck('name', 'id');
         $department = Department::where('status', 1)->pluck('name', 'id');
+        // $departmentHead = User::where('status', 1)->()
                 
         return view('user::create', compact('roles', 'assignLeave', 'designation', 'department'));
     }

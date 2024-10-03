@@ -214,7 +214,7 @@
                                                     @case(2)
                                                         Half Day - 1st
                                                         @break
-                                                    @case(2)
+                                                    @case(3)
                                                         Half Day - 2nd
                                                         @break
                                                     @default

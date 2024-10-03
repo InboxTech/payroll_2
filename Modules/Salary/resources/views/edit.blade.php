@@ -501,13 +501,18 @@
                                 $('.jsEmployerContributionD').text('{{ config("constant.currency_symbol") }}'+' '+response.data.EmployerContributionD);
                                 $('.jsCTCBCD').text('{{ config("constant.currency_symbol") }}'+' '+response.data.Ctcbcd);
                                 $('.jsFinalAmount').val(response.data.Ctcbcd);
+
+                                initialNumberOfDaysWork = response.data.numberOfWorkDay;
+                                initialAbsentDays = response.data.absentDays;
+
+                                // Reset previous paid leaves when AJAX is completed to ensure consistent calculations
+                                previousPaidLeaves = parseFloat($('.jsNumberofPaidLeaves').val()) || 0;
                             }
                         }
                     })
                 }
             });
 
-            $(document).on('keyup change', '.jsNumberofPaidLeaves', calculateSalary);
             $(document).on('keyup change', '.jsESIEmployeeContribution', calculateESI);
 
             function calculateESI()
@@ -548,20 +553,50 @@
                 $('.jsFinalAmount').val(Math.round(Ctcbcd).toFixed(2));
             }
             
+            $(document).on('change keyup', '.jsNumberofPaidLeaves', calculateSalary);
+
             let previousPaidLeaves = "{{ $salary->number_of_paid_leaves }}";
+                initialNumberOfDaysWork = "{{ $salary->number_of_days_work }}";
+                initialAbsentDays = "{{ $salary->absent_days }}";
             
             function calculateSalary() {
-                let currentPaidLeaves = parseFloat($(this).val()) || 0;
-                let numberOfDaysWork = parseFloat($('.jsNumberOfDayWork').val()) || 0;
+                let currentPaidLeaves = parseFloat($('.jsNumberofPaidLeaves').val()) || 0;
                 let totalDays = parseFloat($('.jsTotalDays').val());
+                
+                // Fetch number of days worked and absent days from the DOM, or use initial values
+                let numberOfDaysWork = parseFloat($('.jsNumberOfDayWork').val()) || initialNumberOfDaysWork;
+                let currentAbsentDays = parseFloat($('.jsAbsentDay').val()) || initialAbsentDays;
 
                 let changeInPaidLeaves = currentPaidLeaves - previousPaidLeaves;
+                
+                if (currentPaidLeaves > currentAbsentDays) {
+                    let excessPaidLeaves = currentPaidLeaves - currentAbsentDays;
+                    numberOfDaysWork += excessPaidLeaves;
+                    currentAbsentDays = 0;
+                } else {
+                    // If paid leaves are less than or equal to absent days, adjust both values accordingly
+                    currentAbsentDays -= changeInPaidLeaves;
+                    numberOfDaysWork += changeInPaidLeaves;
+                }
 
-                // Update number of days worked
-                numberOfDaysWork += changeInPaidLeaves;
+                if (currentAbsentDays < 0) {
+                    currentAbsentDays = 0;
+                }
+
+                if (numberOfDaysWork > totalDays) {
+                    numberOfDaysWork = totalDays;
+                }
+
+                if (numberOfDaysWork < 0) {
+                    numberOfDaysWork = 0;
+                }
 
                 // Update the value of number of days worked
                 $('.jsNumberOfDayWork').val(numberOfDaysWork);
+                $('.jsAbsentDay').val(currentAbsentDays);
+
+                initialNumberOfDaysWork = numberOfDaysWork;
+                initialAbsentDays = currentAbsentDays;
 
                 // Update previous paid leaves to the current value
                 previousPaidLeaves = currentPaidLeaves;

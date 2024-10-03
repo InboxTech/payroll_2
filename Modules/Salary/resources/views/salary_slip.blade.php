@@ -95,11 +95,11 @@
                         <th>Total Working Days</th>
                         <td>{{ $salary->total_days }}</td>
                         <th>Paid Days</th>
-                        <td>{{ $salary->total_week_off + $salary->paid_holiday }}</td>
+                        <td>{{ $salary->number_of_days_work }}</td>
                     </tr>
                     <tr>
                         <th>LOP Days</th>
-                        <td></td>
+                        <td>{{ $salary->number_of_paid_leaves }}</td>
                         <th>Leaves Taken</th>
                         <td>{{ $salary->absent_days }}</td>
                     </tr>

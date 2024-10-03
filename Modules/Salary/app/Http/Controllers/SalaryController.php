@@ -21,12 +21,11 @@ class SalaryController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:view-salary|create-salary|edit-salary|delete-salary|show-salary', ['only' => ['monthlist','show']]);
+        $this->middleware('permission:view-salary|create-salary|edit-salary|delete-salary|show-salary', ['only' => ['index','monthlist','show']]);
         $this->middleware('permission:create-salary', ['only' => ['create','store']]);
         $this->middleware('permission:edit-salary', ['only' => ['edit','update']]);
         $this->middleware('permission:delete-salary', ['only' => ['destroy']]);
         $this->middleware('permission:show-salary', ['only' => ['show']]);
-        $this->middleware('permission:employee-list-salary', ['only' => ['index']]);
     }
 
     public function calculateAllDaysWithSalary(Request $request)
@@ -115,7 +114,7 @@ class SalaryController extends Controller
         }
 
         // Absent days 
-        $data['absentDays'] = $numberOfDaysInMonth - ($presentDays + $totalWeekOff + $paidHoliday);
+        $data['absentDays'] = ($numberOfDaysInMonth - $NumberofPaidLeaves) - ($presentDays + $totalWeekOff + $paidHoliday);
 
         // Number of Work Days
         $data['numberOfWorkDay'] = $presentDays + $totalWeekOff + $paidHoliday + $NumberofPaidLeaves;
@@ -319,6 +318,12 @@ class SalaryController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request) {
+        
+        $roleId= array(1, 2);
+
+        if(!in_array(Auth::user()->roles->first()->id, $roleId)) {
+            return redirect()->back()->with('error', 'You have not permission');
+        }
         
         if ($request->ajax()) {
             

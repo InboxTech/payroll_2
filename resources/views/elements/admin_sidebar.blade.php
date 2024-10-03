@@ -170,7 +170,7 @@
             </li>
         @endcan
 
-        @php
+        {{-- @php
             $controller = array('ProjectController');
             $action = array('index');
         @endphp
@@ -188,14 +188,14 @@
                             </a>
                         </li>
                     @endcan
-                    {{-- <li class="menu-item @if($current_controller == 'TaskController') active @endif">
+                    <li class="menu-item @if($current_controller == 'TaskController') active @endif">
                         <a href="{{ route('task.index') }}" class="menu-link">
                             <div data-i18n="Task">Task</div>
                         </a>
-                    </li> --}}
+                    </li>
                 </ul>
             </li>
-        @endcan
+        @endcan --}}
 
         @php 
             $controller = array('SettingController');

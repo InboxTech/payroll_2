@@ -200,11 +200,7 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'show-salary',
                 'group_name' => 'Salary'
             ],
-            [
-                'name' => 'employee-list-salary',
-                'group_name' => 'Salary'
-            ],
-            [
+            /* [
                 'name' => 'view-project',
                 'group_name' => 'Project'
             ],
@@ -227,7 +223,7 @@ class PermissionTableSeeder extends Seeder
             [
                 'name' => 'restore-deleted-project',
                 'group_name' => 'Project'
-            ],
+            ], */
             [
                 'name' => 'edit-setting',
                 'group_name' => 'Setting'

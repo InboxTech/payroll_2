@@ -25,11 +25,11 @@
                         <div class="card mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5 class="mb-0">Holiday Leave</h5>
-                                @canany(['edit-leave', 'view-previous-leave'])
+                                @canany(['create-holiday-leave', 'view-previous-leave'])
                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>
                                         <div class="dropdown-menu">
-                                            @can('edit-leave')
+                                            @can('create-holiday-leave')
                                                 <a class="dropdown-item" href="{{ route('holidayleave.create') }}"><i class="ti ti-plus me-1"></i> Add</a>
                                             @endcan
                                             @can('view-previous-leave')
