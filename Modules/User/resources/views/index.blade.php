@@ -96,11 +96,11 @@
                     },
                     columns: [
                         { data: 'checkbox', name: 'checkbox', orderable: false, searchable: false},
-                        { data: 'full_name', name: 'full_name' },
-                        { data: 'emp_id', name: 'emp_id' },
-                        { data: 'email', name: 'email'},
-                        { data: 'mobile_no', name: 'mobile_no'},
-                        { data: 'status', name: 'status' },
+                        { data: 'full_name', name: 'full_name', orderable: false },
+                        { data: 'emp_id', name: 'emp_id', orderable: false},
+                        { data: 'email', name: 'email', orderable: false},
+                        { data: 'mobile_no', name: 'mobile_no', orderable: false},
+                        { data: 'status', name: 'status', orderable: false },
                         { data: 'action', name: 'action', orderable: false, searchable: false },
                     ],
                 });

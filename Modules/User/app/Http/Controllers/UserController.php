@@ -262,27 +262,24 @@ class UserController extends Controller
 
         if ($request->ajax()) {
             
-            $data = User::select([
-                'users.*',
-                DB::raw("CONCAT(first_name, ' ', last_name) as full_name")
-            ])->whereNot('id', 1)->latest();
+            $data = User::whereNot('id', 1)->orderBy('id', 'DESC')->latest();
 
             return Datatables::of($data)
                     ->filter(function ($query) use ($request) {
-                        if ($request->has('full_name')) {
-                            $query->where(DB::raw("CONCAT(first_name, ' ', last_name)"), 'like', "%" . $request->get('full_name') . "%");
+                        if ($request->full_name) {
+                            $query->where(DB::raw("CONCAT(first_name, ' ', last_name)"), 'like', "%" . $request->full_name . "%");
                         }
 
-                        if ($request->has('email')) {
-                            $query->where('email', 'like', "%" . $request->get('email') . "%");
+                        if ($request->email) {
+                            $query->where('email', 'like', "%" . $request->email . "%");
                         }
 
-                        if ($request->has('mobile_no')) {
-                            $query->where('mobile_no', 'like', "%" . $request->get('mobile_no') . "%");
+                        if ($request->mobile_no) {
+                            $query->where('mobile_no', 'like', "%" . $request->mobile_no . "%");
                         }
                         
-                        if ($request->has('emp_id')) {
-                            $query->where('emp_id', 'like', "%" . $request->get('emp_id') . "%");
+                        if ($request->emp_id) {
+                            $query->where('emp_id', 'like', "%" . $request->emp_id . "%");
                         }
                     })
                     ->addIndexColumn()
