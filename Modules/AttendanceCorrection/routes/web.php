@@ -18,4 +18,5 @@ Route::prefix('admin')->middleware(['auth', 'checkuserstatus'])->group(function(
     Route::resource('attendancecorrection', AttendanceCorrectionController::class)->names('attendancecorrection');
     Route::get('attendancecorrection/{id}/correction', [AttendanceCorrectionController::class, 'correction'])->name('attendancecorrection.correction');
     Route::post('attendance-list', [AttendanceCorrectionController::class, 'attendancelist'])->name('attendancecorrection.attendancelist');
+    Route::match(['get', 'post'], 'attendancecorrection-import', [AttendanceCorrectionController::class, 'import'])->name('attendancecorrection.import');
 });

@@ -9,6 +9,8 @@ use Illuminate\Http\Response;
 use App\Models\User;
 use App\Models\PunchInOut;
 use Illuminate\Support\Facades\DB;
+use App\Imports\AttendanceImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
 use DataTables;
 
@@ -19,6 +21,18 @@ class AttendanceCorrectionController extends Controller
         $this->middleware('permission:employee-list-attendance-correction', ['only' => ['index']]);
         $this->middleware('permission:attendance-list-attendancecorrection', ['only' => ['correction', 'attendancelist']]);
         $this->middleware('permission:edit-attendance-correction', ['only' => ['edit','update']]);
+    }
+
+    public function import(Request $request)
+    {
+        if($request->isMethod('post')) {
+
+            Excel::import(new AttendanceImport,request()->file('import_file'));
+
+            return redirect()->route('attendancecorrection.index')->with('success', 'Your Data Import Successfully');
+        }
+
+        return view('attendancecorrection::import');
     }
 
     /**

@@ -8,7 +8,7 @@
                 <h4 class="py-3 mb-4">
                     <span class="text-muted fw-light">
                         <a href="{{ route('dashboard') }}" class="text-reset">Dashboard</a> /
-                        <a href="{{ route('user.index') }}" class="text-reset">Employee</a> /
+                        <a href="{{ route('attendancecorrection.index') }}" class="text-reset">AttendanceCorrection</a> /
                     </span> Import
                 </h4>
             </div>
@@ -16,7 +16,7 @@
                 <div class="col-xl">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <form class="FormValidate" action="{{ route('user.import') }}" method="post" enctype="multipart/form-data">
+                            <form class="FormValidate" action="{{ route('attendancecorrection.import') }}" method="post" enctype="multipart/form-data">
                                 @csrf 
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
@@ -25,13 +25,13 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="sample-file" class="form-label">Download Sample File</label><br>
-                                        <a href="{{ asset('admin/samplefiles/employee-import-sample.xlsx') }}" class="btn btn-outline-primary" download><i class="fas fa-download"></i>&nbsp;&nbsp;Download </a>
+                                        <a href="{{ asset('admin/samplefiles/attendance-sample-import.xlsx') }}" class="btn btn-outline-primary" download><i class="fas fa-download"></i>&nbsp;&nbsp;Download </a>
                                     </div>
                                 </div>
                                 <div class="mt-3">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                     <button type="reset" class="btn btn-label-secondary waves-effect">Reset</button>
-                                    <a href="{{ route('user.index') }}" class="btn btn-label-secondary waves-effect">Back</a>
+                                    <a href="{{ route('attendancecorrection.index') }}" class="btn btn-label-secondary waves-effect">Back</a>
                                 </div>
                             </form>
                         </div>
