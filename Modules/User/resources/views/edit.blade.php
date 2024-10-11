@@ -262,7 +262,7 @@
                                     <div class="row">
                                         <div class="col-md-4 mt-2">
                                             <label class="form-label" for="pf-number">UAN Number </label>
-                                            <input type="text" name="uan_number" class="form-control" value="{{ $user->user_detail->uan_number }}"/>
+                                            <input type="text" name="uan_number" class="form-control" value="{{ $user->user_detail->uan_number ?? '' }}"/>
                                         </div>
                                     </div>
                                 </div>

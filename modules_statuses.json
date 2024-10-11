@@ -14,5 +14,6 @@
     "Department": true,
     "AttendanceCorrection": true,
     "Project": true,
-    "Task": true
+    "Task": true,
+    "Test": true
 }
