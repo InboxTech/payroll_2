@@ -13,6 +13,7 @@ use App\Models\PasswordResetToken;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Mail\ForgotPasswordMail;
+use Illuminate\Support\Facades\Mail;
 use App\Models\LeaveApply;
 use Illuminate\Support\Carbon;
 use DataTables;
@@ -215,8 +216,7 @@ class AuthController extends Controller
                     'token' => $token
                 );
                 
-                return view('auth::forgotpassword_mail', compact('data'));
-                Mail::to($email_exist->email_id)->send(new ForgotPasswordMail($data));
+                Mail::to($email_exist->email)->send(new ForgotPasswordMail($data));
 
                 return back()->with('success', 'Forgot Password link is send to your registered email id');
             }

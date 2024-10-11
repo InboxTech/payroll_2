@@ -14,7 +14,7 @@
                         </div>
                         <h4 class="mb-1 pt-2">Forgot Password? 🔒</h4>
                         <p class="mb-4">Enter your email and we'll send reset password link</p>
-                        <form class="mb-3" action="{{ route('forgot_password') }}" method="post">
+                        <form class="mb-3 jsFormValidate" action="{{ route('forgot_password') }}" method="post">
                             @csrf
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
@@ -34,3 +34,43 @@
             </div>
         </div>
     @endsection
+    @push('script')
+        <script type="text/javascript">
+            $.validator.addMethod("validEmail", function(value, element) {
+                if (value == '') return true;
+                var temp1;
+                temp1 = true;
+                var ind = value.indexOf('@');
+                var str2 = value.substr(ind + 1);
+                var str3 = str2.substr(0, str2.indexOf('.'));
+                if (str3.lastIndexOf('-') == (str3.length - 1) || (str3.indexOf('-') != str3.lastIndexOf('-'))) return false;
+                var str1 = value.substr(0, ind);
+                if ((str1.lastIndexOf('_') == (str1.length - 1)) || (str1.lastIndexOf('.') == (str1.length - 1)) || (str1.lastIndexOf('-') == (str1.length - 1))) return false;
+                str = /(^[a-zA-Z0-9]+[\.\.\._-]{0,1})+([a-zA-Z0-9]+[\.\.\._-]{0,1})*@([a-zA-Z0-9]+[-]{0,1})+(\.[a-zA-Z0-9]+)*(\.[a-zA-Z]{2,3})$/;
+                temp1 = str.test(value);
+                return temp1;
+            }, "Please Enter Valid Email Address");
+
+            $('.jsFormValidate').validate({
+                rules:{
+                    'email':{
+                        required: true,
+                        email:true,
+                        validEmail:true,
+                    },
+                },
+                messages:{
+                    'password': {
+                        required: "Please Enter Password",
+                        email:"Please Enter Valid Email Address",
+                        validEmail:"Please Enter Valid Email Address",
+                    },
+                },
+                submitHandler: function(form) {
+                    $(form).find(':submit').prop('disabled', true);
+                    $(form).find(':submit').text('Please Wait');
+                    form.submit();
+                }
+            });
+        </script>
+    @endpush

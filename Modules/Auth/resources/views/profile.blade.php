@@ -34,11 +34,11 @@
                                             <i class="ti ti-upload d-block d-sm-none"></i>
                                             <input type="file" name="profile_image" id="upload" class="account-file-input" hidden accept="image/png, image/jpeg" />
                                         </label>
-                                        <button type="button" class="btn btn-label-secondary account-image-reset mb-3">
+                                        <button type="button" class="btn btn-label-secondary account-image-reset mb-3 d-none">
                                             <i class="ti ti-refresh-dot d-block d-sm-none"></i>
                                             <span class="d-none d-sm-block">Reset</span>
                                         </button>
-                                        <div class="text-muted">Allowed JPG, GIF or PNG. Max size of 800K</div>
+                                        <div class="text-muted d-none">Allowed JPG, GIF or PNG. Max size of 800K</div>
                                     </div>
                                 </div>
                             </div>

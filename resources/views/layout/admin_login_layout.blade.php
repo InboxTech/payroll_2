@@ -77,7 +77,7 @@
         <script src="{{ asset('admin/assets/js/main.js') }}"></script>
 
         <!-- Page JS -->
-        <script src="{{ asset('admin/assets/js/pages-auth.js') }}"></script>
+        <script src="{{ asset('admin/assets/vendor/plugin/jquery-validation/jquery.validate.min.js') }}"></script>
 
         @stack('script')
     </body>

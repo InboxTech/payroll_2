@@ -5,7 +5,7 @@
             <div style="width:644px;padding:0px;text-align:left;height:auto;min-height:100px;border: 2px solid #3150a0;border-radius:5px;background-repeat: repeat;background:  #3150a01c;">
                 <div align="center" style="margin-top:20px;text-align:center;padding: 0px 0px;">
                     <a href="javascript:void(0)">
-                        <img style="width: 200px;" src="{{ asset(getImage(getSettingData('company_logo'))) }}">
+                        <img style="width: 200px;" src="{{ asset(getImage(getSettingData('config_company_logo'))) }}">
                     </a>
                 </div>
                 <div align="center" style="border-radius:5px;margin:30px;margin-top:20px;min-height:150px;height:auto;padding:0 0 10px 0;color:#43494e;font-size:13px;font-family: Verdana, sans-serif;font-weight:400;">
