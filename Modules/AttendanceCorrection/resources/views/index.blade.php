@@ -5,8 +5,8 @@
                 @include('flashmessage.flashmessage')
             </div>
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
-                <h4 class="py-3 mb-4"><span class="text-muted fw-light">Dashboard /</span> Attendance Correction</h4>
-                <div class="d-flex align-content-center flex-wrap gap-3">
+                <h4 class="py-lg-3 mb-lg-4"><span class="text-muted fw-light">Dashboard /</span> Attendance Correction</h4>
+                <div class="d-flex align-content-center flex-wrap gap-3 mb-3 mb-lg-0">
                     <div class="d-flex gap-3">
                         <a href="{{ route('attendancecorrection.import') }}" class="btn btn-outline-success"><i class="fas fa-upload"></i>&nbsp;&nbsp;Import</a>
                     </div>

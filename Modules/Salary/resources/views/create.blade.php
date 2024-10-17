@@ -157,7 +157,7 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="number-of-paid-leaves" class="form-label">Number of Paid Leaves <span class="text-danger">*</span></label>
-                                    <input type="number" name="number_of_paid_leaves" class="form-control jsNumberofPaidLeaves" min="0"/>
+                                    <input type="number" name="number_of_paid_leaves" class="form-control jsNumberofPaidLeaves" min="0" readonly/>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="absent-day's" class="form-label">Absent Day's <span class="text-danger">*</span></label>
@@ -456,8 +456,8 @@
             let initialNumberOfDaysWork = 0;
             let initialAbsentDays = 0;
 
-            $(document).on('change', '.jsNumberofPaidLeaves', calculateSalary);
-            $(document).on('keyup', '.jsNumberofPaidLeaves', calculateSalary);
+            /* $(document).on('change', '.jsNumberofPaidLeaves', calculateSalary);
+            $(document).on('keyup', '.jsNumberofPaidLeaves', calculateSalary); */
 
             let previousPaidLeaves = 0;
 
@@ -614,13 +614,14 @@
                                 $('.jsEmployerContributionD').text('{{ config("constant.currency_symbol") }}'+' '+response.data.EmployerContributionD);
                                 $('.jsCTCBCD').text('{{ config("constant.currency_symbol") }}'+' '+response.data.Ctcbcd);
                                 $('.jsFinalAmount').val(response.data.Ctcbcd);
-                                $('.jsNumberofPaidLeaves').attr('max', response.data.absentDays);
+                                $('.jsNumberofPaidLeaves').val(response.data.numberofpaidleaves);
+                                /* $('.jsNumberofPaidLeaves').attr('max', response.data.absentDays);
 
                                 initialNumberOfDaysWork = response.data.numberOfWorkDay;
                                 initialAbsentDays = response.data.absentDays;
 
                                 // Reset previous paid leaves when AJAX is completed to ensure consistent calculations
-                                previousPaidLeaves = parseFloat($('.jsNumberofPaidLeaves').val()) || 0;
+                                previousPaidLeaves = parseFloat($('.jsNumberofPaidLeaves').val()) || 0; */
                             }
                         }
                     })

@@ -30,11 +30,11 @@
                                     </div>
                                     <div class="col-md-3 mt-2">
                                         <label for="dateRangePicker" class="form-label">From Date <span class="text-danger">*</span></label>
-                                        <input type="date" name="from_date" class="form-control" min="{{ date('Y-m-d') }}"/>
+                                        <input type="date" name="from_date" class="form-control" min="{{ date('Y-m-d', strtotime('-5 Day')) }}"/>
                                     </div>
                                     <div class="col-md-3 mt-2">
                                         <label for="dateRangePicker" class="form-label">To Date <span class="text-danger">*</span></label>
-                                        <input type="date" name="to_date" class="form-control" min="{{ date('Y-m-d') }}"/>
+                                        <input type="date" name="to_date" class="form-control" min="{{ date('Y-m-d', strtotime('-5 Day')) }}"/>
                                     </div>
                                     <div class="col-md-3 mt-2">
                                         <label class="form-label" for="basic-default-fullname">Leave Mode <span class="text-danger">*</span></label>

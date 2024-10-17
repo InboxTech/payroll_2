@@ -26,7 +26,11 @@ class AttendanceImport implements ToModel, WithChunkReading
             $punchInOut->user_id = $userData->id;
             $punchInOut->date = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]);
             $punchInOut->punch_in = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[2]);
+            $punchInOut->punch_in_lat = '22.3188337';
+            $punchInOut->punch_in_long = '73.1674962';
             $punchInOut->punch_out = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[3]);
+            $punchInOut->punch_out_lat = '22.3188337';
+            $punchInOut->punch_out_long = '73.1674962';
             $punchInOut->punch_in_out_status = 0;
 
             $punchInOut->save();

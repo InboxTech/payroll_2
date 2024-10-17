@@ -10,6 +10,7 @@
                     <div class="d-flex gap-3">
                         {{-- <a href="javascript:void(0);" class="btn btn-outline-danger" id="delete-selected"><i class="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>
                         <a href="{{ route('salary.create') }}" class="btn btn-outline-primary"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</a> --}}
+                        <a href="{{ route('salary.import') }}" class="btn btn-outline-success"><i class="fas fa-upload"></i>&nbsp;&nbsp;Import</a>
                     </div>
                 </div>
             </div>

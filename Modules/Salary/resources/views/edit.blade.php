@@ -146,7 +146,7 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="number-of-paid-leaves" class="form-label">Number of Paid Leaves <span class="text-danger">*</span></label>
-                                    <input type="number" name="number_of_paid_leaves" class="form-control jsNumberofPaidLeaves" min="0" value="{{ $salary->number_of_paid_leaves }}"/>
+                                    <input type="number" name="number_of_paid_leaves" class="form-control jsNumberofPaidLeaves" min="0" value="{{ $salary->number_of_paid_leaves }}" readonly/>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="absent-day's" class="form-label">Absent Day's <span class="text-danger">*</span></label>
@@ -500,13 +500,14 @@
                                 $('.jsLabourEmployerContri').val(response.data.LabourEmployerContri);
                                 $('.jsEmployerContributionD').text('{{ config("constant.currency_symbol") }}'+' '+response.data.EmployerContributionD);
                                 $('.jsCTCBCD').text('{{ config("constant.currency_symbol") }}'+' '+response.data.Ctcbcd);
+                                $('.jsNumberofPaidLeaves').val(response.data.numberofpaidleaves);
                                 $('.jsFinalAmount').val(response.data.Ctcbcd);
 
-                                initialNumberOfDaysWork = response.data.numberOfWorkDay;
+                                /*initialNumberOfDaysWork = response.data.numberOfWorkDay;
                                 initialAbsentDays = response.data.absentDays;
 
                                 // Reset previous paid leaves when AJAX is completed to ensure consistent calculations
-                                previousPaidLeaves = parseFloat($('.jsNumberofPaidLeaves').val()) || 0;
+                                previousPaidLeaves = parseFloat($('.jsNumberofPaidLeaves').val()) || 0; */
                             }
                         }
                     })
@@ -553,7 +554,7 @@
                 $('.jsFinalAmount').val(Math.round(Ctcbcd).toFixed(2));
             }
             
-            $(document).on('change keyup', '.jsNumberofPaidLeaves', calculateSalary);
+            // $(document).on('change keyup', '.jsNumberofPaidLeaves', calculateSalary);
 
             let previousPaidLeaves = "{{ $salary->number_of_paid_leaves }}";
                 initialNumberOfDaysWork = "{{ $salary->number_of_days_work }}";

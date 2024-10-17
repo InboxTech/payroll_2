@@ -34,7 +34,10 @@ class LeaveApplyController extends Controller
 
             return Datatables::of($data)
                     ->addColumn('checkbox', function($row) {
-                        $btn = '<input type="checkbox" name="id[]" class="form-check-input jsCheckBoxes" value="'.$row->id.'">';
+                        $btn = '';
+                        if($row->is_approved == 0) {
+                            $btn = '<input type="checkbox" name="id[]" class="form-check-input jsCheckBoxes" value="'.$row->id.'">';
+                        }
                         return $btn;
                     })
                     ->addColumn('leave_type_name', function($row) {

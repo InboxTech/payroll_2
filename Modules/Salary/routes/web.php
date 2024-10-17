@@ -21,4 +21,5 @@ Route::prefix('admin')->middleware(['auth', 'checkuserstatus'])->group(function(
     Route::post('calculateAllDaysWithSalary', [SalaryController::class, 'calculateAllDaysWithSalary'])->name('salary.calculateAllDaysWithSalary');
     Route::get('generate-slip/{id}', [SalaryController::class, 'generateslip'])->name('salary.generateslip');
     Route::get('employee-salary', [SalaryController::class, 'employeesalary'])->name('salary.employeesalary');
+    Route::match(['get', 'post'], 'salary-import', [SalaryController::class, 'import'])->name('salary.import');
 });

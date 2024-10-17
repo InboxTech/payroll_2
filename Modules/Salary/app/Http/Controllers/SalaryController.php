@@ -17,6 +17,9 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Storage;
+use App\Imports\SalaryImport;
+use App\Models\LeaveApply;
+use Maatwebsite\Excel\Facades\Excel;
 class SalaryController extends Controller
 {
     function __construct()
@@ -26,6 +29,18 @@ class SalaryController extends Controller
         $this->middleware('permission:edit-salary', ['only' => ['edit','update']]);
         $this->middleware('permission:delete-salary', ['only' => ['destroy']]);
         $this->middleware('permission:show-salary', ['only' => ['show']]);
+    }
+
+    public function import(Request $request)
+    {
+        if($request->isMethod('post')) {
+
+            Excel::import(new SalaryImport,request()->file('import_file'));
+
+            return redirect()->route('salary.index')->with('success', 'Your Data Import Successfully');
+        }
+
+        return view('salary::import');
     }
 
     public function calculateAllDaysWithSalary(Request $request)
@@ -42,10 +57,10 @@ class SalaryController extends Controller
             $monthYear = $request->month_year;
             $userId = $request->user_id;
 
-            if($request->number_of_paid_leaves)
+            /* if($request->number_of_paid_leaves)
             {
                 $NumberofPaidLeaves = $request->number_of_paid_leaves;
-            }
+            } */
         }
 
         $date = Carbon::parse($monthYear);
@@ -113,11 +128,20 @@ class SalaryController extends Controller
             return response()->json(['data' => $data, 'status' => true]);
         }
 
+        // Number Of Paid Leaves
+        $sumOfnumberOfPaidLeaves = LeaveApply::where(['user_id' => $userId, 'is_approved' => 1])
+                    ->whereBetween('from_date', [$startDate, $endDate])
+                    ->whereBetween('to_date', [$startDate, $endDate])
+                    ->whereIn('is_leave_cancle', [0,1])
+                    ->sum('number_of_paid_leaves');
+
+        $data['numberofpaidleaves'] = $sumOfnumberOfPaidLeaves;
+
         // Absent days 
-        $data['absentDays'] = ($numberOfDaysInMonth - $NumberofPaidLeaves) - ($presentDays + $totalWeekOff + $paidHoliday);
+        $data['absentDays'] = ($numberOfDaysInMonth - $sumOfnumberOfPaidLeaves) - ($presentDays + $totalWeekOff + $paidHoliday);
 
         // Number of Work Days
-        $data['numberOfWorkDay'] = $presentDays + $totalWeekOff + $paidHoliday + $NumberofPaidLeaves;
+        $data['numberOfWorkDay'] = $presentDays + $totalWeekOff + $paidHoliday + $sumOfnumberOfPaidLeaves;
         
         // Per Day Salary
         $userData = User::where('id', $userId)->with('user_detail')->first();
@@ -221,7 +245,7 @@ class SalaryController extends Controller
                     'present_days' => $data['presentDays'],
                     'total_week_off' => $data['totalWeekOff'],
                     'paid_holiday' => $data['paidHoliday'],
-                    'number_of_paid_leaves' => $request->number_of_paid_leaves,
+                    'number_of_paid_leaves' => $sumOfnumberOfPaidLeaves,
                     'absent_days' => $data['absentDays'],
                     'total_days' => $numberOfDaysInMonth,
                     'number_of_days_work' => $data['numberOfWorkDay'],

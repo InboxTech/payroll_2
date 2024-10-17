@@ -22,6 +22,9 @@ return new class extends Migration
             $table->text('reason')->nullable();
             $table->integer('is_approved')->nullable()->comment('0 for pending, 1 for Approved, 2 for Rejected')->default('0');
             $table->float('number_of_days', 8, 2)->nullable();
+            $table->float('number_of_paid_leaves', 8, 2)->nullable();
+            $table->text('remark')->nullable();
+            $table->text('leave_status_remark')->nullable();
             $table->integer('deleted_by')->nullable()->comment('This is User Id');
             $table->timestamps();
             $table->softDeletes();

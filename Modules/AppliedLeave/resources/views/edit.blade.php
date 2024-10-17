@@ -83,6 +83,18 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label" for="number-of-paid-leaves">Number of Paid Leaves Approved<span class="text-danger">*</span></label>
+                                    <div class="col-sm-9">
+                                        <input type="number" name="number_of_paid_leaves" class="form-control" value="{{ $model->number_of_paid_leaves }}" min="0" max="{{ $model->number_of_days }}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label" for="Remark">Remark</label>
+                                    <div class="col-sm-9">
+                                        <textarea name="leave_status_remark" class="form-control" rows="5">{{ $model->leave_status_remark }}</textarea>
+                                    </div>
+                                </div>
                                 <div class="mt-3">
                                     @if($model->is_approved == 0)
                                         <button type="submit" class="btn btn-primary">Update</button>
@@ -103,12 +115,18 @@
                 rules: {
                     leave_status: {
                         required: true
-                    }
+                    },
+                    number_of_paid_leaves: {
+                        required: true,
+                    },
                 },
                 messages: {
                     leave_status: {
                         required: "Please Select Leave Status"
-                    }
+                    },
+                    number_of_paid_leaves: {
+                        required: "Please Number Of Paid Leaves. If Not Paid Leaves add zero.",
+                    },
                 },
                 highlight: function(element) {
                     $(element).removeClass('label .error');

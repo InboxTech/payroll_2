@@ -69,6 +69,12 @@ class AppliedLeaveController extends Controller
                     ->addColumn('approval_status', function($row) {
                         return view('appliedleave::approved_status', compact('row'));
                     })
+                    ->addColumn('is_leave_cancle', function($row) {
+                        if($row->is_leave_cancle == 2) {
+                            return 'Yes';
+                        }
+                        return '';
+                    })
                     ->addColumn('action', function($row) {
                         return view('appliedleave::action', compact('row'));
                     })
@@ -135,7 +141,7 @@ class AppliedLeaveController extends Controller
                     case '2':
                         break;
                     case '1':
-                        $newLeaveBalance = $assignLeave->leave_balance - $leaveApply->number_of_days;
+                        $newLeaveBalance = $assignLeave->leave_balance - $request->number_of_paid_leaves;
 
                         if ($newLeaveBalance < 0) {
                             return redirect()->route('appliedleave.edit', $leaveApply->id)->with('error', 'Insufficient Leave Balance');
@@ -153,7 +159,12 @@ class AppliedLeaveController extends Controller
                 return redirect()->route('appliedleave.index')->with('error', 'Leave Not Assign');
             }
 
+            if($request->is_approved == 1) {
+                $leaveApply->number_of_paid_leaves = $request->number_of_paid_leaves;
+            }
+            
             $leaveApply->is_approved = $request->is_approved;
+            $leaveApply->leave_status_remark = $request->leave_status_remark;
             $leaveApply->save();
 
             return redirect()->route('appliedleave.index')->with('success', 'Leave Status Updated Successfully');
@@ -233,7 +244,7 @@ class AppliedLeaveController extends Controller
 
         $newLeaveCount = $toDate->diffInDays($fromDate) + 1;
 
-        $originalLeaveCount = $leaveapply->number_of_days;
+        $originalLeaveCount = $leaveapply->number_of_paid_leaves;
         $leaveDifference = $originalLeaveCount - $newLeaveCount;
         
         switch ($request->input('leave_mode')) {
@@ -258,6 +269,8 @@ class AppliedLeaveController extends Controller
                 {
                     $assignLeave->leave_balance += $originalLeaveCount;
                     $assignLeave->save();
+
+                    $leaveapply->update(['is_approved' => 0, 'number_of_paid_leaves' => 0]);
 
                     // $leaveapply->delete();
 

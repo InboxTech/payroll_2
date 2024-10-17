@@ -55,9 +55,15 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-12 mt-2">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mt-2">
                                         <label class="form-label" for="basic-default-fullname">Reason <span class="text-danger">*</span></label>
                                         <textarea name="reason" class="form-control">{{ $result->reason }}</textarea>
+                                    </div>
+                                    <div class="col-md-6 mt-2">
+                                        <label class="form-label" for="remark">Remark </label>
+                                        <textarea name="remark" class="form-control">{{ $result->remark }}</textarea>
                                     </div>
                                 </div>
                                 <div class="mt-3">
