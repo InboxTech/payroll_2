@@ -32,15 +32,21 @@ class AssignLeavesCron extends Command
         $now = Carbon::now();
         $today = $now->format('Y-m-d');
 
-        $users = User::where('status', 1)->where('confirmation_date', $today)->get();
+        $users = User::where(['status' => 1], ['job_type' => 1])->where('confirmation_date', $today)->get();
         $leaveList = Leave::get();
         $totalLeaves = Leave::sum('number_of_leaves');
         $monthsInYear = 12;
 
         foreach ($users as $user) {
             $confirmationDate = Carbon::createFromDate($user->confirmation_date);
-            $confirmationMonth = $confirmationDate->month;
-            $remainingMonths = 12 - $confirmationMonth;
+            $configmationMonth = $confirmationDate->month;
+            $remainingMonths = 12 - $configmationMonth;
+
+            $confirmationDay = Carbon::createFromDate($user->confirmation_date)->day;
+
+            if ($confirmationDay >= 1 && $confirmationDay <= 15) {
+                $remainingMonths++;
+            }
 
             $calculatedLeaves = ($totalLeaves / $monthsInYear) * $remainingMonths;
 
@@ -67,10 +73,17 @@ class AssignLeavesCron extends Command
 
                     // Casual Leave (CL)
                     case 3:
-                        // $assignedLeave = ($calculatedLeaves * $leave->number_of_leaves) / $totalLeaves;
-                        $assignedLeave = $leave->number_of_leaves / $monthsInYear * $remainingMonths;
+                        $numberOfLeaves = $leave->number_of_leaves;
+                        $halfLeave = intdiv($numberOfLeaves, 2);
+                        $extraLeave = $numberOfLeaves % 2;
 
-                        $assignedLeave = ceil($assignedLeave);
+                        if ($remainingMonths > 6) {
+                            // First 6 months
+                            $assignedLeave = $halfLeave + $extraLeave; // If odd, assign extra leave to the first half
+                        } else {
+                            // Last 6 months
+                            $assignedLeave = $halfLeave;
+                        }
 
                         break;
                     default:

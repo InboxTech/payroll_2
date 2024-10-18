@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="number-of-leaves">Number of Leaves <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="number_of_leaves" value="{{ old('number_of_leaves', $model->number_of_leaves) }}" data-rule-required="true" data-msg-required="Please Enter Number Of Leaves"/>
+                                    <input type="text" class="form-control only_numbers" name="number_of_leaves" value="{{ old('number_of_leaves', $model->number_of_leaves) }}" data-rule-required="true" data-msg-required="Please Enter Number Of Leaves"/>
                                     <span class="error">{{ $errors->first('number_of_leaves') }}</span>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Update</button>
