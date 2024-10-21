@@ -284,10 +284,6 @@
                     order: [],
                     ajax: {
                         url:"{{ route('auth.index') }}",
-                        data: function (d) {
-                            d.start_date = $('.jsStartDate').val(),
-                            d.end_date = $('.jsEndDate').val()
-                        }
                     },
                     'columnDefs': [
                         {
@@ -313,14 +309,6 @@
                         { data: 'punch_out', name: 'punch_out', orderable: false},
                         { data: 'total_time', name: 'total_time', orderable: false },
                     ],
-                });
-        
-                $(".form-control").keyup(function(){
-                    table.draw();
-                });
-                
-                $(".form-control").change(function(){
-                    table.draw();
                 });
             });
         </script>

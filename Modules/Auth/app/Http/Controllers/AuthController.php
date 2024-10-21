@@ -281,10 +281,9 @@ class AuthController extends Controller
 
         if($request->ajax()) {
 
-            $startDate = Carbon::parse($request->start_date)->format('Y-m-d');
-            $endDate = Carbon::parse($request->end_date)->format('Y-m-d');
-
-            $data = PunchInOut::whereBetween('date', [$startDate, $endDate])->get();
+            $todayDate = Carbon::now()->format('Y-m-d');
+            
+            $data = PunchInOut::where('date', $todayDate)->get();
 
             return DataTables::of($data)
                     ->addIndexColumn()

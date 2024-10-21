@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('assignleavescron')
-            ->dailyAt('00:01');
+            ->dailyAt('00:02');
             // ->everyMinute();
     }
 
