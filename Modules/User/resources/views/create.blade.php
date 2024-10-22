@@ -125,6 +125,15 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-4 mb-2">
+                                            <label for="project-manager" class="form-label">Project Manager</label>
+                                            <select name="project_manager_id" class="form-select">
+                                                <option value="">Select Project Manager</option>
+                                                @foreach($projectManager as $dkey => $dvalue)
+                                                    <option value="{{ $dvalue->id }}">{{ $dvalue->full_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-4 mb-2">
                                             <label class="form-label" for="joining-date">Joining Date <span class="text-danger">*</span></label>
                                             <input type="date" name="joining_date" class="form-control"/>
                                         </div>

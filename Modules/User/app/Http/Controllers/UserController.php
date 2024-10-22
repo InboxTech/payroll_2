@@ -325,8 +325,14 @@ class UserController extends Controller
 
         $designation = Designation::whereNot('id', 1)->where('status', 1)->pluck('name', 'id');
         $department = Department::where('status', 1)->pluck('name', 'id');
+        $projectManager = User::select([
+                                    'users.*',
+                                    DB::raw("CONCAT(first_name, ' ', last_name) as full_name")
+                                ])->whereHas('roles', function($query) {
+                                    $query->where('id', '5');
+                                })->get();
                         
-        return view('user::create', compact('roles', 'assignLeave', 'designation', 'department'));
+        return view('user::create', compact('roles', 'assignLeave', 'designation', 'department', 'projectManager'));
     }
 
     /**
@@ -581,8 +587,14 @@ class UserController extends Controller
 
         $designation = Designation::where('status', 1)->pluck('name', 'id');
         $department = Department::where('status', 1)->pluck('name', 'id');
-
-        return view('user::edit', compact('user','roles', 'selectedRole', 'designation', 'department'));
+        $projectManager = User::select([
+                                'users.*',
+                                DB::raw("CONCAT(first_name, ' ', last_name) as full_name")
+                            ])->whereHas('roles', function($query) {
+                                $query->where('id', '5');
+                            })->get();
+        
+        return view('user::edit', compact('user','roles', 'selectedRole', 'designation', 'department', 'projectManager'));
     }
 
     /**

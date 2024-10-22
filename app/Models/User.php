@@ -41,6 +41,7 @@ class User extends Authenticatable
         'emp_status',
         'temporary_address',
         'permanent_address',
+        'project_manager_id',
         'status',
     ];
 

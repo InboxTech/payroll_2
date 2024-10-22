@@ -19,9 +19,32 @@ class RolesTableSeeder extends Seeder
     {
         $role = new Role();
 
-        $role->name = 'Admin';
-        $role->guard_name = 'web';
-        $role->save();
+        $role = [
+            [
+                'name' => 'Admin',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'HR',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Account',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Employee',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Project Manager',
+                'guard_name' => 'web'
+            ],
+        ];
+
+        foreach($role as $role) {
+            Role::create($role);
+        }
 
         $department = [
             [

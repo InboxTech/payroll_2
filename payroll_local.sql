@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 21, 2024 at 03:58 AM
+-- Generation Time: Oct 22, 2024 at 05:47 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.9
 
@@ -259,7 +259,8 @@ INSERT INTO `tbl_migrations` (`id`, `migration`, `batch`) VALUES
 (56, '2024_08_31_165813_create_user_documents_table', 30),
 (59, '2024_09_02_111141_add_address_and_gender_to_users_table', 31),
 (60, '2024_09_18_161839_add_confirmation_date_to_users_table', 32),
-(64, '2014_10_12_000000_create_users_table', 33);
+(64, '2014_10_12_000000_create_users_table', 33),
+(66, '2024_10_21_182219_add_user_id_in_users_table', 34);
 
 -- --------------------------------------------------------
 
@@ -293,17 +294,10 @@ INSERT INTO `tbl_model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\Models\\User', 1),
 (4, 'App\\Models\\User', 2),
 (4, 'App\\Models\\User', 3),
-(4, 'App\\Models\\User', 4),
+(5, 'App\\Models\\User', 4),
 (4, 'App\\Models\\User', 5),
-(7, 'App\\Models\\User', 5),
-(2, 'App\\Models\\User', 6),
-(4, 'App\\Models\\User', 6),
-(3, 'App\\Models\\User', 7),
-(3, 'App\\Models\\User', 8),
-(4, 'App\\Models\\User', 8),
-(4, 'App\\Models\\User', 9),
-(4, 'App\\Models\\User', 10),
-(4, 'App\\Models\\User', 11);
+(5, 'App\\Models\\User', 6),
+(2, 'App\\Models\\User', 7);
 
 -- --------------------------------------------------------
 
@@ -353,51 +347,51 @@ CREATE TABLE `tbl_permissions` (
 --
 
 INSERT INTO `tbl_permissions` (`id`, `name`, `guard_name`, `group_name`, `created_at`, `updated_at`) VALUES
-(1, 'view-role', 'web', 'Role', '2024-10-03 11:53:08', '2024-10-03 11:53:08'),
-(2, 'create-role', 'web', 'Role', '2024-10-03 11:53:08', '2024-10-03 11:53:08'),
-(3, 'edit-role', 'web', 'Role', '2024-10-03 11:53:08', '2024-10-03 11:53:08'),
-(4, 'delete-role', 'web', 'Role', '2024-10-03 11:53:08', '2024-10-03 11:53:08'),
-(5, 'view-employee', 'web', 'Employee', '2024-10-03 11:53:08', '2024-10-03 11:53:08'),
-(6, 'create-employee', 'web', 'Employee', '2024-10-03 11:53:08', '2024-10-03 11:53:08'),
-(7, 'edit-employee', 'web', 'Employee', '2024-10-03 11:53:08', '2024-10-03 11:53:08'),
-(8, 'delete-employee', 'web', 'Employee', '2024-10-03 11:53:08', '2024-10-03 11:53:08'),
-(9, 'leave-history', 'web', 'Employee', '2024-10-03 11:53:08', '2024-10-03 11:53:08'),
-(10, 'delete-letters', 'web', 'Employee', '2024-10-03 11:53:08', '2024-10-03 11:53:08'),
-(11, 'view-designation', 'web', 'Designation', '2024-10-03 11:53:08', '2024-10-03 11:53:08'),
-(12, 'create-designation', 'web', 'Designation', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(13, 'edit-designation', 'web', 'Designation', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(14, 'delete-designation', 'web', 'Designation', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(15, 'view-department', 'web', 'Department', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(16, 'create-department', 'web', 'Department', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(17, 'edit-department', 'web', 'Department', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(18, 'delete-department', 'web', 'Department', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(19, 'view-leave', 'web', 'Leave', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(20, 'create-leave', 'web', 'Leave', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(21, 'edit-leave', 'web', 'Leave', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(22, 'delete-leave', 'web', 'Leave', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(23, 'view-holiday-leave', 'web', 'HolidayLeave', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(24, 'create-holiday-leave', 'web', 'HolidayLeave', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(25, 'edit-holiday-leave', 'web', 'HolidayLeave', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(26, 'delete-holiday-leave', 'web', 'HolidayLeave', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(27, 'view-previous-leave', 'web', 'HolidayLeave', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(28, 'view-leave-apply', 'web', 'LeaveApply', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(29, 'create-leave-apply', 'web', 'LeaveApply', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(30, 'edit-leave-apply', 'web', 'LeaveApply', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(31, 'delete-leave-apply', 'web', 'LeaveApply', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(32, 'view-applied-leave', 'web', 'AppliedLeave', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(33, 'edit-applied-leave', 'web', 'AppliedLeave', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(34, 'delete-applied-leave', 'web', 'AppliedLeave', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(35, 'view-location', 'web', 'PunchInOut', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(36, 'employee-list-attendance-correction', 'web', 'AttendanceCorrection', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(37, 'attendance-list-attendancecorrection', 'web', 'AttendanceCorrection', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(38, 'edit-attendance-correction', 'web', 'AttendanceCorrection', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(39, 'employee-list-attendancereport', 'web', 'AttendanceReport', '2024-10-03 11:53:09', '2024-10-03 11:53:09'),
-(40, 'attendance-report', 'web', 'AttendanceReport', '2024-10-03 11:53:10', '2024-10-03 11:53:10'),
-(41, 'view-salary', 'web', 'Salary', '2024-10-03 11:53:10', '2024-10-03 11:53:10'),
-(42, 'create-salary', 'web', 'Salary', '2024-10-03 11:53:10', '2024-10-03 11:53:10'),
-(43, 'edit-salary', 'web', 'Salary', '2024-10-03 11:53:10', '2024-10-03 11:53:10'),
-(44, 'show-salary', 'web', 'Salary', '2024-10-03 11:53:10', '2024-10-03 11:53:10'),
-(45, 'edit-setting', 'web', 'Setting', '2024-10-03 11:53:10', '2024-10-03 11:53:10');
+(1, 'view-role', 'web', 'Role', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(2, 'create-role', 'web', 'Role', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(3, 'edit-role', 'web', 'Role', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(4, 'delete-role', 'web', 'Role', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(5, 'view-employee', 'web', 'Employee', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(6, 'create-employee', 'web', 'Employee', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(7, 'edit-employee', 'web', 'Employee', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(8, 'delete-employee', 'web', 'Employee', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(9, 'leave-history', 'web', 'Employee', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(10, 'delete-letters', 'web', 'Employee', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(11, 'view-designation', 'web', 'Designation', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(12, 'create-designation', 'web', 'Designation', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(13, 'edit-designation', 'web', 'Designation', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(14, 'delete-designation', 'web', 'Designation', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(15, 'view-department', 'web', 'Department', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(16, 'create-department', 'web', 'Department', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(17, 'edit-department', 'web', 'Department', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(18, 'delete-department', 'web', 'Department', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(19, 'view-leave', 'web', 'Leave', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(20, 'create-leave', 'web', 'Leave', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(21, 'edit-leave', 'web', 'Leave', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(22, 'delete-leave', 'web', 'Leave', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(23, 'view-holiday-leave', 'web', 'HolidayLeave', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(24, 'create-holiday-leave', 'web', 'HolidayLeave', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(25, 'edit-holiday-leave', 'web', 'HolidayLeave', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(26, 'delete-holiday-leave', 'web', 'HolidayLeave', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(27, 'view-previous-leave', 'web', 'HolidayLeave', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(28, 'view-leave-apply', 'web', 'LeaveApply', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(29, 'create-leave-apply', 'web', 'LeaveApply', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(30, 'edit-leave-apply', 'web', 'LeaveApply', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(31, 'delete-leave-apply', 'web', 'LeaveApply', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(32, 'view-applied-leave', 'web', 'AppliedLeave', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(33, 'edit-applied-leave', 'web', 'AppliedLeave', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(34, 'delete-applied-leave', 'web', 'AppliedLeave', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(35, 'view-location', 'web', 'PunchInOut', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(36, 'employee-list-attendance-correction', 'web', 'AttendanceCorrection', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(37, 'attendance-list-attendancecorrection', 'web', 'AttendanceCorrection', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(38, 'edit-attendance-correction', 'web', 'AttendanceCorrection', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(39, 'employee-list-attendancereport', 'web', 'AttendanceReport', '2024-10-21 12:25:06', '2024-10-21 12:25:06'),
+(40, 'attendance-report', 'web', 'AttendanceReport', '2024-10-21 12:25:07', '2024-10-21 12:25:07'),
+(41, 'view-salary', 'web', 'Salary', '2024-10-21 12:25:07', '2024-10-21 12:25:07'),
+(42, 'create-salary', 'web', 'Salary', '2024-10-21 12:25:07', '2024-10-21 12:25:07'),
+(43, 'edit-salary', 'web', 'Salary', '2024-10-21 12:25:07', '2024-10-21 12:25:07'),
+(44, 'show-salary', 'web', 'Salary', '2024-10-21 12:25:07', '2024-10-21 12:25:07'),
+(45, 'edit-setting', 'web', 'Setting', '2024-10-21 12:25:07', '2024-10-21 12:25:07');
 
 -- --------------------------------------------------------
 
@@ -680,15 +674,11 @@ CREATE TABLE `tbl_roles` (
 --
 
 INSERT INTO `tbl_roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'web', '2024-06-06 01:39:00', '2024-06-06 01:39:00'),
-(2, 'HR', 'web', '2024-06-06 01:40:19', '2024-06-06 01:40:19'),
-(3, 'Account', 'web', '2024-06-06 01:51:26', '2024-06-06 01:51:26'),
-(4, 'Employee', 'web', '2024-06-06 05:05:16', '2024-06-06 05:05:16'),
-(5, 'Project Manager', 'web', '2024-09-10 12:03:14', '2024-09-10 12:03:14'),
-(6, 'HOD', 'web', '2024-09-10 12:07:04', '2024-09-18 05:33:02'),
-(7, 'CEO', 'web', '2024-09-18 12:43:48', '2024-09-24 09:08:58'),
-(8, 'pqr', 'web', '2024-09-18 12:45:48', '2024-09-18 12:45:48'),
-(9, 'ABC', 'web', '2024-09-18 12:48:06', '2024-09-18 12:48:06');
+(1, 'Admin', 'web', '2024-10-21 12:23:39', '2024-10-21 12:23:39'),
+(2, 'HR', 'web', '2024-10-21 12:23:39', '2024-10-21 12:23:39'),
+(3, 'Account', 'web', '2024-10-21 12:23:39', '2024-10-21 12:23:39'),
+(4, 'Employee', 'web', '2024-10-21 12:23:39', '2024-10-21 12:23:39'),
+(5, 'Project Manager', 'web', '2024-10-21 12:23:39', '2024-10-21 12:23:39');
 
 -- --------------------------------------------------------
 
@@ -751,91 +741,15 @@ INSERT INTO `tbl_role_has_permissions` (`permission_id`, `role_id`) VALUES
 (43, 1),
 (44, 1),
 (45, 1),
-(46, 1),
-(47, 1),
-(48, 1),
-(49, 1),
-(50, 1),
-(51, 1),
-(1, 2),
-(2, 2),
-(3, 2),
-(4, 2),
-(5, 2),
-(6, 2),
-(7, 2),
-(8, 2),
-(9, 2),
-(11, 2),
-(12, 2),
-(13, 2),
-(14, 2),
-(15, 2),
-(16, 2),
-(17, 2),
-(18, 2),
-(19, 2),
-(20, 2),
-(21, 2),
-(22, 2),
-(23, 2),
-(24, 2),
-(25, 2),
-(26, 2),
-(27, 2),
-(28, 2),
-(29, 2),
-(30, 2),
-(31, 2),
-(32, 2),
-(33, 2),
-(34, 2),
-(35, 2),
-(36, 2),
-(37, 2),
-(38, 2),
-(39, 2),
-(40, 2),
-(41, 2),
-(42, 2),
-(43, 2),
-(44, 2),
-(45, 2),
-(10, 3),
-(14, 3),
-(18, 3),
-(19, 3),
-(20, 3),
-(22, 3),
-(23, 3),
-(24, 3),
-(25, 3),
-(26, 3),
-(27, 3),
-(28, 3),
-(29, 3),
-(31, 3),
-(40, 3),
 (19, 4),
 (23, 4),
 (28, 4),
 (29, 4),
 (30, 4),
 (31, 4),
-(10, 5),
-(14, 5),
-(1, 6),
-(2, 6),
-(3, 6),
-(4, 6),
-(1, 7),
-(5, 7),
-(10, 7),
-(18, 7),
-(26, 7),
-(1, 8),
-(1, 9),
-(5, 9);
+(35, 4),
+(41, 4),
+(44, 4);
 
 -- --------------------------------------------------------
 
@@ -958,11 +872,11 @@ CREATE TABLE `tbl_salary_histories` (
 INSERT INTO `tbl_salary_histories` (`id`, `year`, `job_type`, `user_id`, `gross_salary_yearly`, `gross_salary_monthly`, `basic_yearly`, `basic_monthly`, `hra_yearly`, `hra_monthly`, `medical_yearly`, `medical_monthly`, `education_yearly`, `education_monthly`, `conveyance_yearly`, `conveyance_monthly`, `special_allowance_yearly`, `special_allowance_monthly`, `gross_salary_A_yearly`, `gross_salary_A_monthly`, `is_pf_deduct_yearly`, `is_pf_deduct_monthly`, `employee_contribution_yearly`, `employee_contribution_monthly`, `esi_employee_contribution_yearly`, `esi_employee_contribution_monthly`, `labour_welfare_employee_yearly`, `labour_welfare_employee_monthly`, `professional_tax_yearly`, `professional_tax_monthly`, `employee_contribution_B_yearly`, `employee_contribution_B_monthly`, `net_salary_C_yearly`, `net_salary_C_monthly`, `employer_contribution_yearly`, `employer_contribution_monthly`, `esi_employer_contribution_yearly`, `esi_employer_contribution_monthly`, `labour_welfare_employer_yearly`, `labour_welfare_employer_monthly`, `employer_contri_D_yearly`, `employer_contri_D_monthly`, `ctc_bcd_yearly`, `ctc_bcd_monthly`, `created_at`, `updated_at`) VALUES
 (1, 2024, 1, 2, '200000.00', '15000.00', '180000.00', '5000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '200000.00', '15000.00', 'No', 'No', '0.00', '0.00', '1200.00', '120.00', '12.00', '1.00', '2400.00', '200.00', '3612.00', '321.00', '196388.00', '14679.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '200000.00', '15000.00', '2024-09-18 22:42:27', '2024-10-11 10:08:43'),
 (2, 2024, 2, 2, '200000.00', '15000.00', '180000.00', '5000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '200000.00', '15000.00', 'No', 'No', '0.00', '0.00', '1200.00', '120.00', '12.00', '1.00', '2400.00', '200.00', '3612.00', '321.00', '196388.00', '14679.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '200000.00', '15000.00', '2024-09-19 00:56:54', '2024-10-03 06:24:10'),
-(3, 2024, 1, 3, '324000.00', '27000.00', '129600.00', '10800.00', '51840.00', '4320.00', '15000.00', '1250.00', '12000.00', '1000.00', '19200.00', '1600.00', '96360.00', '8030.00', '324000.00', '27000.00', 'Yes', 'Yes', '15552.00', '1296.00', '0.00', '0.00', '12.00', '1.00', '2400.00', '200.00', '17964.00', '1497.00', '306036.00', '25503.00', '0.00', '0.00', '0.00', '0.00', '24.00', '2.00', '24.00', '2.00', '324024.00', '27002.00', '2024-09-19 00:57:09', '2024-10-18 11:03:54'),
-(4, 2024, 1, 4, '200000.00', '15000.00', '180000.00', '10000.00', '4000.00', '1000.00', '4000.00', '1000.00', '4000.00', '1000.00', '4000.00', '1000.00', '4000.00', '1000.00', '200000.00', '15000.00', 'No', 'No', '0.00', '0.00', '1200.00', '120.00', '12.00', '1.00', '2400.00', '200.00', '3612.00', '321.00', '196388.00', '14679.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '200000.00', '15000.00', '2024-09-23 23:45:05', '2024-10-03 03:03:36'),
+(3, 2024, 1, 3, '324000.00', '27000.00', '129600.00', '10800.00', '51840.00', '4320.00', '15000.00', '1250.00', '12000.00', '1000.00', '19200.00', '1600.00', '96360.00', '8030.00', '324000.00', '27000.00', 'Yes', 'Yes', '15552.00', '1296.00', '0.00', '0.00', '12.00', '1.00', '2400.00', '200.00', '17964.00', '1497.00', '306036.00', '25503.00', '0.00', '0.00', '0.00', '0.00', '24.00', '2.00', '24.00', '2.00', '324024.00', '27002.00', '2024-09-19 00:57:09', '2024-10-22 05:38:27'),
+(4, 2024, 1, 4, '200000.00', '15000.00', '180000.00', '10000.00', '4000.00', '1000.00', '4000.00', '1000.00', '4000.00', '1000.00', '4000.00', '1000.00', '4000.00', '1000.00', '200000.00', '15000.00', 'No', 'No', '0.00', '0.00', '1200.00', '120.00', '12.00', '1.00', '2400.00', '200.00', '3612.00', '321.00', '196388.00', '14679.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '200000.00', '15000.00', '2024-09-23 23:45:05', '2024-10-21 12:34:26'),
 (5, 2024, 1, 5, '250000.00', '20000.00', '200000.00', '15000.00', '10000.00', '1000.00', '10000.00', '1000.00', '10000.00', '1000.00', '10000.00', '1000.00', '10000.00', '1000.00', '250000.00', '20000.00', 'Yes', 'Yes', '24000.00', '1800.00', '20000.00', '1200.00', '12.00', '1.00', '2400.00', '200.00', '46412.00', '3201.00', '203588.00', '16799.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '250000.00', '20000.00', '2024-09-24 03:05:28', '2024-09-24 03:42:39'),
-(6, 2024, 1, 6, '240000.00', '20000.00', '200000.00', '15000.00', '8000.00', '1000.00', '8000.00', '1000.00', '8000.00', '1000.00', '8000.00', '1000.00', '8000.00', '1000.00', '240000.00', '20000.00', 'No', 'No', '0.00', '0.00', '12000.00', '1200.00', '120.00', '10.00', '2400.00', '200.00', '14520.00', '1410.00', '225480.00', '18590.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '240000.00', '20000.00', '2024-09-24 04:25:02', '2024-09-24 05:52:19'),
-(7, 2024, 1, 7, '200000.00', '18000.00', '180000.00', '8000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '200000.00', '18000.00', 'No', 'No', '0.00', '0.00', '1200.00', '120.00', '12.00', '1.00', '2400.00', '200.00', '3612.00', '321.00', '196388.00', '17679.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '200000.00', '18000.00', '2024-10-01 05:01:19', '2024-10-17 06:55:34');
+(6, 2024, 1, 6, '240000.00', '20000.00', '200000.00', '15000.00', '8000.00', '1000.00', '8000.00', '1000.00', '8000.00', '1000.00', '8000.00', '1000.00', '8000.00', '1000.00', '240000.00', '20000.00', 'No', 'No', '0.00', '0.00', '12000.00', '1200.00', '120.00', '10.00', '2400.00', '200.00', '14520.00', '1410.00', '225480.00', '18590.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '240000.00', '20000.00', '2024-09-24 04:25:02', '2024-10-21 12:34:49'),
+(7, 2024, 1, 7, '200000.00', '18000.00', '180000.00', '8000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '200000.00', '18000.00', 'No', 'No', '0.00', '0.00', '1200.00', '120.00', '12.00', '1.00', '2400.00', '200.00', '3612.00', '321.00', '196388.00', '17679.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '200000.00', '18000.00', '2024-10-01 05:01:19', '2024-10-21 12:35:02');
 
 -- --------------------------------------------------------
 
@@ -1022,6 +936,7 @@ CREATE TABLE `tbl_users` (
   `emp_status` int DEFAULT NULL,
   `temporary_address` text COLLATE utf8mb4_unicode_ci,
   `permanent_address` text COLLATE utf8mb4_unicode_ci,
+  `project_manager_id` int DEFAULT NULL COMMENT 'This is User Id',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` int NOT NULL DEFAULT '1' COMMENT '1 for active, 0 for inactive',
   `created_at` timestamp NULL DEFAULT NULL,
@@ -1033,14 +948,14 @@ CREATE TABLE `tbl_users` (
 -- Dumping data for table `tbl_users`
 --
 
-INSERT INTO `tbl_users` (`id`, `designation_id`, `department_id`, `emp_id`, `job_type`, `first_name`, `middle_name`, `last_name`, `email`, `email_verified_at`, `mobile_no`, `personal_email`, `password`, `gender`, `dob`, `joining_date`, `releaving_date`, `probation_end_date`, `confirmation_date`, `profile_image`, `emp_status`, `temporary_address`, `permanent_address`, `remember_token`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, NULL, NULL, NULL, 'Admin', NULL, 'Admin', 'admin@example.com', NULL, 1234567890, NULL, '$2y$10$7LJu/PEg6AP2gG46PrI9/uuI7U3B4e2vU/3uBWzJIxbVqPvNa2.nW', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-10-04 06:22:38', '2024-10-11 09:27:06', NULL),
-(2, 9, 1, 'emp-102', 1, 'Payal', NULL, 'Khanvilkar', 'payal.khanvilkar@inbox-infotech.com', NULL, 9874563210, NULL, '$2y$10$/OSR5xl75Eu8LKqCoiWRxexsTUl/z8ZgA/sj9FTzS8zlrIlrSjr8W', 2, '2016-04-22', '2024-01-01', NULL, '2024-02-29', '2024-09-25', NULL, NULL, NULL, NULL, NULL, 1, '2024-09-18 19:26:54', '2024-10-15 05:29:16', NULL),
-(3, 9, 1, 'emp-107', 1, 'Rahul', NULL, 'Patil', 'rahul.patil@inbox-infotech.com', NULL, 9545276255, 'rahulpatil2163@gmail.com', '$2y$10$xTyfktFEOXMTdaYWs3PxmeBKTHwwLcYwBugVp4ab/m8m/Z.6a5g/a', 1, '1995-06-28', '2024-06-03', NULL, '2024-08-31', '2024-09-01', NULL, NULL, 'Vadodara', 'Vadodara', NULL, 1, '2024-09-18 19:27:09', '2024-10-18 11:03:54', NULL),
-(4, 6, 6, 'emp-103', 1, 'Rhythm', NULL, 'Patel', 'Rhythm@gmail.com', NULL, 1236412300, NULL, '$2y$10$0K9XQXf3oP/9y1rXuDVUW.RdOuCa5BzGfWlUCYtZqcw5jUiJEwnLG', 1, '2016-02-02', '2024-01-01', NULL, '2024-06-30', '2024-09-24', 'profile_image/24092024335.jpg', NULL, NULL, NULL, NULL, 1, '2024-09-23 18:15:05', '2024-09-23 20:10:28', NULL),
-(5, 1, 6, 'emp-104', 1, 'Pratham', NULL, 'P', 'Pratham@gmail.com', NULL, 1236541235, NULL, '$2y$10$80qlIRCEvwlNMT2Vx80zquMD2gbwjK4ZVJ6jWAoUOK/JQbkNiBw5u', 1, '2015-01-01', '2023-01-16', NULL, '2024-01-31', '2024-09-24', NULL, NULL, NULL, NULL, NULL, 1, '2024-09-23 21:35:28', '2024-09-23 22:36:47', '2024-09-23 22:36:47'),
-(6, 10, 6, 'emp-105', 1, 'Pihu', NULL, 'Patel', 'pihu@gmail.com', NULL, 4563214560, NULL, '$2y$10$9BisahFYuR8DmX6Pr57lm.K3ndhGTLNUC6qgfqt99/nMyU3GFYlby', 2, '2013-02-06', '2024-03-01', NULL, '2024-05-29', '2024-09-24', NULL, NULL, NULL, NULL, NULL, 1, '2024-09-23 22:55:02', '2024-09-26 19:57:26', NULL),
-(7, 6, 6, 'emp-106', 1, 'Krishiv', 'p', 'Patel', 'ankita.kamra@inbox-infotech.com', NULL, 7896541236, NULL, '$2y$10$AMeUY1UhOJ/4DYUoMYnYGeII9tnGO3pHXGMJPZfL.EYvWVNilhXaS', 1, '2018-01-01', '2024-01-01', NULL, '2024-07-31', '2024-10-01', 'profile_image/03102024317.jpg', 1, NULL, NULL, NULL, 1, '2024-09-30 23:31:19', '2024-10-14 09:09:45', NULL);
+INSERT INTO `tbl_users` (`id`, `designation_id`, `department_id`, `emp_id`, `job_type`, `first_name`, `middle_name`, `last_name`, `email`, `email_verified_at`, `mobile_no`, `personal_email`, `password`, `gender`, `dob`, `joining_date`, `releaving_date`, `probation_end_date`, `confirmation_date`, `profile_image`, `emp_status`, `temporary_address`, `permanent_address`, `project_manager_id`, `remember_token`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, NULL, NULL, NULL, 'Admin', '', 'Admin', 'admin@example.com', NULL, 1234567890, NULL, '$2y$10$stbwW5rnYW6/JA2.Vr0JpuA3Fpx882oiMEm6jlbyH6ubyuPm9ro4e', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-10-21 12:29:06', '2024-10-21 12:29:06', NULL),
+(2, 9, 1, 'emp-102', 1, 'Payal', NULL, 'Khanvilkar', 'payal.khanvilkar@inbox-infotech.com', NULL, 9874563210, NULL, '$2y$10$/OSR5xl75Eu8LKqCoiWRxexsTUl/z8ZgA/sj9FTzS8zlrIlrSjr8W', 2, '2016-04-22', '2024-01-01', NULL, '2024-02-29', '2024-09-25', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-09-18 13:56:54', '2024-10-14 23:59:16', NULL),
+(3, 9, 1, 'emp-107', 1, 'Rahul', NULL, 'Patil', 'rahul.patil@inbox-infotech.com', NULL, 9545276255, 'rahulpatil2163@gmail.com', '$2y$10$xTyfktFEOXMTdaYWs3PxmeBKTHwwLcYwBugVp4ab/m8m/Z.6a5g/a', 1, '1995-06-28', '2024-06-03', NULL, '2024-08-31', '2024-09-01', NULL, NULL, 'Vadodara', 'Vadodara', 4, NULL, 1, '2024-09-18 13:57:09', '2024-10-22 05:38:27', NULL),
+(4, 7, 6, 'emp-103', 1, 'Rhythm', NULL, 'Patel', 'Rhythm@gmail.com', NULL, 1236412300, NULL, '$2y$10$0K9XQXf3oP/9y1rXuDVUW.RdOuCa5BzGfWlUCYtZqcw5jUiJEwnLG', 1, '2016-02-02', '2024-01-01', NULL, '2024-06-30', '2024-09-24', 'profile_image/24092024335.jpg', NULL, NULL, NULL, NULL, NULL, 1, '2024-09-23 12:45:05', '2024-10-21 12:34:26', NULL),
+(5, 1, 6, 'emp-104', 1, 'Pratham', NULL, 'P', 'Pratham@gmail.com', NULL, 1236541235, NULL, '$2y$10$80qlIRCEvwlNMT2Vx80zquMD2gbwjK4ZVJ6jWAoUOK/JQbkNiBw5u', 1, '2015-01-01', '2023-01-16', NULL, '2024-01-31', '2024-09-24', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-09-23 16:05:28', '2024-09-23 17:06:47', '2024-09-23 17:06:47'),
+(6, 7, 6, 'emp-105', 1, 'Pihu', NULL, 'Patel', 'pihu@gmail.com', NULL, 4563214560, NULL, '$2y$10$9BisahFYuR8DmX6Pr57lm.K3ndhGTLNUC6qgfqt99/nMyU3GFYlby', 2, '2013-02-06', '2024-03-01', NULL, '2024-05-29', '2024-09-24', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-09-23 17:25:02', '2024-10-21 12:34:49', NULL),
+(7, 10, 6, 'emp-106', 1, 'Krishiv', 'p', 'Patel', 'ankita.kamra@inbox-infotech.com', NULL, 7896541236, NULL, '$2y$10$AMeUY1UhOJ/4DYUoMYnYGeII9tnGO3pHXGMJPZfL.EYvWVNilhXaS', 1, '2018-01-01', '2024-01-01', NULL, '2024-07-31', '2024-10-01', 'profile_image/03102024317.jpg', 1, NULL, NULL, NULL, NULL, 1, '2024-09-30 18:01:19', '2024-10-21 12:35:02', NULL);
 
 -- --------------------------------------------------------
 
@@ -1106,11 +1021,11 @@ CREATE TABLE `tbl_user_details` (
 
 INSERT INTO `tbl_user_details` (`id`, `user_id`, `bank_name`, `bank_branch_name`, `ac_no`, `ifsc_code`, `uan_number`, `gross_salary_yearly`, `gross_salary_monthly`, `basic_yearly`, `basic_monthly`, `hra_yearly`, `hra_monthly`, `medical_yearly`, `medical_monthly`, `education_yearly`, `education_monthly`, `conveyance_yearly`, `conveyance_monthly`, `special_allowance_yearly`, `special_allowance_monthly`, `gross_salary_A_yearly`, `gross_salary_A_monthly`, `is_pf_deduct_yearly`, `is_pf_deduct_monthly`, `employee_contribution_yearly`, `employee_contribution_monthly`, `esi_employee_contribution_yearly`, `esi_employee_contribution_monthly`, `labour_welfare_employee_yearly`, `labour_welfare_employee_monthly`, `professional_tax_yearly`, `professional_tax_monthly`, `employee_contribution_B_yearly`, `employee_contribution_B_monthly`, `net_salary_C_yearly`, `net_salary_C_monthly`, `employer_contribution_yearly`, `employer_contribution_monthly`, `esi_employer_contribution_yearly`, `esi_employer_contribution_monthly`, `labour_welfare_employer_yearly`, `labour_welfare_employer_monthly`, `employer_contri_D_yearly`, `employer_contri_D_monthly`, `ctc_bcd_yearly`, `ctc_bcd_monthly`, `created_at`, `updated_at`) VALUES
 (1, 2, 'eyJpdiI6InhENVIrbk1sZHN5RC9DVkJwVFhKNkE9PSIsInZhbHVlIjoidXpkOGxaYnJNTDNYZ0h6RGRYSzZRUT09IiwibWFjIjoiNWE3YjQwNTY3OTRlMmI2NjZjZDllNzhlMWFkYjBiZWQ0ZWUyZTNiNmMwZGY3ODk1NDUyMTA4YWEzN2RjYWUwOSIsInRhZyI6IiJ9', 'eyJpdiI6InVqeFNCUWhTanFGWWFFRGYva2d2dlE9PSIsInZhbHVlIjoiVjVQYXFuVElFLzIwZkNUYUhoVm9lUT09IiwibWFjIjoiM2ZmYmNiNTE4YzhlZWU1MzNmNjU3MDJhY2ZjYzlkN2ZiMmFkNGZlYjU4ZjgwMzVhODUzNDkzNzBkZDRhMjc2ZSIsInRhZyI6IiJ9', 'eyJpdiI6IkhNa2NUVUEzT0ljVElvNm9JSnNFc1E9PSIsInZhbHVlIjoid3o2MElER3FSRnd4TzFNSU1ucGFBUT09IiwibWFjIjoiNGUyMGZjOWJmMjlhODQwYmY0ODU0MTBhNGJjMTI2MDQ2ODg3ZDM3OTU3ZGIwMDY3YjE3MmIyMjRkYjQ4OGJlMiIsInRhZyI6IiJ9', 'eyJpdiI6IjNXalVyNlhUdUZuSVhWTHd4ckd2amc9PSIsInZhbHVlIjoiWERGYW1CM1JsbVZBUkdDRE1jc1pTQT09IiwibWFjIjoiMWFjZDNkZmU5ZWIwNDE0NTlhOTQ1OWE1NjgxMzM3YjhkYWJmYWJjYWVkYTNhYzAzNWMwMmZiZmI1OTdlNTE0NyIsInRhZyI6IiJ9', '123654123', '200000.00', '15000.00', '180000.00', '5000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '200000.00', '15000.00', 'No', 'No', '0.00', '0.00', '1200.00', '120.00', '12.00', '1.00', '2400.00', '200.00', '3612.00', '321.00', '196388.00', '14679.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '200000.00', '15000.00', '2024-09-19 00:56:54', '2024-10-11 10:08:43'),
-(2, 3, 'eyJpdiI6InY2NUFXdldueG9xNWN3OXA0UnJaRlE9PSIsInZhbHVlIjoiQStxM0t6Ty9BY1NLR1NVa2pJTm9udz09IiwibWFjIjoiNjg3NzlmZTdmYjBlYzQ3ZjY1NThlOWYzOWE1ZDZhNGEyMDU5Yjg2ZjZmOTNmZjEzMmE5NjVhNDFlYWIwOWU0NiIsInRhZyI6IiJ9', 'eyJpdiI6InRYb3cxM2tLcW1GNktNcmlwK2J5bnc9PSIsInZhbHVlIjoiaEg2S1VFWE40eW1MT2lpamMycithQT09IiwibWFjIjoiODczZjk3YjkzODkzMzk0MWNlOGY1NjZiZThjMTljMWViOTkwYjZkYjhkMWNlZDQzYzAwZDNjZmVkNTEzNmRmMCIsInRhZyI6IiJ9', 'eyJpdiI6IjdtbXlHVXhQVXl5VWlaejFta2owV2c9PSIsInZhbHVlIjoiYVVXMzV4aTJRUXg0Ry8zZnZ0b0ZJZz09IiwibWFjIjoiMjIwMzJmNjZjZTg2ZjU4MTU0NDE2ODAzNzlkMGYxM2JhZDJmNmI3NTRmMDU5YjA0MDI1YjdlZjlkMDEzMjhiMyIsInRhZyI6IiJ9', 'eyJpdiI6IjdTNnhyelRudWZ6N0dRV0UwM083Y2c9PSIsInZhbHVlIjoiTmMrYURlU3o2QnJxL3JPNHI2NWZZUT09IiwibWFjIjoiZjE1ZmIxNDE5YWQ5YjA5ZTE3NTgyYTMyM2I0NGFmNzBmZTBmMmQ5OTZmNjA5YzQ0NjEzY2U4MzY3NjA2NGM2YSIsInRhZyI6IiJ9', NULL, '324000.00', '27000.00', '129600.00', '10800.00', '51840.00', '4320.00', '15000.00', '1250.00', '12000.00', '1000.00', '19200.00', '1600.00', '96360.00', '8030.00', '324000.00', '27000.00', 'Yes', 'Yes', '15552.00', '1296.00', '0.00', '0.00', '12.00', '1.00', '2400.00', '200.00', '17964.00', '1497.00', '306036.00', '25503.00', '0.00', '0.00', '0.00', '0.00', '24.00', '2.00', '24.00', '2.00', '324024.00', '27002.00', '2024-09-19 00:57:09', '2024-10-18 11:03:54'),
-(3, 4, 'eyJpdiI6Im1zN2JIVm5KdGJ0cHFDbklFaW9iOVE9PSIsInZhbHVlIjoic2ZKd3c4YlpGNllVK3NBUm5peEZDUT09IiwibWFjIjoiY2NmZjkwYmFhM2ZhMDE4MDViNDdhMzk0ZmI2ZjNhNjkyNmEyMTk5ZmUzMWI2OGQ1MDAyMzFmY2U2NjVhOTBhYiIsInRhZyI6IiJ9', 'eyJpdiI6ImZpRVlVVzJTR1pOOU9qejQxZWZ2T1E9PSIsInZhbHVlIjoiMmtvanFQdm4wY1pYS3A3MHVzbUdUdz09IiwibWFjIjoiMTZmYmY2MGRlNmZlYmVjNTcyNzA3OTExODg1ZjI3MDJlNWU5NTY1OGI4MTEyZTNlYzY0YTY2MWJhOGEyNzY3YiIsInRhZyI6IiJ9', 'eyJpdiI6IkFNUWRNYmsrdDVoUFJNRld5Uk9XVFE9PSIsInZhbHVlIjoiV0hkbEdSVmJGYUw2di9iTXZaVjFNUT09IiwibWFjIjoiZmUzZDQ4Y2Q2OGI4MWNiZDkzYThhNjdmN2Q5YmY5NGMyYjVkYjk4NWRjMzBlNTQyM2E1NWVjYjJhMDdjMWJiYyIsInRhZyI6IiJ9', 'eyJpdiI6Imo2S1VTQ013NSs2eW1FRjk3cTVpdkE9PSIsInZhbHVlIjoiQ05rQWhQUE9DeERJQ2NiTER0YWdCZz09IiwibWFjIjoiNGIyMDQwMTQzYjI3MzYzNTk0ZDM5YTExNDY3OTAwOWJjMGZhODlmMjdjY2U5MmI1Y2VlMzAzMWU5NGIxNDE4ZiIsInRhZyI6IiJ9', NULL, '200000.00', '15000.00', '180000.00', '10000.00', '4000.00', '1000.00', '4000.00', '1000.00', '4000.00', '1000.00', '4000.00', '1000.00', '4000.00', '1000.00', '200000.00', '15000.00', 'No', 'No', '0.00', '0.00', '1200.00', '120.00', '12.00', '1.00', '2400.00', '200.00', '3612.00', '321.00', '196388.00', '14679.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '200000.00', '15000.00', '2024-09-23 23:45:05', '2024-10-03 03:03:36'),
+(2, 3, 'eyJpdiI6IkxGOTNQYW9VMFMxS3Z6NktjQnhKV3c9PSIsInZhbHVlIjoiWHdmWUc0bjZZd2gxbFY5ZHhKc1pQZz09IiwibWFjIjoiZDllZDEyMjg5ZTQ5ODAzNGJlOWY3NTBlZjcwY2FjYTJmMjFjYmMyNjJkMDg2NTQxZmRjMGU4MmJhMjlmZTFjMyIsInRhZyI6IiJ9', 'eyJpdiI6IkpzTDFVd2ZvdGVON1lpUjA2ZXlHcHc9PSIsInZhbHVlIjoiRmxvZmV3SVU5SmdtRVp0Rm9RaUhuQT09IiwibWFjIjoiZjVlOGRkZjVlY2Q1MWNiNGRkY2MxZmQzNTgyZjA3NDMwZmE4NWU1ZDJiZTBmMTBkNTU2MjI3ZjRiNDU1YTFkYiIsInRhZyI6IiJ9', 'eyJpdiI6IklhVUttWDNUdjExdjBMQzJrZTE0Tmc9PSIsInZhbHVlIjoiQ2NJZnZPUFRabGduVXc5cURva0xkdz09IiwibWFjIjoiZWQyNzVjYzkxMjlhNzI2MDkzZjAxMmM0YWEzNTFlMTlkZmI1MGQwNGRiZGRkMmJmNWU3Y2M1ZGM4MmRiZjc3ZiIsInRhZyI6IiJ9', 'eyJpdiI6IjgzVUxoUEN3UnBqemhiZTlFNmdLUWc9PSIsInZhbHVlIjoiRnljbHIrTkorcDBxYndmaS9uRXB2Zz09IiwibWFjIjoiOGZiOWVkNzdhMzlhOTMwNjU1MDVlNDljOGYwYmNiYzI3NGZjZDI2M2I0YTk2YmFhNmJlNDUwNmMwODFjNGRmMCIsInRhZyI6IiJ9', NULL, '324000.00', '27000.00', '129600.00', '10800.00', '51840.00', '4320.00', '15000.00', '1250.00', '12000.00', '1000.00', '19200.00', '1600.00', '96360.00', '8030.00', '324000.00', '27000.00', 'Yes', 'Yes', '15552.00', '1296.00', '0.00', '0.00', '12.00', '1.00', '2400.00', '200.00', '17964.00', '1497.00', '306036.00', '25503.00', '0.00', '0.00', '0.00', '0.00', '24.00', '2.00', '24.00', '2.00', '324024.00', '27002.00', '2024-09-19 00:57:09', '2024-10-22 05:38:27'),
+(3, 4, 'eyJpdiI6IjkxbUFmRUhDTHN3K2E0TnJxOGhqV1E9PSIsInZhbHVlIjoiekpGZXVCNHFGYjNvSTZUNU9YaXREUT09IiwibWFjIjoiN2JkYzY0ZTYzYjg2YzZmNzgyZGM1NTNjOGRkNmNhYmM3OGMyYWUxNDgzMDA3OGUxYjBlZDk5NmFjNGQzZWY5MCIsInRhZyI6IiJ9', 'eyJpdiI6IlcralJ4U28wS1BmVnpLMjlzb25Ta0E9PSIsInZhbHVlIjoiRTloNmM1Tkh2TXA2MlpIclJhbWw1UT09IiwibWFjIjoiOTJkNjZkM2JjYTEyYWQ2ZGE3ZTU0YWYwOWU3MGEyMWU0NDRjNWQzNmVkYzdmODdkZmQwOTBjMTM3OWNkYTViZiIsInRhZyI6IiJ9', 'eyJpdiI6IlFjQ1VOdy9rUkIrU0phOEdzMlljMXc9PSIsInZhbHVlIjoidGRhSnF0OGFEaXhzZlFRcjI0RWxhdz09IiwibWFjIjoiMTMyNTkyOWQ1ZDg5ODcxZmRkNDFmMWMzZWRhOGIyYjYwMDZkOGM3MGQ0YzQ1YzdlMTdmOWM2YTY4NDY0NmYxMiIsInRhZyI6IiJ9', 'eyJpdiI6Im05UGhDZzZXYkR3UjNrOFJqNCs4aUE9PSIsInZhbHVlIjoiTGxZZE5aNTR1K2J2V3VRYmFMd1R1Zz09IiwibWFjIjoiZjE5MmUxYWE5YTJkMTdlNDk5NjQ2MTNjMzYzMGYzZDMwOWJmZjFhMWM0ZDZmNjQ5MGVhMDk2YzlkYzMyZGExNyIsInRhZyI6IiJ9', NULL, '200000.00', '15000.00', '180000.00', '10000.00', '4000.00', '1000.00', '4000.00', '1000.00', '4000.00', '1000.00', '4000.00', '1000.00', '4000.00', '1000.00', '200000.00', '15000.00', 'No', 'No', '0.00', '0.00', '1200.00', '120.00', '12.00', '1.00', '2400.00', '200.00', '3612.00', '321.00', '196388.00', '14679.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '200000.00', '15000.00', '2024-09-23 23:45:05', '2024-10-21 12:34:26'),
 (4, 5, 'eyJpdiI6IkxhS2txVThnQmhWNHdFaTdhSDlWOHc9PSIsInZhbHVlIjoiUEtwL1BTYWtveWV3alQ2UzlaeDdlQT09IiwibWFjIjoiZWRiYTc5YjZkMmFiYzdlM2M3ZGJhM2UzODgxMTU0NjQ5MDhiZGYzNmFmZjFhODEzZjcyZmNiNzQ0MWUwYTk0NSIsInRhZyI6IiJ9', 'eyJpdiI6InJlUThJMGw3NzNTb2RIT01NNW43cmc9PSIsInZhbHVlIjoiTXkxMjljM1lpM3lhNXV5K2Z4TW5xdz09IiwibWFjIjoiYjU4MGQ1MDZmZjljM2QwOTdiYTc5OWVlNDIzOGRlMzY2NDdmMDNkY2NlNGU4NDNkYTA1OTU4ZWU5NjliNTkzOSIsInRhZyI6IiJ9', 'eyJpdiI6Ik10UXlsRzNlYnZLMG1CU0xjMGIyNXc9PSIsInZhbHVlIjoiMzZtTGJYSmJISWtZZ0Q0MUUyTjQyUT09IiwibWFjIjoiYTE4ZjU2YjlhZTc5MjU2MjI2NTk3YmVmNWNiZTY2MjBkYzQzNWZjZTYwNDEwMjUzMDlhMDM3MjY0NWNjOWIzYiIsInRhZyI6IiJ9', 'eyJpdiI6InpRYjlUVEwrUm1Wcm5VR0pvaFlHTUE9PSIsInZhbHVlIjoiRTlmS2pJZWRHZTJlaUUrK240a1NZdz09IiwibWFjIjoiNzYzMmE0MjA4NGVkMzlkNjdhNTM2ODYzYzlhYmNjNTkzM2FhNjJmNWVhZmY3YjEwNmE0ZTFmYThlYzQzYzNkMCIsInRhZyI6IiJ9', NULL, '250000.00', '20000.00', '200000.00', '15000.00', '10000.00', '1000.00', '10000.00', '1000.00', '10000.00', '1000.00', '10000.00', '1000.00', '10000.00', '1000.00', '250000.00', '20000.00', 'Yes', 'Yes', '24000.00', '1800.00', '20000.00', '1200.00', '12.00', '1.00', '2400.00', '200.00', '46412.00', '3201.00', '203588.00', '16799.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '250000.00', '20000.00', '2024-09-24 03:05:28', '2024-09-24 03:42:39'),
-(5, 6, 'eyJpdiI6IjJyRm9SeEpmcHl3RlU1b0VGb2Q0Rnc9PSIsInZhbHVlIjoiYVdJV1JFVHBzUmlVNmZWOStyMkR4QT09IiwibWFjIjoiZjU3YzFkOGUzMDc1NDdlZmNlZGMxZmE5MGVjZWY1ZmZhZTQ4Y2RhODA2YjRmMWUzNTk0ZmI0NTkxOTVkODQyYyIsInRhZyI6IiJ9', 'eyJpdiI6Ikx5Umg5NDY5dlNidnF6MklBUzQ5dXc9PSIsInZhbHVlIjoiWDV6Ly83UmVaR1JvWHUzWms1ckZ1Zz09IiwibWFjIjoiZjkxNWUxZTE1M2NlZjAzNWQ4NGU3NTExZTJlNmQ4YTJiNDA2OWJkMWRlNzBkOTkxMDA2NzlhM2Y1YjMwMGQ2MiIsInRhZyI6IiJ9', 'eyJpdiI6IkQxZmtSQnQ5cm90U0VtcGhSd21uMVE9PSIsInZhbHVlIjoibmdwNVBUUEh6VUVGb05UWFJmdStyZz09IiwibWFjIjoiMzMwNWI0N2MzMzUxMTI4YTVhZTE0ODgxMjQ1N2VhM2MyYzhlYzg2YjY4MWIxZjE5M2Q0YzkwYWE1NzJiYzdjNyIsInRhZyI6IiJ9', 'eyJpdiI6ImpTeUdnc1ExdjdSSXdCT2lxc0ZiTXc9PSIsInZhbHVlIjoiNDNUV3doY2srMkFHZ1pLcXJJeUVHdz09IiwibWFjIjoiMDAyMDFjZWVhY2NlODRhMjIzZmNjN2IzYzI1YzhhZGYyNzU1OWIwOWJkOGM4NDUwY2RjNjBlNGM5YjdmNmJiNyIsInRhZyI6IiJ9', '14566122', '240000.00', '20000.00', '200000.00', '15000.00', '8000.00', '1000.00', '8000.00', '1000.00', '8000.00', '1000.00', '8000.00', '1000.00', '8000.00', '1000.00', '240000.00', '20000.00', 'No', 'No', '0.00', '0.00', '12000.00', '1200.00', '120.00', '10.00', '2400.00', '200.00', '14520.00', '1410.00', '225480.00', '18590.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '240000.00', '20000.00', '2024-09-24 04:25:02', '2024-09-24 05:52:19'),
-(6, 7, 'eyJpdiI6Inc0Rm0rZzVWeUk3aHNxellYT0U4NVE9PSIsInZhbHVlIjoibHdmVVZlUGd5UVRSWm1iSzFVS0EwQT09IiwibWFjIjoiY2QzYzY4NmI0YTlkYzllOTI1ZTVjOGI3Yjg1YTA3ODdmZWZmM2UzZGZmZTVhOWEyODBiOGUyOGQwN2E2NzM3NSIsInRhZyI6IiJ9', 'eyJpdiI6IjVQUGtsd1NEQ3lFMHkxdGxWWXBTNHc9PSIsInZhbHVlIjoiV3Y0Mk5Td1k4K2g3QUVRdDZTZWJZUT09IiwibWFjIjoiOTFiYzkxNDdjZmM5YmI5Y2M1NjliZGI0YzkxZWI1YjQ4OWUwNmFiZjllMTQ2ZGM4NGRjZWE5MzEzNzg1NGU4ZiIsInRhZyI6IiJ9', 'eyJpdiI6IktvbThWdVkyVjQ4N0xvYXJ5emZyNUE9PSIsInZhbHVlIjoiN1lDbHVaWEJEVHlOM1RSVHpVeFRKdz09IiwibWFjIjoiMDY2OGRhOTViZTAzYmJiZTQxOTA2NDRmZjZiZjlkMjY1YjNlM2ViOTlhOWM2NDlhOTIwY2I4YzFkZjg0YWE5OSIsInRhZyI6IiJ9', 'eyJpdiI6IkdlVkpPNkVlZ25SdXR5dkE3bkxUNVE9PSIsInZhbHVlIjoibmVGZlMwc0VnOXVFMUhDNUZCMmhRZz09IiwibWFjIjoiZDgxMmFlY2RmZDUzMWE4MDVkNTVlMzUwM2M5YThiMzIzYWRlZjg5MGJkZGZmODFkMjk0ZDNkNTZhZjhhMjFhNiIsInRhZyI6IiJ9', NULL, '200000.00', '18000.00', '180000.00', '8000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '200000.00', '18000.00', 'No', 'No', '0.00', '0.00', '1200.00', '120.00', '12.00', '1.00', '2400.00', '200.00', '3612.00', '321.00', '196388.00', '17679.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '200000.00', '18000.00', '2024-10-01 05:01:19', '2024-10-17 06:55:34');
+(5, 6, 'eyJpdiI6ImllSFVPajZvQjVYSC92ajRpNDRtc1E9PSIsInZhbHVlIjoickVKcG9JK0hlZy9hMWt2ZXFPbFVpUT09IiwibWFjIjoiM2ZiMmIzZmViZTQzOWNlYzRjMzE0YTM0MjVlY2Q5ZjQ5NGIzMWM5MGE0NzVjMmJmMzhmMDYwMmUxMWZmNmQzMCIsInRhZyI6IiJ9', 'eyJpdiI6IlM4MUlLZXI4R2U4OWtzNUVTeHJpN1E9PSIsInZhbHVlIjoieGNEekN2NS9PMWZxZnZyTkZuK2VTZz09IiwibWFjIjoiMmY0MTI1MzgxYTQ2Y2FhNTVmMjI3MzA2ZGI1YTg4MmVmMGIzOTJjZWY0MDVhNDVlZTE3YzAwODM4MDFiMWMxNiIsInRhZyI6IiJ9', 'eyJpdiI6ImNmTmJjV2czRTJETEt3Z1NMWWVSc2c9PSIsInZhbHVlIjoic1NydnRaNk9GWmc1d3htanlKS2FuUT09IiwibWFjIjoiZDA3N2ExYThjNzc3NzVhM2ZiZWEzMDBlZTEzNGYxMjgxZTI4N2EwZjkwNzUyZDdmMGMyNTVhYWIwZmU1YTFhZiIsInRhZyI6IiJ9', 'eyJpdiI6IlI2MWs0czBDRXkzYWtnSDlvbi9hSEE9PSIsInZhbHVlIjoib1M1NmdzeStCU0tLREZmd1QrMndtUT09IiwibWFjIjoiNjU0OGVlZWRkZThiZTJiZjUwZDlmZWRlNDMxMTJjYzg5OGRkODFlMzJiMGY3NmQyOTdkOWFjOWNlMjIwMzU5MSIsInRhZyI6IiJ9', '14566122', '240000.00', '20000.00', '200000.00', '15000.00', '8000.00', '1000.00', '8000.00', '1000.00', '8000.00', '1000.00', '8000.00', '1000.00', '8000.00', '1000.00', '240000.00', '20000.00', 'No', 'No', '0.00', '0.00', '12000.00', '1200.00', '120.00', '10.00', '2400.00', '200.00', '14520.00', '1410.00', '225480.00', '18590.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '240000.00', '20000.00', '2024-09-24 04:25:02', '2024-10-21 12:34:49'),
+(6, 7, 'eyJpdiI6IlhjOFU2cS8zY0NxRTdjUmtOUEZlYkE9PSIsInZhbHVlIjoicWtHYlkzREFjN0xQY2hqVmNaU1NVQT09IiwibWFjIjoiNzJhY2M5OGUwM2JiY2NmOGU4MGMzMmU1ZWZiMjg1NDViOWNhYTVhMmIxMmRjYzUwMjBkMWUyM2YzNjA1YjU0NSIsInRhZyI6IiJ9', 'eyJpdiI6Imd3TXRwbjIwS2kzS1ZsQXdIRW5sNlE9PSIsInZhbHVlIjoiN1lVWFR5OWxCaTRyOGJaWXNtTGJYQT09IiwibWFjIjoiYzI0ZGY2YTVmNDhiNTc5Y2M0ZGJhYTU0NjFhMGNiOTFhMjZmNjVhZGUzODM1MWFhNjI4OGVlZDQ5MWZkODc2MSIsInRhZyI6IiJ9', 'eyJpdiI6IkJNOU1lcDJaR3p0dGFJd2FrYmhnRlE9PSIsInZhbHVlIjoiQjNFSVlxT0c5TW5UNXBCd1JZNUFTQT09IiwibWFjIjoiN2Q1NTJjNWMwYzA5M2JhOTM2MjE5ZDY2NWI3MjM4MzVlNzkzNDJhYzI3ZTdjYjBjZjAzZDJiZWM2YzA4NmQ2NyIsInRhZyI6IiJ9', 'eyJpdiI6IlgxTEZYZksrUGNhYTBaaWhnYmlhUEE9PSIsInZhbHVlIjoibHBLTzh4amhtN2xMOU9XRk00TmZodz09IiwibWFjIjoiOWYwYmRhNDNmYzYxMDhkYTk5NGJlOTZkNDU3YTM2Mzk3OTUzODM5OTVhZWFmNDFiNGFlOTgxMDA5ZGQ3NTk5NiIsInRhZyI6IiJ9', NULL, '200000.00', '18000.00', '180000.00', '8000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '4000.00', '2000.00', '200000.00', '18000.00', 'No', 'No', '0.00', '0.00', '1200.00', '120.00', '12.00', '1.00', '2400.00', '200.00', '3612.00', '321.00', '196388.00', '17679.00', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', '0.00', '200000.00', '18000.00', '2024-10-01 05:01:19', '2024-10-21 12:35:02');
 
 -- --------------------------------------------------------
 
@@ -1332,7 +1247,7 @@ ALTER TABLE `tbl_leave_applies`
 -- AUTO_INCREMENT for table `tbl_migrations`
 --
 ALTER TABLE `tbl_migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `tbl_permissions`
@@ -1362,7 +1277,7 @@ ALTER TABLE `tbl_punch_in_outs`
 -- AUTO_INCREMENT for table `tbl_roles`
 --
 ALTER TABLE `tbl_roles`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_salaries`
