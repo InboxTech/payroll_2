@@ -75,6 +75,7 @@ class AuthController extends Controller
         switch (Auth::user()->roles->pluck("id")->first()) {
             case 1:
             case 2:
+            case 5:
                 $leaveList = LeaveApply::where('is_approved', 1)
                             ->whereRaw('? BETWEEN from_date AND to_date', [$todayDate])
                             ->get();

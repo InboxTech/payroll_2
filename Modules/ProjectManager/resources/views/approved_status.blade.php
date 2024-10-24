@@ -1,4 +1,4 @@
-    @switch($row->is_approved)
+    @switch($row->manager_approval_status)
         @case(0) 
             Pending
             @break;

@@ -192,9 +192,9 @@
                                 <thead class="border-bottom">
                                     <tr>
                                         <th>Employee Name</th>
-                                        <th>Leave Type</th>
                                         <th>Leave Mode</th>
-                                        <th>Action</th>
+                                        <th>Manager Approval Status</th>
+                                        <th>Hr Approval Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -202,9 +202,6 @@
                                         <tr>
                                             <td>
                                                 {{ $value->user->full_name }}
-                                            </td>
-                                            <td>
-                                                {{ $value->leave->leave_type_name }}
                                             </td>
                                             <td>
                                                 @switch($value->leave_mode)
@@ -222,7 +219,34 @@
                                                 @endswitch
                                             </td>
                                             <td>
-                                                <a href="{{ route('appliedleave.edit', $value->id) }}" title="Edit"><i class="ti ti-pencil"></i></a>
+                                                @switch($value->manager_approval_status)
+                                                    @case(0) 
+                                                        Pending
+                                                        @break;
+                                                    @case(1)
+                                                        <i class="fa-solid fa-thumbs-up text-success" title="Leave is Approved"></i>
+                                                        @break;
+                                                    @case(2)
+                                                        <i class="fa-solid fa-thumbs-down text-danger" title="Leave Not Approved"></i>
+                                                        @break;
+                                                    @default
+                                                        Something went wrong
+                                                @endswitch                                        
+                                            </td>
+                                            <td>
+                                                @switch($value->is_approved)
+                                                    @case(0) 
+                                                        Pending
+                                                        @break;
+                                                    @case(1)
+                                                        <i class="fa-solid fa-thumbs-up text-success" title="Leave is Approved"></i>
+                                                        @break;
+                                                    @case(2)
+                                                        <i class="fa-solid fa-thumbs-down text-danger" title="Leave Not Approved"></i>
+                                                        @break;
+                                                    @default
+                                                        Something went wrong
+                                                @endswitch
                                             </td>
                                         </tr>
                                     @empty

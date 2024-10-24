@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
 
 class ForgotPasswordMail extends Mailable
 {
@@ -30,6 +31,9 @@ class ForgotPasswordMail extends Mailable
     {
         return new Envelope(
             subject: 'Forgot Password Mail',
+            replyTo: [
+                new Address('no-reply@inbox-infotech.com', 'Inbox Infotech'),
+            ],
         );
     }
 

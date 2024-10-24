@@ -25,6 +25,8 @@ class LeaveApply extends Model
         'number_of_paid_leaves',
         'remark',
         'leave_status_remark',
+        'manager_approval_status',
+        'manager_remark',
         'deleted_by'
     ];
 

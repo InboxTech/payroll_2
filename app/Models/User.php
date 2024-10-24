@@ -105,4 +105,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserDocument::class);
     }
+
+    public function manager() 
+    {
+        return $this->hasOne(User::class, 'id', 'project_manager_id');
+    }
 }

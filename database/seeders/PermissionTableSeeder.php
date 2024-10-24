@@ -153,18 +153,6 @@ class PermissionTableSeeder extends Seeder
                 'group_name' => 'LeaveApply'
             ],
             [
-                'name' => 'view-applied-leave',
-                'group_name' => 'AppliedLeave'
-            ],
-            [
-                'name' => 'edit-applied-leave',
-                'group_name' => 'AppliedLeave'
-            ],
-            [
-                'name' => 'delete-applied-leave',
-                'group_name' => 'AppliedLeave'
-            ],
-            [
                 'name' => 'view-location',
                 'group_name' => 'PunchInOut'
             ],
@@ -203,6 +191,26 @@ class PermissionTableSeeder extends Seeder
             [
                 'name' => 'show-salary',
                 'group_name' => 'Salary'
+            ],
+            [
+                'name' => 'view-leave-hr',
+                'group_name' => 'Leave Approval By HR'
+            ],
+            [
+                'name' => 'edit-leave-hr',
+                'group_name' => 'Leave Approval By HR'
+            ],
+            [
+                'name' => 'delete-leave-hr',
+                'group_name' => 'Leave Approval By HR'
+            ],
+            [
+                'name' => 'view-leave-pm',
+                'group_name' => 'Leave Approval By Project Manager'
+            ],
+            [
+                'name' => 'edit-leave-pm',
+                'group_name' => 'Leave Approval By Project Manager'
             ],
             /* [
                 'name' => 'view-project',

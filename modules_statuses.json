@@ -15,5 +15,7 @@
     "AttendanceCorrection": true,
     "Project": true,
     "Task": true,
-    "Test": true
+    "Test": true,
+    "Hr": true,
+    "ProjectManager": true
 }

@@ -125,6 +125,34 @@
         @endcan
 
         @php
+            $controller = array('HrController', 'ProjectManagerController');
+            $action = array('index');
+        @endphp
+        @canany(['view-leave-hr', 'view-leave-pm'])
+            <li class="menu-item {{ in_array($current_controller,$controller)? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-calendar"></i>
+                    <div data-i18n="Leave Approval By"></div>
+                </a>
+                <ul class="menu-sub">
+                    @can('view-leave-pm')
+                        <li class="menu-item @if($current_controller == 'ProjectManagerController') active @endif">
+                            <a href="{{ route('projectmanager.index') }}" class="menu-link">
+                                <div data-i18n="Project Manger"></div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('view-leave-hr')
+                        <li class="menu-item @if($current_controller == 'HrController') active @endif">
+                            <a href="{{ route('hr.index') }}" class="menu-link">
+                                <div data-i18n="HR"></div>
+                            </a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
+        @endcan
+        @php
             $controller = array('PunchInOutController', 'AttendenceReportController', 'AttendanceCorrectionController');
             $action = array('index');
         @endphp

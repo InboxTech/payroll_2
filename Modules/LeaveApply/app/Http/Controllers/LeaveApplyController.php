@@ -10,6 +10,8 @@ use App\Models\Leave;
 use App\Models\LeaveApply;
 use App\Models\AssignLeave;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\LeaveApplyMail;
+use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use DataTables;
 
@@ -35,7 +37,7 @@ class LeaveApplyController extends Controller
             return Datatables::of($data)
                     ->addColumn('checkbox', function($row) {
                         $btn = '';
-                        if($row->is_approved == 0) {
+                        if($row->manager_approval_status == 0) {
                             $btn = '<input type="checkbox" name="id[]" class="form-check-input jsCheckBoxes" value="'.$row->id.'">';
                         }
                         return $btn;
@@ -46,14 +48,14 @@ class LeaveApplyController extends Controller
                     ->addColumn('from_date_to_date', function($row) {
                         return date('d-m-Y', strtotime($row->from_date)).' To '.date('d-m-Y', strtotime($row->to_date));
                     })
-                    ->addColumn('approval_status', function($row) {
-                        return view('leaveapply::approved_status', compact('row'));
+                    ->addColumn('manager_approval_status', function($row) {
+                        return view('hr::manager_approval_status', compact('row'));
+                    })
+                    ->addColumn('hr_approval_status', function($row) {
+                        return view('hr::hr_approval_status', compact('row'));
                     })
                     ->addColumn('action', function($row) {
                         return view('leaveapply::action', compact('row'));
-                    })
-                    ->addColumn('apply_date', function($row) {
-                        return date('d-m-Y', strtotime($row->created_at));
                     })
                     ->addColumn('is_leave_cancle', function($row) {
                         if($row->is_leave_cancle == 2) {
@@ -85,6 +87,8 @@ class LeaveApplyController extends Controller
      */
     public function store(Request $request)
     {
+        $userManager = Auth::user()->manager;
+
         $fromDate = Carbon::parse($request->input('from_date'));
         $toDate = Carbon::parse($request->input('to_date'));
         
@@ -111,16 +115,23 @@ class LeaveApplyController extends Controller
                 return redirect()->route('leaveapply.create')->with('error', 'Insufficient Leave Balance');
             }
 
-            if(LeaveApply::create($request->all())) {
+            if($leaveapply = LeaveApply::create($request->all())) {
+
+                if($userManager)
+                {
+                    $data = $leaveapply;
+                    $data['manager_name'] = $userManager->full_name;
+
+                    Mail::to($userManager->email)->send(new LeaveApplyMail($data));
+                }
+
                 return redirect()->route('leaveapply.index')->with('success', 'Your Leave successfully applied');
             }
-    
+
             return redirect()->route('leaveapply.index')->with('error', 'Something went wrong');
         }
-        else
-        {
-            return redirect()->route('leaveapply.index')->with('error', 'Leave Not Assign');
-        }
+
+        return redirect()->route('leaveapply.index')->with('error', 'Leave Not Assign');
     }
 
     /**
@@ -134,10 +145,10 @@ class LeaveApplyController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(LeaveApply $leaveapply)
+    public function edit($id)
     {
-        $model = $leaveapply;
-
+        $model = LeaveApply::where(['user_id' => Auth::user()->id, 'id' => $id])->firstOrFail();
+        
         $leavetype = Leave::pluck('leave_type_name', 'id');
         
         return view('leaveapply::edit', compact('model', 'leavetype'));

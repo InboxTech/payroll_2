@@ -48,8 +48,8 @@
                                 <th class="text-center">Leave Type Name</th>
                                 <th class="text-center">From Date - To Date</th>
                                 <th class="text-center">Total Leave Day</th>
-                                <th class="text-center">Approval Status</th>
-                                <th class="text-center">Apply Date</th>
+                                <th class="text-center">Manager Approval Status</th>
+                                <th class="text-center">Hr Approval Status</th>
                                 <th class="text-center">Is Leave Cancle</th>
                                 @can('edit-leave-apply')
                                     <th class="text-center">Action</th>
@@ -82,8 +82,8 @@
                         { data: 'leave_type_name', name: 'leave_type_name' },
                         { data: 'from_date_to_date', name: 'from_date_to_date'},
                         { data: 'number_of_days', name: 'number_of_days' },
-                        { data: 'approval_status', name: 'approval_status'},
-                        { data: 'apply_date', name: 'apply_date'},
+                        { data: 'manager_approval_status', name: 'manager_approval_status'},
+                        { data: 'hr_approval_status', name: 'hr_approval_status'},
                         { data: 'is_leave_cancle', name: 'is_leave_cancle'},
                         @can('edit-leave-apply')
                             { data: 'action', name: 'action', orderable: false, searchable: false },
